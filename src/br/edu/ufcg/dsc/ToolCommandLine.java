@@ -78,15 +78,11 @@ public class ToolCommandLine {
 
 	public ToolCommandLine() {
 		this.filesManager = FilesManager.getInstance();
-
 		this.cacheProducts = new HashMap<String, HashSet<HashSet<String>>>();
-
 		this.astComparator = new ASTComparator();
-
 		try {
 			this.astComparator.setUpProject();
 		} catch (ConfigurationException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

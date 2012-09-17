@@ -1,5 +1,12 @@
 package br.edu.ufcg.dsc.util;
 
+/**
+ * @author Jefferson Almeida - jra at cin dot ufpe dot br 
+ * Esta classe é responsável por gerenciar os arquivos, bem como procurar por suas dependencias
+ * necessárias para que seja possível compilar o arquivo: Classe, Aspecto.
+ */
+
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -40,86 +47,84 @@ public class FilesManager {
 	}
 
 	/**
-	 * Pelo import do Aspecto, verifica de que classes ele precisa para
-	 * compilar.
+	 * Este método obtém as dependencias do aspecto pelos imports.
+	 * Assim, é possível saber quais classes o aspecto precisa para ser efetivamente compilado.
 	 * 
-	 * @param classe
-	 * @return
+	 * @param File aspecto:  O arquivo referente ao aspecto.
+	 * @return Retorna uma Collection<String> de todos as classes (imports) necessários para o aspecto compilar.
 	 */
 	public Collection<String> getDependenciasDeAspectosPeloImport(File aspecto) {
+		/**
+		 * Uma coleção de strings que contém todas as dependencias do aspecto.
+		 * Ou seja, todos os imports encontrados são adicionados à coleção dependencias.
+		 */
 		Collection<String> dependencias = new ArrayList<String>();
 
 		try {
 			FileReader reader = new FileReader(aspecto);
-
 			BufferedReader in = new BufferedReader(reader);
-
 			String linha;
-
+			/**
+			 * Parser para identificar todos os imports necessários para compilar o aspecto.
+			 */
 			while ((linha = in.readLine()) != null && !linha.contains("public")) {
 				if (linha.contains("import")) {
 					linha = linha.replaceFirst("import", "");
 					linha = linha.replace(";", "");
 					linha = linha.trim();
-
 					dependencias.add(linha);
 				}
 			}
-
 			in.close();
 			reader.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage()+ ":\n Não foi encontrado o arquivo" + aspecto.getName() + "\n\n");
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+		    System.out.println(e.getMessage() + ":\nI/O Exceptioin para encontrar as dependencias do aspecto: " + aspecto.getName() + "\n\n");
 			e.printStackTrace();
 		}
-
 		return dependencias;
 	}
 
 	/**
-	 * Verifica de quais aspectos a classe eh dependente. OU Verifica em quais
-	 * classes um aspecto interfere.
+	 * Este método verifica de quais aspectos a classe eh dependente.
+	 *  Ou Verifica em quais classes um aspecto interfere/tem impacto.
 	 * 
-	 * @param classe
-	 * @return
+	 * @param File classe: A classe passada por parametro.
+	 * @return Retorna uma sequencia de aspectos ( Collection<String> ) que a classe passada por parametro depende.
 	 */
 	public Collection<String> getDependenciasAspectos(File classe) {
 		Collection<String> aspectos = new ArrayList<String>();
-
 		try {
 			FileReader reader = new FileReader(classe);
-
 			BufferedReader in = new BufferedReader(reader);
-
 			String linha = in.readLine();
-
 			linha = linha.replaceAll(Pattern.quote("/"), "");
-
 			String[] aspectosFromText = linha.split(",");
-
 			for (String aspect : aspectosFromText) {
 				if (!aspect.trim().equals("")) {
 					aspectos.add(aspect.trim());
 				}
 			}
-
 			in.close();
-
 			reader.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage() + "\nArquivo não encontrado: " + classe.getName());
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.out.println(e.getMessage() + "\nIO exception para o arquivo: " + classe.getName());
 			e.printStackTrace();
 		}
-
 		return aspectos;
 	}
 
+	/**
+	 * 
+	 * @param sourceFeatures
+	 * @return
+	 * @throws IOException
+	 */
 	public HashSet<String> getFeatures(String sourceFeatures) throws IOException {
 		HashSet<String> out = new HashSet<String>();
 		BufferedReader input = new BufferedReader(new InputStreamReader(new FileInputStream(new File(sourceFeatures))));
@@ -199,16 +204,6 @@ public class FilesManager {
 			}
 		}
 	}
-
-	//	public void copyFile(String sourcePath, String destinationPath, String asset,
-	//			String directory) throws AssetNotFoundException, DirectoryException {
-	//
-	//		String sourceFile = sourcePath + "" + asset;
-	//		String destination = destinationPath + directory;
-	//
-	//		copyFile(sourceFile, destination);
-	//
-	//	}
 
 	public void copyFiles(File sourceDirectory, File sourceFile, File destFile) throws AssetNotFoundException, DirectoryException {
 		if (!sourceFile.getAbsolutePath().contains("svn")) {

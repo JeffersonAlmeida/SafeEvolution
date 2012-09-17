@@ -1,5 +1,9 @@
 package br.edu.ufcg.dsc;
 
+/**
+ * @author Jefferson Almeida - jra at cin dot ufpe dot br 
+ */
+
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;

@@ -44,10 +44,15 @@ public class ASTComparator {
 
 	private String classeName;
 
+    /**
+     * Este método cria um projeto java com o nome JavaProject + miliseconds
+     * 
+     * @return IJavaProject: retorna um projeto java 
+     * @throws ConfigurationException
+     */
 	public IJavaProject setUpProject() throws ConfigurationException {
 		try {
-			javaProject = JavaProjectHelper.createJavaProject("JavaProject"
-					+ System.currentTimeMillis(), "bin");
+			javaProject = JavaProjectHelper.createJavaProject("JavaProject" + System.currentTimeMillis(), "bin");
 //			JavaProjectHelper.addRTJar(javaProject);
 			root = JavaProjectHelper.addSourceContainer(javaProject, "src");
 			packageP = root.createPackageFragment("p", true, null);
