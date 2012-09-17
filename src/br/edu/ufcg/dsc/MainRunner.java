@@ -61,24 +61,26 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				Avaliador avaliador = new Avaliador();
 
 				try {
-					//   C:/ProductsLines/motivating_source
+					
 					avaliador
 							.avalie(
-									Lines.DEFAULT,
-									"C:/WorkspaceSPL/MiniSPL", //  -> /home/felype/Desktop/Exemplos/motivating_source
-									"C:/WorkspaceSPL/MiniSPL_R02", //  -> /home/felype/Desktop/Exemplos/motivating_target_1
-									60,
-									4,
-									Approach.NAIVE_1_APROXIMACAO,
-									true,
-									true,
-									null,
-									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,
-									CKFormat.SIMPLE, CKFormat.SIMPLE,
-									AMFormat.SIMPLE, AMFormat.SIMPLE,
-									"C:/WorkspaceSPL/MiniSPL/lib"); //   ->   /home/felype/Desktop/Exemplos/motivating_source/lib
-
+									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
+									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
+									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									60,  // timeOut
+									4,   // A quantidade de testes que será gerada para cada método.
+									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
+									true, // A SPL Source possui aspectos.
+									true,  // A SPL Target possui aspectos.
+									null, // String: controladores fachadas.
+									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
+									CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
+									CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
+									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
+									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
+									"C:/WorkspaceSPL/MiniSPL/lib"); // Uma sequência de bibliotecas (String)
 				} catch (DirectoryException e) {
+					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
 				}
 
