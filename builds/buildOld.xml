@@ -1,0 +1,143 @@
+<project name="RefactoringProject" default="test_target" basedir="../">
+    
+	<path id="classpath">
+		<fileset dir="lib" includes="lib/junit-4.5.jar" />
+
+	</path>
+	
+    <path id="classpath_source">
+        <fileset dir="${source}/" includes="lib/*.jar"/>
+    </path>
+	
+    <path id="classpath_target">
+        <fileset dir="${target}" includes="lib/*.jar"/>
+    </path>
+    
+    <path id="classpath">
+        <fileset dir="lib"/>
+    </path>
+    
+    <target name="clean">
+        <delete includeemptydirs="false">
+          <!--  <fileset dir="${source}/bin" includes="**/*"/>
+        	<fileset dir="${target}/bin" includes="**/*"/>-->        	
+        	<fileset dir="${tests.folder}/" includes="**/*"/>
+        	<fileset dir="${tests.folder}/bin" includes="**/*"/>
+        	<fileset dir="${tests.folder}/source" includes="**/*"/>
+        	<fileset dir="${tests.folder}/target" includes="**/*"/>        		
+        </delete>
+    </target>
+    
+    <target name="compile_source" depends="clean">
+        <javac debug="on" srcdir="${source}/src" destdir="${source}/bin">
+            <classpath refid="classpath_source"/>
+        </javac>
+    </target> 
+    
+    <target name="compile_target" depends="compile_source">
+        <javac debug="on" srcdir="${target}/src" destdir="${target}/bin">
+            <classpath refid="classpath_target"/>
+        </javac>
+    </target>
+    
+    <target name="compile" depends="compile_target">
+        <echo>
+            Compiling the source files
+        </echo>
+        <javac debug="on" srcdir="src" destdir="bin">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>
+    
+    <target name="code" depends="compile">
+        <echo>
+            Analysing the code
+        </echo>
+        <java classname="refactoring.IdentifyChange" >
+            <arg value="${source}/src"/>
+            <arg value="${target}/src"/>
+            <arg value="1"/>
+        	<classpath refid="classpath_target"/>
+            <classpath>
+                <pathelement path="${target}/bin"/>
+           
+            	<pathelement path="bin"/>
+            	
+            </classpath>
+        </java> 
+    </target>
+    
+    <target name="change" depends="code">
+        <echo>
+            Analysing the code
+        </echo>
+        <java classname="refactoring.IdentifyChange" fork="false" maxmemory="256m">
+            <arg value="${source}/src"/>
+            <arg value="${target}/src"/>
+            <arg value="2"/>
+        	<arg value="${timeout}"/>
+        	<classpath refid="classpath_source"/>
+        	<classpath>
+                <pathelement path="${source}/bin"/>
+                <pathelement path="bin"/>
+            	
+            	
+            </classpath>
+        </java>
+    </target>
+	
+
+	<target name="compile_tests" depends="change">
+			<echo>Compiling the tests</echo>
+			<javac fork="yes" memorymaximumsize="512m" includes="*.java" debug="on" srcdir="${tests.folder}/" destdir="${tests.folder}/bin">
+				<classpath refid="classpath_source"/>
+				<classpath>
+					<pathelement path="lib/junit-4.5.jar" />
+					<pathelement path="${source}/bin" />
+				</classpath>
+			</javac>
+		</target>
+	
+	<target name="test_target" depends="compile_tests">
+			<echo>Running JUnit to test the "source"</echo>
+			<junit printsummary="yes" haltonfailure="yes" fork="true" maxmemory="512m">
+				<classpath refid="classpath" />		
+				<classpath>					
+					<pathelement path="lib/junit-4.5.jar" />
+					<pathelement path="${source}/bin" />
+					<pathelement path="${source}/lib" />
+					<pathelement path="${tests.folder}/bin" />
+				</classpath>
+				<formatter type="xml" />
+				<batchtest  todir="${tests.folder}/source" haltonfailure="no">
+											<fileset dir="${tests.folder}/bin">
+												<include name="*Test.class" />
+											</fileset>
+										</batchtest>
+			</junit>
+		<echo>Running JUnit to test the "target"</echo>
+		<junit printsummary="yes" haltonfailure="yes" fork="true" maxmemory="512m">
+			<classpath refid="classpath" />					
+			<classpath>								
+				<pathelement path="lib/junit-4.5.jar" />
+				<pathelement path="${target}/bin" />
+				<pathelement path="${target}/lib" />
+				<pathelement path="${tests.folder}/bin" />
+						</classpath>
+						<formatter type="xml" />
+			<batchtest todir="${tests.folder}/target" haltonfailure="no">
+				<fileset dir="${tests.folder}/bin">
+					<include name="*Test.class" />
+				</fileset>
+			</batchtest>
+					</junit>
+		</target>
+
+   
+	    
+	
+	
+	
+
+    
+</project>

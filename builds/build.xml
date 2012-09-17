@@ -1,0 +1,30 @@
+<project name="RefactoringProject" default="clean" basedir="../">
+	
+    <path id="classpath_source">
+        <fileset dir="${source}/" includes="lib/*.jar"/>
+    </path>
+	
+    <path id="classpath_target">
+        <fileset dir="${target}" includes="lib/*.jar"/>
+    </path>
+	
+    <target name="clean">
+        <delete includeemptydirs="false">
+        	<fileset dir="${source}/bin" includes="**/*"/>
+        	<fileset dir="${target}/bin" includes="**/*"/>
+        </delete>
+    </target>
+	
+    <target name="compile_source" depends="clean">
+        <javac debug="on" srcdir="${source}/src" destdir="${source}/bin">
+            <classpath refid="classpath_source"/>
+        </javac>
+    </target> 
+	
+    <target name="compile_target" depends="compile_source">
+        <javac debug="on" srcdir="${target}/src" destdir="${target}/bin">
+            <classpath refid="classpath_target"/>
+        </javac>
+    </target> 
+	
+	</project>

@@ -1,0 +1,42 @@
+// CUP specification for a simple expression evaluator (no actions)
+
+package br.ufpe.cin.lps.ck.parser;
+
+import java_cup.runtime.*;
+import br.ufpe.cin.lps.ck.featureexpression.*;
+import java.util.List;
+
+action code {:
+:};
+
+parser code {:
+	/*
+	public NodeFactory nf;
+	
+	public parser(java_cup.runtime.Scanner s, List<IFeature> features) {
+		this(s);
+		nf = new NodeFactory(features);
+	}
+	/**/
+:};
+/* Terminals (tokens returned by the scanner). */
+terminal            LPAREN, RPAREN, OR, AND, NOT;
+terminal String 	FEATURE;
+
+/* Non terminals */
+non terminal            feature_expression;
+
+precedence left AND, OR;
+
+/* The grammar */
+feature_expression ::= LPAREN feature_expression:e RPAREN
+						{: RESULT = e; :}
+					| feature_expression:e1 AND feature_expression:e2
+						{: RESULT = new AndExpression((IFeatureExpression)e1, (IFeatureExpression)e2); :}
+					| feature_expression:e1 OR feature_expression:e2
+						{: RESULT = new OrExpression((IFeatureExpression)e1, (IFeatureExpression)e2); :}
+					| NOT LPAREN feature_expression:e1 RPAREN
+						{: RESULT = new NotExpression((IFeatureExpression)e1); :}
+					| FEATURE:f
+						{: RESULT = new FeatureExpression(f); :}
+					;
