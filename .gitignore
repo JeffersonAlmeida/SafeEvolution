@@ -26,6 +26,6 @@ br.ufpe.cin.target.perspective
 build.properties
 Execution*
 limitacoesTestes.txt
-
 junit*.properties
+javaDoc/
 

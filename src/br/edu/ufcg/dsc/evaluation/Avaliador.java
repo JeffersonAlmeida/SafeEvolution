@@ -18,6 +18,7 @@ import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
+import br.edu.ufcg.dsc.util.Measures;
 import br.edu.ufcg.saferefactor.core.Criteria;
 import edu.mit.csail.sdg.alloy4.Err;
 
@@ -52,9 +53,9 @@ public class Avaliador {
 	
 		try {
 			ResultadoLPS resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat);
+			/** Esta variável <resultadoEstahCerto> pode ser removida do codigo, esta sendo usadas apenas aqui.*/
 			boolean resultadoEstahCerto = true;
 			System.out.println("Resultado da verificação da LPS: " + resultadoEstahCerto + "\n");
-			
 			String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR +  "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
 			FileWriter resultFile = new FileWriter(resultFileName + ".txt");
 			resultFile.write(resultado.toString());

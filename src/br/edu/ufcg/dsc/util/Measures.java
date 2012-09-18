@@ -10,50 +10,73 @@ import java.util.Properties;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 
+/**
+ * 
+ *   @author Jefferson Almeida - jra at cin dot ufpe dot br
+ * 
+ * <strong><p>Esta classe é responsável por calcular o tempo necessário para realizar determinadas tarefas
+ *  ao avaliar a evolução da LPS. Como por exemplo:<br></br>
+ *  - tempo para compilar os produtos.<br></br>
+ *  - tempo para compilar os teste.<br></br>
+ *  - tempo para executar a abordagem.<br></br></p></strong>
+ *
+ */
 public class Measures {
 	
+	/**Tempo total gasto na avaliação da LPS>*/
 	private Timer tempoTotal;
+	
+	/**Tempo gasto para comilar os produtos da LPS>*/
 	private Timer tempoCompilacaoProdutos;
+	
+	/**Tempo necessário para compilar os testes aplicados aos produtos.*/
 	private Timer tempoCompilacaoTestes;
+	
+	/**Tempo gasto na execução dos testes*/
 	private Timer tempoExecucaoTestes;
+	
+	/**Tempo para executar a abordagem selecionada: <strong><NAIVE_2_ICTAC>, <NAIVE_1_APROXIMACAO>, <ONLY_CHANGED_CLASSES>, <IMPACTED_FEATURES></strong>*/
 	private Timer tempoExecucaoAbordagem;
 
+	/**Usada para armazenar o path da LPS Original*/
 	private String sourcePath;
+	
+	/**Usada para armazenar o path da LPS Target*/
 	private String targetPath;
-
+	
+	/**Propriedade para armazenar qual abordagem foi selecionada. */
 	private Approach approach;
 
+	/**Quantidade total dos produtos que foram compilados.*/
 	private int quantidadeProdutosCompilados;
+	
+	/**Quantidade total dos testes aplicados.*/
 	private int quatidadeTotalTestes;
+	
+	/**Quantidade de testes aplicados por produto.*/
 	private int quantidadeTestesPorProduto;
 
+	/**Nome resultante do arquivo para gerar o relatório.*/
 	private String fileResultName;
+	
+	/**Variável usada para armazenar o tempo corrente em milisegundos.*/
 	private String execucao;
+	
+	/**Arquivo de propriedades*/
 	private String filePropertiesName;
 	
+	/**Variável boolena para determinar se houve refinamento ou não na Evolução da LPS.*/
 	private boolean isRefinement;
-	
-//	private static Measures instance;
 	
 	public Measures(){
 		this.tempoTotal = new Timer();
 		this.tempoCompilacaoProdutos = new Timer();
 		this.tempoCompilacaoTestes = new Timer();
 		this.tempoExecucaoTestes = new Timer();
-		
 		this.tempoExecucaoAbordagem = new Timer();
-		
 		this.fileResultName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execution" + System.currentTimeMillis() + ".txt";
 	}
 	
-//	public static Measures getInstance(){
-//		if(instance == null){
-//			instance = new Measures();
-//		}
-//		
-//		return instance;
-//	}
-
 	public String getFilePropertiesName() {
 		return this.filePropertiesName;
 	}
@@ -64,10 +87,7 @@ public class Measures {
 		File fileSource = new File(this.sourcePath);
 		File targetPath = new File(this.targetPath);
 		
-		this.filePropertiesName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + 
-			"Resultados" + Constants.FILE_SEPARATOR + 
-			"properties" + Constants.FILE_SEPARATOR + 
-			fileSource.getName() + "+" + targetPath.getName() + "+" + "Execution" + this.execucao + ".properties";
+		this.filePropertiesName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "properties" + Constants.FILE_SEPARATOR + fileSource.getName() + "+" + targetPath.getName() + "+" + "Execution" + this.execucao + ".properties";
 	}
 
 	public Timer getTempoTotal() {
