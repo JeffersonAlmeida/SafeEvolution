@@ -3,13 +3,13 @@ package br.edu.ufcg.dsc.evaluation;
 /**
  * @author Jefferson Almeida - jra at cin dot ufpe dot br
  * 
- * Esta classe é responsável por avaliar a evolução na Linha de Produtos de software.
+ * <strong><p>Esta classe é responsável por avaliar a evolução na Linha de Produtos de software.</p></strong>
+ * 
  */
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.Lines;
@@ -127,8 +127,7 @@ public class Avaliador {
 						
 				System.out.println(resultadoEstahCerto);
 				
-				String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + 
-				"Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
+				String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
 				
 				FileWriter resultFile = new FileWriter(resultFileName + ".txt");
 				resultFile.write(resultado.toString());
@@ -221,6 +220,7 @@ public class Avaliador {
 		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
 		resultado.resetExecution();
 
+		/** Delega a responsabilidade de verificar se a linha é refinamento para a classe ToolCommandLine */
 		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, resultado, libPathSource, libPathTarget);
 		
 		resultado.setRefinement(isRefinement);

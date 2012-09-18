@@ -1715,14 +1715,31 @@ public class ToolCommandLine {
 		return this.verifyLine(souceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
 	}
 
-	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches,
-			boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind,
-			CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource,
-			String libPathTarget) throws Err,
-			IOException, AssetNotFoundException, DirectoryException {
-
-		//sourcePath = sourcePath.startsWith("/") ? sourcePath : Constants.PLUGIN_PATH + "/../Exemplos/" + sourcePath;
-		//targetPath = targetPath.startsWith("/") ? targetPath : Constants.PLUGIN_PATH + "/../Exemplos/" + targetPath;
+	/**
+	 * 
+	 * @param sourcePath
+	 * @param targetPath
+	 * @param timeout
+	 * @param qtdTestes
+	 * @param selectedApproaches
+	 * @param temAspectosSource
+	 * @param temAspectosTarget
+	 * @param controladoresFachadas
+	 * @param criteria
+	 * @param sourceCKKind
+	 * @param targetCKKind
+	 * @param sourceAMFormat
+	 * @param targetAMFormat
+	 * @param resultado
+	 * @param libPathSource
+	 * @param libPathTarget
+	 * @return
+	 * @throws Err
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 * @throws DirectoryException
+	 */
+	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt",
 				temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
