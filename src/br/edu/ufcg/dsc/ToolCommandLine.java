@@ -13,14 +13,11 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-
 import javax.naming.ConfigurationException;
-
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
-
 import soot.Main;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ast.ASTComparator;
@@ -1698,12 +1695,30 @@ public class ToolCommandLine {
 		return testsGenerationTimeout;
 	}
 
-	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches,
-			boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind,
-			CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado) throws Err, IOException,
-			AssetNotFoundException, DirectoryException {
-
-	//	sourcePath = sourcePath.startsWith("/") ? sourcePath : Constants.PLUGIN_PATH + "/../Exemplos/" + sourcePath;
+	/**
+	 * 
+	 * @param sourcePath
+	 * @param targetPath
+	 * @param timeout
+	 * @param qtdTestes
+	 * @param selectedApproaches
+	 * @param temAspectosSource
+	 * @param temAspectosTarget
+	 * @param controladoresFachadas
+	 * @param criteria
+	 * @param sourceCKKind
+	 * @param targetCKKind
+	 * @param sourceAMFormat
+	 * @param targetAMFormat
+	 * @param resultado
+	 * @return
+	 * @throws Err
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 * @throws DirectoryException
+	 */
+	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
+		//	sourcePath = sourcePath.startsWith("/") ? sourcePath : Constants.PLUGIN_PATH + "/../Exemplos/" + sourcePath;
 	//	targetPath = targetPath.startsWith("/") ? targetPath : Constants.PLUGIN_PATH + "/../Exemplos/" + targetPath;
 
 		ProductLine souceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt",

@@ -70,10 +70,10 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 							.avalie(
 									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
 									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									"C:/WorkspaceSPL/MiniSPL",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.IMPACTED_FEATURES, // A abordagem que será utilizada
+									Approach.ONLY_CHANGED_CLASSES, // A abordagem que será utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.
