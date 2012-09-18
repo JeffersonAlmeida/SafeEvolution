@@ -24,27 +24,27 @@ import edu.mit.csail.sdg.alloy4.Err;
 public class Avaliador {
 	
 	/**
-	 *   
-	 *  Este método avalia a evolução de uma Linha de Produtos de Software. Neste método não precisa passar lista de bibliotecas por parâmetro.
+	 *   {@link #avalie(Lines, String, String, int, int, Approach, boolean, boolean, String, Criteria, CKFormat, CKFormat, AMFormat, AMFormat)}
+	 *  <p>Este método avalia a evolução de uma Linha de Produtos de Software. Neste método não precisa passar lista de bibliotecas por parâmetro.<p>
 	 *  
-	 * @param Lines line: Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target
-	 * @param String sourcePath: O path do source da linha de produtos.  SPL Original  (SPL)
-	 * @param String targetPath: O path do source da linha de produto com a evolução/refactoring. (SPL')
-	 * @param int timeOut:   ????????
-	 * @param int qtdTestes: A quantidade de testes que será gerada para cada método da Linha de Produtos.
-	 * @param approach: Qual a abordagem que será utilizada. @see Approach.java
-	 * @param boolean temAspectosSource: Valor booleano para indicar se tem aspectos no source da LPS ou não.
-	 * @param boolean temAspectosTarget: Valor booleano para indicar se tem aspectos no source Target da LPS ou não.
-	 * @param String controladoresFachadas:  ??????????
-	 * @param Criteria criteria: @see Criteria.java
-	 * @param CKFormat sourceCKKind: Informa o formato do CK presente no source da LPS Original: Hephaestus ou Formato Simples.  @see CKFormat.java
-	 * @param CKFormat targetCKKind: Informa o formato do CK presente no source da LPS Target: Hephaestus ou Formato Simples. @see CKFormat.java
-	 * @param AMFormat sourceAMFormat: Informa o formato do AM presente no source da LPS Original: Hephaestus ou Formato Simples @see AMFormat.java
-	 * @param AMFormat targetAMFormat: Informa o formato do AM presente no source da LPS Target: Hephaestus ou Formato Simples @see AMFormat.java
-	 * @throws DirectoryException: Lança uma exceção de diretório dos paths das linhas de produtos.
-	 * @exception AssetNotFoundException:  Lança uma exceção de asset não encontrado.
-	 * @exception IOException: Lança uma exceção de I/O.
-	 * @exception Err: Lança uma exceção de Erro.
+	 * <strong>@param Lines line:</strong> Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target<br></br>
+	 * <strong>@param String sourcePath:</strong> O path do source da linha de produtos.  SPL Original  (SPL)<br></br>
+	 * <strong>@param String targetPath:</strong> O path do source da linha de produto com a evolução/refactoring. (SPL')<br></br>
+	 * <strong>@param int timeOut:</strong>   ????????<br></br>
+	 * <strong>@param int qtdTestes:</strong> A quantidade de testes que será gerada para cada método da Linha de Produtos.<br></br>
+	 * <strong>@param approach:</strong> Qual a abordagem que será utilizada. <br></br>
+	 * <strong>@param boolean temAspectosSource:</strong> Valor booleano para indicar se tem aspectos no source da LPS ou não.<br></br>
+	 * <strong>@param boolean temAspectosTarget:</strong> Valor booleano para indicar se tem aspectos no source Target da LPS ou não.<br></br>
+	 * <strong>@param String controladoresFachadas:</strong>  ??????????<br></br>
+	 * <strong>@param Criteria criteria:</strong> <br></br>
+	 * <strong>@param CKFormat sourceCKKind:</strong> Informa o formato do CK presente no source da LPS Original: Hephaestus ou Formato Simples. <br></br>
+	 * <strong>@param CKFormat targetCKKind:</strong> Informa o formato do CK presente no source da LPS Target: Hephaestus ou Formato Simples.<br></br>
+	 * <strong>@param AMFormat sourceAMFormat:</strong> Informa o formato do AM presente no source da LPS Original: Hephaestus ou Formato Simples<br></br>
+	 * <strong>@param AMFormat targetAMFormat:</strong> Informa o formato do AM presente no source da LPS Target: Hephaestus ou Formato Simples <br></br>
+	 * <strong>@throws DirectoryException:</strong> Lança uma exceção de diretório dos paths das linhas de produtos.<br></br>
+	 * <strong>@exception AssetNotFoundException:</strong>  Lança uma exceção de asset não encontrado.<br></br>
+	 * <strong>@exception IOException:</strong> Lança uma exceção de I/O.<br></br>
+	 * <strong>@exception Err:</strong> Lança uma exceção de Erro.<br></br>
 	 * */
 	public void avalie(Lines line, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat) throws DirectoryException{
 		
@@ -75,30 +75,33 @@ public class Avaliador {
 	
 	
 	/**
-	 * @author Jefferson Almeida - jra at cin dot ufpe dot br
+	 * {@link #avalie(Lines, String, String, int, int, Approach, boolean, boolean, String, Criteria, CKFormat, CKFormat, AMFormat, AMFormat, String...)}
+	 * 
+	 *  <p>Este método avalia a evolução de uma Linha de Produtos de Software.</p>
 	 *  
-	 *  Este método avalia a evolução de uma Linha de Produtos de Software.
 	 *  
-	 * @param Lines line: Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target
-	 * @param String sourcePath: O path do source da linha de produtos.  SPL Original  (SPL)
-	 * @param String targetPath: O path do source da linha de produto com a evolução/refactoring. (SPL')
-	 * @param int timeOut:   ????????
-	 * @param int qtdTestes: A quantidade de testes que será gerada para cada método da Linha de Produtos.
-	 * @param approach: Qual a abordagem que será utilizada. @see Approach.java
-	 * @param boolean temAspectosSource: Valor booleano para indicar se tem aspectos no source da LPS ou não.
-	 * @param boolean temAspectosTarget: Valor booleano para indicar se tem aspectos no source Target da LPS ou não.
-	 * @param String controladoresFachadas:  ??????????
-	 * @param Criteria criteria: @see Criteria.java
-	 * @param CKFormat sourceCKKind: Informa o formato do CK presente no source da LPS Original: Hephaestus ou Formato Simples.  @see CKFormat.java
-	 * @param CKFormat targetCKKind: Informa o formato do CK presente no source da LPS Target: Hephaestus ou Formato Simples. @see CKFormat.java
-	 * @param AMFormat sourceAMFormat: Informa o formato do AM presente no source da LPS Original: Hephaestus ou Formato Simples @see AMFormat.java
-	 * @param AMFormat targetAMFormat: Informa o formato do AM presente no source da LPS Target: Hephaestus ou Formato Simples @see AMFormat.java
-	 * @param String... libs: Este parâmetro pode ser uma string ou várias. Uma sequência de bibliotecas.   Ex: lib01, lib02, lib03, ... , lib0n.
-	 * @return void: Este método não retorna nada.
-	 * @throws DirectoryException: Lança uma exceção de diretório dos paths das linhas de produtos.
-	 * @exception AssetNotFoundException:  Lança uma exceção de asset não encontrado.
-	 * @exception IOException: Lança uma exceção de I/O.
-	 * @exception Err: Lança uma exceção de Erro.
+	 * <strong>@param Lines line:</strong> Escolha de qual linha de produtos será avaliada.  <strong>Mobile Media, Default ou Target</strong> <br></br>
+	 * <strong>@param String sourcePath:</strong> O path do source da linha de produtos.  SPL Original  (SPL)<br></br>
+	 * <strong>@param String targetPath:</strong> O path do source da linha de produto com a evolução/refactoring. (SPL')<br></br>
+	 * <strong>@param int timeOut:</strong>   ???????? <br></br>
+	 * <strong>@param int qtdTestes:</strong> A quantidade de testes que será gerada para cada método da Linha de Produtos.<br></br>
+	 * <strong>@param approach:</strong> Qual a abordagem que será utilizada. {@link <br.edu.ufcg.dsc.Approach><br></br>
+	 * <strong>@param boolean temAspectosSource:</strong> Valor booleano para indicar se tem aspectos no source da LPS ou não.<br></br>
+	 * <strong>@param boolean temAspectosTarget:</strong> Valor booleano para indicar se tem aspectos no source Target da LPS ou não.<br></br>
+	 * <strong>@param String controladoresFachadas:</strong>  ??????????<br></br>
+	 * <strong>@param Criteria criteria:</strong><br></br>
+	 * <strong>@param CKFormat sourceCKKind:</strong> Informa o formato do CK presente no source da LPS Original: Hephaestus ou Formato Simples.<br></br>
+	 * <strong>@param CKFormat targetCKKind:</strong> Informa o formato do CK presente no source da LPS Target: Hephaestus ou Formato Simples.<br></br>
+	 * <strong>@param AMFormat sourceAMFormat:</strong> Informa o formato do AM presente no source da LPS Original: Hephaestus ou Formato Simples<br></br>
+	 * <strong>@param AMFormat targetAMFormat:</strong> Informa o formato do AM presente no source da LPS Target: Hephaestus ou Formato Simples<br></br>
+	 * <strong>@param String... libs:</strong> Este parâmetro pode ser uma string ou várias. Uma sequência de bibliotecas.   Ex: lib01, lib02, lib03, ... , lib0n.<br></br>
+	 * <strong>@return void:</strong> Este método não retorna nada.<br></br>
+	 * <strong>@throws DirectoryException:</strong> Lança uma exceção de diretório dos paths das linhas de produtos.<br></br>
+	 * <strong>@exception AssetNotFoundException:</strong>  Lança uma exceção de asset não encontrado.<br></br>
+	 * <strong>@exception IOException:</strong> Lança uma exceção de I/O.<br></br>
+	 * <strong>@exception Err:</strong> Lança uma exceção de Erro.<br></br> 
+	 * @see Approach
+	 * @see CKFormat
 	 * */	
 	public void avalie(Lines line, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String... libs) throws DirectoryException{
 		

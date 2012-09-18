@@ -61,7 +61,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			public void run() {
 
 				ProductGenerator.MAX_TENTATIVAS = 2000;
-
+				
 				Avaliador avaliador = new Avaliador();
 
 				try {
@@ -73,7 +73,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
+									Approach.IMPACTED_FEATURES, // A abordagem que será utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.
