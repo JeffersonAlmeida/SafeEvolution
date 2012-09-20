@@ -17,8 +17,7 @@ public class AlloyFMEvolutionBuilder {
 		features = new HashSet<String>();
 	}
 
-	public void buildAlloyFile(String moduleName, String output, String sourceName,
-			String fmSourceXML, String targetName, String fmTargetXML) {
+	public void buildAlloyFile(String moduleName, String output, String sourceName, String fmSourceXML, String targetName, String fmTargetXML) {
 
 		formatHeader(moduleName);
 		contents.append(Constants.LINE_SEPARATOR);
@@ -42,6 +41,8 @@ public class AlloyFMEvolutionBuilder {
 		stream.print(contents.toString());
 		stream.flush();
 		stream.close();
+		
+		System.out.println("\n Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >\n");
 	}
 
 	private void addRunClause() {

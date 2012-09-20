@@ -15,10 +15,7 @@ public class SafeCompositionResult extends AbstractResult {
 	private long timeTmp;
 	private String output;
 
-	public SafeCompositionResult(boolean result, long startedTime,
-			long finishedTime, long Alloytime,
-			Set<Hashtable<String, String>> products, long timeParse,
-			long timeSave, long timeTmp, String output) {
+	public SafeCompositionResult(boolean result, long startedTime, long finishedTime, long Alloytime,Set<Hashtable<String, String>> products, long timeParse, long timeSave, long timeTmp, String output) {
 		listProducts = products;
 		totalErrors = listProducts.size();
 		analysisResult = result;

@@ -3,7 +3,6 @@ package br.edu.ufcg.dsc.util;
 public class Timer {
 	
 	private long base;
-	
 	private long total;
 	
 	public Timer() {
@@ -20,9 +19,7 @@ public class Timer {
 
 	public void pause(){
 		long now = System.currentTimeMillis();
-		
 		long diference = now - this.base;
-		
 		this.total = this.total + diference;
 	}
 	

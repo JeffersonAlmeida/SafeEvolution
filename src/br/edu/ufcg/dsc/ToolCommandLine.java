@@ -66,9 +66,7 @@ public class ToolCommandLine {
 	/**/
 	private ProductBuilder builder;
 	
-	
 	private long testsCompileTimeout;
-	
 	
 	private long testsExecutionTimeout;
 	private long testsGenerationTimeout;
@@ -130,29 +128,37 @@ public class ToolCommandLine {
 		return isRefinement;
 	}
 
+	/**
+	 * @param sourceLine Source Product Line.
+	 * @param targetLine Target Product Line.
+	 */
 	private void putProductsInCache(ProductLine sourceLine, ProductLine targetLine) {
+		System.out.println("\n\n\n\t\tLet's put the products in cache.\n");
 		if (this.cacheProducts.get(sourceLine.getPath()) == null || this.cacheProducts.get(targetLine.getPath()) == null) {
+			/*Build the Source Feature Model Alloy file.*/
+			System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
 			buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
+			
+			/*Build the Target Feature Model Alloy file.*/
+			System.out.println("\nBuild the TARGET Feature Model Alloy file:");
 			buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
 
+			/*Build the Evolution Alloy file.*/
+			System.out.println("\nBuild the EVOLUTION Alloy file:");
 			buildFMEvolutionAlloyFile(sourceLine.getFmPath(), targetLine.getFmPath());
 
 			if (this.cacheProducts.get(sourceLine.getPath()) == null) {
-				HashSet<HashSet<String>> productsSource = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH
-						+ Constants.SOURCE_FM_ALLOY_NAME);
-
+				HashSet<HashSet<String>> productsSource = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME);
 				this.cacheProducts.put(sourceLine.getPath(), productsSource);
 			}
 
 			if (this.cacheProducts.get(targetLine.getPath()) == null) {
-				HashSet<HashSet<String>> productsTarget = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH
-						+ Constants.TARGET_FM_ALLOY_NAME);
-
+				HashSet<HashSet<String>> productsTarget = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME);
 				this.cacheProducts.put(targetLine.getPath(), productsTarget);
 			}
 
-			HashSet<HashSet<String>> products = new HashSet<HashSet<String>>();
-
+			/** I didn't understand why this code is needed. */
+			/*The variable p1 is being used.*/
 			HashSet<String> p1 = new HashSet<String>();
 			p1.add("uceditor");
 			p1.add("motorola");
@@ -170,24 +176,18 @@ public class ToolCommandLine {
 			p1.add("testCaseGenerator");
 			p1.add("xlsstdinput");
 			p1.add("cm");
-
-			//		products.add(p1);
-			//		this.cacheProducts.put(sourcePath, products);
-			//		this.cacheProducts.put(targetPath, products);
 		}
 
 		sourceLine.setSetsOfFeatures(this.cacheProducts.get(sourceLine.getPath()));
 		targetLine.setSetsOfFeatures(this.cacheProducts.get(targetLine.getPath()));
+		System.out.println("\n\t\tThe products are already in cache.");
 	}
 
 	private void setup(ProductLine souceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
 		this.sourceFMSemantics = null;
 		this.targetFMSemantics = null;
-
 		this.dependenciasCopiadas = null;
-
 		this.classesModificaadas = null;
-
 		this.testsCompileTimeout = 0;
 		this.testsExecutionTimeout = 0;
 		this.testsGenerationTimeout = 0;
@@ -213,7 +213,7 @@ public class ToolCommandLine {
 		Project p = new Project();
 		
 		/*This is the directory of the generated products: */
-		System.out.println("\nThis is the directory of the generated products: " + "< " + Constants.PRODUCTS_DIR + " >\n");
+		System.out.println("\nThe directory of the generated products: " + "<  Tool Path + Products  >\n");
 		
 		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
 		
@@ -251,26 +251,49 @@ public class ToolCommandLine {
 		System.out.println("\n Two directories have been deleted:  < Tool Path + Products > and < pluginpath + emma + instr >");
 	}
 
-	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach,
-			Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
-
+	/**
+	 * One of the main methods of this class. It is responsible to check the SPL. <br></br>
+	 * @param sourceLine Source SPL.  <br></br>
+	 * @param targetLine Target SPL.  <br></br>
+	 * @param timeout  <br></br>
+	 * @param qtdTestes Amount of applied tests per methods. <br></br>
+	 * @param approach The approach used to check the SPL Evolution. <br></br>
+	 * @param criteria  <br></br>
+	 * @param resultado SPL Evolution Results/Report  <br></br>
+	 * @return Returns whether the SPL evolution is a refinement  <br></br>
+	 * @throws IOException Case this is not successful, throws IO Exception.  <br></br>
+	 * @throws AssetNotFoundException Case this is not successful, throws IO Asset Not Found Exception. <br></br>
+	 * @throws DirectoryException  Case this is not successful, throws Directory Exception. <br></br>
+	 */
+	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
+		
+		/* Till here this is not a refinment yet. */
 		boolean isRefinement = false;
 
-		//Checa WF
+		/* Check whether the Software Product Line is well formed. */
+		System.out.println("\n\n\n\n\t\tLet's check if the SPL is well formed.\n");
 		boolean isWF = this.isWF(sourceLine, targetLine);
+		System.out.println("\n\n\n\n\t\tOk. We have already checked the well formedness.\n");
+		
+		/* Set this property in Results Class - To be used as a report later.*/
 		resultado.setWF(isWF);
 
+		/*Verify Feature Model -  FM is not verified for the Naive Approach, ONLY Well Formedness*/
 		if (isWF) {
-			//Checa FM
-			//FM nao eh checado na Naive, apenas WF.
-
+			/* Verify whether Configuration knowledge and Feature Model is a refinement */
 			boolean isFMAndCKRefinement = this.isFeatureModelAndConfigurationKnowledgeWeakRefinement(sourceLine, targetLine);
+			
+			System.out.println("FM and CK are refinement:- " + isFMAndCKRefinement );
+			
+			/*Set this information in the Results/Short Report.*/
 			resultado.setFMAndCKRefinement(isFMAndCKRefinement);
 
+			/*which approach is settled ? */
 			if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || isFMAndCKRefinement) {
 
-				//Checa se AM eh igual, exceto para Naive.
+				/* verify whether two AM's is equal. */
 				boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
+				/* Set it down in the results. */
 				resultado.setAssetMappingsEqual(isAssetMappingsEqual);
 
 				if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || !isAssetMappingsEqual) {
@@ -278,49 +301,63 @@ public class ToolCommandLine {
 					HashSet<String> changedFeatures = null;
 
 					if (approach == Approach.IMPACTED_FEATURES || approach == Approach.ONLY_CHANGED_CLASSES) {
-						//Gera testes apenas para features impactadas.
+						/* Generate tests only for impacted features. */
 						changedFeatures = getChangedFeatureNames(targetLine);
 					}
 
 					resultado.getMeasures().getTempoExecucaoAbordagem().startContinue();
 
 					if (approach == Approach.ONLY_CHANGED_CLASSES) {
-						//Gera testes apenas para classes modificadas e nao gera produtos da linha.
-						//Gera duas vezes a quantidade de testes por metodo.
-						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures,
-								criteria, resultado);
+						/* Only generates tests for modified classes and do not generate products. */
+						/* Generates twice the test  amount per method. */
+						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
 					} else {
-						//Gera testes para todas as classes e produtos da linha.
+						/* Generate tests for all classes and all products. */
 						isRefinement = this.testProducts(sourceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
 					}
-
+				
 					resultado.getMeasures().getTempoExecucaoAbordagem().pause();
-
+					/*Set whether the SPL evolution is a refinement. */
 					resultado.getMeasures().setResult(isRefinement);
 
 					if (isRefinement) {
-						System.out.println("A LPS foi refinada!");
+						System.out.println("\nThe Software Product Line is a refinement.\n");
 					} else {
-						System.out.println("Nao eh refinamento. AM nao foi refinado.");
+						System.out.println("The Software Product Line is NOT a refinement.\nAsset Mapping was not refined.\n");
 					}
 				} else {
+					/*Set whether the SPL evolution is a refinement. */
 					resultado.getMeasures().setResult(true);
-
-					System.out.println("A LPS foi refinada!");
+					System.out.println("\nThe Software Product Line was refined.\n");
 				}
-			} else {
-				System.out.println("A tecnica " + approach + " nao pode ser aplicada. F' e K' nao refinam F e K.");
+			} 
+			/* The approaches that can be applied to check the refinement is NAIVE_2_ICTAC and NAIVE_1_APROXIMACAO. */
+			/* However, if CK and FM is a refinement, it is possible to check it out with the two others aproaches. */
+			else {
+				/* This approach can not be applied. */
+				System.out.println("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
 			}
 		} else {
-			System.out.println("Nao eh refinamento. Nao eh WF.");
+			System.out.println("\n Software Product Line Short Report :\n");
+		    System.out.println("- It is NOT a refinement.\n");
+		    System.out.println("- It is NOT well formed.\n");
+			/* Software Product Line Short Report : */
+			/* It is not a refinement. It is not well formed. */
 		}
-
 		return isRefinement;
 	}
 
+	/**
+	 * Verify whether Configuration knowledge and Feature Model is a refinement.<br></br>
+	 * @param sourceLine
+	 * @param targetLine
+	 * @return
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 */
 	@SuppressWarnings("unchecked")
-	private boolean isFeatureModelAndConfigurationKnowledgeWeakRefinement(ProductLine sourceLine, ProductLine targetLine)
-			throws IOException, AssetNotFoundException {
+	private boolean isFeatureModelAndConfigurationKnowledgeWeakRefinement(ProductLine sourceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
+	
 		boolean isRefinement = true;
 
 		HashSet<HashSet<String>> setsOfFeaturesSource = sourceLine.getSetsOfFeatures();
@@ -412,26 +449,36 @@ public class ToolCommandLine {
 		return new Product(productLine, id, featureSet, preProcessTags, constantesOrigens, constantesDestinos);
 	}
 
+	/**
+	 * This method checks if the SPL is well formed.	 <br></br>
+	 * @param sourceLine SOURCE product line.  <br></br>
+	 * @param targetLine TARGET product line.  <br></br>
+	 * @return if the SPL is well formed.  <br></br>
+	 */
 	private boolean isWF(ProductLine sourceLine, ProductLine targetLine) {
+		
+		System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
 		this.buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
+		
+		System.out.println("\nBuild the TARGET Feature Model Alloy file:");
 		this.buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
 
+		System.out.println("\nBuild the SOURCE Configuration Knowledge Alloy file:");
 		this.buildAlloyCKFile(Constants.SOURCE_CK_ALLOY_NAME, this.sourceFMSemantics, "source", sourceLine);
+		
+		System.out.println("\nBuild the TARGET Configuration Knowledge Alloy file:");
 		this.buildAlloyCKFile(Constants.TARGET_CK_ALLOY_NAME, this.targetFMSemantics, "target", targetLine);
 
-		// Checando se ambas sao bem formadas
-		SafeCompositionResult sourceComposition = checkSafeCompositionOfLine(Constants.SOURCE_CK_ALLOY_NAME, sourceLine.getFeatures(),
-				"source");
+	    /* Well Formedness to the <Source> SPL */
+		SafeCompositionResult sourceComposition = checkSafeCompositionOfLine(Constants.SOURCE_CK_ALLOY_NAME, sourceLine.getFeatures(), "source");
+		System.out.println("Well Formedness to the <Source> SPL: " + !sourceComposition.getAnalysisResult());
 
-		System.out.println("RESULTADO DO WF SOURCE: " + !sourceComposition.getAnalysisResult());
-
-		SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(),
-				"target");
-
-		System.out.println("RESULTADO DO WF TARGET: " + !targetComposition.getAnalysisResult());
+		/*Well Formedness to the <Target> SPL*/
+		SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(), "target");
+		System.out.println("Well Formedness to the <Target> SPL.: " + !targetComposition.getAnalysisResult());
 
 		return !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();
-		// Fim da checagem de boa formacao
+		/* End of th Well Formedness Test */ 
 	}
 
 	/**
@@ -441,18 +488,7 @@ public class ToolCommandLine {
 	 */
 	private boolean isAssetMappingEqual(ProductLine sourceLine, ProductLine targetLine) {
 		boolean assetsEqual = false;
-
-		//Checa mepeamento de AM
-
-		//		boolean assetMappingEqual = this.isAssetMappingEqual(sourceLine.getAmPath(), targetLine.getAmPath());
-
-		//Ainda que mapeamento nao seja igual, eh necessario checar quais
-		//classes sao diferentes para as otimizacoes.
-		//	if(assetMappingEqual){
-		//Checa conteudo das classes do AM
 		assetsEqual = this.isSameAssets(sourceLine, targetLine);
-		//	}
-
 		return assetsEqual;
 	}
 
@@ -583,19 +619,28 @@ public class ToolCommandLine {
 		return checkFMEvolutionAlloyFile.getAnalysisResult();
 	}
 
-	private boolean isAssetMappingRefinement(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach,
-			HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException {
+	/**
+	 * asks if the asset mapping is a refinement .	 <br></br>
+	 * @param sourceLine
+	 * @param targetLine
+	 * @param timeout
+	 * @param qtdTestes
+	 * @param approach
+	 * @param changedFeatures
+	 * @param criteria
+	 * @param resultado
+	 * @return
+	 * @throws IOException
+	 */
+	private boolean isAssetMappingRefinement(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException {
 		boolean ehAssetMappingRefinement = false;
-
 		try {
-			ehAssetMappingRefinement = this.checkAssetMappingBehavior(sourceLine, targetLine, timeout, qtdTestes, approach,
-					changedFeatures, criteria, resultado);
+			ehAssetMappingRefinement = this.checkAssetMappingBehavior(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
 		} catch (AssetNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (DirectoryException e1) {
 			e1.printStackTrace();
 		}
-
 		return ehAssetMappingRefinement;
 	}
 
@@ -614,26 +659,40 @@ public class ToolCommandLine {
 		return fmResult;
 	}
 
+	/**
+	 * This method checks the Safe Composition of the SPL.	 <br></br>
+	 * @param string
+	 * @param features
+	 * @param name
+	 * @return returns a SafeCompositionResult
+	 * @see SafeCompositionResult
+	 */
 	private SafeCompositionResult checkSafeCompositionOfLine(String string, HashSet<String> features, String name) {
-		System.out.println("Inicio do teste de Safe Composition");
+		System.out.println("\n\n\t\tThe beginning of the safe composition test.\n");
 		SafeCompositionResult checkCKSource = null;
 		try {
-			checkCKSource = SafeCompositionVerifier.checkCK(Constants.ALLOY_PATH, string, Constants.ALLOY_EXTENSION, string
-					+ Constants.ALLOY_EXTENSION, features, name);
+			checkCKSource = SafeCompositionVerifier.checkCK(Constants.ALLOY_PATH, string, Constants.ALLOY_EXTENSION, string + Constants.ALLOY_EXTENSION, features, name);
 		} catch (Err e) {
+			System.out.println("\nAn Error Occurred when trying to do Safe Composition Test.\n\n" + e.getMessage());
 			e.printStackTrace();
 		}
-		System.out.println("Fim do teste de Safe Composition");
+		System.out.println("\n\t\tEnd of Safe Composition test.\n");
 		return checkCKSource;
 	}
 
 	private void buildFMEvolutionAlloyFile(String sourceFMXML, String targetFMXML) {
 		AlloyFMEvolutionBuilder evolutionAlloy = new AlloyFMEvolutionBuilder();
-		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION,
-				"source", sourceFMXML, "target", targetFMXML);
+		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, "source", sourceFMXML, "target", targetFMXML);
 	}
 
+	/**
+	 * This Method builds FM Alloy FIle <br></br>
+	 * @param moduleName
+	 * @param sourceFmAlloyName
+	 * @param productLine
+	 */
 	private void buildFMAlloyFile(String moduleName, String sourceFmAlloyName, ProductLine productLine) {
+		
 		FeatureModelReader featureModelReader = new FeatureModelReader();
 
 		featureModelReader.readFM(moduleName, productLine.getFmPath());
@@ -648,7 +707,6 @@ public class ToolCommandLine {
 		try {
 			featureModelReader.buildAlloyFile(moduleName, sourceFmAlloyName);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -688,40 +746,6 @@ public class ToolCommandLine {
 		filesManager.createFile(Constants.ALLOY_PATH + name + Constants.ALLOY_EXTENSION, header + alloy + sigs + fMSemantics
 				+ Constants.LINE_SEPARATOR + assertText);
 	}
-
-	//	private boolean isFMEqual(String sourceFM, String targetFM) {
-	//		FeatureModelReader featureModelReader = new FeatureModelReader();
-	//		FeatureModelReader featureModelReaderTarget = new FeatureModelReader();
-	//
-	//		featureModelReader.readFM("source", sourceFM);
-	//		sourceFeatures = featureModelReader.getFeatures();
-	//		ArrayList<String> sourceFormulas = featureModelReader.getFormulas();
-	//		sourceFMSemantics = featureModelReader.getSemanticsFM();
-	//
-	//		featureModelReaderTarget.readFM("target", targetFM);
-	//		targetFeatures = featureModelReaderTarget.getFeatures();
-	//		ArrayList<String> targetFormulas = featureModelReaderTarget
-	//		.getFormulas();
-	//		targetFMSemantics = featureModelReaderTarget.getSemanticsFM();
-	//
-	//		buildFMAlloyFile("source", sourceFM, Constants.ALLOY_PATH
-	//				+ Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION);
-	//		buildFMAlloyFile("target", targetFM, Constants.ALLOY_PATH
-	//				+ Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION);
-	//
-	//		boolean compareFeatures = Comparador.equalSets(sourceFeatures,
-	//				targetFeatures);
-	//		if (!compareFeatures)
-	//			return false;
-	//		return Comparador.equalSets(sourceFormulas, targetFormulas);
-	//	}
-
-	//	private boolean isCKEqual(String sourceCKXML, String targetCKXML, String sourceAM, String targetAM) {
-	//		ConfigurationKnowledge sourceCK = XMLReader.getInstance().getCK(sourceCKXML, sourceAM, this.dependenciasSource);
-	//		ConfigurationKnowledge targetCK = XMLReader.getInstance().getCK(targetCKXML, targetAM, this.dependenciasTarget);
-	//
-	//		return sourceCK.equals(targetCK);
-	//	}
 
 	/**
 	 * Compara os AM - Supoe um assetname comecando com # no assetmapping e
@@ -784,23 +808,6 @@ public class ToolCommandLine {
 		return mapping;
 	}
 
-	//	/**
-	//	 * 
-	//	 * @param p
-	//	 * @return false se existe diferenca, true se nao
-	//	 */
-	//	private boolean checkDiff(Product p) {
-	//		walkSourceTarget(p.getSourceDir(), p.getTargetDir());
-	//
-	//		Set<String> sourceKeySet = this.sourceMapping.keySet();
-	//		Set<String> targetKeySet = this.targetMapping.keySet();
-	//
-	//		if (sourceKeySet.equals(targetKeySet)) {
-	//			return !doDiff(sourceKeySet, targetKeySet);
-	//		}
-	//		return false;
-	//	}
-
 	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
 		boolean result = true;
 
@@ -850,14 +857,6 @@ public class ToolCommandLine {
 			result = false;
 		}
 
-		//		for (String asset : targetKeySet) {
-		//			if(!sourceKeySet.contains(asset)){
-		//				this.classesModificaadas.add(asset);
-		//				this.changedAssets.add(this.filesManager.getPath("src."
-		//						+ asset));
-		//			}
-		//		}
-
 		return result;
 	}
 
@@ -890,10 +889,8 @@ public class ToolCommandLine {
 			readerSource.close();
 			readerTarget.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

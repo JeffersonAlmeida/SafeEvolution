@@ -13,6 +13,10 @@ import org.apache.commons.io.FileUtils;
 
 import br.edu.ufcg.dsc.Constants;
 
+/**
+ * @author Jefferson Almeida - jra at cin dot ufpe dot br  <br></br>
+ * This class is responsible to read the asset map.
+ */
 public class ReadAM {
 
 	public static HashMap<String, String> readAM(String cmFile/*, String fullpath*/) {
@@ -57,7 +61,6 @@ public class ReadAM {
 			// System.out.println(value);
 			components.add(value);
 		}
-
 		return components;
 	}
 
@@ -71,14 +74,4 @@ public class ReadAM {
 				+ Constants.LINE_SEPARATOR;
 		return sig;
 	}
-
-//	/**
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		String fullpath = "/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/samples/MobileMedia_02AO/src/";
-//		String cm = "/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/samples/MobileMedia_02AO/componentModel_02AO.txt";
-//		ReadCM.readCM(cm, fullpath);
-//	}
-
 }

@@ -124,10 +124,6 @@ public class Avaliador {
 				
 				ResultadoLPS resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
 				
-				boolean resultadoEstahCerto = true;
-						
-				System.out.println(resultadoEstahCerto);
-				
 				String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
 				
 				FileWriter resultFile = new FileWriter(resultFileName + ".txt");

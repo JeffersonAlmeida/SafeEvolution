@@ -103,6 +103,11 @@ public class ProductLine {
 		this.amFormat = amFormat;
 	}
 	
+	/**
+	 * This method loads the Asset Mapping depending on AM Format. <br></br>
+	 * @throws IOException throws I/O Exception
+	 * @see {@link AMFormat}
+	 */
 	private void loadAssetMapping() throws IOException {
 		if(this.amFormat == AMFormat.HEPHAESTUS){
 			this.assetMapping = ReadAM.readAM(this.amPath);
@@ -163,9 +168,11 @@ public class ProductLine {
 		
 	}
 	
+	/**
+	 * Walk through source product line and put the Java Files and AspectJ Files found in a HashMap.  <br></br>
+	 * @param dir source product line.
+	 */
 	private void walkSrc(String dir) {
-		System.out.println(dir);
-
 		File f = new File(dir);
 		for (File other : f.listFiles()) {
 			if (other.isHidden()) {

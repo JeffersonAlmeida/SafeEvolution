@@ -313,15 +313,16 @@ public abstract class ProductBuilder {
 		return output;
 	}
 
+	/**
+	 * Get Products From Alloy File  <br></br>
+	 * @param pathToSourceAlloyFM  <br></br>
+	 * @return  <br></br>
+	 */
 	public HashSet<HashSet<String>> getProductsFromAlloy(String pathToSourceAlloyFM) {
-
 		ProductGenerator generator = new ProductGenerator();
 		generator.generateProductsInstance(pathToSourceAlloyFM);
-
 		HashSet<HashSet<String>> products = generator.getProducts();
-
 		return products;
-
 	}
 
 	protected void createDirs(Product product, ArrayList<String> assets, String splPath) throws AssetNotFoundException {

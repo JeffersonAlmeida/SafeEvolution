@@ -11,9 +11,13 @@ import java.util.Stack;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ck.xml.Xml;
 
+/**
+ * 
+ * @author Jefferson Almeida - jra at cin dot ufpe dot br  <br></br>
+ *This class is a Feature Model Reader.
+ */
 public class FeatureModelReader {
 
-//	static String header = "module m abstract sig Bool {} one sig True, False extends Bool {} pred isTrue[b: Bool] { b in True } ";
 	private String semanticsFM;
 	private String sigs;
 	private HashSet<String> features;
@@ -100,34 +104,28 @@ public class FeatureModelReader {
 		}
 	}
 
+	/**
+	 * Read the Feature Model <br></br>
+	 * @param name
+	 * @param fmFile
+	 * @return
+	 */
 	public String readFM(String name, String fmFile) {
-
 		Xml config = new Xml(fmFile, "feature");
 		Stack<String> fm = new Stack<String>();
 		String rootFeature = config.optString("id").toLowerCase();
-//		String rootFeature = config.optString("id");
 		features.add(rootFeature.toLowerCase());
-//		features.add(rootFeature);
 		fm.push("isTrue[" + rootFeature + "]");
-
 		navigateFM(rootFeature, config, fm);
-
 		for (String f : fm) {
 			semanticsFM += f + " and ";
 		}
-		semanticsFM = "pred semantica" + name + "[] { "
-				+ Constants.LINE_SEPARATOR
-				+ semanticsFM.substring(0, semanticsFM.length() - 5)
-				+ Constants.LINE_SEPARATOR + " }";
-
+		semanticsFM = "pred semantica" + name + "[] { "	+ Constants.LINE_SEPARATOR + semanticsFM.substring(0, semanticsFM.length() - 5)	+ Constants.LINE_SEPARATOR + " }";
 		for (String f : features) {
 			sigs += f + ",";
 		}
-
 		sigs = "one sig " + sigs.substring(0, sigs.length() - 1) + " in Bool{}";
-
-		String model = sigs + Constants.LINE_SEPARATOR + semanticsFM
-				+ Constants.LINE_SEPARATOR;
+		String model = sigs + Constants.LINE_SEPARATOR + semanticsFM + Constants.LINE_SEPARATOR;
 		return model;
 	}
 
@@ -152,17 +150,20 @@ public class FeatureModelReader {
 
 	}
 
-	public void buildAlloyFile(String moduleName, String output)
-			throws FileNotFoundException {
-
+	/**
+	 * Build Alloy File  <br></br>
+	 * @param moduleName
+	 * @param output
+	 * @throws FileNotFoundException
+	 */
+	public void buildAlloyFile(String moduleName, String output) throws FileNotFoundException {
 		if (features.isEmpty() || sigs.equals("") || semanticsFM.equals("")) {
 			return;
 		}
-
-		System.out.println("SALVAR O ARQUIVO " + output);
 		File newFile = new File(output);
 		PrintStream stream = new PrintStream(newFile);
 
+		/* Check it out in Tool Path + Alloy + AlloyFile */
 		stream.print("module " + moduleName + Constants.LINE_SEPARATOR);
 		stream.print("open default" + Constants.LINE_SEPARATOR);
 		stream.print(Constants.LINE_SEPARATOR);
@@ -172,19 +173,12 @@ public class FeatureModelReader {
 		stream.print(Constants.LINE_SEPARATOR);
 		String footer = "run semantica" + moduleName + " for " + features.size();
 		stream.print(footer + Constants.LINE_SEPARATOR);
-
 		stream.flush();
 		stream.close();
+		System.out.println("\n Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >\n");
 	}
 
 	public ArrayList<String> getFormulas() {
 		return formulas;
 	}
-
-	// public static void main(String[] args) throws FileNotFoundException {
-	// FeatureModelReader fm = new FeatureModelReader();
-	// String out =
-	// fm.readFM("/Users/Solon/Documents/workspace/teste/model.xml");
-	// System.out.println(out);
-	// }
 }
