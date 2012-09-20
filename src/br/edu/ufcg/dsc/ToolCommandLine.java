@@ -1499,23 +1499,6 @@ public class ToolCommandLine {
 		}
 	}
 
-	//	private void filtrarClasses(Collection<String> dependenciasConstrutor) {
-	//		HashSet<String> classesParaGerarTestes = new HashSet<String>();
-	//
-	//		for (String classe : this.classes) {
-	//			for (String parametro : dependenciasConstrutor) {
-	//				if (classe.endsWith(parametro)) {
-	//					classesParaGerarTestes.add(classe);
-	//
-	//					break;
-	//				}
-	//			}
-	//		}
-	//
-	//		this.classes = classesParaGerarTestes;
-	//
-	//	}
-
 	private Collection<String> getDependeciasConstrutor(String location) {
 		Collection<String> result = new ArrayList<String>();
 
@@ -1537,37 +1520,6 @@ public class ToolCommandLine {
 
 		return result;
 	}
-
-	//	public Collection<String> getClassesModificadas()
-	//	throws IOException {
-	//		ArrayList<String> result = new ArrayList<String>();
-	//
-	//		for (String classe : this.sourceMapping.keySet()) {
-	//			String fileSourcePath = this.sourceMapping.get(classe);
-	//			String fileTargetPath = this.targetMapping.get(classe);
-	//
-	//			File fileSource = new File(fileSourcePath);
-	//			File fileTarget = new File(fileTargetPath);
-	//
-	//			try {
-	//				this.astComparator.setInputs(fileSource, fileTarget);
-	//
-	//				// Se a classe foi modificada.
-	//				if (!this.astComparator.isIsomorphic()) {
-	//					result.add(classe);
-	//
-	//					if (result.size() > MAX_CLASSES_MODIFICADAS) {
-	//						break;
-	//					}
-	//				}
-	//			} catch (JavaModelException e) {
-	//				// TODO Auto-generated catch block
-	//				e.printStackTrace();
-	//			}
-	//		}
-	//
-	//		return result;
-	//	}
 
 	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash,
 			HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
@@ -1653,36 +1605,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	//	public HashSet<String> getChangedAssets(ProductLine sourceLine, ProductLine targetLine) {
-	//		Set<String> sourceKeySet = sourceLine.getMapping().keySet();
-	//		Set<String> targetKeySet = targetLine.getMapping().keySet();
-	//		HashSet<String> output = new HashSet<String>();
-	//
-	//		if (!sourceKeySet.equals(targetKeySet))
-	//			return null;
-	//
-	//		for (String asset : sourceKeySet) {
-	//			String locationSource = sourceLine.getMapping().get(asset);
-	//			String locationTarget = targetLine.getMapping().get(asset);
-	//			File sourceFile = new File(locationSource);
-	//			File targetFile = new File(locationTarget);
-	//
-	//			try {
-	//				this.astComparator.setInputs(sourceFile, targetFile);
-	//
-	//				if (!this.astComparator.isIsomorphic())
-	//					output.add(filesManager.getPath("src." + asset));
-	//			} catch (JavaModelException e) {
-	//				// TODO Auto-generated catch block
-	//				e.printStackTrace();
-	//			} catch (IOException e) {
-	//				// TODO Auto-generated catch block
-	//				e.printStackTrace();
-	//			}
-	//		}
-	//		return output;
-	//	}
-
 	public long getTestsCompileTimeout() {
 		return testsCompileTimeout;
 	}
@@ -1756,13 +1678,11 @@ public class ToolCommandLine {
 	 */
 	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
-		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt",
-				temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
+		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
 		sourceLine.setLibPath(libPathSource);
 
-		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt",
-				temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
+		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 
 		targetLine.setLibPath(libPathTarget);
 

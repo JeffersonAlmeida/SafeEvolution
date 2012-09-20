@@ -84,6 +84,7 @@ public class Measures {
 	 * This method reset the execution.
 	 */
 	public void resetExecution(){
+		/*Get the System time in millisenconds*/
 		this.execucao = String.valueOf(System.currentTimeMillis());
 		File fileSource = new File(this.sourcePath);
 		File targetPath = new File(this.targetPath);
@@ -233,8 +234,6 @@ public class Measures {
 		this.tempoExecucaoAbordagem.reset();
 		this.quantidadeProdutosCompilados = 0;
 	}
-
-	
 	
 	/**
 	 * <h2>Getters and Setters to the Measures Class</h2>

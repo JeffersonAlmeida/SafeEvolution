@@ -165,13 +165,19 @@ public class FilesManager {
 		}
 	}
 
+	/**
+	 * 
+	 * @param sourcePath
+	 * @param assets
+	 * @param assetsDestination
+	 * @param destinationPath
+	 */
 	public void copyFiles(String sourcePath, ArrayList<String> assets, ArrayList<String> assetsDestination, String destinationPath) {
 
 		for (int i = 0; i < assets.size(); i++) {
 			String assetDestino = assetsDestination.get(i);
 
-			//Aspectos nao sao pre-processados pelo Antenna. 
-			//Precisam ir direto para a pasta de arquivo pre-processados.
+			/*Aspectos nao sao pre-processados pelo Antenna. Precisam ir direto para a pasta de arquivo pre-processados.*/
 			if (assetDestino.endsWith("aj")) {
 				assetDestino = assetDestino.replaceFirst(ProductBuilder.SRCPREPROCESS, "src");
 			}
@@ -205,20 +211,28 @@ public class FilesManager {
 		}
 	}
 
+	/**
+	 * 
+	 * @param sourceDirectory source directory path
+	 * @param sourceFile source file path
+	 * @param destFile Target File path
+	 * @throws AssetNotFoundException throws AssetNotFoundException whether it don't find the asset.
+	 * @throws DirectoryException throws DirectoryException whether it don't find the directory.
+	 */
 	public void copyFiles(File sourceDirectory, File sourceFile, File destFile) throws AssetNotFoundException, DirectoryException {
 		if (!sourceFile.getAbsolutePath().contains("svn")) {
+			 /* Is this source file a directory ?*/
 			if (sourceFile.isDirectory()) {
 				File[] files = sourceFile.listFiles();
-
 				for (File file : files) {
+					/*Call the same method recursively*/
 					this.copyFiles(sourceDirectory, file, destFile);
 				}
 			} else {
+				/*The whole source file path*/
 				String sourceAbsolutePath = sourceFile.getAbsolutePath();
-
-				File destFileWithDirectory = new File(destFile.getAbsolutePath() + File.separator
-						+ sourceAbsolutePath.replace(sourceDirectory.getAbsolutePath(), ""));
-
+				File destFileWithDirectory = new File(destFile.getAbsolutePath() + File.separator + sourceAbsolutePath.replace(sourceDirectory.getAbsolutePath(), ""));
+				
 				if (!destFileWithDirectory.getParentFile().exists()) {
 					destFileWithDirectory.getParentFile().mkdirs();
 				}
@@ -228,8 +242,18 @@ public class FilesManager {
 		}
 	}
 
+	/**
+	 * This methods copies the file from the source path and put it in the target path.<br></br>
+	 *  <strong>@param sourceAbsolutPath</strong> The whole source file path  <br></br>
+	 *  <strong>@param targetAbsolutPath</strong> The whole target file path  <br></br>
+	 *  <strong>@throws AssetNotFoundException</strong> throws AssetNotFoundException whether it don't find the asset. <br></br>
+	 *  <strong>@throws DirectoryException</strong>throws DirectoryException whether it don't find the directory. <br></br>
+	 */
 	public void copyFile(String sourceAbsolutPath, String targetAbsolutPath) throws AssetNotFoundException, DirectoryException {
+		/*The whole source file path*/
 		File sourceFile = new File(sourceAbsolutPath);
+		
+		/*The whole target file path*/
 		File destFile = new File(targetAbsolutPath);
 
 		if (!sourceFile.exists()) {
@@ -237,34 +261,29 @@ public class FilesManager {
 		} else if (!destFile.getParentFile().exists()) {
 			throw new DirectoryException("Cannot find dir: " + targetAbsolutPath, destFile.getParent());
 		}
-
 		try {
-			// Cria channel na origem
+			/* Cria channel na origem */
 			FileChannel oriChannel = new FileInputStream(sourceAbsolutPath).getChannel();
-			// Cria channel no destino
+			/* Cria channel no destino */
 			FileChannel destChannel = new FileOutputStream(targetAbsolutPath).getChannel();
-			// Copia conteudo da origem no destino
+			/* Copia conteudo da origem no destino */
 			destChannel.transferFrom(oriChannel, 0, oriChannel.size());
-
-			// Fecha channels
+			/* Fecha channels */
 			oriChannel.close();
 			destChannel.close();
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		//	String command = "scp " + sourceFile + " " + destinationFolder;
-		//	executeUnixCommand(command);
 	}
 
+	/**
+	 * This method executes an unix command.
+	 * @param command
+	 */
 	public void executeUnixCommand(String command) {
-
 		System.out.println("COMANDO " + command);
-
 		try {
 			Runtime.getRuntime().exec(command);
 		} catch (IOException e) {
@@ -372,54 +391,6 @@ public class FilesManager {
 
 		return result;
 	}
-
-	//	//ugly baby
-	//	public ArrayList<String> getAssets(String string, String targetCM)
-	//	throws IOException, AssetNotFoundException {
-	//
-	//		ArrayList<String> output = new ArrayList<String>();
-	//		boolean found = false;
-	//
-	//		BufferedReader input = new BufferedReader(new InputStreamReader(
-	//				new FileInputStream(new File(targetCM))));
-	//
-	//		while (true) {
-	//			String line = input.readLine();
-	//			if (line == null) {
-	//				break;
-	//			}
-	//			line = line.trim();
-	//			if (line.startsWith("#")) {
-	//				String name = line.substring(1).trim();
-	//				if (name.equals(string)) {
-	//					found = true;
-	//					while (true) {
-	//						String nextLine = input.readLine();
-	//						if (nextLine == null || nextLine.equals("")) {
-	//							break;
-	//						}
-	//						if (!nextLine.startsWith(Constants.FILE_SEPARATOR)) {
-	//							nextLine = Constants.FILE_SEPARATOR + nextLine;
-	//						}
-	//						output.add(nextLine);
-	//					}
-	//				} else {
-	//					continue;
-	//				}
-	//			} else {
-	//				continue;
-	//			}
-	//		}
-	//
-	//		input.close();
-	//
-	//		if (!found) {
-	//			throw new AssetNotFoundException(
-	//					"Did not find corresponding asset Name: " + string);
-	//		}
-	//
-	//		return output;
-	//	}
 
 	public HashMap<String, String> getAssets(String amPath) throws IOException {
 

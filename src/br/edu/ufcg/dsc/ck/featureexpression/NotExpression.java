@@ -43,6 +43,4 @@ public class NotExpression implements IFeatureExpression {
 		return (obj instanceof NotExpression)
 		&& (((NotExpression) obj).getCode().equals(this.getCode()));
 	}
-	
-	
 }

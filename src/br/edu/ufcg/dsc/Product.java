@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.regex.Pattern;
 
+/**
+ * @author Jefferson Almeida - jra at cin dot ufpe dot br
+ * This Class represents a single product of the SPL.
+ */
 public class Product {
 	
 	private ProductLine spl;

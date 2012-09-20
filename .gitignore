@@ -12,7 +12,6 @@ Project/
 .classpath
 .metadata/
 temp/
-test/
 script.py
 randoop/
 plugin.xml

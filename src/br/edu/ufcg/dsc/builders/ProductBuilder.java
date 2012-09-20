@@ -41,15 +41,21 @@ public abstract class ProductBuilder {
 		this.filesManager = FilesManager.getInstance();
 	}
 
-	public abstract void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException,
-			IOException, DirectoryException;
+	/**
+	 * This method is implemented by the special classes. Each SPL type generates product in a different way.
+	 * 
+	 * @param product
+	 * @param pathSPL
+	 * @param resultado
+	 * @throws AssetNotFoundException
+	 * @throws IOException
+	 * @throws DirectoryException
+	 */
+	public abstract void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, IOException, DirectoryException;
 
-	public void preprocessVelocity(HashSet<String> features, File file, ProductLine productLine, String productPath, ResultadoLPS resultado)
-			throws IOException {
+	public void preprocessVelocity(HashSet<String> features, File file, ProductLine productLine, String productPath, ResultadoLPS resultado) throws IOException {
 		ArrayList<String> filesToPreprocess = new ArrayList<String>();
-
 		this.getFilesInDirectory(file, filesToPreprocess);
-
 		this.preprocessVelocity(features, filesToPreprocess, productLine, productPath, resultado);
 	}
 
@@ -295,103 +301,6 @@ public abstract class ProductBuilder {
 		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
 	}
 
-	//O verificacao do SafeRefactor jah compila source e target.
-	//	public void compileProducts(String sourcePath, String targetPath) {
-	//		// boolean result = true;
-	//		File buildFile = new File(Constants.PLUGIN_PATH
-	//				+ Constants.FILE_SEPARATOR + "build.xml");
-	//		Project p = new Project();
-	//		// p.setUserProperty("ant.file", buildFile.getAbsolutePath());
-	//		
-	//		//Apenas tornando o path amigavel com o Windows. 
-	//		//TODO: Ver uma forma mais interessante de resolver isso...
-	//		if(sourcePath.charAt(0) == '/' && sourcePath.charAt(2) == ':'){
-	//			sourcePath = sourcePath.substring(1);
-	//		}
-	//		if(targetPath.charAt(0) == '/' && targetPath.charAt(2) == ':'){
-	//			targetPath = targetPath.substring(1);
-	//		}
-	//		
-	//		p.setProperty("source", sourcePath);
-	//		// p.setUserProperty("ant/build.properties",
-	//		// buildFile.getAbsolutePath());
-	//		
-	//		p.setProperty("target", targetPath);
-	//
-	//		// p.setProperty("tests.folder", Constants.TEST);
-	//
-	//		DefaultLogger consoleLogger = new DefaultLogger();
-	//		consoleLogger.setErrorPrintStream(System.err);
-	//		consoleLogger.setOutputPrintStream(System.out);
-	//		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
-	//		p.addBuildListener(consoleLogger);
-	//
-	//		p.init();
-	//		ProjectHelper helper = ProjectHelper.getProjectHelper();
-	//		p.addReference("ant.projectHelper", helper);
-	//		helper.parse(p, buildFile);
-	//
-	//		p.executeTarget("compile_target");
-	//	}
-
-	//	public void generateProducts(String pathToSourceAlloyFM, String sourcePath,
-	//			String targetPath, String sourceAM, String targetAM,
-	//			String sourceCKXML, String targetCKXML,
-	//			HashSet<String> changedFeatures, HashMap<String, HashSet<HashSet<String>>> cacheProductsSource) throws IOException,
-	//			AssetNotFoundException {
-	//		
-	//		this.createDataStructures();
-	//
-	//	//  Tem algum bug aqui. Produtos repetidos sao criados durante da geracao e ela eh muito custosa...
-	//	//	HashSet<HashSet<String>> products = this.getProductsFromAlloy(pathToSourceAlloyFM);
-	//		
-	//		HashSet<HashSet<String>> products = cacheProductsSource.get(sourcePath);
-	//		
-	//		if (changedFeatures != null) {
-	//			products = this.filter(products, changedFeatures);
-	//		}
-	//		
-	//		Measures.getInstance().setQuantidadeProdutosCompilados(products.size());
-	//
-	//		System.out.println("MEUS PRODUTOS = " + products);
-	//		
-	//		int counter = 0;
-	//		ConfigurationKnowledge sourceCK = XMLReader.getCK(sourceCKXML, sourceAM);
-	//		ConfigurationKnowledge targetCK = XMLReader.getCK(targetCKXML, targetAM);
-	//
-	//		for (HashSet<String> features : products) {
-	//			ArrayList<String> sourceAssets = new ArrayList<String>();
-	//			Set<String> evalCK = sourceCK.evalCK(features).get("provided");
-	//			
-	//			for (String name : evalCK) {
-	//				sourceAssets.addAll(filesManager.getAssets(name.trim(),
-	//						sourceAM));
-	//			}
-	//			
-	//			ArrayList<String> targetAssets = new ArrayList<String>();
-	//			Set<String> evalCKTarget = targetCK.evalCK(features)
-	//					.get("provided");
-	//			
-	//			for (String newName : evalCKTarget) {
-	//				targetAssets.addAll(filesManager.getAssets(newName.trim(),
-	//						targetAM));
-	//			}
-	//			
-	//			createDirs(String.valueOf(counter), sourceAssets, targetAssets,
-	//					sourcePath, targetPath);
-	//			
-	//			filesManager.copyFiles(sourcePath, sourceAssets, sourceAssets, sourceProductsPath);
-	//			filesManager.copyFiles(targetPath, targetAssets, targetAssets, targetProductsPath);
-	//			
-	//			System.out.println("PATH = " + sourceProductsPath + " E = "
-	//					+ targetProductsPath);
-	//			
-	//			Product currentProduct = new Product(counter, features, 0, 0);
-	//			updtadeProductsList(currentProduct);
-	//			counter++;
-	//		}
-	//	}
-
 	public HashSet<HashSet<String>> filter(HashSet<HashSet<String>> products, HashSet<String> changedFeatures) {
 		HashSet<HashSet<String>> output = new HashSet<HashSet<String>>();
 
@@ -429,28 +338,6 @@ public abstract class ProductBuilder {
 		product.setPath(productPath);
 	}
 
-	//	protected void buildBasicStructure(String path, String destination)
-	//			throws AssetNotFoundException, DirectoryException {
-	//
-	//		File f = new File(path);
-	//		for (File file : f.listFiles()) {
-	//			System.out.println("ESTOU COM O ARQUIVO " + file);
-	//			if (file.isHidden()) {
-	//				continue;
-	//			}
-	//			if (file.isDirectory()) {
-	//				String newDir = destination + Constants.FILE_SEPARATOR
-	//						+ file.getName();
-	//				filesManager.createDir(newDir);
-	//				buildBasicStructure(file.getAbsolutePath(), newDir
-	//						+ Constants.FILE_SEPARATOR);
-	//			} else if (file.isFile() && !file.isHidden()
-	//					&& !file.getName().equals(LABUILD)) {
-	//				filesManager.copyFile(file.getAbsolutePath(), destination, "",
-	//						"");
-	//			}
-	//		}
-	//	}
 
 	public ArrayList<Product> getProds() {
 		return prods;

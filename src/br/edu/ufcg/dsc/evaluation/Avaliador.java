@@ -207,7 +207,7 @@ public class Avaliador {
 	 * @param targetAMFormat
 	 * @param libPathSource
 	 * @param libPathTarget
-	 * @return
+	 * @return ResultadoLPS
 	 * @throws Err
 	 * @throws IOException
 	 * @throws AssetNotFoundException
@@ -215,19 +215,26 @@ public class Avaliador {
 	 */
 	public ResultadoLPS verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
+		/* SPL evolution results */
 		ResultadoLPS resultado = new ResultadoLPS();
 		
+		/*Set the Original SPL source path and the SPL Target source path from the ResultadoLPS Class */
 		resultado.setSubject(sourcePath, targetPath);
+		
+		/* Set the amount of junit tests applied for each product*/
 		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
+	
+		/* This method reset the execution. Set the measures properties to Default values again.*/
 		resultado.resetExecution();
 
-		/** Delega a responsabilidade de verificar se a linha é refinamento para a classe ToolCommandLine */
+		/* Delega a responsabilidade de verificar se a linha é refinamento para a classe ToolCommandLine */
 		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, resultado, libPathSource, libPathTarget);
 		
+		/* Is this Evolution a refinement. Put it down in the Results please. */
 		resultado.setRefinement(isRefinement);
 		
+		/* returns the results of my SPL evolution. Is it safe ? Let's check it out on Results class report. */
 		return resultado;
-
 	}
 
 }

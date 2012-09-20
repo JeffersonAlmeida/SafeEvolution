@@ -19,22 +19,44 @@ import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.FilesManager;
 
+
+/**
+ *  * @author Jefferson Almeida - jra at cin dot ufpe dot br
+
+ *  This class represents a Software Product Line.
+ */
 public class ProductLine {
+	
+	 /** SPL path */
 	private String path;
+	
+	/**SPL Configuration Knowledge Path*/
 	private String ckPath;
+	
+	/** SPL Feature Model Path */
 	private String fmPath;
+	
+	/**Asset Map SPL Path*/
 	private String amPath;
 	
+	/**The flag used to inform whether the SPL has aspects.*/
 	private boolean temAspectos;
 	
+	/**What does it means ? */
 	private String controladoresFachadas;
 	
+	/**A HashSet to maintain the SPL feature names. (Strings)*/
 	private HashSet<String> features;
+	
+	
 	private HashMap<String, Collection<String>> dependencias;
 	
+	/** Configuration Knowledge of the Product Line*/
 	private ConfigurationKnowledge ck;
+	
 	private HashSet<HashSet<String>> setsOfFeatures;
 	
+	/**/
 	private ArrayList<Product> products;
 	
 	//Nomes de classes encontrados na pasta da linha mapeados em paths.
@@ -43,14 +65,31 @@ public class ProductLine {
 	//Constantes mapeadas em paths relativos.
 	private HashMap<String, String> assetMapping;
 	
+	 /***/
 	private CKFormat ckFormat;
+	
+	 /***/
 	private AMFormat amFormat;
 	
+	 /***/
 	private Properties preprocessProperties;
+	
+	 /***/
 	private String libPath;
 	
-	public ProductLine(String path, String ckPath, String fmPath, String amPath, 
-			boolean temAspectos, String controladoresFachadas, CKFormat ckFormat, AMFormat amFormat) throws IOException {
+	/**
+	 * 
+	 * @param path SPL path
+	 * @param ckPath SPL Configuration Knowledge Path
+	 * @param fmPath SPL Feature Model Path
+	 * @param amPath Asset Map SPL Path
+	 * @param temAspectos The flag used to inform whether the SPL has aspects.
+	 * @param controladoresFachadas
+	 * @param ckFormat
+	 * @param amFormat
+	 * @throws IOException
+	 */
+	public ProductLine(String path, String ckPath, String fmPath, String amPath, boolean temAspectos, String controladoresFachadas, CKFormat ckFormat, AMFormat amFormat) throws IOException {
 		this.path = path;
 		this.ckPath = ckPath;
 		this.fmPath = fmPath;

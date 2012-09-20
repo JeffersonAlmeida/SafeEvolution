@@ -13,14 +13,8 @@ import br.edu.ufcg.dsc.util.FilesManager;
 
 public class TargetBuilder extends ProductBuilder {
 
-
-//	public static final String DEFAULT_LINE = "preprocessor.symbols";
-//	public static final String SOURCE_FILES_LOCATION = "midp-preprocessed";
-//	public static final String BINARY_FILES_LOCATION = "midp-compiled";
-	
 	public TargetBuilder() {
 		super();
-		
 		this.createConstants();
 	}
 	
@@ -60,8 +54,7 @@ public class TargetBuilder extends ProductBuilder {
 	}
 
 	@Override
-	public void generateProduct(Product product, String pathSPL, ResultadoLPS resultado)
-			throws AssetNotFoundException, IOException, DirectoryException {
+	public void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, IOException, DirectoryException {
 		
 		if(!product.isGenerated()){
 			ArrayList<String> assetsOrigens = new ArrayList<String>();
@@ -89,123 +82,5 @@ public class TargetBuilder extends ProductBuilder {
 			resultado.getMeasures().setQuantidadeProdutosCompilados(resultado.getMeasures().getQuantidadeProdutosCompilados() + 1);
 		}
 	}
-
-//	public void generateProducts(String pathToSourceAlloyFM, String sourcePath,
-//			String targetPath, String sourceAM, String targetAM,
-//			String sourceCKXML, String targetCKXML,
-//			HashSet<String> changedFeatures, HashMap<String, HashSet<HashSet<String>>> cacheProductsSource) throws IOException,
-//			AssetNotFoundException {
-//		
-//		this.createDataStructures();
-//
-//		//  Tem algum bug aqui. Produtos repetidos sao criados durante a geracao e ela eh muito custosa...
-//		//	Por enquanto os produtos serao todos armazenados em cache antes de comecar a execucao.
-//		//	HashSet<HashSet<String>> products = this.getProductsFromAlloy(pathToSourceAlloyFM);
-//
-//		HashSet<HashSet<String>> products = cacheProductsSource.get(sourcePath);
-//
-//		if (changedFeatures != null) {
-//			products = filter(products, changedFeatures);
-//		}
-//
-//		Measures.getInstance().setQuantidadeProdutosCompilados(products.size());
-//
-//		System.out.println("MEUS PRODUTOS = " + products);
-//
-//		int counter = 0;
-//		ConfigurationKnowledge sourceCK = XMLReader.getCK(sourceCKXML, sourceAM);
-//		ConfigurationKnowledge targetCK = XMLReader.getCK(targetCKXML, targetAM);
-//
-//		for (HashSet<String> features : products) {
-//			ArrayList<String> sourceAssets = new ArrayList<String>();
-//			ArrayList<String> sourceDestinos = new ArrayList<String>();
-//			
-//			ArrayList<String> sourceAssetsAspects = new ArrayList<String>();
-//			ArrayList<String> sourceDestinosAspects = new ArrayList<String>();
-//			
-//			//Constante -> Destino
-//			HashMap<String,String> evalCKSource = sourceCK.evalCKDestinos(features);
-//			
-//			for (String constant : evalCKSource.keySet()) {
-//				//Considerando que o mapeamento seja se 1:1.
-//				String asset = this.filesManager.getAssets(constant.trim(), sourceAM).get(0);
-//
-//				if(asset.endsWith(".aj")){
-//					sourceAssetsAspects.add(asset);
-//				}
-//				else{
-//					sourceAssets.add(asset);
-//				}
-//
-//				asset = evalCKSource.get(constant)==null ? this.filesManager.getAssets(constant.trim(), sourceAM).get(0) : evalCKSource.get(constant);
-//
-//				if(asset.endsWith(".aj")){
-//					sourceDestinosAspects.add(asset);
-//				}
-//				else{
-//					sourceDestinos.add(asset);
-//				}
-//			}
-//
-//			ArrayList<String> targetAssets = new ArrayList<String>();
-//			ArrayList<String> targetDestinos = new ArrayList<String>();
-//			
-//			ArrayList<String> targetAssetsAspects = new ArrayList<String>();
-//			ArrayList<String> targetDestinosAspects = new ArrayList<String>();
-//			
-//			HashMap<String,String> evalCKTarget = targetCK.evalCKDestinos(features);
-//			
-//			for (String constant : evalCKTarget.keySet()) {
-//				String asset = this.filesManager.getAssets(constant.trim(), targetAM).get(0);
-//				
-//				if(asset.endsWith(".aj")){
-//					targetAssetsAspects.add(asset);
-//				}
-//				else{
-//					targetAssets.add(asset);
-//				}
-//
-//				asset = evalCKTarget.get(constant)==null ? this.filesManager.getAssets(constant.trim(), targetAM).get(0) : evalCKTarget.get(constant);
-//
-//				if(asset.endsWith(".aj")){
-//					targetDestinosAspects.add(asset);
-//				}
-//				else{
-//					targetDestinos.add(asset);
-//				}
-//			}
-//			
-//			createDirs(String.valueOf(counter), sourceDestinos, targetDestinos, sourcePath, targetPath);
-//			
-//			ArrayList<String> sourceToPreprocess = this.filesManager.copyFilesDirectory(sourcePath, sourceAssets, sourceDestinos, productPath);
-//			this.filesManager.limparArquivosJava();
-//			
-//			for(String file : sourceAssetsAspects){
-//				sourceToPreprocess.add(this.productPath + "/" + file);
-//			}
-//			
-//			ArrayList<String> targetToPreprocess = this.filesManager.copyFilesDirectory(targetPath, targetAssets, targetDestinos, targetProductsPath);
-//			this.filesManager.limparArquivosJava();
-//			
-//			for(String file : targetAssetsAspects){
-//				targetToPreprocess.add(this.targetProductsPath + "/" + file);
-//			}
-//			
-//			//Aspectos ainda sao copiados da mesma forma que os Assets do MobileMedia.
-//			//Como o pre processamento da Target eh feito com o Velocity, origem e destinos dos assets eh o mesmo.
-//			this.filesManager.copyFiles(sourcePath, sourceAssetsAspects, sourceDestinosAspects, productPath);
-//			this.filesManager.copyFiles(targetPath, targetAssetsAspects, targetDestinosAspects, targetProductsPath);
-//			
-//			System.out.println("PATH = " + productPath + " E = "
-//					+ targetProductsPath);
-//			
-//			Product currentProduct = new Product(counter, features, 0, 0);
-//			updtadeProductsList(currentProduct);
-//			counter++;
-//			
-//			this.preprocessVelocity(features, sourceToPreprocess);
-//			this.preprocessVelocity(features, targetToPreprocess);
-//		}
-//	}
 }
 	

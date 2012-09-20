@@ -9,9 +9,14 @@ import java.util.Set;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.util.Comparador;
 
+/** @author Jefferson Almeida - jra at cin dot ufpe dot br  <br></br>
+   This class represents a Configuration Knowledge of the SPL.
+ */
 public class ConfigurationKnowledge {
 
+	 /**A set of Configuration Knowledge items.*/
 	private Set<ConfigurationItem> ckItems;
+	
 	private String defauLt;
 	private String predProvided;
 	private String predRequired;
@@ -189,7 +194,6 @@ public class ConfigurationKnowledge {
 				}
 			}
 		}
-		
 		return result;
 	}
 
