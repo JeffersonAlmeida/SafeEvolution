@@ -49,14 +49,27 @@ public class ToolCommandLine {
 
 	private static final int MAX_CLASSES_MODIFICADAS = 1000;
 
+	/*What does it means ? */
 	private String sourceFMSemantics;
+	/*What does it means ? */
 	private String targetFMSemantics;
+	
+	/* This instance managers the files and look for its dependencies needed to compile: Class, Aspects. In addition, it copies the file from the source to the target product. Like hephaestus tool does.*/
 	private FilesManager filesManager;
+	
+	/*Hashset of dependencies to the compile the file. */
 	private HashSet<String> dependenciasCopiadas;
 
+	/*A string collection of changed classes.*/
 	private Collection<String> classesModificaadas;
+	
+	/**/
 	private ProductBuilder builder;
+	
+	
 	private long testsCompileTimeout;
+	
+	
 	private long testsExecutionTimeout;
 	private long testsGenerationTimeout;
 	private HashSet<String> changedAssets;
@@ -96,9 +109,9 @@ public class ToolCommandLine {
 		}
 	}
 
-	public boolean verifyLine(ProductLine souceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach,
-			Criteria criteria, ResultadoLPS resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public boolean verifyLine(ProductLine souceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
+		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 
 		this.setup(souceLine, targetLine);
@@ -188,28 +201,54 @@ public class ToolCommandLine {
 		targetLine.setup();
 	}
 
+	/**
+	 * This method cleans the generated products folder.
+	 */
 	private void cleanProducts() {
+		
+		/*It creates an ANT build file in the tool directory + ant/build.xml*/
 		File buildFile = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.xml");
 
+		/*It creates a new ANT project.*/
 		Project p = new Project();
-		System.out.println(" Constants.PRODUCTS_DIR = " + Constants.PRODUCTS_DIR);
+		
+		/*This is the directory of the generated products: */
+		System.out.println("\nThis is the directory of the generated products: " + "< " + Constants.PRODUCTS_DIR + " >\n");
+		
+		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
+		
+		/*  productsFolder =>                   The name of property to set. 
+		 *  Constants.PRODUCTS_DIR =>           The new value of the property.*/
 		p.setProperty("productsFolder", Constants.PRODUCTS_DIR);
 
+		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
 		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
 
+		/* Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged.*/
 		DefaultLogger consoleLogger = new DefaultLogger();
 		consoleLogger.setErrorPrintStream(System.err);
 		consoleLogger.setOutputPrintStream(System.out);
 		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
 		p.addBuildListener(consoleLogger);
 
+		/*Initialise the ANT project.*/
 		p.init();
+		
+		/* Configures a Project (complete with Targets and Tasks) based on a XML build file. It'll rely on a plugin to do the actual processing of the xml file.*/
 		ProjectHelper helper = ProjectHelper.getProjectHelper();
+		
+		/*Add a reference to the project.*/
 		p.addReference("ant.projectHelper", helper);
+		
+		/*Parses the project file, configuring the project as it goes.*/
 		helper.parse(p, buildFile);
 
+		/*Execute the specified target and any targets it depends on.*/
 		p.executeTarget("clean_products_folder");
-		System.out.println("OK");
+		/*It cleans all of the product directories.*/ /*Two directories have been deleted: productsFolder and ${pluginpath}/emma/instr/.*/
+		// productsFolder =>               Tool Path + Products
+		//                =>               pluginpath + /emma/instr/
+		System.out.println("\n Two directories have been deleted:  < Tool Path + Products > and < pluginpath + emma + instr >");
 	}
 
 	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach,
@@ -861,42 +900,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	//	public void walkSourceTarget(String source, String target) {
-	//		if (this.sourceMapping == null || this.targetMapping == null) {
-	//			this.sourceMapping = new HashMap<String, String>();
-	//			this.targetMapping = new HashMap<String, String>();
-	//
-	//			walkSource(source + Constants.FILE_SEPARATOR + "src");
-	//			walkTarget(target + Constants.FILE_SEPARATOR + "src");
-	//		}
-	//	}
-
-	//	/**
-	//	 * true se mudou algo. listas tem que ser iguais
-	//	 * 
-	//	 * @param source
-	//	 * @param target
-	//	 * @return
-	//	 */
-	//	private boolean doDiff(Set<String> source, Set<String> target) {
-	//		long value = 0;
-	//
-	//		for (String asset : source) {
-	//			String locationSource = sourceMapping.get(asset);
-	//			String locationTarget = targetMapping.get(asset);
-	//
-	//			try {
-	//				value = value + compare(locationSource, locationTarget);
-	//
-	//				System.out.println("MEU VALUE: " + value);
-	//			} catch (IOException e) {
-	//				e.printStackTrace();
-	//			}
-	//		}
-	//
-	//		return (value != 0);
-	//	}
-
 	/**
 	 * Compara dois arquivos.
 	 * 
@@ -920,19 +923,6 @@ public class ToolCommandLine {
 		return value;
 	}
 
-	//	private SafeRefactorResult checkProductBehavior(Product p, int timeout, int qtdTestes, FeaturesKind abordagem, ArrayList<Product> allProducts) {
-	//		SafeRefactorResult result = CommandLine.isRefactoring(p.getSourceDir(), p.getTargetDir(), null, timeout, qtdTestes, abordagem);
-	//
-	//		if(!result.isRefactoring() && abordagem == FeaturesKind.NAIVE){
-	//			allProducts.remove(p);
-	//
-	//			for(int i = 0; i < allProducts.size() && !result.isRefactoring(); i++){
-	//				result = CommandLine.isRefactoringCompiledSource(p.getSourceDir(), allProducts.get(i).getTargetDir(), null, timeout, qtdTestes, abordagem);
-	//			}
-	//		}
-	//
-	//		return result;
-	//	}
 
 	/**
 	 * Checa apenas classes modificadas. Se mais de MAX_CLASSES_MODIFICADAS
@@ -1653,6 +1643,10 @@ public class ToolCommandLine {
 	}
 
 	/**
+	 * This method creates a representation of the source and target product line. 
+	 * In addition, set the libraries path for the target and source product lines.
+	 * 
+	 * Note: This name is not fair enough. It is necessary to apply a refactoring.
 	 * 
 	 * @param sourcePath
 	 * @param targetPath
@@ -1678,14 +1672,19 @@ public class ToolCommandLine {
 	 */
 	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
+		/*This part creates a representation of the source product line.*/
 		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
+		/*Set the libraries path for the source product line.*/
 		sourceLine.setLibPath(libPathSource);
-
+		
+		/*This part creates a representation of the target product line.*/
 		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
-
+		
+		/*Set the libraries path for the target product line.*/
 		targetLine.setLibPath(libPathTarget);
 
+		/* Verify the SPL with the created source and target product line.*/
 		return this.verifyLine(sourceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
 	}
 

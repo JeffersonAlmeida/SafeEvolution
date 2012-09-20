@@ -161,7 +161,6 @@ public class ProductLine {
 		
 		this.loadAssetMapping();
 		
-//		this.loadDependencesCache();
 	}
 	
 	private void walkSrc(String dir) {
