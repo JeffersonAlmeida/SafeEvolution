@@ -202,7 +202,6 @@ public class ASTComparator {
 					compareMessage += "class " + typeA.getElementName() + " was not found"; 
 					differences = false;
 				} else if (!(compareFieldsOf(typeA, typeB) && compareMethodsOf(typeA, typeB))){
-					System.out.println("second comparefield");
 					differences = false;
 				}				
 			}

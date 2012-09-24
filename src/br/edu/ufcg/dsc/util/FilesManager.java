@@ -189,15 +189,10 @@ public class FilesManager {
 			try {
 				copyFile(sourcePath + assets.get(i), destinationPath + assetDestino);
 			} catch (AssetNotFoundException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (DirectoryException e) {
-				// TODO Auto-generated catch block
-				//		e.printStackTrace();
 				System.out.println("Creating dir");
-
 				createDir(e.getDirectory());
-
 				try {
 					copyFile(sourcePath + assets.get(i), destinationPath + assetDestino);
 				} catch (AssetNotFoundException e1) {
@@ -435,8 +430,6 @@ public class FilesManager {
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-
-		System.out.println("CRIADO : " + path);
 
 		return f;
 	}

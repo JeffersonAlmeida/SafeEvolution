@@ -272,32 +272,55 @@ public abstract class ProductBuilder {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param symbols
+	 * @param srcDir
+	 * @param resultado
+	 */
 	public void preprocess(String symbols, String srcDir, ResultadoLPS resultado) {
+		
+		
+		/*Create an ANT build file*/
 		File buildFile = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.xml");
+		
+		/*Create a new Ant project.*/
 		Project p = new Project();
 
+		/* Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 		p.setProperty("srcpreprocess", srcDir + Constants.FILE_SEPARATOR + SRCPREPROCESS);
 
+		/* Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 		p.setProperty("src", srcDir + Constants.FILE_SEPARATOR + "src");
 
+		/* Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 		p.setProperty("symbols", symbols);
 
+		/* Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
 
+		/*  Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged. */
 		DefaultLogger consoleLogger = new DefaultLogger();
 		consoleLogger.setErrorPrintStream(System.err);
 		consoleLogger.setOutputPrintStream(System.out);
 		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
 		p.addBuildListener(consoleLogger);
 
+		/* Initialise the ANT project. */
 		p.init();
 		ProjectHelper helper = ProjectHelper.getProjectHelper();
 		p.addReference("ant.projectHelper", helper);
+		
+		/* Parses the project file, configuring the project as it goes.*/
 		helper.parse(p, buildFile);
 
-		//O pre-processamento contarah como tempo de compilacao tambem.
+		/* The pre-processing time will be part of time to compile. */
 		resultado.getMeasures().getTempoCompilacaoProdutos().startContinue();
+		
+		/* Execute the specified target and any targets it depends on.*/
 		p.executeTarget("preprocess");
+		
+		/* The pre-processing time will be part of time to compile. */
 		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
 	}
 

@@ -501,10 +501,8 @@ public class ToolCommandLine {
 			resultado.getMeasures().setQuantidadeProdutosCompilados(0);
 
 			for (Product productSource : sourceLine.getProducts()) {
-				if (approach == Approach.NAIVE_2_ICTAC
-						|| approach == Approach.NAIVE_1_APROXIMACAO
-						|| (approach == Approach.IMPACTED_FEATURES && productSource.containsSomeAsset(this.classesModificaadas, sourceLine
-								.getMappingClassesSistemaDeArquivos()))) {
+				if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || (approach == Approach.IMPACTED_FEATURES && productSource.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
+					
 					this.builder.generateProduct(productSource, sourceLine.getPath(), resultado);
 
 					Product provavelCorrespondente = productSource.getLikelyCorrespondingProduct();
@@ -527,8 +525,7 @@ public class ToolCommandLine {
 								if (productTarget != provavelCorrespondente) {
 									this.builder.generateProduct(productTarget, targetLine.getPath(), resultado);
 
-									isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine
-											.getControladoresFachadas(), timeout, qtdTestes, approach, criteria, resultado);
+									isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria, resultado);
 
 									//Para de procurar se encontrar um par com mesmo comportamento.
 									if (isRefactoring) {
@@ -547,7 +544,6 @@ public class ToolCommandLine {
 				}
 			}
 		} catch (AssetNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -82,7 +82,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"C:/WorkspaceSPL/MiniSPL/lib"); // Uma sequência de bibliotecas (String)
+									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
