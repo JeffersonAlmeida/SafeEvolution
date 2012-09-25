@@ -142,8 +142,8 @@ public class CommandLine {
 		if (isRefinement) {
 			System.out.println("SafeRefactor found no behavioral changes");
 		} else {
-			System.out.println("SafeRefactor found behavioral changes");
-			System.out.println("Tests' dir:" + Constants.TEST);
+			System.out.println("\n\n -- SafeRefactor found behavioral changes -- ");
+			System.out.println("\n Safe Refactor Tests' directory:" + "< " + Constants.TEST + " >");
 		}
 
 		return isRefinement;

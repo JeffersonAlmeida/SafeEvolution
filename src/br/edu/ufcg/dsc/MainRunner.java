@@ -73,7 +73,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.NAIVE_2_ICTAC, // A abordagem que será utilizada
+									Approach.ONLY_CHANGED_CLASSES, // A abordagem que será utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.

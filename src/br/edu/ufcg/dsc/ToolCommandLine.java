@@ -492,8 +492,7 @@ public class ToolCommandLine {
 		return assetsEqual;
 	}
 
-	private boolean testProducts(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach,
-			Criteria criteria, ResultadoLPS resultado) throws IOException, DirectoryException {
+	private boolean testProducts(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, DirectoryException {
 
 		boolean isRefactoring = true;
 
@@ -536,8 +535,7 @@ public class ToolCommandLine {
 						}
 					}
 
-					System.out.println(isRefactoring);
-
+					/* If one method is not a refactoring, we can break this loop and let the user know about the refactoring was not applied successfully. */
 					if (!isRefactoring) {
 						break;
 					}
@@ -547,7 +545,7 @@ public class ToolCommandLine {
 			e.printStackTrace();
 		}
 
-		System.out.println("RESULTADO FINAL DO COMPORTAMENTO " + isRefactoring);
+		System.out.println("This evolution is a refactoring ?: " + "< " + isRefactoring + " >");
 
 		return isRefactoring;
 	}
