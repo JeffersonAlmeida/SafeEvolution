@@ -7,11 +7,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
-
 import java_cup.runtime.Symbol;
-
 import org.apache.commons.io.FileUtils;
-
 import br.edu.ufcg.dsc.am.ReadAM;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.parser.parser;
@@ -21,38 +18,31 @@ import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.ck.xml.Xml;
 
 public class SimpleCKReader {
-
-	public static Map<String, Set<String>> getProvidedRequired(
-			String transformation, String args, Map<String, String> cm,
-			Set<String> components) {
+	
+	/**
+	 * 
+	 */
+	public static Map<String, Set<String>> getProvidedRequired(String transformation,String args,Map<String, String> cm,Set<String> components) {
+		
 		Map<String, Set<String>> getProvidedRequired = new HashMap<String, Set<String>>();
 		Set<String> provided = new HashSet<String>();
 		Set<String> required = new HashSet<String>();
 
 		if (transformation.equalsIgnoreCase("selectComponents")) {
-			// String[] assets = args.split(",\\s*");
 			String[] assets = args.split(",");
 			for (String asset : assets) {
 				try {
 					asset = asset.trim();
 					provided.add(asset);
 					String filepath = cm.get(asset);
-					String fileContents = FileUtils.readFileToString(new File(
-							filepath));
-					fileContents = fileContents
-							.replaceAll(
-									"(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)",
-									"");
-					// System.out.println(fileContents);
-
+					String fileContents = FileUtils.readFileToString(new File(filepath));
+					fileContents = fileContents.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
 					for (String component : components) {
 						if (fileContents.indexOf(component) != -1) {
 							required.add(component);
 						}
 					}
-
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -62,9 +52,15 @@ public class SimpleCKReader {
 		return getProvidedRequired;
 	}
 
-	public static ConfigurationKnowledge readCK(String ckFile,
-			Map<String, String> cm) {
-		// Set<Set<String>> productsFM = new HashSet<Set<String>>();
+	/**
+	 * This method reads the configuration knowledge. <br></br>
+	 * @param ckFile CK File String <br></br>
+	 * @param cm Component Model <br></br>
+	 * @return  returns a ConfigurationKnowledge<br></br>
+	 * @see ConfigurationKnowledge <br></br>
+	 */
+	public static ConfigurationKnowledge readCK(String ckFile, Map<String, String> cm) {
+
 		Xml ckXML = new Xml(ckFile, "configurationModel");
 		Set<ConfigurationItem> ckItems = new HashSet<ConfigurationItem>();
 		for (Xml f : ckXML.children("configuration")) {
@@ -79,12 +75,8 @@ public class SimpleCKReader {
 				featExp = (IFeatureExpression) sym.value;
 
 				Set<Task> tasks = new HashSet<Task>();
-				// System.out.println(featExp);
 				for (Xml t : f.children("transformation")) {
-					Map<String, Set<String>> getProvidedRequired = SimpleCKReader
-							.getProvidedRequired(t.child("name").content()
-									.trim(), t.child("args").content().trim(),
-									cm, ReadAM.components(cm));
+					Map<String, Set<String>> getProvidedRequired = SimpleCKReader.getProvidedRequired(t.child("name").content().trim(), t.child("args").content().trim(), cm, ReadAM.components(cm));
 
 					// components - get provided and required
 					Set<String> provided = getProvidedRequired.get("provided");
@@ -99,29 +91,10 @@ public class SimpleCKReader {
 				ckItems.add(item);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
 		}
 		ConfigurationKnowledge ck = new ConfigurationKnowledge(ckItems);
 		return ck;
 	}
-
-//	/**
-//	 * @param args
-//	 */
-//	public static void main(String[] args) {
-//		// TODO Auto-generated method stub
-//		String fullpath = "/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/samples/MobileMedia_02AO/src/";
-//		String cmModel = "/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/samples/MobileMedia_02AO/componentModel_02AO.txt";
-//
-//		Map<String, String> cm = ReadCM.readCM(cmModel, fullpath);
-//		// System.out.println(ReadCM.components(cm));
-//
-//		String ckModel = "/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/samples/MobileMedia_02AO/configurationModel_02AO.xml";
-//		ConfigurationKnowledge ck = ReadCK.readCK(ckModel, cm);
-//		System.out.println(ck);
-//	}
-
 }

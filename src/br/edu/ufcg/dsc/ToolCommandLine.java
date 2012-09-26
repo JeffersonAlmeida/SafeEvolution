@@ -645,7 +645,6 @@ public class ToolCommandLine {
 		try {
 			fmRefactoring = instance.isFMRefactoring(string);
 		} catch (Err e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		long finishedTime = System.currentTimeMillis();
@@ -838,10 +837,8 @@ public class ToolCommandLine {
 						this.changedAssets.add(this.filesManager.getPath("src." + asset));
 					}
 				} catch (JavaModelException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

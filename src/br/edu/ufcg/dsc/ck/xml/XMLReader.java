@@ -8,17 +8,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import java_cup.runtime.Symbol;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
-
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
 import soot.Main;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ProductLine;
@@ -34,26 +30,34 @@ import br.edu.ufcg.dsc.util.FilesManager;
 
 public class XMLReader {
 	
+	/**A HashMap of Configurations Knowledge */
 	private HashMap<String, ConfigurationKnowledge> cacheCKs;
 	
+	/**A XML Reader Singleton*/
 	private static XMLReader instance;
 	
+	/*XML Reader Constructor*/
 	private XMLReader() {
+		/* Initialize the HashMap of Configurations Knowledge */
 		this.cacheCKs = new HashMap<String, ConfigurationKnowledge>();
 	}
 	
+	/*Get the singleton instance of XML Reader.*/
 	public static XMLReader getInstance(){
 		if(instance == null){
 			instance = new XMLReader();
 		}
-		
 		return instance;
 	}
 
-	public ConfigurationKnowledge getCK(ProductLine productLine
-			
-			/*String configurationKnowledgeFileName, HashMap<String,String> assetMapping, 
-			HashMap<String, Collection<String>> dependencias*/) {
+	/**
+	 * Get representation of a Configuration Knowledge from a product line.  <br></br>
+	 * @param productLine The SPL  <br></br>
+	 * @return a ConfigurationKnowledge <br></br>
+	 * @see ConfigurationKnowledge <br></br>
+	 */
+	public ConfigurationKnowledge getCK(ProductLine productLine) {
+		
 		ConfigurationKnowledge ck = this.cacheCKs.get(productLine.getCkPath());
 		
 		if(ck == null){
@@ -77,21 +81,17 @@ public class XMLReader {
 
 						Element fstElmnt = (Element) fstNode;
 
-						NodeList featExpElmntLst = fstElmnt
-								.getElementsByTagName("expression");
+						NodeList featExpElmntLst = fstElmnt.getElementsByTagName("expression");
 						Element featExpElmnt = (Element) featExpElmntLst.item(0);
 						NodeList fExp = featExpElmnt.getChildNodes();
-						String featureExpression = ((Node) fExp.item(0))
-								.getNodeValue();
+						String featureExpression = ((Node) fExp.item(0)).getNodeValue();
 						
 						featureExpression = featureExpression.toLowerCase();
 
-						NodeList provElmntLst = fstElmnt
-								.getElementsByTagName("provided");
+						NodeList provElmntLst = fstElmnt.getElementsByTagName("provided");
 						Element providedElmnt = (Element) provElmntLst.item(0);
 						NodeList providedList = providedElmnt.getChildNodes();
-						String provideds = ((Node) providedList.item(0))
-								.getNodeValue();
+						String provideds = ((Node) providedList.item(0)).getNodeValue();
 						String[] providedsArray = provideds.split(",");
 
 						HashMap<String,String> provided = new HashMap<String,String>();
@@ -99,27 +99,22 @@ public class XMLReader {
 						for (String component : providedsArray) {
 							if(component.contains("[")){
 								String[] parts = component.split(Pattern.quote("["));
-								
 								provided.put(parts[0], parts[1].split(Pattern.quote("]"))[0]);
 							}
 							else{
 								provided.put(component, null);
 							}
-							
 						}
-						
-						//Pegando requireds de forma automatica.
-						//Soh funciona para classes e aspectos.
+						/* Get required classes automatically. */
+						/* It only works for java classes and aspects. */
 						Set<String> required = getRequiredClasses(productLine, provided);
 
-						NodeList reqElmntLst = fstElmnt
-								.getElementsByTagName("required");
+						NodeList reqElmntLst = fstElmnt.getElementsByTagName("required");
 						Element requiredElmnt = (Element) reqElmntLst.item(0);
 						NodeList requiredList = requiredElmnt.getChildNodes();
 						
 						if (requiredList.getLength() > 0) {
-							String requireds = ((Node) requiredList.item(0))
-									.getNodeValue().trim();
+							String requireds = ((Node) requiredList.item(0)).getNodeValue().trim();
 							String[] requiredsArray = requireds.split(",");
 
 							for (String component : requiredsArray) {
@@ -134,32 +129,15 @@ public class XMLReader {
 						tasks.add(task);
 
 						IFeatureExpression featExp = null;
-						scanner sc = new scanner(
-								new StringReader(featureExpression));
+						scanner sc = new scanner(new StringReader(featureExpression));
 						parser p = new parser(sc);
 						Symbol sym = p.parse();
 						featExp = (IFeatureExpression) sym.value;
 
-						ConfigurationItem item = new ConfigurationItem(featExp,
-								tasks);
+						ConfigurationItem item = new ConfigurationItem(featExp, tasks);
 						ck.addCKitem(item);
-						/*
-						 * System.out.println("FeatureExpression : " + featExp);
-						 * System.out.println("Provided : " + provided);
-						 * System.out.println("Required : " + required); /*
-						 */
-						/*
-						 * System.out.println("FeatureExpression : " +
-						 * featureExpression); System.out.println("Provided : " +
-						 * provideds); System.out.println("Required : " +
-						 * requireds); /*
-						 */
-
 					}
-					/**/
-					// System.out.println();
 				}
-				// System.out.println(ck);
 				
 				this.cacheCKs.put(productLine.getCkPath(), ck);
 
@@ -167,148 +145,89 @@ public class XMLReader {
 				e.printStackTrace();
 			}
 		}
-		
 		return ck;
 	}
 
+	/**
+	 * Get required classes from provided classes to compile the product.  <br></br>
+	 * @param productLine The product line.  <br></br> 
+	 * @param providedClasses The provided classes  <br></br>
+	 * @return returns a HashSet<String> of required classes.   <br></br>
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 */
 	public static Set<String> getRequiredClasses(ProductLine productLine, HashMap<String, String> providedClasses) throws IOException, AssetNotFoundException {
+		/* Initialize this HashSet to store the required classes. */
 		HashSet<String> requiredClasses = new HashSet<String>();
-
+		/* walk through all provided classes.*/
 		for(String providedClass : providedClasses.keySet()){
+			/* Get the relative path of the class. */
 			String classeRelativePath = productLine.getAssetMapping().get(providedClass.trim());
-
+			/* Replace "\" to "/" */
 			classeRelativePath = classeRelativePath.replaceAll(Pattern.quote(Constants.FILE_SEPARATOR), "/");
-			
 			if(classeRelativePath != null){
+				/*Construct a Class File */
 				File classFile = new File(productLine.getPath() + Constants.FILE_SEPARATOR + classeRelativePath);
 				
+				/* Initialize this Collection<String> to store dependencies. */
 				Collection<String> dependencias = null;
 				
+				/* Is the file a Java Class ? */
 				if(classeRelativePath.endsWith(".java")){
-					dependencias = Main.v().getDependences(
-							classFile.getName().replaceAll(".java", ""), classFile.getParent());
-					
+					/* Get the java class dependencies with soot framework. */
+					dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
+					/* Catch the aspects needed to compile the class. This class can depend on aspects. Who are these aspects ? */
 					dependencias.addAll(FilesManager.getInstance().getDependenciasAspectos(classFile));
 				}
+				/* Is the file an aspect ? */
 				else if(classeRelativePath.endsWith(".aj")){
+					/* get the aspect dependencies looking for the imports. */
 					dependencias = FilesManager.getInstance().getDependenciasDeAspectosPeloImport(classFile);
 				}
 				
+				/* Does it have dependencies ? */
 				if(dependencias != null){
 					productLine.getDependencias().put(classeRelativePath, dependencias);
-					
+					/* walk through all dependencies classes.*/
 					for(String dependence : dependencias){
+						/*Get the required classes*/
 						String constantRequired = getConstantFromAssetMapping(dependence, productLine.getAssetMapping());
-						
 						if(constantRequired != null){
+							/* ... and put it in the required HashSet<String>*/
 							requiredClasses.add(constantRequired);
 						}
 					}
 				}
 			}
-		}
+		}/*FOR end*/
 		
+		/*return it!*/
 		return requiredClasses;
 	}
 
+	/**
+	 *  Get the required class  <br></br>
+	 * @param dependecia
+	 * @param assetMapping
+	 * @return
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 */
 	private static String getConstantFromAssetMapping(String dependecia, HashMap<String,String> assetMapping) throws IOException, AssetNotFoundException {
 		String result = null;
-		
 		Set<String> assetNames = assetMapping.keySet();
-
 		for (String constant : assetNames) {
 			String classeRelativePath = assetMapping.get(constant.trim());
-			
 			classeRelativePath = classeRelativePath.replaceAll(Pattern.quote("/src/"), "").replaceAll(Pattern.quote("/"), ".");
-			
-			// A dependencia nem sempre eh um nome de classe com pacote. As chaves do
-			// mapping sempre sao.
-			// Eh necessario checar se dependencia faz parte de alguma key.
-			if ((dependecia.contains(".") && classeRelativePath.endsWith(dependecia + ".java")) 
-					|| classeRelativePath.endsWith("." + dependecia + ".java") 
-					|| (dependecia.contains(".") && classeRelativePath.endsWith(dependecia + ".aj")) 
-					|| classeRelativePath.endsWith("." + dependecia + ".aj")) {
-				
-				
+			if ((dependecia.contains(".") && classeRelativePath.endsWith(dependecia + ".java")) || classeRelativePath.endsWith("." + dependecia + ".java") || (dependecia.contains(".") && classeRelativePath.endsWith(dependecia + ".aj"))	|| classeRelativePath.endsWith("." + dependecia + ".aj")) {
 				result = constant;
-
 				break;
 			}
 		}
-
 		return result;
 	}
 
 	public void reset() {
 		this.cacheCKs.clear();
 	}
-
-	// public static void main(String argv[]) {
-	// long timeStart = System.currentTimeMillis();
-	//		
-	// ConfigurationKnowledge ck =
-	// XMLReader.getCK("/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/src/br/ufpe/cin/lps/ck/xml/ck07.xml");
-	// //ConfigurationKnowledge ck =
-	// XMLReader.getCK("/Users/leopoldoteixeira/Documents/CIn/workspaces/msc/ck/src/br/ufpe/cin/lps/ck/xml/ck07_AO_alt.xml");
-	// System.out.println(ck);
-	// String path =
-	// "/Users/leopoldoteixeira/Documents/Dropbox/cin/_work/alloy/";
-	// String model = "fm07_AO.als";
-	// Set<String> features = new HashSet<String>();
-	// features.add("MobileMedia");
-	// features.add("Sorting");
-	// features.add("Favourites");
-	// features.add("Copy");
-	//		
-	// features.add("SMS");
-	// features.add("Photo");
-	// features.add("Music");
-	// features.add("Video");
-	// features.add("CapturePhoto");
-	// features.add("CaptureVideo");
-	// /**/
-	//		
-	// AlloyFM r = new AlloyFM(path,model,features);
-	// Set<Set<String>> products = null;
-	// try {
-	// products = r.getProductConfigurations();
-	// } catch (Err e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//		
-	// System.out.println(products);
-	//		
-	// int totalProducts = 0;
-	// int totalInvalidProducts = 0;
-	// Set<Set<String>> invalidProducts = new HashSet<Set<String>>();
-	//		
-	// for (Set<String> product : products) {
-	// totalProducts++;
-	// //evaluating CK
-	//			
-	// Hashtable<String,Set<String>> evaluation = ck.evalCK(product);
-	// System.out.println(evaluation);
-	//			
-	// Set<String> provided = evaluation.get("provided");
-	// Set<String> required = evaluation.get("required");
-	// if (provided.containsAll(required)) {
-	// System.out.println("Valid Product: "+product);
-	// }
-	// else {
-	// totalInvalidProducts++;
-	// required.removeAll(provided);
-	// System.out.println(required);
-	// System.out.println("Invalid Product: "+product);
-	// invalidProducts.add(product);
-	// }
-	// System.out.println();
-	// }
-	// System.out.println("Total of products: "+totalProducts);
-	// System.out.println("Total of invalid products: "+totalInvalidProducts);
-	// System.out.println("Invalid products: "+invalidProducts);
-	// System.out.println("finished in "+(System.currentTimeMillis() -
-	// timeStart)+ " ms");
-	// /**/
-	// }
 }
