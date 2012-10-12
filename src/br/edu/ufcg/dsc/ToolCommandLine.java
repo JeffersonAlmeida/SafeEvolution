@@ -115,24 +115,28 @@ public class ToolCommandLine {
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 
-	 	/* cleans the generated products folder. */
+	 	/* It cleans the generated products folder. */
 		this.setup(souceLine, targetLine);
 
+		/* It Calls alloy to build source and target products and put it in cache. */
 		this.putProductsInCache(souceLine, targetLine);
 
+		/* Reset results variables .*/
 		resultado.getMeasures().reset();
 		resultado.getMeasures().setApproach(approach);
 		resultado.getMeasures().getTempoTotal().startContinue();
 
+		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
 		isRefinement = this.checkLPS(souceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
 
+		/*Report Variables: Pause total time to check the SPL.*/
 		resultado.getMeasures().getTempoTotal().pause();
 		resultado.getMeasures().print();
 
 		return isRefinement;
 	}
 
-	/**
+	/** This method calls alloy to build source and target products and put it in cache.
 	 * @param sourceLine Source Product Line.
 	 * @param targetLine Target Product Line.
 	 */
@@ -152,17 +156,20 @@ public class ToolCommandLine {
 			buildFMEvolutionAlloyFile(sourceLine.getFmPath(), targetLine.getFmPath());
 
 			if (this.cacheProducts.get(sourceLine.getPath()) == null) {
+				/* This method calls alloy to build source products and put it in cache. */
 				HashSet<HashSet<String>> productsSource = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME);
 				this.cacheProducts.put(sourceLine.getPath(), productsSource);
 			}
 
 			if (this.cacheProducts.get(targetLine.getPath()) == null) {
+				/* This method calls alloy to build target products and put it in cache. */
 				HashSet<HashSet<String>> productsTarget = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME);
 				this.cacheProducts.put(targetLine.getPath(), productsTarget);
 			}
 
 		}
-
+		
+		/* A set of features that compose a product. */
 		sourceLine.setSetsOfFeatures(this.cacheProducts.get(sourceLine.getPath()));
 		targetLine.setSetsOfFeatures(this.cacheProducts.get(targetLine.getPath()));
 		System.out.println("\n\t\tThe products are already in cache.");

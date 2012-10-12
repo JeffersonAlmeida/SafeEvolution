@@ -47,6 +47,11 @@ public class ProductGenerator {
 		}
 	}
 
+	/**
+	 * This is the method responsible to generate a product given an Alloy File.
+	 * @param file Alloy File.
+	 * @throws Err
+	 */
 	private void generateProduct(String file) throws Err {
 
 		/*System.out.println("\nIt is possible to generate: " + this.products.size() + " products."); */
