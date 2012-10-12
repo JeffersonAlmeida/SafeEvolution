@@ -44,11 +44,10 @@ public class MobileMediaBuilder extends ProductBuilder {
 	 */
 	private ArrayList<String> generateFilesToPreProcess(Collection<String> assets) {
 		ArrayList<String> result = new ArrayList<String>();
-		
 		for(String asset : assets){
+			/* Replaces the first substring of this string that matches the given regular expression with the given replacement. */
 			result.add(asset.replaceFirst("src", SRCPREPROCESS));
 		}
-		
 		return result;
 	}
 	
@@ -66,8 +65,10 @@ public class MobileMediaBuilder extends ProductBuilder {
 			
 			product.sortAssetNames(assetsOrigens, assetsDestinos);
 			
+			/* files to be processed. */
 			ArrayList<String> filesToPreProcess = this.generateFilesToPreProcess(assetsDestinos);
 			
+			/* Creates directories of the generated products */
 			this.createDirs(product, filesToPreProcess, pathSPL);
 			this.filesManager.copyFiles(pathSPL, assetsOrigens, filesToPreProcess, product.getPath());
 

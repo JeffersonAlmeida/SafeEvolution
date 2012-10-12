@@ -73,86 +73,97 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.ONLY_CHANGED_CLASSES, // A abordagem que será utilizada
+									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.
 									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-									CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
-									CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
+									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
+									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
 									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
-					System.out.println("\n ------------------------------------------- \n\n");
-					/*------------------------------------------------------------------------------------------------------------------*/
-					
-					System.out.println("### IMPACTED_FEATURES ###");
-					
-					avaliador
-					.avalie(
-							Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-							"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-							"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
-							60,  // timeOut
-							4,   // A quantidade de testes que será gerada para cada método.
-							Approach.IMPACTED_FEATURES, // A abordagem que será utilizada
-							true, // A SPL Source possui aspectos.
-							true,  // A SPL Target possui aspectos.
-							null, // String: controladores fachadas.
-							Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-							CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
-							CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
-							AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-							AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-							"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
-					System.out.println("\n ------------------------------------------- \n\n");
-					
-					System.out.println("### NAIVE_1_APROXIMACAO ###");
-					avaliador
-					.avalie(
-							Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-							"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-							"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
-							60,  // timeOut
-							4,   // A quantidade de testes que será gerada para cada método.
-							Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
-							true, // A SPL Source possui aspectos.
-							true,  // A SPL Target possui aspectos.
-							null, // String: controladores fachadas.
-							Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-							CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
-							CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
-							AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-							AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-							"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
-					System.out.println("\n ------------------------------------------- \n\n");
-					/*------------------------------------------------------------------------------------------------------------------*/
-					
-					/*------------------------------------------------------------------------------------------------------------------*/
-					System.out.println("### NAIVE_2_ICTAC ###");
-					avaliador
-					.avalie(
-							Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-							"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-							"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
-							60,  // timeOut
-							4,   // A quantidade de testes que será gerada para cada método.
-							Approach.NAIVE_2_ICTAC, // A abordagem que será utilizada
-							true, // A SPL Source possui aspectos.
-							true,  // A SPL Target possui aspectos.
-							null, // String: controladores fachadas.
-							Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-							CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
-							CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
-							AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-							AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-							"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
-					System.out.println("\n ------------------------------------------- \n\n");
-					/*------------------------------------------------------------------------------------------------------------------*/
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
 				}
+				
+				/*try {
+					System.out.println("### IMPACTED_FEATURES ###");
+					avaliador
+							.avalie(
+									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
+									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
+									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									60,  // timeOut
+									4,   // A quantidade de testes que será gerada para cada método.
+									Approach.IMPACTED_FEATURES, // A abordagem que será utilizada
+									true, // A SPL Source possui aspectos.
+									true,  // A SPL Target possui aspectos.
+									null, // String: controladores fachadas.
+									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
+									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
+									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
+									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
+									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
+									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
+				} catch (DirectoryException e) {
+					System.out.println(e.getMessage()+ "\n\n\n\n");
+					e.printStackTrace();
+				}
+				
+				
+				try {
+					System.out.println("### NAIVE_1_APROXIMACAO ###");
+					avaliador
+							.avalie(
+									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
+									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
+									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									60,  // timeOut
+									4,   // A quantidade de testes que será gerada para cada método.
+									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
+									true, // A SPL Source possui aspectos.
+									true,  // A SPL Target possui aspectos.
+									null, // String: controladores fachadas.
+									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
+									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
+									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
+									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
+									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
+									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
+				} catch (DirectoryException e) {
+					System.out.println(e.getMessage()+ "\n\n\n\n");
+					e.printStackTrace();
+				}
+				
+
+				
+				try {
+					System.out.println("### NAIVE_2_ICTAC ###");
+					avaliador
+							.avalie(
+									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
+									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
+									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									60,  // timeOut
+									4,   // A quantidade de testes que será gerada para cada método.
+									Approach.NAIVE_2_ICTAC, // A abordagem que será utilizada
+									true, // A SPL Source possui aspectos.
+									true,  // A SPL Target possui aspectos.
+									null, // String: controladores fachadas.
+									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
+									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
+									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
+									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
+									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
+									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
+				} catch (DirectoryException e) {
+					System.out.println(e.getMessage()+ "\n\n\n\n");
+					e.printStackTrace();
+				}*/
+				
+
 
 			}
 		});

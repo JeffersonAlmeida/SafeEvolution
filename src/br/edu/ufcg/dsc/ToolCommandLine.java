@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
@@ -70,6 +71,8 @@ public class ToolCommandLine {
 	
 	private long testsExecutionTimeout;
 	private long testsGenerationTimeout;
+	
+	/* This variable will store the changed assets - mofified files/classes.*/
 	private HashSet<String> changedAssets;
 
 	private ASTComparator astComparator;
@@ -112,6 +115,7 @@ public class ToolCommandLine {
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 
+	 	/* cleans the generated products folder. */
 		this.setup(souceLine, targetLine);
 
 		this.putProductsInCache(souceLine, targetLine);
@@ -158,7 +162,7 @@ public class ToolCommandLine {
 			}
 
 			/** I didn't understand why this code is needed. */
-			/*The variable p1 is being used.*/
+			/*The variable p1 is being used ?*/
 			HashSet<String> p1 = new HashSet<String>();
 			p1.add("uceditor");
 			p1.add("motorola");
@@ -193,8 +197,10 @@ public class ToolCommandLine {
 		this.testsGenerationTimeout = 0;
 		this.changedAssets = null;
 
+		/* Removes all of the mappings from this map. The map will be empty after this call returns. */
 		XMLReader.getInstance().reset();
 
+		/* cleans the generated products folder. */
 		this.cleanProducts();
 
 		souceLine.setup();
@@ -360,49 +366,81 @@ public class ToolCommandLine {
 	
 		boolean isRefinement = true;
 
+		/*IT will store the set of SOURCE PRODUCT LINE features*/
 		HashSet<HashSet<String>> setsOfFeaturesSource = sourceLine.getSetsOfFeatures();
+		
+		/*IT will store the set of TARGET PRODUCT LINE features*/
 		HashSet<HashSet<String>> setsOfFeaturesTarget = targetLine.getSetsOfFeatures();
 
+		/* A clone of the variable above*/
 		setsOfFeaturesTarget = (HashSet<HashSet<String>>) setsOfFeaturesTarget.clone();
 
+		/* The product Id.*/
 		int id = 0;
 
 		for (HashSet<String> featureSetSource : setsOfFeaturesSource) {
+			/* It will evaluate CK and AM in order to produce products of the SPL. */
 			Product productSource = this.evaluateProductCKAM(featureSetSource, sourceLine, id++);
-
+			
+			/* It will add the new generated product in the set of products of the <SOURCE> product line. */
 			sourceLine.getProducts().add(productSource);
 
+			/* This part is trying to accomplish the step 1 and 2 of all product pairs approach.
+			 * Step 2 - Mapping corresponding products.
+               Step 3 - Generations Target products with their corresponding source products. */
 			if (setsOfFeaturesTarget.contains(featureSetSource)) {
-				//Tentativa de encontrar um correspondente no target de forma mais economica.
+				/* This condition asks if the product source is also present in any product target. */ 
+				/*It means, the set of features that compose the source product is also presented in any set of features that compose all target products.*/
+				/* Trying to find a corresponding target product in a more economical way.  */
+				System.out.println("\n\n\tCorrespondent Product");
 				Product provavelCorrespondenteNoTarget = this.evaluateProductCKAM(featureSetSource, targetLine, id++);
-
+				
+				/* This Compares whether mapping between names and assets is the same in both products. */
 				if (provavelCorrespondenteNoTarget.temMesmosAssetsEPreProcessConstants(productSource)) {
+					 /* It will store the corresponding <TARGET> product. Corresponding products has the same features. Not necessarily the same assets and the same behavior. */
 					productSource.setLikelyCorrespondingProduct(provavelCorrespondenteNoTarget);
+				}else{
+					/*It means that a generated product and its corresponding target product do not have the same assets.*/
+					System.out.println("\nThe two products below do not have the same set of assets:");
+					provavelCorrespondenteNoTarget.printSetOfFeatures();
+					productSource.printSetOfFeatures();
 				}
-
+				
+				/* It will add the new generated product in the set of products of the <TARGET> product line. */
 				targetLine.getProducts().add(provavelCorrespondenteNoTarget);
 
-				//Remove do Target o produto jah criado. No final sobrabrarao no target
-				//somente as configuracoes que nao existiam na linha original.
+				/* Remove the new already generated product from the set of Target product. */
+				/* It will remain only configurations that do not exist in the original line. * It means, It will remain only products that is not correspondent to anyone from source line. */
 				setsOfFeaturesTarget.remove(featureSetSource);
 			}
-		}
+			
+		} /* FOR end*/
 
-		//Geracao de produtos que nao existiam na linha original. 
-		//Na Naive, algum produto antigo pode passar a corresponder 
-		//a este produto.
+		/* This will generate the others products of the Target product Line.*/
+		/* The products that did not have a corresponding source product line product. */
 		for (HashSet<String> featureSetTarget : setsOfFeaturesTarget) {
+			/* It will evaluate CK and AM in order to produce products of the SPL. */
 			Product productTarget = this.evaluateProductCKAM(featureSetTarget, targetLine, id++);
-
+			/* It will add the new generated product in the set of products of the <TARGET> product line. */
 			targetLine.getProducts().add(productTarget);
 		}
 
-		//Tentativa de casar os produtos que ainda nao tem par.
+		/* Attempting to "marry" products that did not have a par. */
+		System.out.println("\n\n ... Attempting to marry products that did not have a par.");
 		for (Product productSource : sourceLine.getProducts()) {
 			if (productSource.getLikelyCorrespondingProduct() == null) {
+				System.out.println("\nThis product did not have a really correspondent target product:");
+				String concat =  "";
+				Iterator<String> i = productSource.getFeaturesList().iterator();
+				while(i.hasNext()){
+					String feature = (String) i.next();
+					concat = concat + " [ " + feature + " ]";
+				}
+				System.out.println("\nProduct :: " + concat);
+				/* It tries to catch a corresponding product in the target SPL. */
 				Product provavelCorrespondenteNoTarget = this.getProvavelCorrespondenteNoTarget(productSource, targetLine.getProducts());
-
 				if (provavelCorrespondenteNoTarget != null) {
+					 /* It will store the corresponding <TARGET> product. Corresponding products has the same features. Not necessarily the same assets and the same behavior. */
 					productSource.setLikelyCorrespondingProduct(provavelCorrespondenteNoTarget);
 				} else {
 					isRefinement = false;
@@ -410,42 +448,68 @@ public class ToolCommandLine {
 			}
 		}
 
+		System.out.println("\n\nAll products in the source has a really corresponding target product ?: " + isRefinement);
+		System.out.println("\nIt means that a generated product and its corresponding target product may do not have the same assets.");
 		return isRefinement;
-	}
+	} /*Method end*/
 
+	/**
+	 * Walk through all Target products in order to find anyone who is correspondent to the source product.
+	 * @param productSource
+	 * @param productsTarget
+	 * @return
+	 */
 	private Product getProvavelCorrespondenteNoTarget(Product productSource, ArrayList<Product> productsTarget) {
 		Product result = null;
-
 		for (Product productTarget : productsTarget) {
 			if (productTarget.temMesmosAssetsEPreProcessConstants(productSource)) {
 				result = productTarget;
-
 				break;
 			}
 		}
-
 		return result;
 	}
 
-	private Product evaluateProductCKAM(HashSet<String> featureSet, ProductLine productLine, int id) throws IOException,
-			AssetNotFoundException {
-		//Constante -> Destino
-		HashMap<String, String> constantesDestinos = productLine.getCk().evalCKDestinos(featureSet);
+	/**
+	 * It will evaluate CK and AM in order to produce products of the SPL.
+	 * @param featureSet A set of features that compose a product.
+	 * @param productLine Source Product Line
+	 * @param id Product Id
+	 * @return This method returns a product.
+	 * @throws IOException
+	 * @throws AssetNotFoundException
+	 */
+	private Product evaluateProductCKAM(HashSet<String> featureSet, ProductLine productLine, int id) throws IOException, AssetNotFoundException {
+		
+		String concat =  "";
+		Iterator<String> i = featureSet.iterator();
+		while(i.hasNext()){
+			String feature = (String) i.next();
+			concat = concat + " [ " + feature + " ]";
+		}
+		System.out.println("\nProduct "+ (id) + " :: " + concat);
+	
+		/* <AssetName, path> Get in CK the DESTINY of the assets. */
+ 		HashMap<String, String> constantesDestinos = productLine.getCk().evalCKDestinos(featureSet);
+		
+		if(constantesDestinos.isEmpty()){
+			System.out.println("constante destino esta vazio: " + constantesDestinos.isEmpty());
+		}
 
-		//Constante -> Origem
+		/* <AssetName, path> Get in CK the ORIGIN of the assets.*/
 		HashMap<String, String> constantesOrigens = new HashMap<String, String>();
 
 		for (String constant : constantesDestinos.keySet()) {
-			//Substituindo os nulos dos destinos, casos em que origem e destino sao iguais.
-			constantesDestinos.put(constant, constantesDestinos.get(constant) == null ? productLine.getAssetMapping().get(constant.trim())
-					: constantesDestinos.get(constant));
+			/* Replacing invalid destinations, where source and destination are the same. */
+			constantesDestinos.put(constant, constantesDestinos.get(constant) == null ? productLine.getAssetMapping().get(constant.trim()) : constantesDestinos.get(constant));
 
-			//A origem sempre eh o path informado no AM.
+			/* The origin path is always the one informed in the asset mapping. */
 			constantesOrigens.put(constant, productLine.getAssetMapping().get(constant.trim()));
 		}
-
+		
 		HashSet<String> preProcessTags = this.builder.getPreProcessTags(featureSet);
-
+		
+		/*Constructs a new Product */
 		return new Product(productLine, id, featureSet, preProcessTags, constantesOrigens, constantesDestinos);
 	}
 
@@ -508,11 +572,10 @@ public class ToolCommandLine {
 
 					if (provavelCorrespondente != null) {
 						this.builder.generateProduct(provavelCorrespondente, targetLine.getPath(), resultado);
-
-						isRefactoring = isRefactoring
-								&& CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(),
-										timeout, qtdTestes, approach, criteria, resultado);
+						isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria, resultado);
 					} else {
+						/* If the source product does not have a correspondent target product it is NOT considered a refactoring.
+						 * It means, that the behavior was not preserved once we can not find even a correspondent target product.*/
 						isRefactoring = false;
 					}
 
@@ -614,7 +677,7 @@ public class ToolCommandLine {
 	}
 
 	/**
-	 * asks if the asset mapping is a refinement .	 <br></br>
+	 * Asks if the asset mapping is a refinement .	 <br></br>
 	 * @param sourceLine
 	 * @param targetLine
 	 * @param timeout
@@ -715,7 +778,6 @@ public class ToolCommandLine {
 		}
 		HashSet<String> ckSigs = ck.getSignatures();
 		for (String string : ckSigs) {
-			// correctSet.add(string.trim().toLowerCase());
 			correctSet.add(string.trim());
 		}
 		String header = "module " + name + Constants.LINE_SEPARATOR;
@@ -725,7 +787,6 @@ public class ToolCommandLine {
 		for (String string : correctSet) {
 			string = string.trim();
 			if (string != null && !string.equals("")) {
-				// sigs += separador + string.toLowerCase();
 				sigs += separador + string;
 				separador = ", ";
 			}
@@ -801,38 +862,55 @@ public class ToolCommandLine {
 		return mapping;
 	}
 
+	/**
+	 * This methods answers whether the assets of the SOURCE product line is completely equal to the TARGET product line. 
+	 * It means, that it looks for the modified assets.  <br></br>
+	 * @param sourceLine  <br></br>
+	 * @param targetLine  <br></br>
+	 * @return returns is both product lines have the same assets. Without changes.
+	 */
 	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
 		boolean result = true;
-
+		
+		/* Get all SOURCE product line classes. */
 		Set<String> sourceKeySet = sourceLine.getMappingClassesSistemaDeArquivos().keySet();
+		
+		/* Get all TARGET product line classes. */
 		Set<String> targetKeySet = targetLine.getMappingClassesSistemaDeArquivos().keySet();
 
+		/* Initialize the modified classes variable. */
 		this.classesModificaadas = new HashSet<String>();
+		
+		/* Initialize the changed assets variable. */
 		this.changedAssets = new HashSet<String>();
 
+		/* walk through all assets of the SOURCE product line classes. */
 		for (String asset : sourceKeySet) {
+			/* location source file*/
 			String locationSource = sourceLine.getMappingClassesSistemaDeArquivos().get(asset);
+			/* location target file*/
 			String locationTarget = targetLine.getMappingClassesSistemaDeArquivos().get(asset);
-
 			if (locationSource != null && locationTarget != null) {
-				File sourceFile = new File(locationSource);
-				File targetFile = new File(locationTarget);
-
+				/* build the two files.*/
+				File sourceFile = new File(locationSource); // source asset File.
+				File targetFile = new File(locationTarget); // target asset File.
 				try {
 					boolean equals;
-
 					if (asset.endsWith("java")) {
+						/* This methods compares two textual files and return whether they are equal.
+						 * It means, there is no refactoring in the second when compared to the first one. */
 						this.astComparator.setInputs(sourceFile, targetFile);
 						equals = this.astComparator.isIsomorphic();
 					} else if (asset.endsWith("aj")) {
+						/* This methods compares two textual files and return whether they are equal. 
+						 * It means, there is no refactoring in the second when compared to the first one. */
 						equals = this.isTextualFileContentsEquals(sourceFile, targetFile);
 					} else {
-						//Se nao java ou java, o resultado nao faz diferenca.
 						equals = true;
 					}
-
 					if (!equals) {
 						result = false;
+						/*Put the asset in the modified classes.*/
 						this.classesModificaadas.add(asset);
 						this.changedAssets.add(this.filesManager.getPath("src." + asset));
 					}
@@ -843,7 +921,6 @@ public class ToolCommandLine {
 				}
 			}
 		}
-
 		if (!targetKeySet.containsAll((sourceKeySet))) {
 			result = false;
 		}
@@ -851,32 +928,32 @@ public class ToolCommandLine {
 		return result;
 	}
 
+	/**
+	 * This methods compares two textual files and return whether they are equal. 
+	 * It means, there is no refactoring in the second when compared to the first one.
+	 * @param sourceFile
+	 * @param targetFile
+	 * @return
+	 */
 	private boolean isTextualFileContentsEquals(File sourceFile, File targetFile) {
 		boolean result = true;
-
 		String linhaSource = "";
 		String linhaTarget = "";
-
 		try {
 			FileReader readerSource = new FileReader(sourceFile);
 			FileReader readerTarget = new FileReader(targetFile);
-
 			BufferedReader inSource = new BufferedReader(readerSource);
 			BufferedReader inTarget = new BufferedReader(readerTarget);
-
 			while (result && ((linhaSource = inSource.readLine()) != null & (linhaTarget = inTarget.readLine()) != null)) {
 				if (!linhaSource.trim().equals(linhaTarget.trim())) {
 					result = false;
 				}
 			}
-
 			if (linhaSource != null || linhaTarget != null) {
 				result = false;
 			}
-
 			inSource.close();
 			inTarget.close();
-
 			readerSource.close();
 			readerTarget.close();
 		} catch (FileNotFoundException e) {
@@ -884,7 +961,6 @@ public class ToolCommandLine {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return result;
 	}
 
@@ -914,7 +990,8 @@ public class ToolCommandLine {
 
 	/**
 	 * Checa apenas classes modificadas. Se mais de MAX_CLASSES_MODIFICADAS
-	 * forem alteradas, a otimizacao eh descartada.
+	 * forem alteradas, a otimizacao eh descartada. This methods also is responsible to answer whether the evolution is a refactoring or not.
+	 * It means, is the evolution preserving behavior ?  <br></br>
 	 * 
 	 * @param sourcePath
 	 * @param targetPath
@@ -925,117 +1002,107 @@ public class ToolCommandLine {
 	 * @return
 	 * @throws IOException
 	 * @throws AssetNotFoundException
-	 * @throws DirectoryException
+	 * @throws DirectoryException 
 	 */
-	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach,
-			HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException,
-			DirectoryException {
+	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
-
 		long startedTime = System.currentTimeMillis();
 
+		/* The amount of modified classes are greater than MAX_CLASSES_MODIFICADAS */
+		/* The optimization for AM won't be realized. */
 		if (this.classesModificaadas.size() > MAX_CLASSES_MODIFICADAS) {
-			System.out.println("################ A quantidade de classes modificadas eh maior que " + MAX_CLASSES_MODIFICADAS
-					+ ". A otimizacao para AM nao serah realizada.");
+			System.out.println("\n\n ! Warning: The amount of modified classes are greater than" + MAX_CLASSES_MODIFICADAS);
+			System.out.println("The optimization for AM won't be realized.\n");
 		} else {
+			/* Set the amout of compiled products to 1*/
 			resultado.getMeasures().setQuantidadeProdutosCompilados(1);
 
 			String productPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR;
 
-			// Criando pastas para source e target, que ser�o as mesmas para 
-			//todas as classes modificadas e suas dependencias.
-			File testSourceDirectory = FilesManager.getInstance().createDir(
-					productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
+			/* Creating folders for source and target products, which will be the same for all modified classes and their dependencies. */
+			File testSourceDirectory = FilesManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
+			File testTargetDirectory = FilesManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
 
-			File testTargetDirectory = FilesManager.getInstance().createDir(
-					productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
-
-			// Criando pasta bin.
+			/* This creates bin folder for SOURCE PRODUCT and TARGET PRODUCT. */
 			FilesManager.getInstance().createDir(productPath + "source" + Constants.FILE_SEPARATOR + "bin");
 			FilesManager.getInstance().createDir(productPath + "target" + Constants.FILE_SEPARATOR + "bin");
 
+			/* Get library path of the SOURCE and TARGET SPL*/
 			String libPathSource = sourceLine.getLibPath();
 			String libPathtarget = targetLine.getLibPath();
 
 			if (libPathSource != null && libPathtarget != null) {
+				/* This copies all library files for SOURCE PRODUCT and TARGET PRODUCT lib path. */
 				FilesManager.getInstance().copyLibs(libPathSource, productPath + "source" + Constants.FILE_SEPARATOR + "lib");
 				FilesManager.getInstance().copyLibs(libPathtarget, productPath + "target" + Constants.FILE_SEPARATOR + "lib");
 			}
 
-			//Classes que terao testes gerados.
+			/* Classes that will have generated tests. */
 			String classes = "";
 			String classeToGenerateTestes = "";
 
 			this.listaAspectos = new HashSet<String>();
 
+			System.out.println("\n Amount of modified classes: " + classesModificaadas.size()+"\n");
+			/* walk through all changed classes. */
 			for (String classe : this.classesModificaadas) {
-				System.out.println("################ " + this.classesModificaadas.size() + "Verificando classe " + classe);
+				System.out.println(" - Modified: " + classe);
 
+				/* Get the whole path of the modified class. */
 				String fileSourcePath = sourceLine.getMappingClassesSistemaDeArquivos().get(classe);
 				String fileTargetPath = targetLine.getMappingClassesSistemaDeArquivos().get(classe);
 
-				// Copiando versao source do arquivo modificado.
+				/*Copying source version of the modified file. */
 				String destinationPath = null;
 				File fileDestination = null;
-
-				destinationPath = testSourceDirectory.getAbsolutePath()
-						+ FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
-
+				destinationPath = testSourceDirectory.getAbsolutePath() + FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
 				fileDestination = new File(destinationPath);
-
 				classeToGenerateTestes = classe;
 
-				if (this.line == Lines.TARGET) {
-					classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(
-							Pattern.quote("src.java."), "");
+				/*is the SPL -> TARGET SOFTWARE PRODUCT LINE ?*/
+				if (this.line == Lines.TARGET){
+					classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
 				}
-
 				FilesManager.getInstance().createDir(fileDestination.getParent());
 				FilesManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
 
-				// Pegando path da classe na versao source.
+				/* Catch the class path in source version. */
 				File fileSource = fileDestination;
-
-				destinationPath = testTargetDirectory.getAbsolutePath()
-						+ FilesManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
-
+				destinationPath = testTargetDirectory.getAbsolutePath()	+ FilesManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
 				fileDestination = new File(destinationPath);
-
 				FilesManager.getInstance().createDir(fileDestination.getParent());
 				FilesManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
 
-				// Pegando path da classe na versao source.
+				/* Catch the class path in source version. */
 				File fileTarget = fileDestination;
 
 				this.dependenciasCopiadas = new HashSet<String>();
 
-				this.copyDependencies(fileSource, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), null, sourceLine
-						.getDependencias());
-				this.copyDependencies(fileTarget, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), null, targetLine
-						.getDependencias());
+				this.copyDependencies(fileSource, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), null, sourceLine.getDependencias());
+				this.copyDependencies(fileTarget, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), null, targetLine.getDependencias());
 
-				//Como aspectos nao sao pre-processados, caso existam constantes de pre-processamentos
-				//nas classes do conjunto, serah necessario mover manualmente os aspectos para a pasta
-				//src apos o pre-processamento.
+				/* As aspects are not preprocessed, it will be necessary to manually move the aspects to the src folder after the preprocessing. */
 				if (fileSource.getAbsolutePath().endsWith("aj")) {
 					this.listaAspectos.add(fileSource.getAbsolutePath());
 				}
 				if (fileTarget.getAbsolutePath().endsWith("aj")) {
 					this.listaAspectos.add(fileTarget.getAbsolutePath());
 				}
-
-				if (classes.equals("")) {
+				if (classes.equals("")){
 					classes = classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
 				} else if (!classes.contains(classeToGenerateTestes.replaceAll(".java", ""))) {
 					classes = classes + "|" + classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
 				}
 			}
 
+			/* Check only products that have any of the modified classes. */
+			/* This variable will store modified products. It means, products that have at least one modified asset. */ 
 			ArrayList<Product> produtosQueContemClassesModificadas = new ArrayList<Product>();
-
-			//Cheque somente produtos que tem alguma das classes modificadas.
-			for (Product product : sourceLine.getProducts()) {
+			
+			for (Product product : sourceLine.getProducts()){
+				/* Is this product contains at least one modified asset ? */
 				if (product.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
+					/* if the answer is YES, add this product to the modified products variable. */
 					produtosQueContemClassesModificadas.add(product);
 				}
 			}
@@ -1046,23 +1113,23 @@ public class ToolCommandLine {
 			//		**Eh melhor entrar aqui se temAspectos, mesmo que nao tenha preprocess
 			//		**Quando tiver soh preprocess entra no else
 			//		**
+			
+			/* Does SOURCE product line contains aspectos ? */
 			if (sourceLine.temAspectos()) {
 				HashSet<HashSet<String>> products = new HashSet<HashSet<String>>();
 				
+				/* Removes all of the elements from this list. */
 				produtosQueContemClassesModificadas.clear();
 
 				for (Product product : sourceLine.getProducts()) {
+					/* Is this product contains at least one modified asset ? */
 					if (product.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
 						produtosQueContemClassesModificadas.add(product);
-
 						products.add(product.getFeaturesList());
 					}
 				}
-				//				HashSet<HashSet<String>> products = sourceLine.getSetsOfFeatures();
-				//
-				//				products = this.builder.filter(products, changedFeatures);
 
-				//Se tem aspectos, mas nao existem classes com mais de uma versao na linha.
+				/* if it has aspects, but there are no classes with more than one version in the SPL. */
 				HashSet<HashSet<String>> pseudoProductsToBePreprocessed = new HashSet<HashSet<String>>();
 
 				this.mapeamentoFeaturesAspectosSource = new HashMap<HashSet<String>, HashSet<String>>();
@@ -1070,7 +1137,6 @@ public class ToolCommandLine {
 
 				for (HashSet<String> product : products) {
 					HashSet<String> prodToBuild = this.makeCombination(product, sourceLine, targetLine);
-
 					if (prodToBuild.size() > 0) {
 						pseudoProductsToBePreprocessed.add(prodToBuild);
 					}
@@ -1080,7 +1146,7 @@ public class ToolCommandLine {
 
 				sameBehavior = true;
 
-				System.out.println("######################PRODUCTS SIZE " + pseudoProductsToBePreprocessed.size());
+				System.out.println("\n products size: " + pseudoProductsToBePreprocessed.size());
 				int i = 0;
 				for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
 					System.out.println("######################PRODUCT " + i++);
@@ -1091,22 +1157,14 @@ public class ToolCommandLine {
 
 					for (String aspecto : aspectosDaConfiguracaoSource) {
 						String destinationPath = testSourceDirectory.getAbsolutePath() + aspecto.split("src")[1];
-
 						if (!this.classesModificaadas.contains(aspecto) && !this.listaAspectos.contains(destinationPath)) {
 							File fileDestination = new File(destinationPath);
-
 							FilesManager.getInstance().createDir(fileDestination.getParent());
-							FilesManager.getInstance()
-									.copyFile(
-											sourceLine.getMappingClassesSistemaDeArquivos().get(
-													FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
-
+							FilesManager.getInstance().copyFile(sourceLine.getMappingClassesSistemaDeArquivos().get(FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 							filesToTrash.add(fileDestination);
 							filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
 							this.listaAspectos.add(fileDestination.getAbsolutePath());
-
-							this.copyDependencies(fileDestination, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(),
-									filesToTrash, sourceLine.getDependencias());
+							this.copyDependencies(fileDestination, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), filesToTrash, sourceLine.getDependencias());
 						}
 					}
 
@@ -1117,17 +1175,13 @@ public class ToolCommandLine {
 							File fileDestination = new File(destinationPath);
 
 							FilesManager.getInstance().createDir(fileDestination.getParent());
-							FilesManager.getInstance()
-									.copyFile(
-											targetLine.getMappingClassesSistemaDeArquivos().get(
-													FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
+							FilesManager.getInstance().copyFile(targetLine.getMappingClassesSistemaDeArquivos().get( FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 
 							filesToTrash.add(fileDestination);
 							filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
 							this.listaAspectos.add(fileDestination.getAbsolutePath());
 
-							this.copyDependencies(fileDestination, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(),
-									filesToTrash, targetLine.getDependencias());
+							this.copyDependencies(fileDestination, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), filesToTrash, targetLine.getDependencias());
 						}
 					}
 
@@ -1160,20 +1214,15 @@ public class ToolCommandLine {
 						}
 					}
 
-					sameBehavior = sameBehavior
-							&& CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes,
-									timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), resultado, false,
-									false);
-
+					sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), resultado, false, false);
 					for (File file : filesToTrash) {
 						file.delete();
 						this.listaAspectos.remove(file.getAbsolutePath());
-
 						this.dependenciasCopiadas.remove(file.getAbsolutePath());
 					}
 
 					filesToTrash.clear();
-
+					
 					System.out.println("###########################" + sameBehavior);
 					
 					if(!sameBehavior){
@@ -1236,7 +1285,6 @@ public class ToolCommandLine {
 
 			System.out.println("Asset mapping verificado em: " + String.valueOf((finishedTime - startedTime) / 1000) + " segundos.");
 		}
-
 		return sameBehavior;
 	}
 
@@ -1499,11 +1547,9 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash,
-			HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
+	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash, HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
 
-		String pathDependencia = FilesManager.getInstance().getPathAPartirDoSrc(
-				classe.getAbsolutePath().replaceFirst("srcpreprocess", "src"));
+		String pathDependencia = FilesManager.getInstance().getPathAPartirDoSrc( classe.getAbsolutePath().replaceFirst("srcpreprocess", "src"));
 
 		if (!pathDependencia.startsWith("/")) {
 			pathDependencia = "/" + pathDependencia;

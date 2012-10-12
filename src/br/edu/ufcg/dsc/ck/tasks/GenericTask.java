@@ -9,7 +9,10 @@ import br.edu.ufcg.dsc.util.Comparador;
 
 public class GenericTask implements Task {
 	
+	/* This variable will store the required classes. */
 	private Set<String> required;
+	
+	/* This variable will store the provided classes.*/
 	private Set<String> provided;
 	
 	@Override
@@ -46,62 +49,95 @@ public class GenericTask implements Task {
 	}
 
 
-
+	/**
+	 * Initializes the set of provided and required classes. <br></br>
+	 * @param provided
+	 * @param required
+	 */
 	public GenericTask(Set<String> provided, Set<String> required) {
 		this.required = required;
 		this.provided = provided;
 	}
-
+	
+	/**
+	 * is the set of required and provided classes empty ?
+	 * @return returns true or false.
+	 */
 	public boolean isEmpty() {
 		return (this.required.isEmpty() && this.provided.isEmpty());
 	}
 
+	/**
+	 * This method adds a class to the set of provided classes.
+	 */
 	@Override
 	public boolean addToProvided(String constant, String path) {
 		return this.provided.add(constant);
 	}
 
+	/**
+	 * This method removes a class "c" from the set of provided classes.
+	 */
 	@Override
 	public boolean removeFromProvided(String c) {
 		return this.provided.remove(c);
 	}
 
+	/**
+	 * This method adds a class to the set of Required classes.
+	 */
 	@Override
 	public boolean addToRequired(String c) {
 		return this.required.add(c);
 	}
 
+	/**
+	 * This method removes a class "c" from the set of required classes.
+	 */
 	@Override
 	public boolean removeFromRequired(String c) {
 		return this.provided.remove(c);
 	}
 
+	/**
+	 * This method returns the set of provided classes.
+	 */
 	@Override
 	public HashMap<String,String> getProvided() {
 		HashMap<String, String> result = new HashMap<String, String>();
-		
 		for(String str : this.provided){
 			result.put(str,null);
 		}
-		
 		return result;
 	}
 
+	/**
+	 * This method returns the set of required classes.
+	 */
 	@Override
 	public Set<String> getRequired() {
 		return this.required;
 	}
 
+	/**
+	 * This method sets the set of provided classes.
+	 */
 	@Override
 	public void setProvided(HashMap<String,String> interfaces) {
 		this.provided = interfaces.keySet();
 	}
 
+	/**
+	 * This method sets the set of required classes.
+	 */
 	@Override
 	public void setRequired(Set<String> interfaces) {
 		this.required = interfaces;
 	}
 
+	/**
+	 * Object ToString.
+	 */
 	@Override
 	public String toString() {
 		String result = "";

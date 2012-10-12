@@ -6,6 +6,7 @@ import java.io.StringReader;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Pattern;
 import java_cup.runtime.Symbol;
@@ -20,6 +21,7 @@ import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
+import br.edu.ufcg.dsc.ck.featureexpression.FeatureExpression;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.parser.parser;
 import br.edu.ufcg.dsc.ck.parser.scanner;
@@ -51,9 +53,9 @@ public class XMLReader {
 	}
 
 	/**
-	 * Get representation of a Configuration Knowledge from a product line.  <br></br>
+	 * This method reads the SIMPLE XML CK and build the abstract representation of a Configuration Knowledge from a product line.  <br></br>
 	 * @param productLine The SPL  <br></br>
-	 * @return a ConfigurationKnowledge <br></br>
+	 * @return a Configuration Knowledge <br></br>
 	 * @see ConfigurationKnowledge <br></br>
 	 */
 	public ConfigurationKnowledge getCK(ProductLine productLine) {
@@ -72,15 +74,22 @@ public class XMLReader {
 				Document doc = db.parse(file);
 				doc.getDocumentElement().normalize();
 
+				/* The NodeList interface provides the abstraction of an ordered collection of nodes */
+				/*Make a NodeList of the XML tag: configuration*/
 				NodeList nodeLst = doc.getElementsByTagName("configuration");
-
+				
+				/* walk through all nodes. */
 				for (int s = 0; s < nodeLst.getLength(); s++) {
+					
 					Node fstNode = nodeLst.item(s);
 
+					/* IS The node an Element. */
 					if (fstNode.getNodeType() == Node.ELEMENT_NODE) {
-
+						
+						/* represents an element in an HTML or XML document. Elements may have attributes associated with them */
 						Element fstElmnt = (Element) fstNode;
 
+						/*Make a NodeList of the XML tag: expression*/
 						NodeList featExpElmntLst = fstElmnt.getElementsByTagName("expression");
 						Element featExpElmnt = (Element) featExpElmntLst.item(0);
 						NodeList fExp = featExpElmnt.getChildNodes();
@@ -90,12 +99,23 @@ public class XMLReader {
 
 						NodeList provElmntLst = fstElmnt.getElementsByTagName("provided");
 						Element providedElmnt = (Element) provElmntLst.item(0);
+						
+						/*A NodeList that contains all children of this node. If there are no children, this is a NodeList containing no nodes.*/
 						NodeList providedList = providedElmnt.getChildNodes();
 						String provideds = ((Node) providedList.item(0)).getNodeValue();
+						
+						/* This array contains all provided classes. */
 						String[] providedsArray = provideds.split(",");
 
+						System.out.print("\n\n Provided classes to " + featureExpression + ": ");
+						String allProvided = "";
+						for(String provided: providedsArray){
+							allProvided = allProvided + " [ " + provided + " ] ";
+						}
+						System.out.println(allProvided+"\n\n");
 						HashMap<String,String> provided = new HashMap<String,String>();
 						
+						/*walk through all provided class Array.*/
 						for (String component : providedsArray) {
 							if(component.contains("[")){
 								String[] parts = component.split(Pattern.quote("["));
@@ -109,14 +129,24 @@ public class XMLReader {
 						/* It only works for java classes and aspects. */
 						Set<String> required = getRequiredClasses(productLine, provided);
 
+						
+						/* Now it's time to get the required classes. */
 						NodeList reqElmntLst = fstElmnt.getElementsByTagName("required");
 						Element requiredElmnt = (Element) reqElmntLst.item(0);
+						/*A NodeList that contains all children of this node. If there are no children, this is a NodeList containing no nodes.*/
 						NodeList requiredList = requiredElmnt.getChildNodes();
 						
 						if (requiredList.getLength() > 0) {
 							String requireds = ((Node) requiredList.item(0)).getNodeValue().trim();
+							
+							/* This array contains all required classes. */
 							String[] requiredsArray = requireds.split(",");
-
+							String allRequired = "";
+							System.out.print("\n\n Required classes to " + featureExpression + ": ");
+							for(String requiredStr: requiredsArray){
+								allRequired = allRequired + " [ " + requiredStr + " ] ";
+							}
+							System.out.println(allRequired+"\n\n");
 							for (String component : requiredsArray) {
 								if (!component.trim().equals("true")) {
 									required.add(component);
@@ -134,10 +164,16 @@ public class XMLReader {
 						Symbol sym = p.parse();
 						featExp = (IFeatureExpression) sym.value;
 
+						FeatureExpression fe = (FeatureExpression) featExp;
+						System.out.println("FeatureExpression: " + fe.getExp());
+						if(tasks.isEmpty()){
+							System.out.println("Task is EMPTY!");
+						}
+						/* Creates a new Configuration Item: FeatExpression and Tasks:provided and required classes to this feature.*/
 						ConfigurationItem item = new ConfigurationItem(featExp, tasks);
 						ck.addCKitem(item);
 					}
-				}
+				} /*FOR end*/
 				
 				this.cacheCKs.put(productLine.getCkPath(), ck);
 
@@ -145,11 +181,13 @@ public class XMLReader {
 				e.printStackTrace();
 			}
 		}
+		/*returns the Configuration knowledge.*/
 		return ck;
 	}
 
 	/**
-	 * Get required classes from provided classes to compile the product.  <br></br>
+	 * Get required classes from provided classes to compile the product.  
+	 * These dependencies is found with soot framework. <br></br>
 	 * @param productLine The product line.  <br></br> 
 	 * @param providedClasses The provided classes  <br></br>
 	 * @return returns a HashSet<String> of required classes.   <br></br>
@@ -227,7 +265,11 @@ public class XMLReader {
 		return result;
 	}
 
+	/**
+	 * Removes all of the mappings from this map. The map will be empty after this call returns.
+	 */
 	public void reset() {
+		/* The map will be empty after this call returns. */
 		this.cacheCKs.clear();
 	}
 }

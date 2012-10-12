@@ -258,17 +258,19 @@ public abstract class ProductBuilder {
 		return result;
 	}
 
+	/**
+	 *  Get Pre Process Tags
+	 * @param features -  A set of features that compose a product.
+	 * @return
+	 */
 	public HashSet<String> getPreProcessTags(HashSet<String> features) {
 		HashSet<String> result = new HashSet<String>();
-
 		for (String feature : features) {
 			String preProcessTag = this.preprocessFeaturesToConstants.get(feature);
-
 			if (preProcessTag != null) {
 				result.add(preProcessTag);
 			}
 		}
-
 		return result;
 	}
 
@@ -348,17 +350,31 @@ public abstract class ProductBuilder {
 		return products;
 	}
 
+	/**
+	 * 
+	 * @param product
+	 * @param assets
+	 * @param splPath
+	 * @throws AssetNotFoundException
+	 */
 	protected void createDirs(Product product, ArrayList<String> assets, String splPath) throws AssetNotFoundException {
 
 		String temp = "Product" + product.getId();
 		String productPath = FILES_DIR + Constants.FILE_SEPARATOR + temp;
 
+		/* This creates the products directory. */
 		this.filesManager.createDir(FILES_DIR);
+		
+		/* This creates the products folder. Product0, product1, ..., product N. */
 		this.filesManager.createDir(productPath);
+		
+		/* This creates the bin folder. */
 		this.filesManager.createDir(productPath + Constants.FILE_SEPARATOR + "bin");
 
+		/**/
 		this.filesManager.verifyDirectoriesStructure(assets, productPath);
 
+		/* This sets the product source path. */
 		product.setPath(productPath);
 	}
 

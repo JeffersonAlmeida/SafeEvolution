@@ -2,6 +2,7 @@ package br.edu.ufcg.dsc.ck;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,10 +16,14 @@ public class ConfigurationItem {
 	private IFeatureExpression featExp;
 	private Set<Task> tasks;
 
+	/**
+	 * Constructs a configuration Item with a feature expression and a set of tasks.
+	 * @param featExp
+	 * @param tasks
+	 */
 	public ConfigurationItem(IFeatureExpression featExp, Set<Task> tasks) {
 		this.featExp = featExp;
 		this.tasks = tasks;
-		// this.signatures = new HashSet<String>();
 	}
 
 	public IFeatureExpression getFeatExp() {
@@ -138,12 +143,20 @@ public class ConfigurationItem {
 	}
 
 	public HashMap<String,String> getProvidedItemDestinos() {
+		/* Provided Items to compile a class.*/
 		HashMap<String,String> provided = new HashMap<String,String>();
-		
 		for (Task task : this.tasks) {
+			/*Add all provided classes here in the 	HashMap<String,String>*/
 			provided.putAll(task.getProvided());
 		}
 		
+		Iterator<String> i = provided.keySet().iterator();
+		String all = "";
+		while(i.hasNext()){
+			String  p = (String) i.next();
+			all = all + "\n [ " + p + " ] - " + provided.get(p) + "";
+		}
+		System.out.println(all + "");
 		return provided;
 	}
 

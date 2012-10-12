@@ -192,7 +192,6 @@ public class ASTComparator {
 				IType typeA = listTypesA[i];
 				IType typeB = null;				
 				for (int j = 0; j < listTypesB.length; j++) {
-					//System.out.println("typeA: "+ typeA.getElementName() + " typeB: "+ listTypesB[j].getElementName());
 					if (typeA.getElementName().equals(listTypesB[j].getElementName())) {
 						typeB = listTypesB[j];						
 						break;
@@ -209,17 +208,6 @@ public class ASTComparator {
 		return differences;
 	}
 	
-//	public boolean compareIsomorphic() {
-//		IType typeA = compUnitA.findPrimaryType();		
-//		IType typeASecond = compUnitASecond.findPrimaryType();
-//		
-//		if (!typeA.getElementName().equals(typeASecond.getElementName()))
-//			return false;
-//		else
-//			return compareFieldsOf(typeA, typeASecond)
-//					&& compareMethodsOf(typeA, typeASecond);
-//	}
-
 	private boolean compareMethodsOf(IType typeA, IType typeASecond) {
 		try {
 			IMethod[] methodsA = typeA.getMethods();

@@ -23,7 +23,7 @@ import br.edu.ufcg.dsc.util.FilesManager;
 /**
  *  * @author Jefferson Almeida - jra at cin dot ufpe dot br
 
- *  This class represents a Software Product Line.
+ *  This class represents a Software Product Line abstraction.
  */
 public class ProductLine {
 	
@@ -47,34 +47,35 @@ public class ProductLine {
 	
 	/**A HashSet to maintain the SPL feature names. (Strings)*/
 	private HashSet<String> features;
-	
-	
+
+	/***/
 	private HashMap<String, Collection<String>> dependencias;
 	
 	/** Configuration Knowledge of the Product Line*/
 	private ConfigurationKnowledge ck;
 	
+	/** A set of features that compose a product. */
 	private HashSet<HashSet<String>> setsOfFeatures;
 	
-	/**/
+	/**ArrayList of Products*/
 	private ArrayList<Product> products;
 	
-	//Nomes de classes encontrados na pasta da linha mapeados em paths.
+	/** Class names found in the folder mapped paths. */
 	private HashMap<String, String> mappingClassesSistemaDeArquivos;
 	
-	//Constantes mapeadas em paths relativos.
+	/** Constants mapped to relative paths. */
 	private HashMap<String, String> assetMapping;
 	
-	 /***/
+	 /** CK Format of the SPL CK*/
 	private CKFormat ckFormat;
 	
-	 /***/
+	 /** AM Format of the SP AM*/
 	private AMFormat amFormat;
 	
-	 /***/
+	/***/
 	private Properties preprocessProperties;
 	
-	 /***/
+	/** The library path of the SPL.*/
 	private String libPath;
 	
 	/**
@@ -241,6 +242,11 @@ public class ProductLine {
 		this.dependencias = dependencias;
 	}
 
+	/**
+	 * Get the Configuration Knowledge of the SPL.
+	 * @return returns a ConfigurationKnowledge
+	 * @see ConfigurationKnowledge
+	 */
 	public ConfigurationKnowledge getCk() {
 		if(this.ck == null){
 			if(this.ckFormat == CKFormat.HEPHAESTUS){
@@ -250,7 +256,6 @@ public class ProductLine {
 				this.ck = XMLReader.getInstance().getCK(this);
 			}
 		}
-		
 		return this.ck;
 	}
 
@@ -282,10 +287,17 @@ public class ProductLine {
 		return assetMapping;
 	}
 
+	/**
+	 * Set The library path of the SPL.
+	 * @param libPath  library path of the SPL.
+	 */
 	public void setLibPath(String libPath) {
 		this.libPath = libPath;
 	}
 
+	/**
+	 * @return The library path of the SPL.
+	 */
 	public String getLibPath() {
 		return libPath;
 	}

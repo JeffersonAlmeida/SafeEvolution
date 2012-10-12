@@ -140,9 +140,9 @@ public class CommandLine {
 		isRefinement = sr.isRefactoring(String.valueOf(timeout), false);
 
 		if (isRefinement) {
-			System.out.println("SafeRefactor found no behavioral changes");
+			System.out.println("SafeRefactor found NO behavioral changes");
 		} else {
-			System.out.println("\n\n -- SafeRefactor found behavioral changes -- ");
+			System.out.println("\n\n -- SafeRefactor FOUND behavioral changes -- ");
 			System.out.println("\n Safe Refactor Tests' directory:" + "< " + Constants.TEST + " >");
 		}
 

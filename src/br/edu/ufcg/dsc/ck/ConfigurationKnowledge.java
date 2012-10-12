@@ -63,19 +63,17 @@ public class ConfigurationKnowledge {
 	}
 	
 	/**
-	 * Retorna um mapeamento constante destino.
-	 * @param features
-	 * @return
+	 * Returns all provided classes to compiles these features.
+	 * @param features A set of features that compose a product.
+	 * @return HashMap<String, String> of provided classes
 	 */
 	public HashMap<String, String> evalCKDestinos(Set<String> features) {
 		HashMap<String, String> provided = new HashMap<String, String>();
-
 		for (ConfigurationItem item : this.ckItems) {
 			if (item.getFeatExp().evaluate(features)) {
 				provided.putAll(item.getProvidedItemDestinos());
 			}
 		}
-		
 		return provided;
 	}
 

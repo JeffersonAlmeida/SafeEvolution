@@ -139,6 +139,11 @@ public class FilesManager {
 		return out;
 	}
 
+	/**
+	 * 
+	 * @param assets
+	 * @param path
+	 */
 	public void verifyDirectoriesStructure(ArrayList<String> assets, String path) {
 		for (String file : assets) {
 			String temp = "";
@@ -196,10 +201,8 @@ public class FilesManager {
 				try {
 					copyFile(sourcePath + assets.get(i), destinationPath + assetDestino);
 				} catch (AssetNotFoundException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (DirectoryException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -342,7 +345,6 @@ public class FilesManager {
 		try {
 			stream = new PrintStream(new File(fileName));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -377,13 +379,10 @@ public class FilesManager {
 
 	public String getPathAPartirDoSrc(String path) {
 		String result = "";
-
 		String[] parts = path.split("src");
-
 		for (int i = 1; i < parts.length; i++) {
 			result = result + "src" + parts[i];
 		}
-
 		return result;
 	}
 
@@ -426,11 +425,9 @@ public class FilesManager {
 
 	public File createDir(String path) {
 		File f = new File(path);
-
 		if (!f.exists()) {
 			f.mkdirs();
 		}
-
 		return f;
 	}
 
@@ -628,10 +625,16 @@ public class FilesManager {
 		System.out.println("Limpando " + directory);
 	}
 
+	/**
+	 * This method copies all files from a SOURCE PATH to a second path.
+	 * @param fileSourcePath
+	 * @param destDirectoryPath
+	 * @throws AssetNotFoundException
+	 * @throws DirectoryException
+	 */
 	public void copyLibs(String fileSourcePath, String destDirectoryPath) throws AssetNotFoundException, DirectoryException {
 		File fileSource = new File(fileSourcePath);
 		File fileDest = new File(destDirectoryPath);
-
 		FilesManager.getInstance().copyFiles(fileSource, fileSource, fileDest);
 	}
 }

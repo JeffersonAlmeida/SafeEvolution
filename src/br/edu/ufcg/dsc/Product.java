@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
@@ -21,6 +22,8 @@ public class Product {
 	private HashMap<String,String> mapeamentoAssetNameParaOrigem;
 	private HashMap<String,String> mapeamentoAssetNameParaDestino;
 	
+	 /* It will store the corresponding product. Corresponding products has the same features.
+       Not necessarily  the same assets and not necessarily  the same behavior. */
 	private Product likelyCorrespondingProduct;
 	
 	private boolean generated;
@@ -28,20 +31,25 @@ public class Product {
 
 	private String path;
 
+	/* ? */
 	private HashSet<String> preProcessTags;
 
-	public Product(ProductLine spl, int id, HashSet<String> features, HashSet<String> preProcessTags, 
-			HashMap<String,String> mapeamentoAssetNameParaOrigem, HashMap<String,String> mapeamentoAssetNameParaDestino) {
+	/**
+	 * Product Constructor.
+	 * @param spl
+	 * @param id
+	 * @param features
+	 * @param preProcessTags
+	 * @param mapeamentoAssetNameParaOrigem
+	 * @param mapeamentoAssetNameParaDestino
+	 */
+	public Product(ProductLine spl, int id, HashSet<String> features, HashSet<String> preProcessTags, HashMap<String,String> mapeamentoAssetNameParaOrigem, HashMap<String,String> mapeamentoAssetNameParaDestino) {
 		this.spl = spl;
-		
 		this.id = id;
-		
 		this.featuresList = features;
 		this.preProcessTags = preProcessTags;
-		
 		this.mapeamentoAssetNameParaOrigem = mapeamentoAssetNameParaOrigem;
 		this.mapeamentoAssetNameParaDestino = mapeamentoAssetNameParaDestino;
-		
 		this.generated = false;
 		this.compiled = false;
 	}
@@ -106,15 +114,31 @@ public class Product {
 	}
 
 	/**
-	 * Compara se mapeamento entre nomes e assets eh o mesmo nos dois 
-	 * produtos.
+	 * This Compares whether mapping between names and assets is the same in both products.
 	 * @param productSource
 	 * @return
 	 */
 	public boolean temMesmosAssetsEPreProcessConstants(Product productSource) {
-		return this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino) &&
-			this.mapeamentoAssetNameParaOrigem.equals(productSource.mapeamentoAssetNameParaOrigem) &&
-			this.preProcessTags.equals(productSource.preProcessTags);
+		
+		Iterator<String> it = mapeamentoAssetNameParaDestino.keySet().iterator();
+		Iterator<String> it2 = productSource.mapeamentoAssetNameParaDestino.keySet().iterator();
+		int i = 0 ;
+		System.out.println("\n\t Mapping Asset Destiny");
+		while(it.hasNext()){
+			String key = (String) it.next();
+			System.out.println(" key " + (i++) + ": "+ key + " content: " + mapeamentoAssetNameParaDestino.get(key));
+		}
+		i=0;
+		while(it2.hasNext()){
+			String key2 = (String) it2.next();
+			System.out.println(" key " + (i++) + ": "+ key2 + " content: " + mapeamentoAssetNameParaDestino.get(key2));
+		}
+		
+		boolean mappingAssetDestiny = this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino);
+		boolean mappingAssetOrigin = this.mapeamentoAssetNameParaOrigem.equals(productSource.mapeamentoAssetNameParaOrigem);
+		boolean preProcess = this.preProcessTags.equals(productSource.preProcessTags);
+		System.out.println("mappingAssetDestiny: " + mappingAssetDestiny + " mappingAssetOrigin: " + mappingAssetOrigin + " preProcess: " + preProcess);
+		return mappingAssetDestiny && mappingAssetOrigin &&	preProcess;
 	}
 
 	public boolean isGenerated() {
@@ -155,10 +179,29 @@ public class Product {
 		return result;
 	}
 
+	/**
+	 * 
+	 * @param assetsOrigens
+	 * @param assetsDestinos
+	 */
 	public void sortAssetNames(ArrayList<String> assetsOrigens, ArrayList<String> assetsDestinos) {
 		for(String assetName : this.mapeamentoAssetNameParaOrigem.keySet()){
 			assetsOrigens.add(this.mapeamentoAssetNameParaOrigem.get(assetName));
 			assetsDestinos.add(this.mapeamentoAssetNameParaDestino.get(assetName));
+		}
+		
+		System.out.println("\nAssests Origem");
+		Iterator<String> i = assetsOrigens.iterator();
+		while(i.hasNext()){
+			String asset = (String) i.next();
+			System.out.println(" asset: " + asset );
+		}
+		
+		System.out.println("\nAssests Destino");
+		Iterator<String> i2 = assetsDestinos.iterator();
+		while(i2.hasNext()){
+			String asset = (String) i2.next();
+			System.out.println(" asset: " + asset );
 		}
 	}
 
@@ -172,15 +215,12 @@ public class Product {
 
 	public boolean containsSomeAsset(Collection<String> classesModificaadas, HashMap<String, String> mapping) {
 		boolean result = false;
-		
 		for(String classe : classesModificaadas){
 			String path = mapping.get(classe);
-			
 			for(String assetPath : this.mapeamentoAssetNameParaOrigem.values()){
 				if(result){
 					break;
 				}
-				
 				if(this.getComparablePath(path).contains(this.getComparablePath(assetPath))){
 					result = true;
 					
@@ -204,5 +244,15 @@ public class Product {
 		}
 
 		return result;
+	}
+
+	public void printSetOfFeatures() {
+		String concat =  "";
+		Iterator<String> i = this.featuresList.iterator();
+		while(i.hasNext()){
+			String feature = (String) i.next();
+			concat = concat + " [ " + feature + " ]";
+		}
+		System.out.println("\nProduct" + this.id +  " :: " + concat);
 	}
 }
