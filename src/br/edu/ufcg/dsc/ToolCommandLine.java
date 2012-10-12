@@ -161,25 +161,6 @@ public class ToolCommandLine {
 				this.cacheProducts.put(targetLine.getPath(), productsTarget);
 			}
 
-			/** I didn't understand why this code is needed. */
-			/*The variable p1 is being used ?*/
-			HashSet<String> p1 = new HashSet<String>();
-			p1.add("uceditor");
-			p1.add("motorola");
-			p1.add("windows");
-			p1.add("ptbr");
-			p1.add("environment");
-			p1.add("importtemplate");
-			p1.add("input");
-			p1.add("basicgeneration");
-			p1.add("xmloutput");
-			p1.add("branding");
-			p1.add("target");
-			p1.add("language");
-			p1.add("output");
-			p1.add("testCaseGenerator");
-			p1.add("xlsstdinput");
-			p1.add("cm");
 		}
 
 		sourceLine.setSetsOfFeatures(this.cacheProducts.get(sourceLine.getPath()));
