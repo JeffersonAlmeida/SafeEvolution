@@ -268,7 +268,7 @@ public class ToolCommandLine {
 		System.out.println("\n\n\n\n\t\tLet's check if the SPL is well formed.\n");
 		boolean isWF = this.isWF(sourceLine, targetLine);
 		System.out.println("\n\n\n\n\t\tOk. We have already checked the well formedness.\n");
-		
+		System.out.println("\n\t -> WF: " + isWF+ "\n");
 		/* Set this property in Results Class - To be used as a report later.*/
 		resultado.setWF(isWF);
 
@@ -303,7 +303,7 @@ public class ToolCommandLine {
 
 					if (approach == Approach.ONLY_CHANGED_CLASSES) {
 						/* Only generates tests for modified classes and do not generate products. */
-						/* Generates twice the test  amount per method. */
+						/* Generates two tests per method. */
 						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
 					} else {
 						/* Generate tests for all classes and all products. */

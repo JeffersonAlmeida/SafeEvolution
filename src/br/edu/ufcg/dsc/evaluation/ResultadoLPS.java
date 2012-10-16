@@ -21,6 +21,7 @@ public class ResultadoLPS {
 	private boolean fmAndCKRefinement;
 
 	private boolean isAssetMappingsEqual;
+	
 	private Collection<Diferenca> diferencas;
 	
 	/**SPL is a refinement ?*/
@@ -42,8 +43,8 @@ public class ResultadoLPS {
 	public String toString() {
 		
 		
-		String result = "My Software Product Line is Well Formed ?: " + this.isWF + "\n\n";
-		result += "Are Configuration Knowledge and Feature Model a refinement ?: " + this.fmAndCKRefinement + "\n";
+		String result = "-> My Software Product Line is Well Formed ?: " + this.isWF + "\n";
+		result += "-> Are Configuration Knowledge and Feature Model a refinement ?: " + this.fmAndCKRefinement + "\n";
 		
 		String metodosAdicionadosString = "";
 		String metodosRemovidosString = "";
@@ -76,15 +77,15 @@ public class ResultadoLPS {
 		}
 		
 		if(!metodosAdicionadosString.equals("")){
-			result += "MŽtodos adicionados:\n";
+			result += "Métodos adicionados:\n";
 			result += metodosAdicionadosString + "\n";
 		}
 		if(!metodosRemovidosString.equals("")){
-			result += "MŽtodos removidos:\n";
+			result += "Métodos removidos:\n";
 			result += metodosRemovidosString + "\n";
 		}
 		if(!metodosComComportamentoDiferenteString.equals("")){
-			result += "MŽtodos com comportamento diferente:\n";
+			result += "Métodos com comportamento diferente:\n";
 			result += metodosComComportamentoDiferenteString + "\n";
 		}
 
