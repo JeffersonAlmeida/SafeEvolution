@@ -1695,13 +1695,13 @@ public class ToolCommandLine {
 	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/*This part creates a representation of the source product line.*/
-		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "Hephaestus/ck.xml", sourcePath + "Hephaestus/fm.xml", sourcePath + "Hephaestus/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
+		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "\\Hephaestus\\ck.xml", sourcePath + "\\Hephaestus\\fm.xml", sourcePath + "\\Hephaestus\\am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
 		/*Set the libraries path for the source product line.*/
 		sourceLine.setLibPath(libPathSource);
 		
 		/*This part creates a representation of the target product line.*/
-		ProductLine targetLine = new ProductLine(targetPath, targetPath + "Hephaestus/ck.xml", targetPath + "Hephaestus/fm.xml", targetPath + "Hephaestus/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
+		ProductLine targetLine = new ProductLine(targetPath, targetPath + "\\Hephaestus\\ck.xml", targetPath + "\\Hephaestus\\fm.xml", targetPath + "\\Hephaestus\\am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 		
 		/*Set the libraries path for the target product line.*/
 		targetLine.setLibPath(libPathTarget);
