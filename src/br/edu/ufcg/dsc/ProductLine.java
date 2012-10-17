@@ -174,18 +174,18 @@ public class ProductLine {
 	 * @param dir source product line.
 	 */
 	private void walkSrc(String dir) {
+		System.out.println("Walk through this directory and get all files: " + dir);
 		File f = new File(dir);
-		for (File other : f.listFiles()) {
-			if (other.isHidden()) {
-				continue;
+		if(f.isDirectory()){
+			File[] files = f.listFiles();
+			for (File file : files) {
+				/*Call the same method recursively*/
+				this.walkSrc(file.getPath());
 			}
-			if (other.isDirectory()) {
-				walkSrc(other.getPath());
-			} else {
-				if (other.getName().endsWith(".java") || other.getName().endsWith(".aj")) {
-					String path = other.getPath();
-					this.mappingClassesSistemaDeArquivos.put(FilesManager.getInstance().getCorrectName(path), path);
-				}
+		}else if (f.isFile()){
+			if (f.getName().endsWith(".java") || f.getName().endsWith(".aj")) {
+				String path = f.getPath();
+				this.mappingClassesSistemaDeArquivos.put(FilesManager.getInstance().getCorrectName(path), path);
 			}
 		}
 	}
