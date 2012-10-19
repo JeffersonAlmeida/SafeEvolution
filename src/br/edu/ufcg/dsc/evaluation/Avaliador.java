@@ -171,7 +171,7 @@ public class Avaliador {
 	 */
 	public ResultadoLPS verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
-		ResultadoLPS resultado = new ResultadoLPS();
+		ResultadoLPS resultado = ResultadoLPS.getInstance();
 		
 		resultado.setSubject(sourcePath, targetPath);
 		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
@@ -212,7 +212,7 @@ public class Avaliador {
 	public ResultadoLPS verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
 		/* SPL evolution results */
-		ResultadoLPS resultado = new ResultadoLPS();
+		ResultadoLPS resultado = ResultadoLPS.getInstance();
 		
 		/*Set the Original SPL source path and the SPL Target source path from the ResultadoLPS Class */
 		resultado.setSubject(sourcePath, targetPath);

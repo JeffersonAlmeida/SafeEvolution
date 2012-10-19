@@ -305,9 +305,11 @@ public class ToolCommandLine {
 						/* Only generates tests for modified classes and do not generate products. */
 						/* Generates two tests per method. */
 						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
+						if(isRefinement){System.out.println("\nAsset Mapping Refined.\n");} else {System.out.println("\nSorry to inform you that Asset Mapping was not refined.\n");}
 					} else {
 						/* Generate tests for all classes and all products. */
 						isRefinement = this.testProducts(sourceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
+						if(isRefinement){System.out.println("\nCompatible Observable Behavior\n");} else {System.out.println("\nSource and Target do not have compatible observable behavior.\n");} 
 					}
 				
 					resultado.getMeasures().getTempoExecucaoAbordagem().pause();
@@ -317,9 +319,9 @@ public class ToolCommandLine {
 					if (isRefinement) {
 						System.out.println("\nThe Software Product Line is a refinement.\n");
 					} else {
-						System.out.println("The Software Product Line is NOT a refinement.\nAsset Mapping was not refined.\n");
+						System.out.println("The Software Product Line is NOT a refinement.\n");
 					}
-				} else {
+				}else {
 					/*Set whether the SPL evolution is a refinement. */
 					resultado.getMeasures().setResult(true);
 					System.out.println("\nThe Software Product Line was refined.\n");
@@ -586,6 +588,7 @@ public class ToolCommandLine {
 					}
 
 					/* If one method is not a refactoring, we can break this loop and let the user know about the refactoring was not applied successfully. */
+					/* Source and Target does not have compatible observable behavior. */
 					if (!isRefactoring) {
 						break;
 					}
@@ -911,7 +914,7 @@ public class ToolCommandLine {
 		if (!targetKeySet.containsAll((sourceKeySet))) {
 			result = false;
 		}
-
+		System.out.println("\nHave Source and Target the same assets ?:" + result +" \n");
 		return result;
 	}
 
@@ -1546,7 +1549,8 @@ public class ToolCommandLine {
 
 		if (dependencias == null) {
 			if (classe.getAbsolutePath().endsWith(".java")) {
-
+				
+				
 				dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());
 
 				//Classes podem ser dependentes de aspectos

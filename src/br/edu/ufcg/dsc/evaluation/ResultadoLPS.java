@@ -11,6 +11,8 @@ import br.edu.ufcg.dsc.util.Measures;
  */
 public class ResultadoLPS {
 	
+	private static ResultadoLPS instance;
+	
 	/**SPL Measures. Time to compile products. Time to compile tests and so on.*/
 	private Measures measures;
 
@@ -27,24 +29,52 @@ public class ResultadoLPS {
 	/**SPL is a refinement ?*/
 	private boolean isRefinement;
 	
+	private boolean sourceIsWellFormed;
+	
+	private boolean targetIsWellFormed;
+	
+	private boolean compObservableBehavior;
+	
 	/**
 	 * Initiate the properties of the class.
 	 * Default Values.
 	 */
-	public ResultadoLPS() {
+	private ResultadoLPS() {
 		this.measures = new Measures();
 		this.isWF = false;
 		this.fmAndCKRefinement = false;
 		this.isAssetMappingsEqual = false;
 		this.diferencas = new ArrayList<Diferenca>();
 	}
+	/**
+	 * Singleton
+	 * @return ResultadoLPS
+	 */
+	public static ResultadoLPS getInstance(){  
+        if (instance == null){  
+            instance = new ResultadoLPS();  
+        }  
+        return instance;  
+    }  
+/**
+-> Source Product Line is Well Formed:?
+-> Target Product Line is Well Formed:?
+-> My Whole Software Product Line is Well Formed ?: 
+-> Asset Mappings are Equals :?
+-> Are Configuration Knowledge and Feature Model a refinement ?:
+-> The evolution has a compatible observable behavior ?:
+*/
 	
 	@Override
 	public String toString() {
 		
 		
-		String result = "-> My Software Product Line is Well Formed ?: " + this.isWF + "\n";
-		result += "-> Are Configuration Knowledge and Feature Model a refinement ?: " + this.fmAndCKRefinement + "\n";
+		String result = "->Source Product Line is Well Formed:?" + this.isSourceIsWellFormed()+"\n";
+		result += "->Target Product Line is Well Formed:?" + this.isTargetIsWellFormed()+"\n";
+		result += "-> My Whole Software Product Line is Well Formed:? " + this.isWF() + "\n";
+		result += "->Asset Mappings are Equals :?"+ this.isAssetMappingsEqual() + "\n";
+		result += "-> Are Configuration Knowledge and Feature Model a refinement:? " + this.fmAndCKRefinement + "\n";
+		result += "->The evolution has a compatible observable behavior:?" + isCompObservableBehavior()+ "\n";
 		
 		String metodosAdicionadosString = "";
 		String metodosRemovidosString = "";
@@ -175,4 +205,26 @@ public class ResultadoLPS {
 	public void setRefinement(boolean isRefinement) {
 		this.isRefinement = isRefinement;
 	}
+	public boolean isSourceIsWellFormed() {
+		return sourceIsWellFormed;
+	}
+	public void setSourceIsWellFormed(boolean sourceIsWellFormed) {
+		this.sourceIsWellFormed = sourceIsWellFormed;
+	}
+	public boolean isTargetIsWellFormed() {
+		return targetIsWellFormed;
+	}
+	public void setTargetIsWellFormed(boolean targetIsWellFormed) {
+		this.targetIsWellFormed = targetIsWellFormed;
+	}
+	public boolean isCompObservableBehavior() {
+		return compObservableBehavior;
+	}
+	public void setCompObservableBehavior(boolean compObservableBehavior) {
+		this.compObservableBehavior = compObservableBehavior;
+	}
+	public void setFmAndCKRefinement(boolean fmAndCKRefinement) {
+		this.fmAndCKRefinement = fmAndCKRefinement;
+	}
+	
 }

@@ -694,6 +694,9 @@ mappingAssetDestiny: true mappingAssetOrigin: true preProcess: true
 All products in the source have a really corresponding target product ?: true
 FM and CK are refinement:- true
 
+Have Source and Target the same assets ?:true 
+
+
 Assests Origem
  asset: \src/org/softlang/visitor/ReturningVisitor.java
  asset: \src/org/softlang/tests/Basics.java
@@ -3456,13 +3459,13 @@ generate_tests:
      [java] Explorer = randoop.ForwardGenerator@1da77f5
      [java] Começo!!
      [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Fri Oct 19 13:53:02 BRT 2012)FIM!!!
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Fri Oct 19 15:25:51 BRT 2012)FIM!!!
      [java] 
-     [java] Progress update: test inputs generated=104, failing inputs=0      (Fri Oct 19 13:53:02 BRT 2012)
+     [java] Progress update: test inputs generated=104, failing inputs=0      (Fri Oct 19 15:25:52 BRT 2012)
      [java] Normal method executions:1734
      [java] Exceptional method executions:0
      [java] 
-     [java] Average method execution time (normal termination):     0,122
+     [java] Average method execution time (normal termination):     0,129
      [java] Average method execution time (exceptional termination):NaN
      [java] 
      [java] Creating Junit tests (104 tests)...Writing 104 junit tests
@@ -3486,11 +3489,11 @@ coverage:
     [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\outinstr
     [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr
 processing instrumentation path ...
-instrumentation path processed in 65 ms
+instrumentation path processed in 77 ms
 [12 class(es) instrumented, 0 resource(s) copied]
-metadata merged into [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr\metadata_source.emma] {in 53 ms}
+metadata merged into [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr\metadata_source.emma] {in 73 ms}
 processing input files ...
-1 file(s) read and merged in 1 ms
+1 file(s) read and merged in 2 ms
 nothing to do: no runtime coverage data found in any of the data files
 
 
@@ -3498,6 +3501,8 @@ nothing to do: no runtime coverage data found in any of the data files
 
  Safe Refactor Tests' directory:< C:\Users\JEFFER~1\AppData\Local\Temp\\safeRefactor\tests >
 This evolution is a refactoring ?: < false >
+
+Source and Target do not have compatible observable behavior.
+
 The Software Product Line is NOT a refinement.
-Asset Mapping was not refined.
 
