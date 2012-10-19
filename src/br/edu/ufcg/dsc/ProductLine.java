@@ -161,7 +161,9 @@ public class ProductLine {
 		
 		this.mappingClassesSistemaDeArquivos = new HashMap<String, String>();
 		
-		this.walkSrc(this.getPath() + Constants.FILE_SEPARATOR + "src");
+		String dir = this.getPath() + Constants.FILE_SEPARATOR + "src";
+		System.out.println("Walk through this directory and get all files: " + dir);
+		this.walkSrc(dir);
 		
 		this.loadPreprocessProperties();
 		
@@ -174,7 +176,6 @@ public class ProductLine {
 	 * @param dir source product line.
 	 */
 	private void walkSrc(String dir) {
-		System.out.println("Walk through this directory and get all files: " + dir);
 		File f = new File(dir);
 		if(f.isDirectory()){
 			File[] files = f.listFiles();

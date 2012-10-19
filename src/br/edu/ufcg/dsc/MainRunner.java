@@ -69,8 +69,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 					avaliador
 							.avalie(
 									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"D:\\101Companies\\FirstCategory\\1011S",  // SPL Original  (SPL)
-									"D:\\101Companies\\FirstCategory\\1011T",  // Evolução/refactoring da SPL.   (SPL')
+									"D:\\101Companies\\FirstCategory\\ToySPL",  // SPL Original  (SPL)
+									"D:\\101Companies\\FirstCategory\\ToySPLT",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
 									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
@@ -82,7 +82,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"D:\\101Companies\\FirstCategory\\1011S\\lib", "D:\\101Companies\\FirstCategory\\1011T\\lib"); // Uma sequência de bibliotecas (String)
+									"D:\\101Companies\\FirstCategory\\ToySPL\\lib", "D:\\101Companies\\FirstCategory\\ToySPLT\\lib"); // Uma sequência de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();

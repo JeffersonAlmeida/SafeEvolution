@@ -436,8 +436,7 @@ public class ToolCommandLine {
 			}
 		}
 
-		System.out.println("\n\nAll products in the source has a really corresponding target product ?: " + isRefinement);
-		System.out.println("\nIt means that a generated product and its corresponding target product may do not have the same assets.");
+		System.out.println("\n\nAll products in the source have a really corresponding target product ?: " + isRefinement);
 		return isRefinement;
 	} /*Method end*/
 
