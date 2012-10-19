@@ -1,0 +1,3503 @@
+### ONLY_CHANGED_CLASSES ###
+
+The directory of the generated products: <  Tool Path + Products  >
+
+
+clean_products_folder:
+     [echo] This is an Ant Task created to clean the generated products folder.
+
+ Two directories have been deleted:  < Tool Path + Products > and < pluginpath + emma + instr >
+Walk through this directory and get all files: D:\101Companies\FirstCategory\ToySPL\src
+Walk through this directory and get all files: D:\101Companies\FirstCategory\ToySPLT\src
+
+
+
+		Let's put the products in cache.
+
+
+Build the SOURCE Feature Model Alloy file:
+
+ Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
+
+
+Build the TARGET Feature Model Alloy file:
+
+ Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
+
+
+Build the EVOLUTION Alloy file:
+
+ Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
+
+
+		The products are already in cache.
+
+
+
+
+		Let's check if the SPL is well formed.
+
+
+Build the SOURCE Feature Model Alloy file:
+
+ Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
+
+
+Build the TARGET Feature Model Alloy file:
+
+ Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
+
+
+Build the SOURCE Configuration Knowledge Alloy file:
+
+
+Class Name: Build, build.xml
+
+ Provided Classes:  [ Build ] 
+
+ Required Classes: 
+
+
+Class Name: Company,  src\org\softlang\company\Company.java
+
+ Provided Classes:  [ Company ] 
+
+ Required Classes:  [ Container ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\Component.java:14:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.Component
+
+
+Class Name: Component, src\org\softlang\company\Component.java
+
+ Provided Classes:  [ Component ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ] 
+
+
+Class Name: Container, src\org\softlang\company\Container.java
+
+ Provided Classes:  [ Container ] 
+
+ Required Classes:  [ Subunit ]  [ Component ] 
+
+
+Class Name: Department, src\org\softlang\company\Department.java
+
+ Provided Classes:  [ Department ] 
+
+ Required Classes:  [ Subunit ]  [ Employee ]  [ Container ] 
+
+
+Class Name: Employee,  src\org\softlang\company\Employee.java
+
+ Provided Classes:  [ Employee ] 
+
+ Required Classes:  [ Subunit ] 
+
+
+Class Name: Subunit,  src\org\softlang\company\Subunit.java
+
+ Provided Classes:  [ Subunit ] 
+
+ Required Classes:  [ Component ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\factory\BeanFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.bean not found
+
+
+Class Name: BeanFactory,  src\org\softlang\company\factory\BeanFactory.java
+
+ Provided Classes:  [ BeanFactory ] 
+
+ Required Classes:  [ EmployeeImplBean ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
+
+
+Class Name: Factory,  src\org\softlang\company\factory\Factory.java
+
+ Provided Classes:  [ Factory ] 
+
+ Required Classes:  [ Department ]  [ Company ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\CompanyImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\CompanyImpl.java:9:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.CompanyImpl
+
+
+Class Name: CompanyImplBean,  src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ Provided Classes:  [ CompanyImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Company ]  [ ContainerImplBean ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\ComponentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\ComponentImpl.java:23:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.ComponentImpl
+
+
+Class Name: ComponentImplBean,  src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ Provided Classes:  [ ComponentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Component ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\ContainerImpl.java:11:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+
+Class Name: ContainerImplBean,  src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ Provided Classes:  [ ContainerImplBean ] 
+
+ Required Classes:  [ ObservableSimpleList ]  [ ComponentImplBean ]  [ Subunit ]  [ SimpleLinkedList ]  [ Container ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\DepartmentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\DepartmentImpl.java:9:
+  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\DepartmentImpl.java:18:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.DepartmentImpl
+
+
+Class Name: DepartmentImplBean,  src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ Provided Classes:  [ DepartmentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Subunit ]  [ Department ]  [ Employee ]  [ ContainerImplBean ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:19:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:20:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:29:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:30:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:39:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:40:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:49:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:50:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\company\impl\bean\EmployeeImpl.java:53:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.EmployeeImpl
+
+
+Class Name: EmployeeImplBean,  src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ Provided Classes:  [ EmployeeImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ ComponentImplBean ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\ReturningVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\ReturningVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\ReturningVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+
+
+Class Name: ReturningVisitor,  src\org/softlang/visitor/ReturningVisitor.java
+
+ Provided Classes:  [ ReturningVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\VoidVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\VoidVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\visitor\VoidVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+
+
+Class Name: VoidVisitor,  src\org/softlang/visitor/VoidVisitor.java
+
+ Provided Classes:  [ VoidVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\util\ObservableSimpleList.java:48:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\util\ObservableSimpleList.java:57:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+
+Class Name: ObservableSimpleList,  src\org/softlang/util/ObservableSimpleList.java
+
+ Provided Classes:  [ ObservableSimpleList ] 
+
+ Required Classes:  [ AddToList ]  [ SimpleList ]  [ RemoveFromList ] 
+
+
+Class Name: SimpleList,  src\org/softlang/util/SimpleList.java
+
+ Provided Classes:  [ SimpleList ] 
+
+ Required Classes: 
+
+
+Class Name: SimpleLinkedList,  src\org/softlang/util/SimpleLinkedList.java
+
+ Provided Classes:  [ SimpleLinkedList ] 
+
+ Required Classes:  [ SimpleList ] 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\util\AddToList.java:4,36:
+  Semantic Error: no field named element
+
+
+Class Name: AddToList,  src\org/softlang/util/AddToList.java
+
+ Provided Classes:  [ AddToList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+
+Class Name: ChangeList,  src\org/softlang/util/ChangeList.java
+
+ Provided Classes:  [ ChangeList ] 
+
+ Required Classes: 
+D:\101Companies\FirstCategory\ToySPL\src\org\softlang\util\RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+
+Class Name: RemoveFromList,  src\org/softlang/util/RemoveFromList.java
+
+ Provided Classes:  [ RemoveFromList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+
+Class Name: Basics,  src\org/softlang/tests/Basics.java
+
+ Provided Classes:  [ Basics ] 
+
+ Required Classes:  [ Factory ]  [ Department ]  [ Company ]  [ Employee ] 
+
+
+Class Name: Junit, lib\Junit.jar
+
+ Provided Classes:  [ Junit ] 
+
+ Required Classes: 
+
+Build the TARGET Configuration Knowledge Alloy file:
+
+
+Class Name: Build, build.xml
+
+ Provided Classes:  [ Build ] 
+
+ Required Classes: 
+
+
+Class Name: Company,  src\org\softlang\company\Company.java
+
+ Provided Classes:  [ Company ] 
+
+ Required Classes:  [ Container ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\Component.java:14:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.Component
+
+
+Class Name: Component, src\org\softlang\company\Component.java
+
+ Provided Classes:  [ Component ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ] 
+
+
+Class Name: Container, src\org\softlang\company\Container.java
+
+ Provided Classes:  [ Container ] 
+
+ Required Classes:  [ Subunit ]  [ Component ] 
+
+
+Class Name: Department, src\org\softlang\company\Department.java
+
+ Provided Classes:  [ Department ] 
+
+ Required Classes:  [ Subunit ]  [ Employee ]  [ Container ] 
+
+
+Class Name: Employee,  src\org\softlang\company\Employee.java
+
+ Provided Classes:  [ Employee ] 
+
+ Required Classes:  [ Subunit ] 
+
+
+Class Name: Subunit,  src\org\softlang\company\Subunit.java
+
+ Provided Classes:  [ Subunit ] 
+
+ Required Classes:  [ Component ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\factory\BeanFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.bean not found
+
+
+Class Name: BeanFactory,  src\org\softlang\company\factory\BeanFactory.java
+
+ Provided Classes:  [ BeanFactory ] 
+
+ Required Classes:  [ EmployeeImplBean ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
+
+
+Class Name: Factory,  src\org\softlang\company\factory\Factory.java
+
+ Provided Classes:  [ Factory ] 
+
+ Required Classes:  [ Department ]  [ Company ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\CompanyImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\CompanyImpl.java:9:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.CompanyImpl
+
+
+Class Name: CompanyImplBean,  src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ Provided Classes:  [ CompanyImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Company ]  [ ContainerImplBean ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\ComponentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\ComponentImpl.java:23:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.ComponentImpl
+
+
+Class Name: ComponentImplBean,  src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ Provided Classes:  [ ComponentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Component ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\ContainerImpl.java:11:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+
+Class Name: ContainerImplBean,  src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ Provided Classes:  [ ContainerImplBean ] 
+
+ Required Classes:  [ ObservableSimpleList ]  [ ComponentImplBean ]  [ Subunit ]  [ SimpleLinkedList ]  [ Container ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\DepartmentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\DepartmentImpl.java:9:
+  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\DepartmentImpl.java:18:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.DepartmentImpl
+
+
+Class Name: DepartmentImplBean,  src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ Provided Classes:  [ DepartmentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Subunit ]  [ Department ]  [ Employee ]  [ ContainerImplBean ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:19:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:20:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:29:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:30:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:39:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:40:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:49:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:50:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\company\impl\bean\EmployeeImpl.java:53:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.EmployeeImpl
+
+
+Class Name: EmployeeImplBean,  src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ Provided Classes:  [ EmployeeImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ ComponentImplBean ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\ReturningVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\ReturningVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\ReturningVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+
+
+Class Name: ReturningVisitor,  src\org/softlang/visitor/ReturningVisitor.java
+
+ Provided Classes:  [ ReturningVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\VoidVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\VoidVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\visitor\VoidVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+
+
+Class Name: VoidVisitor,  src\org/softlang/visitor/VoidVisitor.java
+
+ Provided Classes:  [ VoidVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\util\ObservableSimpleList.java:48:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\util\ObservableSimpleList.java:57:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+
+Class Name: ObservableSimpleList,  src\org/softlang/util/ObservableSimpleList.java
+
+ Provided Classes:  [ ObservableSimpleList ] 
+
+ Required Classes:  [ AddToList ]  [ SimpleList ]  [ RemoveFromList ] 
+
+
+Class Name: SimpleList,  src\org/softlang/util/SimpleList.java
+
+ Provided Classes:  [ SimpleList ] 
+
+ Required Classes: 
+
+
+Class Name: SimpleLinkedList,  src\org/softlang/util/SimpleLinkedList.java
+
+ Provided Classes:  [ SimpleLinkedList ] 
+
+ Required Classes:  [ SimpleList ] 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\util\AddToList.java:4,36:
+  Semantic Error: no field named element
+
+
+Class Name: AddToList,  src\org/softlang/util/AddToList.java
+
+ Provided Classes:  [ AddToList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+
+Class Name: ChangeList,  src\org/softlang/util/ChangeList.java
+
+ Provided Classes:  [ ChangeList ] 
+
+ Required Classes: 
+D:\101Companies\FirstCategory\ToySPLT\src\org\softlang\util\RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+
+Class Name: RemoveFromList,  src\org/softlang/util/RemoveFromList.java
+
+ Provided Classes:  [ RemoveFromList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+
+Class Name: Basics,  src\org/softlang/tests/Basics.java
+
+ Provided Classes:  [ Basics ] 
+
+ Required Classes:  [ Factory ]  [ Department ]  [ Company ]  [ Employee ] 
+
+
+Class Name: Junit, lib\Junit.jar
+
+ Provided Classes:  [ Junit ] 
+
+ Required Classes: 
+
+
+		The beginning of the safe composition test.
+
+
+		End of Safe Composition test.
+
+Well Formedness to the <Source> SPL: true
+
+
+		The beginning of the safe composition test.
+
+
+		End of Safe Composition test.
+
+Well Formedness to the <Target> SPL.: true
+
+
+
+
+		Ok. We have already checked the well formedness.
+
+
+	 -> WF: true
+
+
+Product 0 ::  [ javaexorcismspl ] [ treestructure ]
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ Basics ] - src\org/softlang/tests/Basics.java
+
+ [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ VoidVisitor ] - src\org/softlang/visitor/VoidVisitor.java
+
+ [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
+
+ [ ChangeList ] - src\org/softlang/util/ChangeList.java
+
+ [ AddToList ] - src\org/softlang/util/AddToList.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ SimpleList ] - src\org/softlang/util/SimpleList.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ Build ] - build.xml
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+
+	Correspondent Product
+
+Product 1 ::  [ javaexorcismspl ] [ treestructure ]
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ Basics ] - src\org/softlang/tests/Basics.java
+
+ [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ VoidVisitor ] - src\org/softlang/visitor/VoidVisitor.java
+
+ [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
+
+ [ ChangeList ] - src\org/softlang/util/ChangeList.java
+
+ [ AddToList ] - src\org/softlang/util/AddToList.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ SimpleList ] - src\org/softlang/util/SimpleList.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ Build ] - build.xml
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+	 Mapping Asset Destiny
+ key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
+ key 1: Basics content: src\org/softlang/tests/Basics.java
+ key 2: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ key 3: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
+ key 4: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
+ key 5: Subunit content: src\org\softlang\company\Subunit.java
+ key 6: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
+ key 7: Factory content: src\org\softlang\company\factory\Factory.java
+ key 8: Employee content: src\org\softlang\company\Employee.java
+ key 9: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
+ key 10: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
+ key 11: Junit content: lib\Junit.jar
+ key 12: AddToList content: src\org/softlang/util/AddToList.java
+ key 13: VoidVisitor content: src\org/softlang/visitor/VoidVisitor.java
+ key 14: Build content: build.xml
+ key 15: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ key 16: ChangeList content: src\org/softlang/util/ChangeList.java
+ key 17: Component content: src\org\softlang\company\Component.java
+ key 18: Department content: src\org\softlang\company\Department.java
+ key 19: Company content: src\org\softlang\company\Company.java
+ key 20: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
+ key 21: SimpleList content: src\org/softlang/util/SimpleList.java
+ key 22: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
+ key 23: Container content: src\org\softlang\company\Container.java
+ key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
+ key 1: Basics content: src\org/softlang/tests/Basics.java
+ key 2: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ key 3: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
+ key 4: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
+ key 5: Subunit content: src\org\softlang\company\Subunit.java
+ key 6: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
+ key 7: Factory content: src\org\softlang\company\factory\Factory.java
+ key 8: Employee content: src\org\softlang\company\Employee.java
+ key 9: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
+ key 10: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
+ key 11: Junit content: lib\Junit.jar
+ key 12: AddToList content: src\org/softlang/util/AddToList.java
+ key 13: VoidVisitor content: src\org/softlang/visitor/VoidVisitor.java
+ key 14: Build content: build.xml
+ key 15: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ key 16: ChangeList content: src\org/softlang/util/ChangeList.java
+ key 17: Component content: src\org\softlang\company\Component.java
+ key 18: Department content: src\org\softlang\company\Department.java
+ key 19: Company content: src\org\softlang\company\Company.java
+ key 20: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
+ key 21: SimpleList content: src\org/softlang/util/SimpleList.java
+ key 22: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
+ key 23: Container content: src\org\softlang\company\Container.java
+mappingAssetDestiny: true mappingAssetOrigin: true preProcess: true
+
+
+ ... Attempting to marry products that did not have a par.
+
+
+All products in the source have a really corresponding target product ?: true
+FM and CK are refinement:- true
+
+Assests Origem
+ asset: \src/org/softlang/visitor/ReturningVisitor.java
+ asset: \src/org/softlang/tests/Basics.java
+ asset: \src/org/softlang/company/impl/bean/EmployeeImpl.java
+ asset: \src/org/softlang/company/impl/bean/ComponentImpl.java
+ asset: \src/org/softlang/util/ObservableSimpleList.java
+ asset: \src/org/softlang/company/Subunit.java
+ asset: \src/org/softlang/company/impl/bean/CompanyImpl.java
+ asset: \src/org/softlang/company/factory/Factory.java
+ asset: \src/org/softlang/company/Employee.java
+ asset: \src/org/softlang/util/RemoveFromList.java
+ asset: \src/org/softlang/company/impl/bean/ContainerImpl.java
+ asset: \src/org/softlang/util/AddToList.java
+ asset: \lib/Junit.jar
+ asset: \src/org/softlang/visitor/VoidVisitor.java
+ asset: \build.xml
+ asset: \src/org/softlang/company/impl/bean/DepartmentImpl.java
+ asset: \src/org/softlang/util/ChangeList.java
+ asset: \src/org/softlang/company/Component.java
+ asset: \src/org/softlang/company/Company.java
+ asset: \src/org/softlang/company/Department.java
+ asset: \src/org/softlang/util/SimpleList.java
+ asset: \src/org/softlang/util/SimpleLinkedList.java
+ asset: \src/org/softlang/company/Container.java
+ asset: \src/org/softlang/company/factory/BeanFactory.java
+
+Assests Destino
+ asset: src\org/softlang/visitor/ReturningVisitor.java
+ asset: src\org/softlang/tests/Basics.java
+ asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ asset: src\org\softlang\company\impl\bean\ComponentImpl.java
+ asset: src\org/softlang/util/ObservableSimpleList.java
+ asset: src\org\softlang\company\Subunit.java
+ asset: src\org\softlang\company\impl\bean\CompanyImpl.java
+ asset: src\org\softlang\company\factory\Factory.java
+ asset: src\org\softlang\company\Employee.java
+ asset: src\org/softlang/util/RemoveFromList.java
+ asset: src\org\softlang\company\impl\bean\ContainerImpl.java
+ asset: src\org/softlang/util/AddToList.java
+ asset: lib\Junit.jar
+ asset: src\org/softlang/visitor/VoidVisitor.java
+ asset: build.xml
+ asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ asset: src\org/softlang/util/ChangeList.java
+ asset: src\org\softlang\company\Component.java
+ asset: src\org\softlang\company\Company.java
+ asset: src\org\softlang\company\Department.java
+ asset: src\org/softlang/util/SimpleList.java
+ asset: src\org/softlang/util/SimpleLinkedList.java
+ asset: src\org\softlang\company\Container.java
+ asset: src\org\softlang\company\factory\BeanFactory.java
+Creating dir
+Creating dir
+Creating dir
+
+preprocess:
+     [echo]  This task is responsible to PREPROCESS the files ... 
+[wtkpreprocess] **************************************************************
+[wtkpreprocess] * Antenna 1.2.1 initialized for project "RefactoringProject" *
+[wtkpreprocess] * Using "Sun Wireless Toolkit 2.5" (CLDC-1.0; MIDP-1.0)      *
+[wtkpreprocess] **************************************************************
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\capabilities.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\capabilities.xml not found
+Devices: loading capabilities.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\groups.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\groups.xml not found
+Devices: loading groups.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\devices.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\devices.xml not found
+Devices: loading devices.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\custom-devices.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\custom-devices.xml not found
+Devices: loading custom-devices.xml from classpath
+Warning: unknown device "null"
+[wtkpreprocess] Preprocessing 22 file(s) at D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\srcpreprocess
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A company has a name and consists of (possibly nested) departments.
+(-) * This is sufficiently covered by the Container interface.
+(-) * Hence, the present interface is essentially a marker.
+(-) */
+(-)public interface Company extends Container { }
+org\softlang\company\Company.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)import org.softlang.visitor.ReturningVisitor;
+(-)import org.softlang.visitor.VoidVisitor;
+(-)
+(-)/**
+(-) * The root class of the object model for companies.
+(-) * All objects in a company have a name.
+(-) * There is also general visitor support.
+(-) */
+(-)public interface Component {
+(-)	String getName();
+(-)	void setName(String name);
+(-)	void accept(VoidVisitor v);
+(-)	<R> R accept(ReturningVisitor<R> v);
+(-)}
+org\softlang\company\Component.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * An interface for all composites in an company object structure.
+(-) * Containers are supposed to aggregate sub-units.
+(-) */
+(-)public interface Container extends Component {
+(-)	Iterable<? extends Subunit> subunits();
+(-)	boolean add(Subunit u);
+(-)	boolean remove(Subunit u);
+(-)}
+org\softlang\company\Container.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A department has a name, employees, and sub-departments.
+(-) * One of the employees is supposed to be the manager.
+(-) * We add a getter for the manager for convenience's sake.
+(-) */
+(-)public interface Department extends Subunit, Container {
+(-)	Employee getManager();
+(-)}
+org\softlang\company\Department.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * An employee has a name, an address, and a salary. 
+(-) * Also, an employee may be flagged to be a manager.
+(-) */
+(-)public interface Employee extends Subunit {
+(-)	String getAddress();
+(-)	void setAddress(String address);
+(-)	double getSalary();
+(-)	void setSalary(double salary);
+(-)	boolean getManager();
+(-)	void setManager(boolean manager);
+(-)}
+org\softlang\company\Employee.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A subunit is either an employee unit or a department unit.
+(-) * The interface is only needed as a common base type.
+(-) * That is, no members are added here to Component.
+(-) */
+(-)public interface Subunit extends Component { }
+org\softlang\company\Subunit.java ... modified
+(-)package org.softlang.company.factory;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.company.impl.bean.*;
+(-)
+(-)/**
+(-) * A factory that constructs (a kind of) "beans" as opposed to POJPs
+(-) */
+(-)public class BeanFactory implements Factory {
+(-)	public Company mkCompany() { return new CompanyImpl(); }
+(-)	public Department mkDepartment() { return new DepartmentImpl(); }
+(-)	public Employee mkEmployee() { return new EmployeeImpl(); }
+(-)}
+org\softlang\company\factory\BeanFactory.java ... modified
+(-)package org.softlang.company.factory;
+(-)
+(-)import org.softlang.company.Company;
+(-)import org.softlang.company.Department;
+(-)import org.softlang.company.Employee;
+(-)
+(-)/**
+(-) * The factory interface for constructing all possible company objects
+(-) */
+(-)public interface Factory {
+(-)	Company mkCompany();
+(-)	Department mkDepartment();
+(-)	Employee mkEmployee();
+(-)}
+org\softlang\company\factory\Factory.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)import org.softlang.visitor.VoidVisitor;
+(-)
+(-)public class CompanyImpl extends ContainerImpl implements Company {
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}	
+(-)}
+org\softlang\company\impl\bean\CompanyImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)import java.util.Observable;
+(-)
+(-)/**
+(-) * Observability and a parent axis are added on top of the Component interface.
+(-) */
+(-)public abstract class ComponentImpl extends Observable implements Component {
+(-)	private ComponentImpl parent;
+(-)	private String name;
+(-)	public String getName() {
+(-)		return name; 
+(-)	}
+(-)	public void setName(String name) { 
+(-)		this.name = name; 
+(-)		setChanged();
+(-)		notifyObservers("name");		
+(-)	}
+(-)	public ComponentImpl getParent() { return parent; }
+(-)	/* package */ void setParent(ComponentImpl parent) { this.parent = parent; }
+(-)	public abstract void accept(VoidVisitor v);
+(-)	public abstract <R> R accept(ReturningVisitor<R> v);
+(-)}
+org\softlang\company\impl\bean\ComponentImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.util.ObservableSimpleList;
+(-)import org.softlang.util.SimpleLinkedList;
+(-)import java.util.Observer;
+(-)
+(-)public abstract class ContainerImpl extends ComponentImpl implements Container {
+(-)
+(-)	private ObservableSimpleList<Subunit> subunits = 
+(-)		new ObservableSimpleList<Subunit>(
+(-)				new SimpleLinkedList<Subunit>());
+(-)	
+(-)	public Iterable<? extends Subunit> subunits() {
+(-)		return subunits;
+(-)	}
+(-)
+(-)	public boolean add(Subunit u) {
+(-)		ComponentImpl i = (ComponentImpl)u;
+(-)		if (i.getParent()!=null)
+(-)			throw new IllegalArgumentException("Attemped re-parenting.");
+(-)		i.setParent(this);
+(-)		return subunits.add(u);
+(-)	}
+(-)
+(-)	public boolean remove(Subunit u) {
+(-)		ComponentImpl i = (ComponentImpl)u;
+(-)		i.setParent(null);
+(-)		return subunits.remove(u);
+(-)	}
+(-)	
+(-)	public void addObserver(Observer o) {
+(-)		super.addObserver(o);
+(-)		subunits.addObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObserver(Observer o) {
+(-)		super.deleteObserver(o);
+(-)		subunits.deleteObserver(o);		
+(-)	}
+(-)	
+(-)	public void deleteObservers() {
+(-)		super.deleteObservers();
+(-)		subunits.deleteObservers();
+(-)	}			
+(-)}
+org\softlang\company\impl\bean\ContainerImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)
+(-)public class DepartmentImpl extends ContainerImpl implements Department {
+(-)	
+(-)	public Employee getManager() {
+(-)		for (Subunit u : subunits())
+(-)			if (u instanceof Employee) {
+(-)				Employee e = (Employee)u;
+(-)				if (e.getManager())
+(-)					return e;
+(-)			}
+(-)		return null;
+(-)	}	
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}
+(-)}
+org\softlang\company\impl\bean\DepartmentImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)
+(-)public class EmployeeImpl extends ComponentImpl implements Employee {
+(-)
+(-)	private String name;
+(-)	private String address;
+(-)	private double salary;
+(-)	private boolean manager;
+(-)
+(-)	public String getName() {
+(-)		return name;
+(-)	}
+(-)
+(-)	public void setName(String name) {
+(-)		this.name = name;
+(-)		setChanged();
+(-)		notifyObservers("name");
+(-)	}
+(-)
+(-)	public String getAddress() {
+(-)		return address;
+(-)	}
+(-)
+(-)	public void setAddress(String address) {
+(-)		this.address = address;
+(-)		setChanged();
+(-)		notifyObservers("address");
+(-)	}
+(-)
+(-)	public double getSalary() {
+(-)		return salary;
+(-)	}
+(-)
+(-)	public void setSalary(double salary) {
+(-)		this.salary = salary;
+(-)		setChanged();
+(-)		notifyObservers("salary");
+(-)	}	
+(-)	
+(-)	public boolean getManager() {
+(-)		return manager;
+(-)	}
+(-)
+(-)	public void setManager(boolean manager) {
+(-)		this.manager = manager;
+(-)		setChanged();
+(-)		notifyObservers("manager");
+(-)	}
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}
+(-)}
+org\softlang\company\impl\bean\EmployeeImpl.java ... modified
+(-)package org.softlang.tests;
+(-)
+(-)import org.junit.Test;
+(-)import org.softlang.company.Company;
+(-)import org.softlang.company.Department;
+(-)import org.softlang.company.Employee;
+(-)import org.softlang.company.factory.Factory;
+(-)
+(-)/**
+(-) * Test/demonstrate basic operations for totaling and cutting salaries.
+(-) */
+(-)public class Basics {
+(-)	
+(-)	static Company createSampleCompany(Factory f) {
+(-)		
+(-)		// Create company
+(-)		Company sampleCompany = f.mkCompany();
+(-)		sampleCompany.setName("meganalysis");
+(-)		
+(-)		// Create all employees
+(-)		Employee craig = f.mkEmployee();
+(-)		craig.setName("Craig");
+(-)		craig.setAddress("Redmond");
+(-)		craig.setSalary(123456);
+(-)		craig.setManager(true);
+(-)
+(-)		Employee erik = f.mkEmployee();
+(-)		erik.setName("Erik");
+(-)		erik.setAddress("Utrecht");
+(-)		erik.setSalary(12345);
+(-)
+(-)		Employee ralf = f.mkEmployee();
+(-)		ralf.setName("Ralf");
+(-)		ralf.setAddress("Koblenz");
+(-)		ralf.setSalary(1234);		
+(-)
+(-)		Employee ray = f.mkEmployee();
+(-)		ray.setName("Ray");
+(-)		ray.setAddress("Redmond");
+(-)		ray.setSalary(234567);
+(-)		ray.setManager(true);
+(-)
+(-)		Employee klaus = f.mkEmployee();
+(-)		klaus.setName("Klaus");
+(-)		klaus.setAddress("Boston");
+(-)		klaus.setSalary(23456);
+(-)		klaus.setManager(true);
+(-)		
+(-)		Employee karl = f.mkEmployee();
+(-)		karl.setName("Karl");
+(-)		karl.setAddress("Riga");
+(-)		karl.setSalary(2345);
+(-)		karl.setManager(true);
+(-)		
+(-)		Employee joe = f.mkEmployee();
+(-)		joe.setName("Joe");
+(-)		joe.setAddress("Wifi City");
+(-)		joe.setSalary(2344);								
+(-)
+(-)		// Create research department
+(-)		Department research = f.mkDepartment();
+(-)		research.setName("Research");
+(-)		research.add(craig);
+(-)		research.add(erik);
+(-)		research.add(ralf);
+(-)		sampleCompany.add(research);
+(-)
+(-)		// Create development department
+(-)		Department development = f.mkDepartment();
+(-)		development.setName("Development");
+(-)		development.add(ray);
+(-)		sampleCompany.add(development);
+(-)
+(-)		// Create sub-department dev1
+(-)		Department dev1 = f.mkDepartment();
+(-)		dev1.setName("Dev1");
+(-)		dev1.add(klaus);
+(-)		development.add(dev1);
+(-)
+(-)		// Create sub-department dev11
+(-)		Department dev11 = f.mkDepartment();
+(-)		dev11.setName("Dev1.1");
+(-)		dev11.add(karl);
+(-)		dev11.add(joe);
+(-)		dev1.add(dev11);
+(-)		
+(-)		return sampleCompany;
+(-)	}
+(-)	
+(-)	@Test
+(-)	public void test() {
+(-)	}
+(-)}
+org\softlang\tests\Basics.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)public class AddToList extends ChangeList {
+(-)	public AddToList(Object o) { this.element = o; }
+(-)}
+org\softlang\util\AddToList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)/**
+(-) * Represent changes to observable lists
+(-) */
+(-)public abstract class ChangeList {
+(-)	public Object element;
+(-)}
+org\softlang\util\ChangeList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)import java.util.*;
+(-)
+(-)/**
+(-) * Compose the (Simple)List interface with the Observable base class.
+(-) * In fact, a given list is decorated with observer capability.
+(-) * The methods must be adjusted to notify upon changes.
+(-) * Addition and removal of observers is pushed into elements--if they are observable.
+(-) */
+(-)public class ObservableSimpleList<X> extends Observable implements SimpleList<X> {
+(-)
+(-)	private SimpleList<X> inner;
+(-)	
+(-)	public ObservableSimpleList(SimpleList<X> inner) {
+(-)		this.inner = inner;
+(-)	}
+(-)	
+(-)	public void addObserver(Observer o) {
+(-)		super.addObserver(o);
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).addObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObserver(Observer o) {
+(-)		super.deleteObserver(o);
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).deleteObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObservers() {
+(-)		super.deleteObservers();
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).deleteObservers();
+(-)	}	
+(-)		
+(-)	public Iterator<X> iterator() {
+(-)		return inner.iterator();
+(-)	}
+(-)		
+(-)	public boolean add(X e) {
+(-)		boolean result = inner.add(e);
+(-)		if (result) {
+(-)			setChanged();
+(-)			notifyObservers(new AddToList(e));	
+(-)		}
+(-)		return result;
+(-)	}
+(-)
+(-)	public boolean remove(X e) {
+(-)		boolean result = inner.remove(e);
+(-)		if (result) {
+(-)			setChanged();
+(-)			notifyObservers(new RemoveFromList(e));
+(-)		}
+(-)		return result;
+(-)	}
+(-)}
+org\softlang\util\ObservableSimpleList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)public class RemoveFromList extends ChangeList {
+(-)	public RemoveFromList(Object o) { this.element = o; }
+(-)}
+org\softlang\util\RemoveFromList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)import java.util.Iterator;
+(-)import java.util.LinkedList;
+(-)
+(-)/**
+(-) * This is a down-graded version of java.util.LinkedList.
+(-) */
+(-)public class SimpleLinkedList<X> implements SimpleList<X> {
+(-)
+(-)	protected LinkedList<X> inner = 
+(-)		new LinkedList<X>();
+(-)		
+(-)	public Iterator<X> iterator() {
+(-)		return inner.iterator();
+(-)	}
+(-)
+(-)	public boolean add(X x) {
+(-)		return inner.add(x);
+(-)	}
+(-)
+(-)	public boolean remove(X x) {
+(-)		return inner.remove(x);
+(-)	}
+(-)}
+org\softlang\util\SimpleLinkedList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)/**
+(-) * This is a down-graded version of java.util.List.
+(-) */
+(-)public interface SimpleList<X> extends Iterable<X> {
+(-)	boolean add(X x);
+(-)	boolean remove(X x);
+(-)}
+org\softlang\util\SimpleList.java ... modified
+(-)package org.softlang.visitor;
+(-)
+(-)import org.softlang.company.*;
+(-)
+(-)public interface ReturningVisitor<R> {
+(-)
+(-)	R visit(Company o);
+(-)	R visit(Department o);
+(-)	R visit(Employee o);
+(-)
+(-)}
+org\softlang\visitor\ReturningVisitor.java ... modified
+(-)package org.softlang.visitor;
+(-)
+(-)import org.softlang.company.*;
+(-)
+(-)public interface VoidVisitor {
+(-)
+(-)	void visit(Company o);
+(-)	void visit(Department o);
+(-)	void visit(Employee o);
+(-)		
+(-)}
+org\softlang\visitor\VoidVisitor.java ... modified
+
+Assests Origem
+ asset: \src/org/softlang/visitor/ReturningVisitor.java
+ asset: \src/org/softlang/tests/Basics.java
+ asset: \src/org/softlang/company/impl/bean/EmployeeImpl.java
+ asset: \src/org/softlang/company/impl/bean/ComponentImpl.java
+ asset: \src/org/softlang/util/ObservableSimpleList.java
+ asset: \src/org/softlang/company/Subunit.java
+ asset: \src/org/softlang/company/impl/bean/CompanyImpl.java
+ asset: \src/org/softlang/company/factory/Factory.java
+ asset: \src/org/softlang/company/Employee.java
+ asset: \src/org/softlang/util/RemoveFromList.java
+ asset: \src/org/softlang/company/impl/bean/ContainerImpl.java
+ asset: \src/org/softlang/util/AddToList.java
+ asset: \lib/Junit.jar
+ asset: \src/org/softlang/visitor/VoidVisitor.java
+ asset: \build.xml
+ asset: \src/org/softlang/company/impl/bean/DepartmentImpl.java
+ asset: \src/org/softlang/util/ChangeList.java
+ asset: \src/org/softlang/company/Component.java
+ asset: \src/org/softlang/company/Company.java
+ asset: \src/org/softlang/company/Department.java
+ asset: \src/org/softlang/util/SimpleList.java
+ asset: \src/org/softlang/util/SimpleLinkedList.java
+ asset: \src/org/softlang/company/Container.java
+ asset: \src/org/softlang/company/factory/BeanFactory.java
+
+Assests Destino
+ asset: src\org/softlang/visitor/ReturningVisitor.java
+ asset: src\org/softlang/tests/Basics.java
+ asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ asset: src\org\softlang\company\impl\bean\ComponentImpl.java
+ asset: src\org/softlang/util/ObservableSimpleList.java
+ asset: src\org\softlang\company\Subunit.java
+ asset: src\org\softlang\company\impl\bean\CompanyImpl.java
+ asset: src\org\softlang\company\factory\Factory.java
+ asset: src\org\softlang\company\Employee.java
+ asset: src\org/softlang/util/RemoveFromList.java
+ asset: src\org\softlang\company\impl\bean\ContainerImpl.java
+ asset: src\org/softlang/util/AddToList.java
+ asset: lib\Junit.jar
+ asset: src\org/softlang/visitor/VoidVisitor.java
+ asset: build.xml
+ asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ asset: src\org/softlang/util/ChangeList.java
+ asset: src\org\softlang\company\Component.java
+ asset: src\org\softlang\company\Company.java
+ asset: src\org\softlang\company\Department.java
+ asset: src\org/softlang/util/SimpleList.java
+ asset: src\org/softlang/util/SimpleLinkedList.java
+ asset: src\org\softlang\company\Container.java
+ asset: src\org\softlang\company\factory\BeanFactory.java
+Creating dir
+Creating dir
+Creating dir
+
+preprocess:
+     [echo]  This task is responsible to PREPROCESS the files ... 
+[wtkpreprocess] **************************************************************
+[wtkpreprocess] * Antenna 1.2.1 initialized for project "RefactoringProject" *
+[wtkpreprocess] * Using "Sun Wireless Toolkit 2.5" (CLDC-1.0; MIDP-1.0)      *
+[wtkpreprocess] **************************************************************
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\capabilities.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\capabilities.xml not found
+Devices: loading capabilities.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\groups.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\groups.xml not found
+Devices: loading groups.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\devices.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\devices.xml not found
+Devices: loading devices.xml from classpath
+Devices: D:\Eclipses\ECLIPSE\eclipse\lib\custom-devices.xml not found
+Devices: D:\Eclipses\ECLIPSE\eclipse\.\custom-devices.xml not found
+Devices: loading custom-devices.xml from classpath
+Warning: unknown device "null"
+[wtkpreprocess] Preprocessing 22 file(s) at D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\srcpreprocess
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A company has a name and consists of (possibly nested) departments.
+(-) * This is sufficiently covered by the Container interface.
+(-) * Hence, the present interface is essentially a marker.
+(-) */
+(-)public interface Company extends Container { }
+org\softlang\company\Company.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)import org.softlang.visitor.ReturningVisitor;
+(-)import org.softlang.visitor.VoidVisitor;
+(-)
+(-)/**
+(-) * The root class of the object model for companies.
+(-) * All objects in a company have a name.
+(-) * There is also general visitor support.
+(-) */
+(-)public interface Component {
+(-)	String getName();
+(-)	void setName(String name);
+(-)	void accept(VoidVisitor v);
+(-)	<R> R accept(ReturningVisitor<R> v);
+(-)}
+org\softlang\company\Component.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * An interface for all composites in an company object structure.
+(-) * Containers are supposed to aggregate sub-units.
+(-) */
+(-)public interface Container extends Component {
+(-)	Iterable<? extends Subunit> subunits();
+(-)	boolean add(Subunit u);
+(-)	boolean remove(Subunit u);
+(-)}
+org\softlang\company\Container.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A department has a name, employees, and sub-departments.
+(-) * One of the employees is supposed to be the manager.
+(-) * We add a getter for the manager for convenience's sake.
+(-) */
+(-)public interface Department extends Subunit, Container {
+(-)	Employee getManager();
+(-)}
+org\softlang\company\Department.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * An employee has a name, an address, and a salary. 
+(-) * Also, an employee may be flagged to be a manager.
+(-) */
+(-)public interface Employee extends Subunit {
+(-)	String getAddress();
+(-)	void setAddress(String address);
+(-)	double getSalary();
+(-)	void setSalary(double salary);
+(-)	boolean getManager();
+(-)	void setManager(boolean manager);
+(-)}
+org\softlang\company\Employee.java ... modified
+(-)package org.softlang.company;
+(-)
+(-)/**
+(-) * A subunit is either an employee unit or a department unit.
+(-) * The interface is only needed as a common base type.
+(-) * That is, no members are added here to Component.
+(-) */
+(-)public interface Subunit extends Component { }
+org\softlang\company\Subunit.java ... modified
+(-)package org.softlang.company.factory;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.company.impl.bean.*;
+(-)
+(-)/**
+(-) * A factory that constructs (a kind of) "beans" as opposed to POJPs
+(-) */
+(-)public class BeanFactory implements Factory {
+(-)	public Company mkCompany() { return new CompanyImpl(); }
+(-)	public Department mkDepartment() { return new DepartmentImpl(); }
+(-)	public Employee mkEmployee() { return new EmployeeImpl(); }
+(-)}
+org\softlang\company\factory\BeanFactory.java ... modified
+(-)package org.softlang.company.factory;
+(-)
+(-)import org.softlang.company.Company;
+(-)import org.softlang.company.Department;
+(-)import org.softlang.company.Employee;
+(-)
+(-)/**
+(-) * The factory interface for constructing all possible company objects
+(-) */
+(-)public interface Factory {
+(-)	Company mkCompany();
+(-)	Department mkDepartment();
+(-)	Employee mkEmployee();
+(-)}
+org\softlang\company\factory\Factory.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)import org.softlang.visitor.VoidVisitor;
+(-)
+(-)public class CompanyImpl extends ContainerImpl implements Company {
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}	
+(-)}
+org\softlang\company\impl\bean\CompanyImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)import java.util.Observable;
+(-)
+(-)/**
+(-) * Observability and a parent axis are added on top of the Component interface.
+(-) */
+(-)public abstract class ComponentImpl extends Observable implements Component {
+(-)	private ComponentImpl parent;
+(-)	private String name;
+(-)	public String getName() {
+(-)		return name; 
+(-)	}
+(-)	public void setName(String name) { 
+(-)		this.name = name; 
+(-)		setChanged();
+(-)		notifyObservers("name");		
+(-)	}
+(-)	public ComponentImpl getParent() { return parent; }
+(-)	/* package */ void setParent(ComponentImpl parent) { this.parent = parent; }
+(-)	public abstract void accept(VoidVisitor v);
+(-)	public abstract <R> R accept(ReturningVisitor<R> v);
+(-)}
+org\softlang\company\impl\bean\ComponentImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.util.ObservableSimpleList;
+(-)import org.softlang.util.SimpleLinkedList;
+(-)import java.util.Observer;
+(-)
+(-)public abstract class ContainerImpl extends ComponentImpl implements Container {
+(-)
+(-)	private ObservableSimpleList<Subunit> subunits = 
+(-)		new ObservableSimpleList<Subunit>(
+(-)				new SimpleLinkedList<Subunit>());
+(-)	
+(-)	public Iterable<? extends Subunit> subunits() {
+(-)		return subunits;
+(-)	}
+(-)
+(-)	public boolean add(Subunit u) {
+(-)		ComponentImpl i = (ComponentImpl)u;
+(-)		if (i.getParent()!=null)
+(-)			throw new IllegalArgumentException("Attemped re-parenting.");
+(-)		i.setParent(this);
+(-)		return subunits.add(u);
+(-)	}
+(-)
+(-)	public boolean remove(Subunit u) {
+(-)		ComponentImpl i = (ComponentImpl)u;
+(-)		i.setParent(null);
+(-)		return subunits.remove(u);
+(-)	}
+(-)	
+(-)	public void addObserver(Observer o) {
+(-)		super.addObserver(o);
+(-)		subunits.addObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObserver(Observer o) {
+(-)		super.deleteObserver(o);
+(-)		subunits.deleteObserver(o);		
+(-)	}
+(-)	
+(-)	public void deleteObservers() {
+(-)		super.deleteObservers();
+(-)		subunits.deleteObservers();
+(-)	}			
+(-)}
+org\softlang\company\impl\bean\ContainerImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)
+(-)public class DepartmentImpl extends ContainerImpl implements Department {
+(-)	
+(-)	public Employee getManager() {
+(-)		for (Subunit u : subunits())
+(-)			if (u instanceof Employee) {
+(-)				Employee e = (Employee)u;
+(-)				if (e.getManager())
+(-)					return e;
+(-)			}
+(-)		return null;
+(-)	}	
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}
+(-)}
+org\softlang\company\impl\bean\DepartmentImpl.java ... modified
+(-)package org.softlang.company.impl.bean;
+(-)
+(-)import org.softlang.company.*;
+(-)import org.softlang.visitor.*;
+(-)
+(-)public class EmployeeImpl extends ComponentImpl implements Employee {
+(-)
+(-)	private String name;
+(-)	private String address;
+(-)	private double salary;
+(-)	private boolean manager;
+(-)
+(-)	public String getName() {
+(-)		return name;
+(-)	}
+(-)
+(-)	public void setName(String name) {
+(-)		this.name = name;
+(-)		setChanged();
+(-)		notifyObservers("name");
+(-)	}
+(-)
+(-)	public String getAddress() {
+(-)		return address;
+(-)	}
+(-)
+(-)	public void setAddress(String address) {
+(-)		this.address = address;
+(-)		setChanged();
+(-)		notifyObservers("address");
+(-)	}
+(-)
+(-)	public double getSalary() {
+(-)		return salary;
+(-)	}
+(-)
+(-)	public void setSalary(double salary) {
+(-)		this.salary = salary;
+(-)		setChanged();
+(-)		notifyObservers("salary");
+(-)	}	
+(-)	
+(-)	public boolean getManager() {
+(-)		return manager;
+(-)	}
+(-)
+(-)	public void setManager(boolean manager) {
+(-)		this.manager = manager;
+(-)		setChanged();
+(-)		notifyObservers("manager");
+(-)	}
+(-)
+(-)	public void accept(VoidVisitor v) {
+(-)		v.visit(this);
+(-)	}
+(-)
+(-)	public <R> R accept(ReturningVisitor<R> v) {
+(-)		return v.visit(this);
+(-)	}
+(-)}
+org\softlang\company\impl\bean\EmployeeImpl.java ... modified
+(-)package org.softlang.tests;
+(-)
+(-)import org.junit.Test;
+(-)import org.softlang.company.Company;
+(-)import org.softlang.company.Department;
+(-)import org.softlang.company.Employee;
+(-)import org.softlang.company.factory.Factory;
+(-)
+(-)/**
+(-) * Test/demonstrate basic operations for totaling and cutting salaries.
+(-) */
+(-)public class Basics {
+(-)	
+(-)	static Company createSampleCompany(Factory f) {
+(-)		
+(-)		// Create company
+(-)		Company sampleCompany = f.mkCompany();
+(-)		sampleCompany.setName("meganalysis");
+(-)		
+(-)		// Create all employees
+(-)		Employee craig = f.mkEmployee();
+(-)		craig.setName("Craig");
+(-)		craig.setAddress("Redmond");
+(-)		craig.setSalary(123456);
+(-)		craig.setManager(true);
+(-)
+(-)		Employee erik = f.mkEmployee();
+(-)		erik.setName("Erik");
+(-)		erik.setAddress("Utrecht");
+(-)		erik.setSalary(12345);
+(-)
+(-)		Employee ralf = f.mkEmployee();
+(-)		ralf.setName("Ralf");
+(-)		ralf.setAddress("Koblenz");
+(-)		ralf.setSalary(1234);		
+(-)
+(-)		Employee ray = f.mkEmployee();
+(-)		ray.setName("Ray");
+(-)		ray.setAddress("Redmond");
+(-)		ray.setSalary(234567);
+(-)		ray.setManager(true);
+(-)
+(-)		Employee klaus = f.mkEmployee();
+(-)		klaus.setName("Klaus");
+(-)		klaus.setAddress("Boston");
+(-)		klaus.setSalary(23456);
+(-)		klaus.setManager(true);
+(-)		
+(-)		Employee karl = f.mkEmployee();
+(-)		karl.setName("Karl");
+(-)		karl.setAddress("Riga");
+(-)		karl.setSalary(2345);
+(-)		karl.setManager(true);
+(-)		
+(-)		Employee joe = f.mkEmployee();
+(-)		joe.setName("Joe");
+(-)		joe.setAddress("Wifi City");
+(-)		joe.setSalary(2344);								
+(-)
+(-)		// Create research department
+(-)		Department research = f.mkDepartment();
+(-)		research.setName("Research");
+(-)		research.add(craig);
+(-)		research.add(erik);
+(-)		research.add(ralf);
+(-)		sampleCompany.add(research);
+(-)
+(-)		// Create development department
+(-)		Department development = f.mkDepartment();
+(-)		development.setName("Development");
+(-)		development.add(ray);
+(-)		sampleCompany.add(development);
+(-)
+(-)		// Create sub-department dev1
+(-)		Department dev1 = f.mkDepartment();
+(-)		dev1.setName("Dev1");
+(-)		dev1.add(klaus);
+(-)		development.add(dev1);
+(-)
+(-)		// Create sub-department dev11
+(-)		Department dev11 = f.mkDepartment();
+(-)		dev11.setName("Dev1.1");
+(-)		dev11.add(karl);
+(-)		dev11.add(joe);
+(-)		dev1.add(dev11);
+(-)		
+(-)		return sampleCompany;
+(-)	}
+(-)	
+(-)	@Test
+(-)	public void test() {
+(-)	}
+(-)}
+org\softlang\tests\Basics.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)public class AddToList extends ChangeList {
+(-)	public AddToList(Object o) { this.element = o; }
+(-)}
+org\softlang\util\AddToList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)/**
+(-) * Represent changes to observable lists
+(-) */
+(-)public abstract class ChangeList {
+(-)	public Object element;
+(-)}
+org\softlang\util\ChangeList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)import java.util.*;
+(-)
+(-)/**
+(-) * Compose the (Simple)List interface with the Observable base class.
+(-) * In fact, a given list is decorated with observer capability.
+(-) * The methods must be adjusted to notify upon changes.
+(-) * Addition and removal of observers is pushed into elements--if they are observable.
+(-) */
+(-)public class ObservableSimpleList<X> extends Observable implements SimpleList<X> {
+(-)
+(-)	private SimpleList<X> inner;
+(-)	
+(-)	public ObservableSimpleList(SimpleList<X> inner) {
+(-)		this.inner = inner;
+(-)	}
+(-)	
+(-)	public void addObserver(Observer o) {
+(-)		super.addObserver(o);
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).addObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObserver(Observer o) {
+(-)		super.deleteObserver(o);
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).deleteObserver(o);
+(-)	}
+(-)	
+(-)	public void deleteObservers() {
+(-)		super.deleteObservers();
+(-)		for (X e : this)
+(-)			if (e instanceof Observable)
+(-)				((Observable)e).deleteObservers();
+(-)	}	
+(-)		
+(-)	public Iterator<X> iterator() {
+(-)		return inner.iterator();
+(-)	}
+(-)		
+(-)	public boolean add(X e) {
+(-)		boolean result = inner.add(e);
+(-)		if (result) {
+(-)			setChanged();
+(-)			notifyObservers(new AddToList(e));	
+(-)		}
+(-)		return result;
+(-)	}
+(-)
+(-)	public boolean remove(X e) {
+(-)		boolean result = inner.remove(e);
+(-)		if (result) {
+(-)			setChanged();
+(-)			notifyObservers(new RemoveFromList(e));
+(-)		}
+(-)		return result;
+(-)	}
+(-)}
+org\softlang\util\ObservableSimpleList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)public class RemoveFromList extends ChangeList {
+(-)	public RemoveFromList(Object o) { this.element = o; }
+(-)}
+org\softlang\util\RemoveFromList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)import java.util.Iterator;
+(-)import java.util.LinkedList;
+(-)
+(-)/**
+(-) * This is a down-graded version of java.util.LinkedList.
+(-) */
+(-)public class SimpleLinkedList<X> implements SimpleList<X> {
+(-)
+(-)	protected LinkedList<X> inner = 
+(-)		new LinkedList<X>();
+(-)		
+(-)	public Iterator<X> iterator() {
+(-)		return inner.iterator();
+(-)	}
+(-)
+(-)	public boolean add(X x) {
+(-)		return inner.add(x);
+(-)	}
+(-)
+(-)	public boolean remove(X x) {
+(-)		return inner.remove(x);
+(-)	}
+(-)}
+org\softlang\util\SimpleLinkedList.java ... modified
+(-)package org.softlang.util;
+(-)
+(-)/**
+(-) * This is a down-graded version of java.util.List.
+(-) */
+(-)public interface SimpleList<X> extends Iterable<X> {
+(-)	boolean add(X x);
+(-)	boolean remove(X x);
+(-)}
+org\softlang\util\SimpleList.java ... modified
+(-)package org.softlang.visitor;
+(-)
+(-)import org.softlang.company.*;
+(-)
+(-)public interface ReturningVisitor<R> {
+(-)
+(-)	R visit(Company o);
+(-)	R visit(Department o);
+(-)	R visit(Employee o);
+(-)
+(-)}
+org\softlang\visitor\ReturningVisitor.java ... modified
+(-)package org.softlang.visitor;
+(-)
+(-)import org.softlang.company.*;
+(-)
+(-)public interface VoidVisitor {
+(-)
+(-)	void visit(Company o);
+(-)	void visit(Department o);
+(-)	void visit(Employee o);
+(-)		
+(-)}
+org\softlang\visitor\VoidVisitor.java ... modified
+
+clean:
+     [echo]  This task is responsible to clean all tests. 
+
+compile_target_ind:
+     [echo]  TARGET Compile IND 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+
+compile_source:
+     [echo]  SOURCE Compile 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+
+
+ANT BUILD DIRECTORY: /build.xml
+
+ You can find ant build logs in: < C:\Users\JEFFER~1\AppData\Local\Temp\safeRefactorAJ\log.txt >
+
+  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
+
+init:
+
+clean:
+
+analyze_target:
+     [echo] 
+     [echo] 			            Analyzing target methods
+     [echo] 			        
+     [java] 
+     [java] Mapp Class Two
+     [java] 
+     [java] file source: D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products\Product1\bin
+     [java] 
+     [java]  I found it: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\bin\org\softlang\company\Company.class
+     [java] File Source Directory: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\bin\org\softlang\company\Company.class
+     [java] 
+     [java]  List of Classes: 22:
+     [java] 
+     [java] -> org.softlang.company.Company
+     [java] 
+     [java] -> org.softlang.company.Component
+     [java] 
+     [java] -> org.softlang.company.Container
+     [java] 
+     [java] -> org.softlang.company.Department
+     [java] 
+     [java] -> org.softlang.company.Employee
+     [java] 
+     [java] -> org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] -> org.softlang.company.factory.Factory
+     [java] 
+     [java] -> org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ComponentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] -> org.softlang.company.Subunit
+     [java] 
+     [java] -> org.softlang.tests.Basics
+     [java] 
+     [java] -> org.softlang.util.AddToList
+     [java] 
+     [java] -> org.softlang.util.ChangeList
+     [java] 
+     [java] -> org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] -> org.softlang.util.RemoveFromList
+     [java] 
+     [java] -> org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] -> org.softlang.util.SimpleList
+     [java] 
+     [java] -> org.softlang.visitor.ReturningVisitor
+     [java] 
+     [java] -> org.softlang.visitor.VoidVisitor
+     [java] 
+     [java] 
+     [java] 
+     [java] class name: org.softlang.company.Company
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Company
+     [java] class name: org.softlang.company.Component
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Component
+     [java] class name: org.softlang.company.Container
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Container
+     [java] class name: org.softlang.company.Department
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Department
+     [java] class name: org.softlang.company.Employee
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Employee
+     [java] class name: org.softlang.company.factory.BeanFactory
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.factory.BeanFactory
+     [java] class name: org.softlang.company.factory.Factory
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.factory.Factory
+     [java] class name: org.softlang.company.impl.bean.CompanyImpl
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.impl.bean.CompanyImpl
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] class name: org.softlang.company.impl.bean.ComponentImpl
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.impl.bean.ComponentImpl
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] class name: org.softlang.company.impl.bean.ContainerImpl
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.impl.bean.ContainerImpl
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] class name: org.softlang.company.impl.bean.DepartmentImpl
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.impl.bean.DepartmentImpl
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] class name: org.softlang.company.impl.bean.EmployeeImpl
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.impl.bean.EmployeeImpl
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] class name: org.softlang.company.Subunit
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.company.Subunit
+     [java] class name: org.softlang.tests.Basics
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.tests.Basics
+     [java] class name: org.softlang.util.AddToList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.AddToList
+     [java] class name: org.softlang.util.ChangeList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.ChangeList
+     [java] class name: org.softlang.util.ObservableSimpleList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.ObservableSimpleList
+     [java] class name: org.softlang.util.RemoveFromList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.RemoveFromList
+     [java] class name: org.softlang.util.SimpleLinkedList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.SimpleLinkedList
+     [java] class name: org.softlang.util.SimpleList
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.util.SimpleList
+     [java] class name: org.softlang.visitor.ReturningVisitor
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.visitor.ReturningVisitor
+     [java] class name: org.softlang.visitor.VoidVisitor
+     [java] load start
+     [java] load stop
+     [java] Class<?> Name: org.softlang.visitor.VoidVisitor
+     [java] Classes that throw exception and will be not included in the tests: 
+     [java] Removing methods containing unsupported classses parameter
+
+generate_tests:
+     [echo] 
+     [echo] 	            Generating tests
+     [echo] 	        
+     [java] 
+     [java] 
+     [java] source: D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products\Product0
+     [java] target: D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products\Product1
+     [java] bin: bin
+     [java] src: src
+     [java] lib: lib
+     [java] classes: ${classes}
+     [java] maxTestsPerMethods: 2
+     [java] criteria: ONLY_COMMON_METHODS_SUBSET_DEFAULT
+     [java] 
+     [java] 
+     [java] 
+     [java] Mapp Class One
+     [java] 
+     [java] File Directory: D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products\Product0\bin
+     [java] 
+     [java]  I found it: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\bin\org\softlang\company\Company.class
+     [java] File Source Directory: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\bin\org\softlang\company\Company.class
+     [java] 
+     [java] Classes Names: 22
+     [java] 
+     [java] -> org.softlang.company.Company
+     [java] 
+     [java] -> org.softlang.company.Component
+     [java] 
+     [java] -> org.softlang.company.Container
+     [java] 
+     [java] -> org.softlang.company.Department
+     [java] 
+     [java] -> org.softlang.company.Employee
+     [java] 
+     [java] -> org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] -> org.softlang.company.factory.Factory
+     [java] 
+     [java] -> org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ComponentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] -> org.softlang.company.Subunit
+     [java] 
+     [java] -> org.softlang.tests.Basics
+     [java] 
+     [java] -> org.softlang.util.AddToList
+     [java] 
+     [java] -> org.softlang.util.ChangeList
+     [java] 
+     [java] -> org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] -> org.softlang.util.RemoveFromList
+     [java] 
+     [java] -> org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] -> org.softlang.util.SimpleList
+     [java] 
+     [java] -> org.softlang.visitor.ReturningVisitor
+     [java] 
+     [java] -> org.softlang.visitor.VoidVisitor
+     [java] 
+     [java] 
+     [java] 
+     [java] 
+     [java] className: org.softlang.company.Company
+     [java] 
+     [java] className: org.softlang.company.Component
+     [java] 
+     [java] className: org.softlang.company.Container
+     [java] 
+     [java] className: org.softlang.company.Department
+     [java] 
+     [java] className: org.softlang.company.Employee
+     [java] 
+     [java] className: org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.factory.BeanFactory Parent: java.lang.Object
+     [java] Constructor: org.softlang.company.factory.BeanFactory
+     [java] Method: public org.softlang.company.Company org.softlang.company.factory.BeanFactory.mkCompany()
+     [java] Method: public org.softlang.company.Department org.softlang.company.factory.BeanFactory.mkDepartment()
+     [java] Method: public org.softlang.company.Employee org.softlang.company.factory.BeanFactory.mkEmployee()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.factory.Factory
+     [java] 
+     [java] className: org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.CompanyImpl Parent: org.softlang.company.impl.bean.ContainerImpl
+     [java] Constructor: org.softlang.company.impl.bean.CompanyImpl
+     [java] Method: public void org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.ComponentImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.ComponentImpl Parent: java.util.Observable
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public abstract java.lang.Object org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public synchronized void java.util.Observable.addObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObservers()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.ContainerImpl Parent: org.softlang.company.impl.bean.ComponentImpl
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public abstract java.lang.Object org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] Method: public abstract java.lang.Object org.softlang.company.Component.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor)
+     [java] 
+     [java] className: org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.DepartmentImpl Parent: org.softlang.company.impl.bean.ContainerImpl
+     [java] Constructor: org.softlang.company.impl.bean.DepartmentImpl
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public void org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public org.softlang.company.Employee org.softlang.company.impl.bean.DepartmentImpl.getManager()
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.EmployeeImpl Parent: org.softlang.company.impl.bean.ComponentImpl
+     [java] Constructor: org.softlang.company.impl.bean.EmployeeImpl
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.EmployeeImpl.getAddress()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.EmployeeImpl.getName()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String)
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public boolean org.softlang.company.impl.bean.EmployeeImpl.getManager()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String)
+     [java] Method: public double org.softlang.company.impl.bean.EmployeeImpl.getSalary()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setSalary(double)
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean)
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public synchronized void java.util.Observable.addObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObservers()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.Subunit
+     [java] 
+     [java] className: org.softlang.tests.Basics
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.tests.Basics Parent: java.lang.Object
+     [java] Constructor: org.softlang.tests.Basics
+     [java] Method: public void org.softlang.tests.Basics.test()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.AddToList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.AddToList Parent: org.softlang.util.ChangeList
+     [java] Constructor: org.softlang.util.AddToList
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.ChangeList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.ChangeList Parent: java.lang.Object
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.ObservableSimpleList Parent: java.util.Observable
+     [java] Constructor: org.softlang.util.ObservableSimpleList
+     [java] Method: public boolean org.softlang.util.ObservableSimpleList.remove(java.lang.Object)
+     [java] Method: public boolean org.softlang.util.ObservableSimpleList.add(java.lang.Object)
+     [java] Method: public java.util.Iterator org.softlang.util.ObservableSimpleList.iterator()
+     [java] Method: public void org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.util.ObservableSimpleList.deleteObservers()
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.RemoveFromList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.RemoveFromList Parent: org.softlang.util.ChangeList
+     [java] Constructor: org.softlang.util.RemoveFromList
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.SimpleLinkedList Parent: java.lang.Object
+     [java] Constructor: org.softlang.util.SimpleLinkedList
+     [java] Method: public boolean org.softlang.util.SimpleLinkedList.remove(java.lang.Object)
+     [java] Method: public boolean org.softlang.util.SimpleLinkedList.add(java.lang.Object)
+     [java] Method: public java.util.Iterator org.softlang.util.SimpleLinkedList.iterator()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.SimpleList
+     [java] 
+     [java] className: org.softlang.visitor.ReturningVisitor
+     [java] 
+     [java] className: org.softlang.visitor.VoidVisitor
+     [java] 
+     [java] 
+     [java] 		SOURCE Classes:
+     [java] 
+     [java] org.softlang.util.RemoveFromList
+     [java] org.softlang.company.impl.bean.CompanyImpl
+     [java] org.softlang.util.SimpleLinkedList
+     [java] org.softlang.tests.Basics
+     [java] org.softlang.util.ObservableSimpleList
+     [java] org.softlang.company.factory.BeanFactory
+     [java] org.softlang.util.ChangeList
+     [java] org.softlang.company.impl.bean.DepartmentImpl
+     [java] org.softlang.company.impl.bean.ComponentImpl
+     [java] org.softlang.company.impl.bean.EmployeeImpl
+     [java] org.softlang.util.AddToList
+     [java] org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Mapp Class One
+     [java] 
+     [java] File Directory: D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products\Product1\bin
+     [java] 
+     [java]  I found it: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\bin\org\softlang\company\Company.class
+     [java] File Source Directory: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\bin\org\softlang\company\Company.class
+     [java] 
+     [java] Classes Names: 22
+     [java] 
+     [java] -> org.softlang.company.Company
+     [java] 
+     [java] -> org.softlang.company.Component
+     [java] 
+     [java] -> org.softlang.company.Container
+     [java] 
+     [java] -> org.softlang.company.Department
+     [java] 
+     [java] -> org.softlang.company.Employee
+     [java] 
+     [java] -> org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] -> org.softlang.company.factory.Factory
+     [java] 
+     [java] -> org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ComponentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] -> org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] -> org.softlang.company.Subunit
+     [java] 
+     [java] -> org.softlang.tests.Basics
+     [java] 
+     [java] -> org.softlang.util.AddToList
+     [java] 
+     [java] -> org.softlang.util.ChangeList
+     [java] 
+     [java] -> org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] -> org.softlang.util.RemoveFromList
+     [java] 
+     [java] -> org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] -> org.softlang.util.SimpleList
+     [java] 
+     [java] -> org.softlang.visitor.ReturningVisitor
+     [java] 
+     [java] -> org.softlang.visitor.VoidVisitor
+     [java] 
+     [java] 
+     [java] 
+     [java] 
+     [java] className: org.softlang.company.Company
+     [java] 
+     [java] className: org.softlang.company.Component
+     [java] 
+     [java] className: org.softlang.company.Container
+     [java] 
+     [java] className: org.softlang.company.Department
+     [java] 
+     [java] className: org.softlang.company.Employee
+     [java] 
+     [java] className: org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.factory.BeanFactory Parent: java.lang.Object
+     [java] Constructor: org.softlang.company.factory.BeanFactory
+     [java] Method: public org.softlang.company.Company org.softlang.company.factory.BeanFactory.mkCompany()
+     [java] Method: public org.softlang.company.Department org.softlang.company.factory.BeanFactory.mkDepartment()
+     [java] Method: public org.softlang.company.Employee org.softlang.company.factory.BeanFactory.mkEmployee()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.factory.Factory
+     [java] 
+     [java] className: org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.CompanyImpl Parent: org.softlang.company.impl.bean.ContainerImpl
+     [java] Constructor: org.softlang.company.impl.bean.CompanyImpl
+     [java] Method: public void org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.ComponentImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.ComponentImpl Parent: java.util.Observable
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public abstract java.lang.Object org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public synchronized void java.util.Observable.addObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObservers()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.ContainerImpl Parent: org.softlang.company.impl.bean.ComponentImpl
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public abstract java.lang.Object org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] Method: public abstract java.lang.Object org.softlang.company.Component.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public abstract void org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor)
+     [java] 
+     [java] className: org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.DepartmentImpl Parent: org.softlang.company.impl.bean.ContainerImpl
+     [java] Constructor: org.softlang.company.impl.bean.DepartmentImpl
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public void org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public org.softlang.company.Employee org.softlang.company.impl.bean.DepartmentImpl.getManager()
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit)
+     [java] Method: public boolean org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit)
+     [java] Method: public java.lang.Iterable org.softlang.company.impl.bean.ContainerImpl.subunits()
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.company.impl.bean.ContainerImpl.deleteObservers()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.ComponentImpl.getName()
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public void org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String)
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.company.impl.bean.EmployeeImpl Parent: org.softlang.company.impl.bean.ComponentImpl
+     [java] Constructor: org.softlang.company.impl.bean.EmployeeImpl
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.EmployeeImpl.getAddress()
+     [java] Method: public java.lang.String org.softlang.company.impl.bean.EmployeeImpl.getName()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String)
+     [java] Method: public java.lang.Object org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.ReturningVisitor)
+     [java] Type: org.softlang.visitor.ReturningVisitor<R>
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor)
+     [java] Method: public boolean org.softlang.company.impl.bean.EmployeeImpl.getManager()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String)
+     [java] Method: public double org.softlang.company.impl.bean.EmployeeImpl.getSalary()
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setSalary(double)
+     [java] Method: public void org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean)
+     [java] Method: public org.softlang.company.impl.bean.ComponentImpl org.softlang.company.impl.bean.ComponentImpl.getParent()
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public synchronized void java.util.Observable.addObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObserver(java.util.Observer)
+     [java] Method: public synchronized void java.util.Observable.deleteObservers()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.company.Subunit
+     [java] 
+     [java] className: org.softlang.tests.Basics
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.tests.Basics Parent: java.lang.Object
+     [java] Constructor: org.softlang.tests.Basics
+     [java] Method: public void org.softlang.tests.Basics.test()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.AddToList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.AddToList Parent: org.softlang.util.ChangeList
+     [java] Constructor: org.softlang.util.AddToList
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.ChangeList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.ChangeList Parent: java.lang.Object
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.ObservableSimpleList Parent: java.util.Observable
+     [java] Constructor: org.softlang.util.ObservableSimpleList
+     [java] Method: public boolean org.softlang.util.ObservableSimpleList.remove(java.lang.Object)
+     [java] Method: public boolean org.softlang.util.ObservableSimpleList.add(java.lang.Object)
+     [java] Method: public java.util.Iterator org.softlang.util.ObservableSimpleList.iterator()
+     [java] Method: public void org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer)
+     [java] Method: public void org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer)
+     [java] Method: public void org.softlang.util.ObservableSimpleList.deleteObservers()
+     [java] Method: public synchronized boolean java.util.Observable.hasChanged()
+     [java] Method: public void java.util.Observable.notifyObservers()
+     [java] Method: public void java.util.Observable.notifyObservers(java.lang.Object)
+     [java] Method: public synchronized int java.util.Observable.countObservers()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.RemoveFromList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.RemoveFromList Parent: org.softlang.util.ChangeList
+     [java] Constructor: org.softlang.util.RemoveFromList
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] 
+     [java] ** S. Class ** 
+     [java] Full Name: org.softlang.util.SimpleLinkedList Parent: java.lang.Object
+     [java] Constructor: org.softlang.util.SimpleLinkedList
+     [java] Method: public boolean org.softlang.util.SimpleLinkedList.remove(java.lang.Object)
+     [java] Method: public boolean org.softlang.util.SimpleLinkedList.add(java.lang.Object)
+     [java] Method: public java.util.Iterator org.softlang.util.SimpleLinkedList.iterator()
+     [java] Method: public final void java.lang.Object.wait() throws java.lang.InterruptedException
+     [java] Method: public final void java.lang.Object.wait(long,int) throws java.lang.InterruptedException
+     [java] Method: public final native void java.lang.Object.wait(long) throws java.lang.InterruptedException
+     [java] Method: public boolean java.lang.Object.equals(java.lang.Object)
+     [java] Method: public java.lang.String java.lang.Object.toString()
+     [java] Method: public native int java.lang.Object.hashCode()
+     [java] Method: public final native java.lang.Class java.lang.Object.getClass()
+     [java] Method: public final native void java.lang.Object.notify()
+     [java] Method: public final native void java.lang.Object.notifyAll()
+     [java] 
+     [java] className: org.softlang.util.SimpleList
+     [java] 
+     [java] className: org.softlang.visitor.ReturningVisitor
+     [java] 
+     [java] className: org.softlang.visitor.VoidVisitor
+     [java] 
+     [java] 
+     [java] 		Target Classes:
+     [java] 
+     [java] org.softlang.util.RemoveFromList
+     [java] org.softlang.company.impl.bean.CompanyImpl
+     [java] org.softlang.util.SimpleLinkedList
+     [java] org.softlang.tests.Basics
+     [java] org.softlang.util.ObservableSimpleList
+     [java] org.softlang.company.factory.BeanFactory
+     [java] org.softlang.util.ChangeList
+     [java] org.softlang.company.impl.bean.DepartmentImpl
+     [java] org.softlang.company.impl.bean.ComponentImpl
+     [java] org.softlang.company.impl.bean.EmployeeImpl
+     [java] org.softlang.util.AddToList
+     [java] org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.util.RemoveFromList
+     [java] SuperClass: org.softlang.util.ChangeList
+     [java]  Constructors: 
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] methods: 
+     [java] 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.impl.bean.CompanyImpl
+     [java] SuperClass: org.softlang.company.impl.bean.ContainerImpl
+     [java]  Constructors: 
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] methods: 
+     [java] method : org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.util.SimpleLinkedList
+     [java] SuperClass: java.lang.Object
+     [java]  Constructors: 
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] methods: 
+     [java] method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : 
+     [java] method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : 
+     [java] method : org.softlang.util.SimpleLinkedList.iterator() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.SimpleLinkedList.iterator() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.tests.Basics
+     [java] SuperClass: java.lang.Object
+     [java]  Constructors: 
+     [java] cons : org.softlang.tests.Basics.<init>()
+     [java] methods: 
+     [java] method : org.softlang.tests.Basics.test() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.tests.Basics.test() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.util.ObservableSimpleList
+     [java] SuperClass: java.util.Observable
+     [java]  Constructors: 
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] methods: 
+     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : 
+     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : 
+     [java] method : org.softlang.util.ObservableSimpleList.iterator() : 
+     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : 
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : 
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.iterator() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.util.ObservableSimpleList.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.factory.BeanFactory
+     [java] SuperClass: java.lang.Object
+     [java]  Constructors: 
+     [java] cons : org.softlang.company.factory.BeanFactory.<init>()
+     [java] methods: 
+     [java] method : org.softlang.company.factory.BeanFactory.mkCompany() : 
+     [java] method : org.softlang.company.factory.BeanFactory.mkDepartment() : 
+     [java] method : org.softlang.company.factory.BeanFactory.mkEmployee() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.factory.BeanFactory.mkCompany() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.factory.BeanFactory.mkDepartment() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.factory.BeanFactory.mkEmployee() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.util.ChangeList
+     [java] SuperClass: java.lang.Object
+     [java]  Constructors: 
+     [java] methods: 
+     [java] 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.impl.bean.DepartmentImpl
+     [java] SuperClass: org.softlang.company.impl.bean.ContainerImpl
+     [java]  Constructors: 
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] methods: 
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.impl.bean.ComponentImpl
+     [java] SuperClass: java.util.Observable
+     [java]  Constructors: 
+     [java] methods: 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.addObserver(java.util.Observer) : 
+     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : 
+     [java] method : java.util.Observable.deleteObservers() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.impl.bean.EmployeeImpl
+     [java] SuperClass: org.softlang.company.impl.bean.ComponentImpl
+     [java]  Constructors: 
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] methods: 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : 
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.addObserver(java.util.Observer) : 
+     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : 
+     [java] method : java.util.Observable.deleteObservers() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.getName() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.util.AddToList
+     [java] SuperClass: org.softlang.util.ChangeList
+     [java]  Constructors: 
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] methods: 
+     [java] 
+     [java] 
+     [java] 
+     [java] Target Class: Class: org.softlang.company.impl.bean.ContainerImpl
+     [java] SuperClass: org.softlang.company.impl.bean.ComponentImpl
+     [java]  Constructors: 
+     [java] methods: 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] method : java.util.Observable.hasChanged() : 
+     [java] method : java.util.Observable.notifyObservers() : 
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] method : java.util.Observable.countObservers() : 
+     [java] method : org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.subunits() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getName() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.hasChanged() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.notifyObservers(java.lang.Object) : 
+     [java] 
+     [java] 
+     [java] method: method : java.util.Observable.countObservers() : 
+     [java] 
+     [java] 
+     [java] method: method : org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor) : 
+     [java]  Classes is Empty !!
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.tests.Basics.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.company.factory.BeanFactory.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] 
+     [java] Common constructor between Source and Target: cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] 
+     [java] 
+     [java] 
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.CompanyImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.SimpleLinkedList.iterator() : org.softlang.util.SimpleLinkedList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.tests.Basics.test() : org.softlang.tests.Basics
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.factory.BeanFactory.mkCompany() : org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.factory.BeanFactory.mkDepartment() : org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.factory.BeanFactory.mkEmployee() : org.softlang.company.factory.BeanFactory
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] 
+     [java] Common method between Source and Target: method : org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.ContainerImpl
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.tests.Basics.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.factory.BeanFactory.<init>()
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] method : org.softlang.company.impl.bean.CompanyImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.CompanyImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : org.softlang.util.SimpleLinkedList
+     [java] method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : org.softlang.util.SimpleLinkedList
+     [java] method : org.softlang.util.SimpleLinkedList.iterator() : org.softlang.util.SimpleLinkedList
+     [java] method : org.softlang.tests.Basics.test() : org.softlang.tests.Basics
+     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.company.factory.BeanFactory.mkCompany() : org.softlang.company.factory.BeanFactory
+     [java] method : org.softlang.company.factory.BeanFactory.mkDepartment() : org.softlang.company.factory.BeanFactory
+     [java] method : org.softlang.company.factory.BeanFactory.mkEmployee() : org.softlang.company.factory.BeanFactory
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.DepartmentImpl
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.Component.accept(org.softlang.visitor.VoidVisitor) : org.softlang.company.impl.bean.ContainerImpl
+     [java] 
+     [java] 
+     [java] 
+     [java] Amount of tests to test: 52
+     [java]  Args Size: 8
+     [java] policy = sun.security.provider.PolicyFile@46638f
+     [java] PUBLIC MEMBERS=53
+     [java] Explorer = randoop.ForwardGenerator@1da77f5
+     [java] Começo!!
+     [java] 
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Fri Oct 19 13:53:02 BRT 2012)FIM!!!
+     [java] 
+     [java] Progress update: test inputs generated=104, failing inputs=0      (Fri Oct 19 13:53:02 BRT 2012)
+     [java] Normal method executions:1734
+     [java] Exceptional method executions:0
+     [java] 
+     [java] Average method execution time (normal termination):     0,122
+     [java] Average method execution time (exceptional termination):NaN
+     [java] 
+     [java] Creating Junit tests (104 tests)...Writing 104 junit tests
+     [java] 
+     [java] Created file: C:\Users\JEFFER~1\AppData\Local\Temp\safeRefactorAJ\tests\source\RandoopTest0.java
+     [java] Created file: C:\Users\JEFFER~1\AppData\Local\Temp\safeRefactorAJ\tests\source\RandoopTest.java
+
+compile_tests:
+     [echo] Compiling the tests
+
+run_tests:
+     [echo] Running JUnit to test the "source"
+     [echo] Running JUnit to test the "target"
+     [echo] Running JUnit to test the "source" again
+ Print Report :
+
+
+report changes: null
+
+coverage:
+    [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\outinstr
+    [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr
+processing instrumentation path ...
+instrumentation path processed in 65 ms
+[12 class(es) instrumented, 0 resource(s) copied]
+metadata merged into [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr\metadata_source.emma] {in 53 ms}
+processing input files ...
+1 file(s) read and merged in 1 ms
+nothing to do: no runtime coverage data found in any of the data files
+
+
+ -- SafeRefactor FOUND behavioral changes -- 
+
+ Safe Refactor Tests' directory:< C:\Users\JEFFER~1\AppData\Local\Temp\\safeRefactor\tests >
+This evolution is a refactoring ?: < false >
+The Software Product Line is NOT a refinement.
+Asset Mapping was not refined.
+
