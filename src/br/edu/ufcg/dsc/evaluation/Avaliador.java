@@ -10,6 +10,9 @@ package br.edu.ufcg.dsc.evaluation;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import com.sun.org.apache.regexp.internal.RE;
+
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.Lines;
@@ -124,11 +127,15 @@ public class Avaliador {
 				
 				ResultadoLPS resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
 				
-				String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
-				
+				// String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
+				String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "miniReport";
+				 
 				FileWriter resultFile = new FileWriter(resultFileName + ".txt");
 				resultFile.write(resultado.toString());
 				resultFile.close();
+				
+				System.out.println("\n\t SPL REPORT: \n");
+				System.out.println(resultado.toString());
 				
 				File fileProperties = new File(resultFileName + ".properties");
 					

@@ -309,6 +309,7 @@ public class ToolCommandLine {
 					} else {
 						/* Generate tests for all classes and all products. */
 						isRefinement = this.testProducts(sourceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
+						ResultadoLPS.getInstance().setCompObservableBehavior(isRefinement);
 						if(isRefinement){System.out.println("\nCompatible Observable Behavior\n");} else {System.out.println("\nSource and Target do not have compatible observable behavior.\n");} 
 					}
 				
@@ -321,10 +322,12 @@ public class ToolCommandLine {
 					} else {
 						System.out.println("The Software Product Line is NOT a refinement.\n");
 					}
+					ResultadoLPS.getInstance().setRefinement(isRefinement);
 				}else {
 					/*Set whether the SPL evolution is a refinement. */
 					resultado.getMeasures().setResult(true);
 					System.out.println("\nThe Software Product Line was refined.\n");
+					ResultadoLPS.getInstance().setRefinement(true);
 				}
 			} 
 			/* The approaches that can be applied to check the refinement is NAIVE_2_ICTAC and NAIVE_1_APROXIMACAO. */
@@ -332,11 +335,14 @@ public class ToolCommandLine {
 			else {
 				/* This approach can not be applied. */
 				System.out.println("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
+				ResultadoLPS.getInstance().setObservation("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
 			}
 		} else {
 			System.out.println("\n Software Product Line Short Report :\n");
 		    System.out.println("- It is NOT a refinement.\n");
 		    System.out.println("- It is NOT well formed.\n");
+		    ResultadoLPS.getInstance().setWF(false);
+		    ResultadoLPS.getInstance().setRefinement(false);
 			/* Software Product Line Short Report : */
 			/* It is not a refinement. It is not well formed. */
 		}
@@ -524,10 +530,12 @@ public class ToolCommandLine {
 
 	    /* Well Formedness to the <Source> SPL */
 		SafeCompositionResult sourceComposition = checkSafeCompositionOfLine(Constants.SOURCE_CK_ALLOY_NAME, sourceLine.getFeatures(), "source");
+		ResultadoLPS.getInstance().setSourceIsWellFormed(!sourceComposition.getAnalysisResult());
 		System.out.println("Well Formedness to the <Source> SPL: " + !sourceComposition.getAnalysisResult());
 
 		/*Well Formedness to the <Target> SPL*/
 		SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(), "target");
+		ResultadoLPS.getInstance().setTargetIsWellFormed(!targetComposition.getAnalysisResult());
 		System.out.println("Well Formedness to the <Target> SPL.: " + !targetComposition.getAnalysisResult());
 
 		return !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();

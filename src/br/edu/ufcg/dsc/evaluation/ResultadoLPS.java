@@ -35,6 +35,8 @@ public class ResultadoLPS {
 	
 	private boolean compObservableBehavior;
 	
+	private String observation;
+	
 	/**
 	 * Initiate the properties of the class.
 	 * Default Values.
@@ -69,12 +71,14 @@ public class ResultadoLPS {
 	public String toString() {
 		
 		
-		String result = "->Source Product Line is Well Formed:?" + this.isSourceIsWellFormed()+"\n";
-		result += "->Target Product Line is Well Formed:?" + this.isTargetIsWellFormed()+"\n";
-		result += "-> My Whole Software Product Line is Well Formed:? " + this.isWF() + "\n";
-		result += "->Asset Mappings are Equals :?"+ this.isAssetMappingsEqual() + "\n";
-		result += "-> Are Configuration Knowledge and Feature Model a refinement:? " + this.fmAndCKRefinement + "\n";
-		result += "->The evolution has a compatible observable behavior:?" + isCompObservableBehavior()+ "\n";
+		String result = "-> Source Product Line is Well Formed:?  " + this.isSourceIsWellFormed()+"\n";
+		result += "-> Target Product Line is Well Formed:?  " + this.isTargetIsWellFormed()+"\n";
+		result += "-> Asset Mappings are Equals :?"+ this.isAssetMappingsEqual() + "\n";
+		result += "-> Are Configuration Knowledge and Feature Model a refinement:?  " + this.fmAndCKRefinement + "\n";
+		result += "-> The evolution has a compatible observable behavior:?  " + isCompObservableBehavior()+ "\n";
+		result += "-> My Whole Software Product Line is Well Formed:?  " + this.isWF() + "\n";
+		result += "-> My Whole Software Product Line is a Refinement:?  " + this.isRefinement() + "\n\n\n";
+		if(getObservation()!=null)result += "Observation:  " + getObservation()+ "\n\n";
 		
 		String metodosAdicionadosString = "";
 		String metodosRemovidosString = "";
@@ -225,6 +229,12 @@ public class ResultadoLPS {
 	}
 	public void setFmAndCKRefinement(boolean fmAndCKRefinement) {
 		this.fmAndCKRefinement = fmAndCKRefinement;
+	}
+	public String getObservation() {
+		return observation;
+	}
+	public void setObservation(String observation) {
+		this.observation = observation;
 	}
 	
 }

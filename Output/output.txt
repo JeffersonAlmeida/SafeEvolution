@@ -3454,14 +3454,14 @@ generate_tests:
      [java] 
      [java] Amount of tests to test: 52
      [java]  Args Size: 8
-     [java] policy = sun.security.provider.PolicyFile@46638f
+     [java] policy = sun.security.provider.PolicyFile@1325905
      [java] PUBLIC MEMBERS=53
-     [java] Explorer = randoop.ForwardGenerator@1da77f5
+     [java] Explorer = randoop.ForwardGenerator@1f97ae0
      [java] Começo!!
      [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Fri Oct 19 15:25:51 BRT 2012)FIM!!!
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Sat Oct 20 11:56:10 BRT 2012)FIM!!!
      [java] 
-     [java] Progress update: test inputs generated=104, failing inputs=0      (Fri Oct 19 15:25:52 BRT 2012)
+     [java] Progress update: test inputs generated=104, failing inputs=0      (Sat Oct 20 11:56:10 BRT 2012)
      [java] Normal method executions:1734
      [java] Exceptional method executions:0
      [java] 
@@ -3475,34 +3475,53 @@ generate_tests:
 
 compile_tests:
      [echo] Compiling the tests
+    [javac] Compiling 2 source files to C:\Users\JEFFER~1\AppData\Local\Temp\safeRefactorAJ\tests\bin
+    [javac] Note: C:\Users\JEFFER~1\AppData\Local\Temp\safeRefactorAJ\tests\source\RandoopTest0.java uses unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
 
 run_tests:
      [echo] Running JUnit to test the "source"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 104, Failures: 0, Errors: 0, Time elapsed: 0,117 sec
      [echo] Running JUnit to test the "target"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 104, Failures: 0, Errors: 0, Time elapsed: 0,117 sec
      [echo] Running JUnit to test the "source" again
+    [junit] Running RandoopTest0
+    [junit] Tests run: 104, Failures: 0, Errors: 0, Time elapsed: 0,116 sec
  Print Report :
-
-
-report changes: null
 
 coverage:
     [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\outinstr
     [mkdir] Created dir: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr
 processing instrumentation path ...
-instrumentation path processed in 77 ms
+instrumentation path processed in 68 ms
 [12 class(es) instrumented, 0 resource(s) copied]
-metadata merged into [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr\metadata_source.emma] {in 73 ms}
+metadata merged into [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\instr\metadata_source.emma] {in 112 ms}
+    [junit] Running RandoopTest0
+    [junit] Tests run: 104, Failures: 0, Errors: 0, Time elapsed: 0,181 sec
 processing input files ...
-1 file(s) read and merged in 2 ms
-nothing to do: no runtime coverage data found in any of the data files
+1 file(s) read and merged in 3 ms
+writing [xml] report to [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\report.xml] ...
+writing [html] report to [D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product0\report.html] ...
+SafeRefactor found NO behavioral changes
+This evolution is a refactoring ?: < true >
+
+Compatible Observable Behavior
 
 
- -- SafeRefactor FOUND behavioral changes -- 
+The Software Product Line is a refinement.
 
- Safe Refactor Tests' directory:< C:\Users\JEFFER~1\AppData\Local\Temp\\safeRefactor\tests >
-This evolution is a refactoring ?: < false >
 
-Source and Target do not have compatible observable behavior.
+	 SPL REPORT: 
 
-The Software Product Line is NOT a refinement.
+-> Source Product Line is Well Formed:?  true
+-> Target Product Line is Well Formed:?  true
+-> Asset Mappings are Equals :?true
+-> Are Configuration Knowledge and Feature Model a refinement:?  true
+-> The evolution has a compatible observable behavior:?  true
+-> My Whole Software Product Line is Well Formed:?  true
+-> My Whole Software Product Line is a Refinement:?  true
+
+
 
