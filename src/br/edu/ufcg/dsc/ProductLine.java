@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Properties;
 
 import soot.Main;
@@ -302,4 +303,24 @@ public class ProductLine {
 	public String getLibPath() {
 		return libPath;
 	}
+
+	public void printSetOfFeatures() {
+		String s = "";
+		int c = 1;
+		Iterator<HashSet<String>> i = this.setsOfFeatures.iterator();
+		while(i.hasNext()){
+			 HashSet<String> set = i.next();
+			 Iterator<String> iterator = set.iterator();
+			 s = "";
+			 while(iterator.hasNext()){
+				 s = s + "[ " + iterator.next() + " ] ";
+			 }
+			 System.out.println("\n"+ (c++) + " -> " + s);
+		}
+	}
+
+	public void setPreprocessProperties(Properties preprocessProperties) {
+		this.preprocessProperties = preprocessProperties;
+	}
+	
 }
