@@ -103,9 +103,9 @@ public class ToolCommandLine {
 
 		this.line = line;
 
-		if (line.equals(Lines.MOBILE_MEDIA) || line.equals(Lines.DEFAULT)) {
+		if (line.equals(Lines.MOBILE_MEDIA)) {
 			this.builder = new MobileMediaBuilder();
-		} else if (line.equals(Lines.TARGET)) {
+		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
 			this.builder = new TargetBuilder();
 		}
 	}
@@ -276,7 +276,7 @@ public class ToolCommandLine {
 		if (isWF) {
 			/* Verify whether Configuration knowledge and Feature Model is a refinement */
 			boolean isFMAndCKRefinement = this.isFeatureModelAndConfigurationKnowledgeWeakRefinement(sourceLine, targetLine);
-			
+			isFMAndCKRefinement = true;
 			System.out.println("FM and CK are refinement:- " + isFMAndCKRefinement );
 			
 			/*Set this information in the Results/Short Report.*/
@@ -305,6 +305,8 @@ public class ToolCommandLine {
 						/* Only generates tests for modified classes and do not generate products. */
 						/* Generates two tests per method. */
 						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
+						/*Ja supoe que o comportamento também não foi preservado.*/
+						ResultadoLPS.getInstance().setCompObservableBehavior(isRefinement);
 						if(isRefinement){System.out.println("\nAsset Mapping Refined.\n");} else {System.out.println("\nSorry to inform you that Asset Mapping was not refined.\n");}
 					} else {
 						/* Generate tests for all classes and all products. */
@@ -364,9 +366,13 @@ public class ToolCommandLine {
 
 		/*IT will store the set of SOURCE PRODUCT LINE features*/
 		HashSet<HashSet<String>> setsOfFeaturesSource = sourceLine.getSetsOfFeatures();
+		System.out.println("\n# SOURCE Products List<"+ setsOfFeaturesSource.size() +"> #");
+		sourceLine.printSetOfFeatures();
 		
 		/*IT will store the set of TARGET PRODUCT LINE features*/
 		HashSet<HashSet<String>> setsOfFeaturesTarget = targetLine.getSetsOfFeatures();
+		System.out.println("\n# TARGET Products List<"+ setsOfFeaturesTarget.size()+"> #");
+		targetLine.printSetOfFeatures();
 
 		/* A clone of the variable above*/
 		setsOfFeaturesTarget = (HashSet<HashSet<String>>) setsOfFeaturesTarget.clone();
@@ -432,7 +438,7 @@ public class ToolCommandLine {
 					String feature = (String) i.next();
 					concat = concat + " [ " + feature + " ]";
 				}
-				System.out.println("\nProduct :: " + concat);
+				System.out.println("\nProduct  :: " + concat);
 				/* It tries to catch a corresponding product in the target SPL. */
 				Product provavelCorrespondenteNoTarget = this.getProvavelCorrespondenteNoTarget(productSource, targetLine.getProducts());
 				if (provavelCorrespondenteNoTarget != null) {
@@ -444,7 +450,7 @@ public class ToolCommandLine {
 			}
 		}
 
-		System.out.println("\n\nAll products in the source have a really corresponding target product ?: " + isRefinement);
+		System.out.println("\n\nAll products in the source have a really correspondent target product ?: " + isRefinement);
 		return isRefinement;
 	} /*Method end*/
 
@@ -482,7 +488,7 @@ public class ToolCommandLine {
 			String feature = (String) i.next();
 			concat = concat + " [ " + feature + " ]";
 		}
-		System.out.println("\nProduct "+ (id) + " :: " + concat);
+		System.out.println("\nProduct "+ (id++) + " :: " + concat);
 	
 		/* <AssetName, path> Get in CK the DESTINY of the assets. */
  		HashMap<String, String> constantesDestinos = productLine.getCk().evalCKDestinos(featureSet);
@@ -554,13 +560,15 @@ public class ToolCommandLine {
 	}
 
 	private boolean testProducts(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, DirectoryException {
-
+		
+		System.out.println("\n\nTesting Products: ");
 		boolean isRefactoring = true;
 
 		try {
 			resultado.getMeasures().setQuantidadeProdutosCompilados(0);
 
 			for (Product productSource : sourceLine.getProducts()) {
+				productSource.printSetOfFeatures();
 				if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || (approach == Approach.IMPACTED_FEATURES && productSource.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
 					
 					this.builder.generateProduct(productSource, sourceLine.getPath(), resultado);
@@ -573,6 +581,7 @@ public class ToolCommandLine {
 					} else {
 						/* If the source product does not have a correspondent target product it is NOT considered a refactoring.
 						 * It means, that the behavior was not preserved once we can not find even a correspondent target product.*/
+						System.out.println("This product does not have a correspondent target product.");
 						isRefactoring = false;
 					}
 
@@ -1018,8 +1027,8 @@ public class ToolCommandLine {
 			String productPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR;
 
 			/* Creating folders for source and target products, which will be the same for all modified classes and their dependencies. */
-			File testSourceDirectory = FilesManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
-			File testTargetDirectory = FilesManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.TARGET ? "src" : ProductBuilder.SRCPREPROCESS));
+			File testSourceDirectory = FilesManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
+			File testTargetDirectory = FilesManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
 
 			/* This creates bin folder for SOURCE PRODUCT and TARGET PRODUCT. */
 			FilesManager.getInstance().createDir(productPath + "source" + Constants.FILE_SEPARATOR + "bin");
@@ -1056,11 +1065,12 @@ public class ToolCommandLine {
 				destinationPath = testSourceDirectory.getAbsolutePath() + FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
 				fileDestination = new File(destinationPath);
 				classeToGenerateTestes = classe;
-
-				/*is the SPL -> TARGET SOFTWARE PRODUCT LINE ?*/
+				System.out.println("$classeToGenerateTestes Antes: " + classeToGenerateTestes);
+				
 				if (this.line == Lines.TARGET){
 					classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
 				}
+				System.out.println("*classeToGenerateTestes Depois: " + classeToGenerateTestes);
 				FilesManager.getInstance().createDir(fileDestination.getParent());
 				FilesManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
 
@@ -1183,16 +1193,18 @@ public class ToolCommandLine {
 						}
 					}
 
-					if (this.line == Lines.TARGET) {
+					if (this.line == Lines.TARGET || this.line == Lines.DEFAULT) {
 						//Para a TaRGeT, os arquivos sao pre processados com o Velocity dentro da propria
 						//pasta, sem copias. Com isso, eh necessario renomear a pasta para src manualmente.
 
 						if (prod.size() > 0/* && !(prod.size() == 1 && prod.iterator().next().contains("fake"))*/) {
-							this.builder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent(),
-									resultado);
-							this.builder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent(),
-									resultado);
+							this.builder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent(), resultado);
+							this.builder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent(), resultado);
 						}
+						/*Rename srcpreprocess folder to src*/
+						/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
+						testTargetDirectory.renameTo(new File(testTargetDirectory.getParent()+ System.getProperty("file.separator") + "src"));*/
+						
 					} else {
 						//Para o MobileMedia, pre processa com Antenna, que copia o codigo da pasta
 						//srcprecess para src.
@@ -1200,7 +1212,7 @@ public class ToolCommandLine {
 
 						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent(), resultado);
 
-						System.out.println("#######################################################" + prod);
+						System.out.println("########################################################" + prod);
 
 						//Como o Antenna nao pre processa aspectos, eles tambem nao sao copiados para 
 						//a pasta src. Eh necessario copia-los manualmente.
@@ -1212,6 +1224,7 @@ public class ToolCommandLine {
 						}
 					}
 
+					System.out.println("\nClasses que receberao testes JUNIT: " + classes);
 					sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), resultado, false, false);
 					for (File file : filesToTrash) {
 						file.delete();
