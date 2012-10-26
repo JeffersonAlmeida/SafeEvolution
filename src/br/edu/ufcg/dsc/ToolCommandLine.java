@@ -1157,7 +1157,14 @@ public class ToolCommandLine {
 				System.out.println("\n products size: " + pseudoProductsToBePreprocessed.size());
 				int i = 0;
 				for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
-					System.out.println("######################PRODUCT " + i++);
+					System.out.print("&PRODUCT: " + (i++) + " -> ");
+					Iterator<String> it = prod.iterator();
+					String s = "";
+					while(it.hasNext()){
+						s = s + "[ " + it.next() + " ]";
+						
+					}
+					System.out.println(s);
 					HashSet<String> aspectosDaConfiguracaoSource = this.mapeamentoFeaturesAspectosSource.get(prod);
 					HashSet<String> aspectosDaConfiguracaoTarget = this.mapeamentoFeaturesAspectosTarget.get(prod);
 
@@ -1359,23 +1366,27 @@ public class ToolCommandLine {
 		return "/src/" + classe.replaceAll(Pattern.quote("/java"), ".java");
 	}
 
+	/**
+	 * @param product
+	 * @param sourceLine
+	 * @param targetLine
+	 * @return
+	 */
 	private HashSet<String> makeCombination(HashSet<String> product, ProductLine sourceLine, ProductLine targetLine) {
+		
 		HashSet<String> result = new HashSet<String>();
 
 		//Como o mapeamento nao mudou, os aspectos da versao source e da target sao os mesmos.
 		ArrayList<String> aspectosDoProdutoSource = this.getAspectosDoProduto(product, sourceLine);
-		//	ArrayList<String> aspectosDoProdutoTarget = this.getAspectosDoProduto(product, targetCKXML, targetAM);
 
-		//Os que interferem podem ter mudado j� que o conte�do deles mudou, podento ter pointcuts
-		//e advices novos.
-		HashSet<String> aspectosQueInterferemNaClasseModificadaSource = this.getAspectosQueInterferemNaClasseModificada(
-				aspectosDoProdutoSource, sourceLine.getMappingClassesSistemaDeArquivos());
-		HashSet<String> aspectosQueInterferemNaClasseModificadaTarget = this.getAspectosQueInterferemNaClasseModificada(
-				aspectosDoProdutoSource, targetLine.getMappingClassesSistemaDeArquivos());
+		//Os que interferem podem ter mudado j� que o conte�do deles mudou, podento ter pointcuts e advices novos.
+		HashSet<String> aspectosQueInterferemNaClasseModificadaSource = this.getAspectosQueInterferemNaClasseModificada(aspectosDoProdutoSource, sourceLine.getMappingClassesSistemaDeArquivos());
+		HashSet<String> aspectosQueInterferemNaClasseModificadaTarget = this.getAspectosQueInterferemNaClasseModificada(aspectosDoProdutoSource, targetLine.getMappingClassesSistemaDeArquivos());
 
 		for (String feature : product) {
-			String feat = this.builder.getPreprocessFeaturesToConstants().get(feature);
-
+			HashMap<String, String> FeaturesConstants = this.builder.getPreprocessFeaturesToConstants();
+			String feat = FeaturesConstants.get(feature);
+			System.out.println("\n feat: " + feat);
 			if (feat != null) {
 				result.add(feature);
 			}
@@ -1393,18 +1404,14 @@ public class ToolCommandLine {
 			this.mapeamentoFeaturesAspectosTarget.put(result, aspectosQueInterferemNaClasseModificadaTarget);
 		} else {
 			for (HashSet<String> prodKey : this.mapeamentoFeaturesAspectosSource.keySet()) {
-				if (this.mapeamentoFeaturesAspectosSource.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaSource)
-						&& this.mapeamentoFeaturesAspectosTarget.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaTarget)) {
-
+				if (this.mapeamentoFeaturesAspectosSource.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaSource) && this.mapeamentoFeaturesAspectosTarget.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaTarget)) {
 					jaExiste = this.equivalent(prodKey, result);
 				}
 			}
-
 			if (!jaExiste) {
 				if (this.mapeamentoFeaturesAspectosSource.containsKey(result) || result.isEmpty()) {
 					result.add("fake" + Math.random());
 				}
-
 				this.mapeamentoFeaturesAspectosSource.put(result, aspectosQueInterferemNaClasseModificadaSource);
 				this.mapeamentoFeaturesAspectosTarget.put(result, aspectosQueInterferemNaClasseModificadaTarget);
 			}

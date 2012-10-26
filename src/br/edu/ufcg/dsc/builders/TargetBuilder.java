@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -15,7 +14,7 @@ public class TargetBuilder extends ProductBuilder {
 
 	public TargetBuilder() {
 		super();
-		this.createConstants();
+		this.createConstants("101SPL");
 	}
 	
 	private void createConstants() {
@@ -52,6 +51,31 @@ public class TargetBuilder extends ProductBuilder {
 			this.preprocessConstantsToFeatures.put(this.preprocessFeaturesToConstants.get(feature), feature);
 		}
 	}
+	
+	private void createConstants(String s) {
+		
+		this.preprocessFeaturesToConstants = new HashMap<String, String>();
+		
+		this.preprocessFeaturesToConstants.put("javaexorcismspl", "javaexorcismspl");
+		this.preprocessFeaturesToConstants.put("treestructure", "treestructure");
+		this.preprocessFeaturesToConstants.put("logging", "logging");
+		this.preprocessFeaturesToConstants.put("accesscontrol", "accesscontrol");
+		this.preprocessFeaturesToConstants.put("cut", "cut");
+		this.preprocessFeaturesToConstants.put("cutwhatever", "cutwhatever");
+		this.preprocessFeaturesToConstants.put("cutnodepartment", "cutnodepartment");
+		this.preprocessFeaturesToConstants.put("cutnomanager", "cutnomanager");
+		this.preprocessFeaturesToConstants.put("total", "total");
+		this.preprocessFeaturesToConstants.put("totalwalker", "totalwalker");
+		this.preprocessFeaturesToConstants.put("totalreducer", "totalreducer");
+		this.preprocessFeaturesToConstants.put("precedence", "precedence");
+		this.preprocessFeaturesToConstants.put("gui", "gui");
+
+		this.preprocessConstantsToFeatures = new HashMap<String, String>();
+		
+		for(String feature : this.preprocessFeaturesToConstants.keySet()){
+			this.preprocessConstantsToFeatures.put(this.preprocessFeaturesToConstants.get(feature), feature);
+		}
+	}
 
 	@Override
 	public void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, IOException, DirectoryException {
@@ -69,8 +93,7 @@ public class TargetBuilder extends ProductBuilder {
 			
 			File productDirectory = new File(product.getPath());
 			
-			this.preprocessVelocity(product.getFeaturesList(), productDirectory, 
-					product.getSpl(), product.getPath(), resultado);
+			this.preprocessVelocity(product.getFeaturesList(), productDirectory, product.getSpl(), product.getPath(), resultado);
 			
 			String libPath = product.getSpl().getLibPath();
 			

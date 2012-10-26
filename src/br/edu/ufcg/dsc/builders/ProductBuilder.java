@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Properties;
 import java.util.regex.Pattern;
 
 import org.apache.tools.ant.DefaultLogger;
@@ -73,11 +72,17 @@ public abstract class ProductBuilder {
 		}
 	}
 
-	public void preprocessVelocity(HashSet<String> features, ArrayList<String> filesToPreprocess, ProductLine productLine,
-			String productPath, ResultadoLPS resultado) throws IOException {
+	public void preprocessVelocity(HashSet<String> features, ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath, ResultadoLPS resultado) throws IOException {
+		System.out.println("@Features Preprocess Velocity :");
+		for (String feature : features) {
+			System.out.println("\nfeature:" + feature);
+		}
 		String fileConstants = this.createConstansFile(features);
 		String filesToPreprocessArgument = this.createFilesToPreprocessArgument(filesToPreprocess, productLine, productPath);
 
+		System.out.println("FileConstants: " + fileConstants);
+		System.out.println("filesToPreprocessArgument: " + filesToPreprocessArgument);
+		
 		File buildFile = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.xml");
 		Project p = new Project();
 
@@ -102,10 +107,9 @@ public abstract class ProductBuilder {
 		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
 	}
 
-	private String createFilesToPreprocessArgument(ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath)
-			throws IOException {
-		File arq = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "ant" + Constants.FILE_SEPARATOR
-				+ "files.properties");
+	private String createFilesToPreprocessArgument(ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath) throws IOException {
+		
+		File arq = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "ant" + Constants.FILE_SEPARATOR	+ "files.properties");
 
 		if (arq.exists()) {
 			arq.delete();
@@ -113,11 +117,12 @@ public abstract class ProductBuilder {
 
 		FileWriter fileWriter = new FileWriter(arq);
 
-		Properties fileProperties = productLine.getPreprocessProperties();
+		//Properties fileProperties = productLine.getPreprocessProperties();
 
-		if (!fileProperties.keySet().isEmpty()) {
+		/*if (!fileProperties.keySet().isEmpty()) {
 			String classesToPreprocessProperty = fileProperties.getProperty("preprocess");
-
+			System.out.println("\nclasses To Pre-Process Property: " + classesToPreprocessProperty);
+			
 			if (classesToPreprocessProperty != null) {
 				this.writeClassesToPrecess(productPath, fileWriter, classesToPreprocessProperty, filesToPreprocess);
 
@@ -131,29 +136,25 @@ public abstract class ProductBuilder {
 					classesToPreprocessProperty = fileProperties.getProperty("preprocess" + n++);
 				}
 			}
-		} else {
-			//Descomentar esse c�digo se quiser que volte a pr�-processar todas as classes na aus�ncia do arquivo preprocess.properties.
-//			for (String file : filesToPreprocess) {
-//				if (file.charAt(2) == ':') {
-//					file = file.substring(1);
-//
-//					String[] parts = file.split(Pattern.quote("/"));
-//
-//					file = "";
-//
-//					for (String part : parts) {
-//						file = file + "\\" + part;
-//					}
-//
-//					file = file.substring(1);
-//				}
-//
-//				fileWriter.write(file + "\n");
-//			}
-		}
-
+		}*/
+	//else {
+			/* Descomentar esse codigo se quiser que volte a preprocessar todas as classes na ausencia do arquivo preprocess.properties. */
+			for (String file : filesToPreprocess) {
+				System.out.println("File: " + file);
+				if (file.charAt(2) == ':') {
+					file = file.substring(1);
+					String[] parts = file.split(Pattern.quote("/"));
+					file = "";
+					for (String part : parts) {
+						file = file + "\\" + part;
+					}
+					file = file.substring(1);
+				}
+				fileWriter.write(file + "\n");
+			}
+		//}
+		
 		fileWriter.close();
-
 		return arq.getAbsolutePath();
 	}
 
@@ -199,8 +200,7 @@ public abstract class ProductBuilder {
 	}
 
 	private String createConstansFile(HashSet<String> features) {
-		File file = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "ant" + Constants.FILE_SEPARATOR
-				+ "constants.properties");
+		File file = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "ant" + Constants.FILE_SEPARATOR + "constants.properties");
 
 		if (file.exists()) {
 			file.delete();
@@ -215,7 +215,6 @@ public abstract class ProductBuilder {
 
 			fileWriter.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

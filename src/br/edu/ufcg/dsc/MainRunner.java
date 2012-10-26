@@ -69,32 +69,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 					avaliador
 							.avalie(
 									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"D:\\101Companies\\FirstCategory\\ToySPL",  // SPL Original  (SPL)
-									"D:\\101Companies\\FirstCategory\\ToySPLT",  // Evolução/refactoring da SPL.   (SPL')
-									60,  // timeOut
-									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
-									true, // A SPL Source possui aspectos.
-									true,  // A SPL Target possui aspectos.
-									null, // String: controladores fachadas.
-									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
-									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
-									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"D:\\101Companies\\FirstCategory\\ToySPL\\lib", "D:\\101Companies\\FirstCategory\\ToySPLT\\lib"); // Uma sequência de bibliotecas (String)
-				} catch (DirectoryException e) {
-					System.out.println(e.getMessage()+ "\n\n\n\n");
-					e.printStackTrace();
-				}
-				
-				/*try {
-					System.out.println("### IMPACTED_FEATURES ###");
-					avaliador
-							.avalie(
-									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									"D:\\101Companies\\SecondCategory\\ToySPL03",  // SPL Original  (SPL)
+									"D:\\101Companies\\SecondCategory\\ToySPL03T",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
 									Approach.IMPACTED_FEATURES, // A abordagem que será utilizada
@@ -106,46 +82,20 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
+									"D:\\101Companies\\SecondCategory\\ToySPL03\\lib", "D:\\101Companies\\SecondCategory\\ToySPL03T\\lib"); // Uma sequência de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
 				}
 				
-				
+				/*
 				try {
-					System.out.println("### NAIVE_1_APROXIMACAO ###");
+					System.out.println("### ONLY_CHANGED_CLASSES ###");
 					avaliador
 							.avalie(
 									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
-									60,  // timeOut
-									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
-									true, // A SPL Source possui aspectos.
-									true,  // A SPL Target possui aspectos.
-									null, // String: controladores fachadas.
-									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
-									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
-									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
-				} catch (DirectoryException e) {
-					System.out.println(e.getMessage()+ "\n\n\n\n");
-					e.printStackTrace();
-				}
-				
-
-				
-				try {
-					System.out.println("### NAIVE_2_ICTAC ###");
-					avaliador
-							.avalie(
-									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"C:/WorkspaceSPL/MiniSPL",  // SPL Original  (SPL)
-									"C:/WorkspaceSPL/MiniSPL_R02",  // Evolução/refactoring da SPL.   (SPL')
+									"D:\\101Companies\\SecondCategory\\ToySPL02",  // SPL Original  (SPL)
+									"D:\\101Companies\\SecondCategory\\ToySPL02T",  // Evolução/refactoring da SPL.   (SPL')
 									60,  // timeOut
 									4,   // A quantidade de testes que será gerada para cada método.
 									Approach.NAIVE_2_ICTAC, // A abordagem que será utilizada
@@ -157,11 +107,12 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"C:/WorkspaceSPL/MiniSPL/lib", "C:/WorkspaceSPL/MiniSPL_R02/lib"); // Uma sequência de bibliotecas (String)
+									"D:\\101Companies\\SecondCategory\\ToySPL03\\lib", "D:\\101Companies\\SecondCategory\\ToySPL03T\\lib"); // Uma sequência de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
 				}*/
+				
 				
 
 

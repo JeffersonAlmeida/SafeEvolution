@@ -150,14 +150,15 @@ public class HephaestusCKReader {
 								preprocess = preprocess + "," + fileName;
 							}
 						}
-						preprocessProperties.setProperty(fExp, args);
+						//preprocessProperties.setProperty(fExp, args);
+						preprocessProperties.setProperty("preprocess", preprocess);
 					}
 				} /* FOR end */
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
+		productLine.setPreprocessProperties(preprocessProperties);
 		/* Create a Configuration Knowledge and returns it. */
 		ConfigurationKnowledge ck = new ConfigurationKnowledge(ckItems);
 		return ck;

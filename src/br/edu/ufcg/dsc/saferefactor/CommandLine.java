@@ -71,7 +71,7 @@ public class CommandLine {
 			p.setProperty("timeout", String.valueOf(timeout));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("timeout", "0");
+			p.setProperty("timeout", "60");
 		}
 
 		if (maxTests != 0) {
@@ -79,7 +79,7 @@ public class CommandLine {
 			p.setProperty("maxtests", String.valueOf(maxTests));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("maxtests", "0");
+			p.setProperty("maxtests", "60");
 		}
 
 		/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
@@ -137,7 +137,8 @@ public class CommandLine {
 
 		Saferefactor sr = new Saferefactor(source, target, "bin", "src", "lib", classes, maxTests, criteria);
 
-		isRefinement = sr.isRefactoring(String.valueOf(timeout), false);
+		System.out.println("Safe Refactor!");
+		isRefinement = sr.isRefactoring(String.valueOf(timeout), true);
 
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");

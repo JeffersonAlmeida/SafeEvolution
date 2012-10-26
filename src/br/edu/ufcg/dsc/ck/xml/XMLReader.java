@@ -214,7 +214,7 @@ public class XMLReader {
 				if(classeRelativePath.endsWith(".java")){
 					/* Get the java class dependencies with soot framework. */
 					/*String clazz = classFile.getName().replaceAll(".java", "");
-					String path = classFile.getParent();
+					String path = classFile.getParent(); 
 					System.out.println("Parametros para o SOOT -> Classe:" + clazz + " path:" + path);*/
 					dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
 					/* Catch the aspects needed to compile the class. This class can depend on aspects. Who are these aspects ? */
