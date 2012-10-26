@@ -134,11 +134,27 @@ public class Product {
 			System.out.println(" key " + (i++) + ": "+ key2 + " content: " + mapeamentoAssetNameParaDestino.get(key2));
 		}
 		
-		boolean mappingAssetDestiny = this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino);
+		boolean mappingAssetDestiny = this.compareAssets(productSource);
+		
+		
+		//boolean mappingAssetDestiny = this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino);
 		boolean mappingAssetOrigin = this.mapeamentoAssetNameParaOrigem.equals(productSource.mapeamentoAssetNameParaOrigem);
 		boolean preProcess = this.preProcessTags.equals(productSource.preProcessTags);
 		System.out.println("mappingAssetDestiny: " + mappingAssetDestiny + " mappingAssetOrigin: " + mappingAssetOrigin + " preProcess: " + preProcess);
 		return mappingAssetDestiny && mappingAssetOrigin &&	preProcess;
+	}
+
+	private boolean compareAssets(Product productSource) {
+		Iterator<String> it = mapeamentoAssetNameParaDestino.keySet().iterator();
+		while(it.hasNext()){
+			String key = (String) it.next();
+			//System.out.println("compara: Primeiro Asset: " + this.mapeamentoAssetNameParaDestino.get(key) + "  -  Segundo Asset: " + 	productSource.mapeamentoAssetNameParaDestino.get(key) );
+			if(!(this.mapeamentoAssetNameParaDestino.containsKey(key))){
+				System.out.println("Chave não encontrada: " + key);
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public boolean isGenerated() {
