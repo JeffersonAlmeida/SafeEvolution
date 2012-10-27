@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -12,7 +14,16 @@ import br.edu.ufcg.dsc.util.FilesManager;
 
 public class TargetBuilder extends ProductBuilder {
 
-	public TargetBuilder() {
+	 private static TargetBuilder instance = null; 
+
+	 public static TargetBuilder getInstance(){  
+        if (instance == null){  
+            instance = new TargetBuilder();  
+        }  
+        return instance;  
+	 }  
+	
+	private TargetBuilder() {
 		super();
 		this.createConstants("101SPL");
 	}
@@ -56,19 +67,19 @@ public class TargetBuilder extends ProductBuilder {
 		
 		this.preprocessFeaturesToConstants = new HashMap<String, String>();
 		
-		this.preprocessFeaturesToConstants.put("javaexorcismspl", "javaexorcismspl");
-		this.preprocessFeaturesToConstants.put("treestructure", "treestructure");
-		this.preprocessFeaturesToConstants.put("logging", "logging");
-		this.preprocessFeaturesToConstants.put("accesscontrol", "accesscontrol");
-		this.preprocessFeaturesToConstants.put("cut", "cut");
-		this.preprocessFeaturesToConstants.put("cutwhatever", "cutwhatever");
-		this.preprocessFeaturesToConstants.put("cutnodepartment", "cutnodepartment");
-		this.preprocessFeaturesToConstants.put("cutnomanager", "cutnomanager");
-		this.preprocessFeaturesToConstants.put("total", "total");
-		this.preprocessFeaturesToConstants.put("totalwalker", "totalwalker");
-		this.preprocessFeaturesToConstants.put("totalreducer", "totalreducer");
-		this.preprocessFeaturesToConstants.put("precedence", "precedence");
-		this.preprocessFeaturesToConstants.put("gui", "gui");
+		this.preprocessFeaturesToConstants.put("JavaExorcismSPL", "JavaExorcismSPL");
+		this.preprocessFeaturesToConstants.put("TreeStructure", "TreeStructure");
+		this.preprocessFeaturesToConstants.put("Logging", "Logging");
+		this.preprocessFeaturesToConstants.put("AccessControl", "AccessControl");
+		this.preprocessFeaturesToConstants.put("Cut", "Cut");
+		this.preprocessFeaturesToConstants.put("CutWhatever", "CutWhatever");
+		this.preprocessFeaturesToConstants.put("CutNoDepartment", "CutNoDepartment");
+		this.preprocessFeaturesToConstants.put("CutNoManager", "CutNoManager");
+		this.preprocessFeaturesToConstants.put("Total", "Total");
+		this.preprocessFeaturesToConstants.put("TotalWalker", "TotalWalker");
+		this.preprocessFeaturesToConstants.put("TotalReducer", "TotalReducer");
+		this.preprocessFeaturesToConstants.put("Precedence", "Precedence");
+		this.preprocessFeaturesToConstants.put("GUI", "GUI");
 
 		this.preprocessConstantsToFeatures = new HashMap<String, String>();
 		
@@ -92,8 +103,8 @@ public class TargetBuilder extends ProductBuilder {
 			
 			
 			File productDirectory = new File(product.getPath());
-			
-			this.preprocessVelocity(product.getFeaturesList(), productDirectory, product.getSpl(), product.getPath(), resultado);
+			HashSet<String> featuresList = product.getFeaturesList();
+			this.preprocessVelocity(featuresList, productDirectory, product.getSpl(), product.getPath(), resultado);
 			
 			String libPath = product.getSpl().getLibPath();
 			

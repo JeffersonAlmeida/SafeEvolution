@@ -106,7 +106,7 @@ public class ToolCommandLine {
 		if (line.equals(Lines.MOBILE_MEDIA)) {
 			this.builder = new MobileMediaBuilder();
 		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
-			this.builder = new TargetBuilder();
+			this.builder = TargetBuilder.getInstance();
 		}
 	}
 
@@ -276,7 +276,6 @@ public class ToolCommandLine {
 		if (isWF) {
 			/* Verify whether Configuration knowledge and Feature Model is a refinement */
 			boolean isFMAndCKRefinement = this.isFeatureModelAndConfigurationKnowledgeWeakRefinement(sourceLine, targetLine);
-			isFMAndCKRefinement = true;
 			System.out.println("FM and CK are refinement:- " + isFMAndCKRefinement );
 			
 			/*Set this information in the Results/Short Report.*/
