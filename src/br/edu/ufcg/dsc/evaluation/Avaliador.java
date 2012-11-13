@@ -111,6 +111,8 @@ public class Avaliador {
 		
 		ToolCommandLine toolCommandLine = new ToolCommandLine(line);
 		
+		System.out.println("Avaliando A LPS.");
+		
 		try {
 				String libPathSource = null;
 				String libPathTarget = null;

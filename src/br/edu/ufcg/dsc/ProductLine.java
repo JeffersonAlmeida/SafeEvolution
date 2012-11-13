@@ -96,11 +96,8 @@ public class ProductLine {
 		this.ckPath = ckPath;
 		this.fmPath = fmPath;
 		this.amPath = amPath;
-		
 		this.temAspectos = temAspectos;
-		
 		this.controladoresFachadas = controladoresFachadas;
-		
 		this.ckFormat = ckFormat;
 		this.amFormat = amFormat;
 	}
@@ -304,6 +301,8 @@ public class ProductLine {
 		return libPath;
 	}
 
+	/**
+	 *  Imprime as configuracoes validas = 'produtos'*/
 	public void printSetOfFeatures() {
 		String s = "";
 		int c = 1;
@@ -321,6 +320,26 @@ public class ProductLine {
 
 	public void setPreprocessProperties(Properties preprocessProperties) {
 		this.preprocessProperties = preprocessProperties;
+	}
+	
+	/**
+	 * Imprime as features individualmente.
+	 */
+	public void printFeatures(String plName){
+		System.out.println("\n" + plName.toUpperCase() + " Features: ");
+		Iterator<String> i = this.features.iterator();
+		while(i.hasNext()){
+			String s = i.next();
+			System.out.println("\nFeature: " + s);
+		}
+	}
+	
+	public void printPreprocessProperties(String plName){
+		Iterator<Object> i = this.preprocessProperties.keySet().iterator();
+		while(i.hasNext()){
+			String feature = (String) i.next();
+			System.out.println("Feature: " + feature + " - " + "Files: " + this.preprocessProperties.getProperty(feature));
+		}
 	}
 	
 }

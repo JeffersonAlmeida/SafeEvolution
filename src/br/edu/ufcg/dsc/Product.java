@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
+import com.nokia.mid.sound.Sound;
+
 /**
  * @author Jefferson Almeida - jra at cin dot ufpe dot br
  * This Class represents a single product of the SPL.
@@ -119,29 +121,65 @@ public class Product {
 	 * @return
 	 */
 	public boolean temMesmosAssetsEPreProcessConstants(Product productSource) {
+		  /* this -> Target Product, productSource -> Source Product */
 		
-		Iterator<String> it = mapeamentoAssetNameParaDestino.keySet().iterator();
-		Iterator<String> it2 = productSource.mapeamentoAssetNameParaDestino.keySet().iterator();
-		int i = 0 ;
-		System.out.println("\n\t Mapping Asset Destiny");
-		while(it.hasNext()){
-			String key = (String) it.next();
-			System.out.println(" key " + (i++) + ": "+ key + " content: " + mapeamentoAssetNameParaDestino.get(key));
-		}
-		i=0;
-		while(it2.hasNext()){
-			String key2 = (String) it2.next();
-			System.out.println(" key " + (i++) + ": "+ key2 + " content: " + mapeamentoAssetNameParaDestino.get(key2));
-		}
+		printAssetAndPreProcessConstants(productSource);
 		
-		boolean mappingAssetDestiny = this.compareAssets(productSource);
-		
-		
-		//boolean mappingAssetDestiny = this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino);
+		boolean mappingAssetDestiny = this.mapeamentoAssetNameParaDestino.equals(productSource.mapeamentoAssetNameParaDestino);
 		boolean mappingAssetOrigin = this.mapeamentoAssetNameParaOrigem.equals(productSource.mapeamentoAssetNameParaOrigem);
 		boolean preProcess = this.preProcessTags.equals(productSource.preProcessTags);
 		System.out.println("mappingAssetDestiny: " + mappingAssetDestiny + " mappingAssetOrigin: " + mappingAssetOrigin + " preProcess: " + preProcess);
 		return mappingAssetDestiny && mappingAssetOrigin &&	preProcess;
+	}
+
+	private void printAssetAndPreProcessConstants(Product productSource) {
+		
+		Iterator<String> it = mapeamentoAssetNameParaDestino.keySet().iterator();
+		Iterator<String> it2 = productSource.mapeamentoAssetNameParaDestino.keySet().iterator();
+		
+		int i=0;
+		System.out.println("\n\n\tSOURCE Mapping Asset DESTINY:\n");
+		while(it2.hasNext()){
+			String key2 = (String) it2.next();
+			System.out.println(" key " + (i++) + ": "+ key2 + " content: " + productSource.mapeamentoAssetNameParaDestino.get(key2));
+		}
+		
+		i = 0 ;
+		System.out.println("\n\tTARGET Mapping Asset DESTINY:\n");
+		while(it.hasNext()){
+			String key = (String) it.next();
+			System.out.println(" key " + (i++) + ": "+ key + " content: " + this.mapeamentoAssetNameParaDestino.get(key));
+		}
+		
+		i=0;
+		System.out.println("\n\n\tSOURCE Mapping Asset ORGIGEM:\n");
+		Iterator<String> it4 = productSource.mapeamentoAssetNameParaOrigem.keySet().iterator();
+		while(it4.hasNext()){
+			String key = (String) it4.next();
+			System.out.println(" key " + (i++) + ": "+ key + " content: " + productSource.mapeamentoAssetNameParaOrigem.get(key));
+		}
+		i=0;
+		System.out.println("\n\n\tTARGET Mapping Asset ORGIGEM:\n");
+		Iterator<String> it3 = this.mapeamentoAssetNameParaOrigem.keySet().iterator();
+		while(it3.hasNext()){
+			String key = (String) it3.next();
+			System.out.println(" key " + (i++) + ": "+ key + " content: " + mapeamentoAssetNameParaOrigem.get(key));
+		}
+		i=0;
+		System.out.println("\n\n\tSOURCE PREPROCESS TAGS:\n");
+		Iterator<String> it6 = productSource.preProcessTags.iterator();
+		while(it6.hasNext()){
+			String key = (String) it6.next();
+			System.out.println(" key " + (i++) + ": "+ key);
+		}
+		i=0;
+		System.out.println("\n\n\t TARGET PREPROCESS TAGS:\n");
+		Iterator<String> it5 = this.preProcessTags.iterator(); 
+		while(it5.hasNext()){
+			String key = (String) it5.next();
+			System.out.println(" key " + (i++) + ": "+ key);
+		}
+		System.out.println("\n\n");
 	}
 
 	private boolean compareAssets(Product productSource) {

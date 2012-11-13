@@ -67,19 +67,19 @@ public class TargetBuilder extends ProductBuilder {
 		
 		this.preprocessFeaturesToConstants = new HashMap<String, String>();
 		
-		this.preprocessFeaturesToConstants.put("JavaExorcismSPL", "JavaExorcismSPL");
-		this.preprocessFeaturesToConstants.put("TreeStructure", "TreeStructure");
-		this.preprocessFeaturesToConstants.put("Logging", "Logging");
-		this.preprocessFeaturesToConstants.put("AccessControl", "AccessControl");
-		this.preprocessFeaturesToConstants.put("Cut", "Cut");
-		this.preprocessFeaturesToConstants.put("CutWhatever", "CutWhatever");
-		this.preprocessFeaturesToConstants.put("CutNoDepartment", "CutNoDepartment");
-		this.preprocessFeaturesToConstants.put("CutNoManager", "CutNoManager");
-		this.preprocessFeaturesToConstants.put("Total", "Total");
-		this.preprocessFeaturesToConstants.put("TotalWalker", "TotalWalker");
-		this.preprocessFeaturesToConstants.put("TotalReducer", "TotalReducer");
-		this.preprocessFeaturesToConstants.put("Precedence", "Precedence");
-		this.preprocessFeaturesToConstants.put("GUI", "GUI");
+		this.preprocessFeaturesToConstants.put("javaexorcismspl", "javaexorcismspl");
+		this.preprocessFeaturesToConstants.put("treestructure", "treestructure");
+		this.preprocessFeaturesToConstants.put("logging", "logging");
+		this.preprocessFeaturesToConstants.put("accesscontrol", "accesscontrol");
+		this.preprocessFeaturesToConstants.put("cut", "cut");
+		this.preprocessFeaturesToConstants.put("cutwhatever", "cutwhatever");
+		this.preprocessFeaturesToConstants.put("cutnodepartment", "cutnodepartment");
+		this.preprocessFeaturesToConstants.put("cutnomanager", "cutnomanager");
+		this.preprocessFeaturesToConstants.put("total", "total");
+		this.preprocessFeaturesToConstants.put("totalwalker", "totalwalker");
+		this.preprocessFeaturesToConstants.put("totalreducer", "totalreducer");
+		this.preprocessFeaturesToConstants.put("precedence", "precedence");
+		this.preprocessFeaturesToConstants.put("gui", "gui");
 
 		this.preprocessConstantsToFeatures = new HashMap<String, String>();
 		

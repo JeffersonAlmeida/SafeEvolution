@@ -113,8 +113,7 @@ public class ASTComparator {
 	 * @param textB
 	 * @throws JavaModelException 
 	 */
-	public void setInputs(String nameCUA, String contentsA, String nameCUB,
-			String contentsB) throws JavaModelException {
+	public void setInputs(String nameCUA, String contentsA, String nameCUB, String contentsB) throws JavaModelException {
 
 		try {
 			String formattedCUA = formatCompilationUnit(contentsA);

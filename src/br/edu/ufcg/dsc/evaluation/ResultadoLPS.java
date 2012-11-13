@@ -47,6 +47,9 @@ public class ResultadoLPS {
 		this.fmAndCKRefinement = false;
 		this.isAssetMappingsEqual = false;
 		this.diferencas = new ArrayList<Diferenca>();
+		/*We assume this is true, once source and target product line have the same assets 
+		 *is not necessary to verify the behavioral preservation.*/
+		this.compObservableBehavior = true;
 	}
 	/**
 	 * Singleton
@@ -206,8 +209,8 @@ public class ResultadoLPS {
 		return isRefinement;
 	}
 
-	public void setRefinement(boolean isRefinement) {
-		this.isRefinement = isRefinement;
+	public void setRefinement(boolean refinement) {
+		this.isRefinement = refinement;
 	}
 	public boolean isSourceIsWellFormed() {
 		return sourceIsWellFormed;

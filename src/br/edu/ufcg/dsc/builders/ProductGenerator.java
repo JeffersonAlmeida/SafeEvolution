@@ -89,6 +89,7 @@ public class ProductGenerator {
 				HashSet<String> output = new HashSet<String>();
 				SafeList<Sig> allReachableSigs = ans.getAllReachableSigs();
 				
+				
 				int counter = 1;
 				for (Sig sig : allReachableSigs) {
 					if (counter >= TOTAL_UNUSED_SIGS) {
@@ -102,6 +103,7 @@ public class ProductGenerator {
 					}
 					counter++;
 				}
+				
 				if (output.size() != 0) {
 						products.add(output);
 				}

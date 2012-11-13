@@ -60,13 +60,14 @@ public abstract class ProductBuilder {
 
 	private void getFilesInDirectory(File file, ArrayList<String> filesToPreprocess) {
 		if (file.isDirectory()) {
+			System.out.println("\nDirectory: " + file.getAbsolutePath());
 			File[] files = file.listFiles();
-
 			for (File subFile : files) {
 				this.getFilesInDirectory(subFile, filesToPreprocess);
 			}
 		} else {
 			if (file.getAbsolutePath().endsWith("xml") || file.getAbsolutePath().endsWith("java") || file.getAbsolutePath().endsWith("aj")) {
+				System.out.println("\nFile: " + file.getAbsolutePath());
 				filesToPreprocess.add(file.getAbsolutePath());
 			}
 		}

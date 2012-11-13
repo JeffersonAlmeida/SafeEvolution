@@ -195,4 +195,10 @@ public class ConfigurationKnowledge {
 		return result;
 	}
 
+	public void print(String plName) {
+		System.out.println("\n" + plName + " Configuration Knowledge Items:\n" + this.toString());
+	}
+	
+	
+
 }

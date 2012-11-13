@@ -160,6 +160,7 @@ public class FeatureModelReader {
 		if (features.isEmpty() || sigs.equals("") || semanticsFM.equals("")) {
 			return;
 		}
+	
 		File newFile = new File(output);
 		PrintStream stream = new PrintStream(newFile);
 

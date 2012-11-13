@@ -1,6 +1,8 @@
 package br.edu.ufcg.dsc.ck.xml;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
 import java.util.Collection;
@@ -213,9 +215,18 @@ public class XMLReader {
 				/* Is the file a Java Class ? */
 				if(classeRelativePath.endsWith(".java")){
 					/* Get the java class dependencies with soot framework. */
-					/*String clazz = classFile.getName().replaceAll(".java", "");
+					String clazz = classFile.getName().replaceAll(".java", "");
+					BufferedReader reader = new BufferedReader(new FileReader(classFile));
+			            String line = "", text = "";
+			            while((line = reader.readLine()) != null){
+			                text += line + "\r\n";
+			        }
+			        reader.close();
+					
+			        System.out.println("\nClass Content:\n" + text);
+			        
 					String path = classFile.getParent(); 
-					System.out.println("Parametros para o SOOT -> Classe:" + clazz + " path:" + path);*/
+					System.out.println("Parametros para o SOOT -> Classe:" + clazz + " path:" + path);
 					dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
 					/* Catch the aspects needed to compile the class. This class can depend on aspects. Who are these aspects ? */
 					dependencias.addAll(FilesManager.getInstance().getDependenciasAspectos(classFile));
@@ -231,10 +242,12 @@ public class XMLReader {
 					productLine.getDependencias().put(classeRelativePath, dependencias);
 					/* walk through all dependencies classes.*/
 					for(String dependence : dependencias){
-						/*Get the required classes*/
+						System.out.println("\nProvided Class: " + providedClass + " Dependence: " + dependence);
+						/*Get the required classes*/ /* Get constant from the asset mapping.*/
 						String constantRequired = getConstantFromAssetMapping(dependence, productLine.getAssetMapping());
 						if(constantRequired != null){
 							/* ... and put it in the required HashSet<String>*/
+							System.out.println("\nProvided Class: " + providedClass + " Its Dependencies: " + dependence + " - constant Required: " + constantRequired);
 							requiredClasses.add(constantRequired);
 						}
 					}

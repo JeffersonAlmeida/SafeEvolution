@@ -1,4 +1,5 @@
 ### ONLY_CHANGED_CLASSES ###
+Avaliando A LPS.
 
 The directory of the generated products: <  Tool Path + Products  >
 
@@ -7,8 +8,8 @@ clean_products_folder:
      [echo] This is an Ant Task created to clean the generated products folder.
 
  Two directories have been deleted:  < Tool Path + Products > and < pluginpath + emma + instr >
-Walk through this directory and get all files: D:\101Companies\SecondCategory\ToySPL03\src
-Walk through this directory and get all files: D:\101Companies\SecondCategory\ToySPL03T\src
+Walk through this directory and get all files: D:\101Companies\SecondCategory\littleSPLT\src
+Walk through this directory and get all files: D:\101Companies\SecondCategory\littleSPLT02\src
 
 
 
@@ -16,11 +17,39 @@ Walk through this directory and get all files: D:\101Companies\SecondCategory\To
 
 
 Build the SOURCE Feature Model Alloy file:
+source Set OF Features: 
+
+SOURCE Features: 
+
+Feature: tree
+
+Feature: littlespl
+
+Feature: logging
+
+SOURCE FM Semantics: pred semanticasource[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] )
+ }
 
  Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
 
 
 Build the TARGET Feature Model Alloy file:
+target Set OF Features: 
+
+TARGET Features: 
+
+Feature: tree
+
+Feature: precedence
+
+Feature: littlespl
+
+Feature: logging
+
+TARGET FM Semantics: pred semanticatarget[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] ) and ( isTrue[precedence] => isTrue[littlespl] )
+ }
 
  Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
 
@@ -39,604 +68,1073 @@ Build the EVOLUTION Alloy file:
 
 
 Build the SOURCE Feature Model Alloy file:
+source Set OF Features: 
+
+SOURCE Features: 
+
+Feature: tree
+
+Feature: littlespl
+
+Feature: logging
+
+SOURCE FM Semantics: pred semanticasource[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] )
+ }
 
  Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
 
 
 Build the TARGET Feature Model Alloy file:
+target Set OF Features: 
+
+TARGET Features: 
+
+Feature: tree
+
+Feature: precedence
+
+Feature: littlespl
+
+Feature: logging
+
+TARGET FM Semantics: pred semanticatarget[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] ) and ( isTrue[precedence] => isTrue[littlespl] )
+ }
 
  Alloy File has been created. Check it out in < Tool Path + Alloy + Alloy File >
 
 
 Build the SOURCE Configuration Knowledge Alloy file:
 
+Class Content:
+package org.softlang.company;
+import java.util.Observable;
 
-Class Name: Build, build.xml
+//#if($LOG)
+import org.softlang.main.Walker;
+#end
 
- Provided Classes:  [ Build ] 
+public class Employee extends Observable{
 
- Required Classes: 
+	private String name;
+	private double salary;
+	
+	public Employee(String name, double salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+		//#if($LOG)
+		Walker walker = new Walker();
+		walker.m();
+		setChanged();
+ 		notifyObservers("salary");
+ 		#end
+	
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+}
 
+Parametros para o SOOT -> Classe:Employee path:D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\company
 
-Class Name: Junit, lib\Junit.jar
+Provided Class: Employee Dependence: org.softlang.main.Walker
 
- Provided Classes:  [ Junit ] 
+Provided Class: Employee Its Dependencies: org.softlang.main.Walker - constant Required: Walker
 
- Required Classes: 
+Provided Class: Employee Dependence: Walker
 
+Provided Class: Employee Its Dependencies: Walker - constant Required: Walker
 
-Class Name: Basics, src\org\softlang\tests\Basics.java
-
- Provided Classes:  [ Basics ] 
-
- Required Classes:  [ Factory ]  [ Department ]  [ Company ]  [ Employee ] 
-
-
-Class Name: Company, src\org\softlang\company\Company.java
-
- Provided Classes:  [ Company ] 
-
- Required Classes:  [ Container ] 
-
-
-Class Name: Component, src\org\softlang\company\Component.java
-
- Provided Classes:  [ Component ] 
-
- Required Classes: 
-
-
-Class Name: Container, src\org\softlang\company\Container.java
-
- Provided Classes:  [ Container ] 
-
- Required Classes:  [ Subunit ]  [ Component ] 
-
-
-Class Name: Department, src\org\softlang\company\Department.java
-
- Provided Classes:  [ Department ] 
-
- Required Classes:  [ Subunit ]  [ Employee ]  [ Container ] 
+Provided Class: Employee Dependence: package org.softlang.company;
 
 
 Class Name: Employee, src\org\softlang\company\Employee.java
 
  Provided Classes:  [ Employee ] 
 
- Required Classes:  [ Subunit ] 
+ Required Classes:  [ Walker ] 
 
+Class Content:
+package org.softlang.features;
 
-Class Name: Subunit, src\org\softlang\company\Subunit.java
+import java.util.Observable;
+import java.util.Observer;
 
- Provided Classes:  [ Subunit ] 
+import org.softlang.company.Employee;
 
- Required Classes:  [ Component ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\factory\BeanFactory.java:4,8:
-  Semantic Error: org.softlang.company.impl.bean not found
+/**
+ * Log all changes to salaries of employees.
+ * Log them on stdout and count them.
+ */
+public class Logging implements Observer {
+	public void update(Observable o, Object arg) {
+		if (o instanceof Employee && arg instanceof String) {
+			Employee e = (Employee)o;
+			if (((String)arg).equals("salary")) {
+				System.out.println("Salary of " + e.getName() + " adjusted to " + e.getSalary());
+			}
+		}
+	}
+}
 
+Parametros para o SOOT -> Classe:Logging path:D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\features
 
-Class Name: BeanFactory, src\org\softlang\company\factory\BeanFactory.java
+Provided Class: Logging Dependence: org.softlang.company.Employee
 
- Provided Classes:  [ BeanFactory ] 
+Provided Class: Logging Its Dependencies: org.softlang.company.Employee - constant Required: Employee
 
- Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
+Provided Class: Logging Dependence: Employee
 
+Provided Class: Logging Its Dependencies: Employee - constant Required: Employee
 
-Class Name: Factory, src\org\softlang\company\factory\Factory.java
-
- Provided Classes:  [ Factory ] 
-
- Required Classes:  [ Department ]  [ Company ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\factory\PojoFactory.java:4,8:
-  Semantic Error: org.softlang.company.impl.pojo not found
-
-
-Class Name: PojoFactory, src\org\softlang\company\factory\PojoFactory.java
-
- Provided Classes:  [ PojoFactory ] 
-
- Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
-
-
-Class Name: CompanyImplBean, src\org\softlang\company\impl\bean\CompanyImpl.java
-
- Provided Classes:  [ CompanyImplBean ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Company ] 
-
-
-Class Name: ComponentImplBean, src\org\softlang\company\impl\bean\ComponentImpl.java
-
- Provided Classes:  [ ComponentImplBean ] 
-
- Required Classes:  [ Component ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\ContainerImpl.java:13:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-
-Class Name: ContainerImplBean, src\org\softlang\company\impl\bean\ContainerImpl.java
-
- Provided Classes:  [ ContainerImplBean ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ ObservableSimpleList ]  [ Subunit ]  [ SimpleLinkedList ]  [ Container ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\DepartmentImpl.java:10:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
-
-
-Class Name: DepartmentImplBean, src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- Provided Classes:  [ DepartmentImplBean ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:19:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:20:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:31:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:32:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:44:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:45:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:57:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:58:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-
-
-Class Name: EmployeeImplBean, src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- Provided Classes:  [ EmployeeImplBean ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
-
-
-Class Name: CompanyImplPojo, src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- Provided Classes:  [ CompanyImplPojo ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Company ] 
-
-
-Class Name: ComponentImplPojo, src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- Provided Classes:  [ ComponentImplPojo ] 
-
- Required Classes:  [ Component ] 
-
-
-Class Name: ContainerImplPojo, src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- Provided Classes:  [ ContainerImplPojo ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Subunit ]  [ Container ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\pojo\DepartmentImpl.java:10:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.pojo.DepartmentImpl matches.
-
-
-Class Name: DepartmentImplPojo, src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
- Provided Classes:  [ DepartmentImplPojo ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Employee ] 
-
-
-Class Name: EmployeeImplPojo, src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- Provided Classes:  [ EmployeeImplPojo ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\ReturningVisitor.java:3,8:
-  Semantic Error: org.softlang.company not found
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\ReturningVisitor.java:7:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\ReturningVisitor.java:8:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-
-
-Class Name: ReturningVisitor, src\org\softlang\visitor\ReturningVisitor.java
-
- Provided Classes:  [ ReturningVisitor ] 
-
- Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\util\ObservableSimpleList.java:60:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\util\ObservableSimpleList.java:69:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-
-Class Name: ObservableSimpleList, src\org\softlang\util\ObservableSimpleList.java
-
- Provided Classes:  [ ObservableSimpleList ] 
-
- Required Classes:  [ AddToList ]  [ SimpleList ]  [ RemoveFromList ] 
-
-
-Class Name: SimpleList, src\org\softlang\util\SimpleList.java
-
- Provided Classes:  [ SimpleList ] 
-
- Required Classes: 
-
-
-Class Name: SimpleLinkedList, src\org\softlang\util\SimpleLinkedList.java
-
- Provided Classes:  [ SimpleLinkedList ] 
-
- Required Classes:  [ SimpleList ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\util\AddToList.java:4,36:
-  Semantic Error: no field named element
-
-
-Class Name: AddToList, src\org\softlang\util\AddToList.java
-
- Provided Classes:  [ AddToList ] 
-
- Required Classes:  [ ChangeList ] 
-
-
-Class Name: ChangeList, src\org\softlang\util\ChangeList.java
-
- Provided Classes:  [ ChangeList ] 
-
- Required Classes: 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\util\RemoveFromList.java:4,41:
-  Semantic Error: no field named element
-
-
-Class Name: RemoveFromList, src\org\softlang\util\RemoveFromList.java
-
- Provided Classes:  [ RemoveFromList ] 
-
- Required Classes:  [ ChangeList ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\VoidVisitor.java:3,8:
-  Semantic Error: org.softlang.company not found
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\VoidVisitor.java:7:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\visitor\VoidVisitor.java:8:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
-
-
-Class Name: VoidVisitor,  src\org\softlang\visitor\VoidVisitor.java
-
- Provided Classes:  [ VoidVisitor ] 
-
- Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+Provided Class: Logging Dependence: package org.softlang.features;
 
 
 Class Name: Logging, src\org\softlang\features\Logging.java
 
  Provided Classes:  [ Logging ] 
 
- Required Classes:  [ EmployeeImplBean ]  [ EmployeeImplPojo ] 
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:19:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:20:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:31:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:32:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:44:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:45:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:57:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03\src\org\softlang\company\impl\bean\EmployeeImpl.java:58:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+ Required Classes:  [ Employee ] 
+
+Class Content:
+package org.softlang.main;
+
+import org.softlang.company.Employee;
+import org.softlang.features.Logging;
+
+public class Main {
+
+	public static void main(String[] args) {
+		System.out.println("Main\n");
+		Logging log = new Logging();
+		Employee employee = new Employee("Jefferson", 10000.0);
+		employee.addObserver(log);
+		employee.setSalary(20000.0);
+	}
+
+}
+
+Parametros para o SOOT -> Classe:Main path:D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\main
+D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\main\Main.java:11:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+Provided Class: Main Dependence: Logging
+
+Provided Class: Main Its Dependencies: Logging - constant Required: Logging
+
+Provided Class: Main Dependence: org.softlang.features.Logging
+
+Provided Class: Main Its Dependencies: org.softlang.features.Logging - constant Required: Logging
+
+Provided Class: Main Dependence: org.softlang.company.Employee
+
+Provided Class: Main Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Main Dependence: Employee
+
+Provided Class: Main Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Main Dependence: package org.softlang.main;
 
 
-Class Name: EmployeeImplBean, src\org\softlang\company\impl\bean\EmployeeImpl.java
+Class Name: Main, src\org\softlang\main\Main.java
 
- Provided Classes:  [ EmployeeImplBean ] 
+ Provided Classes:  [ Main ] 
 
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
+ Required Classes:  [ Logging ]  [ Employee ] 
 
-Build the TARGET Configuration Knowledge Alloy file:
+Class Content:
+package org.softlang.company;
+import java.util.Observable;
 
+//#if($LOG)
+import org.softlang.main.Walker;
+#end
 
-Class Name: Build, build.xml
+public class Employee extends Observable{
 
- Provided Classes:  [ Build ] 
+	private String name;
+	private double salary;
+	
+	public Employee(String name, double salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+		//#if($LOG)
+		Walker walker = new Walker();
+		walker.m();
+		setChanged();
+ 		notifyObservers("salary");
+ 		#end
+	
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+}
 
- Required Classes: 
+Parametros para o SOOT -> Classe:Employee path:D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\company
 
+Provided Class: Employee Dependence: org.softlang.main.Walker
 
-Class Name: Junit, lib\Junit.jar
+Provided Class: Employee Its Dependencies: org.softlang.main.Walker - constant Required: Walker
 
- Provided Classes:  [ Junit ] 
+Provided Class: Employee Dependence: Walker
 
- Required Classes: 
+Provided Class: Employee Its Dependencies: Walker - constant Required: Walker
 
-
-Class Name: Basics, src\org\softlang\tests\Basics.java
-
- Provided Classes:  [ Basics ] 
-
- Required Classes:  [ Factory ]  [ Department ]  [ Company ]  [ Employee ] 
-
-
-Class Name: Company, src\org\softlang\company\Company.java
-
- Provided Classes:  [ Company ] 
-
- Required Classes:  [ Container ] 
-
-
-Class Name: Component, src\org\softlang\company\Component.java
-
- Provided Classes:  [ Component ] 
-
- Required Classes: 
-
-
-Class Name: Container, src\org\softlang\company\Container.java
-
- Provided Classes:  [ Container ] 
-
- Required Classes:  [ Subunit ]  [ Component ] 
-
-
-Class Name: Department, src\org\softlang\company\Department.java
-
- Provided Classes:  [ Department ] 
-
- Required Classes:  [ Subunit ]  [ Employee ]  [ Container ] 
+Provided Class: Employee Dependence: package org.softlang.company;
 
 
 Class Name: Employee, src\org\softlang\company\Employee.java
 
  Provided Classes:  [ Employee ] 
 
- Required Classes:  [ Subunit ] 
+ Required Classes:  [ Walker ] 
 
+Class Content:
+package org.softlang.main;
 
-Class Name: Subunit, src\org\softlang\company\Subunit.java
+public class Walker {
+	public Walker(){
+		super();
+	}
+	public void m(){
+		System.out.println("M()");
+	}
+}
 
- Provided Classes:  [ Subunit ] 
+Parametros para o SOOT -> Classe:Walker path:D:\101Companies\SecondCategory\littleSPLT\src\org\softlang\main
 
- Required Classes:  [ Component ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\factory\BeanFactory.java:4,8:
-  Semantic Error: org.softlang.company.impl.bean not found
+Provided Class: Walker Dependence: package org.softlang.main;
 
 
-Class Name: BeanFactory, src\org\softlang\company\factory\BeanFactory.java
+Class Name: Walker, src\org\softlang\main\Walker.java
 
- Provided Classes:  [ BeanFactory ] 
-
- Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
-
-
-Class Name: Factory, src\org\softlang\company\factory\Factory.java
-
- Provided Classes:  [ Factory ] 
-
- Required Classes:  [ Department ]  [ Company ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\factory\PojoFactory.java:4,8:
-  Semantic Error: org.softlang.company.impl.pojo not found
-
-
-Class Name: PojoFactory, src\org\softlang\company\factory\PojoFactory.java
-
- Provided Classes:  [ PojoFactory ] 
-
- Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplBean ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
-
-
-Class Name: CompanyImplBean, src\org\softlang\company\impl\bean\CompanyImpl.java
-
- Provided Classes:  [ CompanyImplBean ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Company ] 
-
-
-Class Name: ComponentImplBean, src\org\softlang\company\impl\bean\ComponentImpl.java
-
- Provided Classes:  [ ComponentImplBean ] 
-
- Required Classes:  [ Component ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\ContainerImpl.java:15:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-
-Class Name: ContainerImplBean, src\org\softlang\company\impl\bean\ContainerImpl.java
-
- Provided Classes:  [ ContainerImplBean ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ ObservableSimpleList ]  [ Subunit ]  [ SimpleLinkedList ]  [ Container ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\DepartmentImpl.java:10:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
-
-
-Class Name: DepartmentImplBean, src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- Provided Classes:  [ DepartmentImplBean ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:29:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:30:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:41:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:42:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:57:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:58:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:76:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:77:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-
-
-Class Name: EmployeeImplBean, src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- Provided Classes:  [ EmployeeImplBean ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
-
-
-Class Name: CompanyImplPojo, src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- Provided Classes:  [ CompanyImplPojo ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Company ] 
-
-
-Class Name: ComponentImplPojo, src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- Provided Classes:  [ ComponentImplPojo ] 
-
- Required Classes:  [ Component ] 
-
-
-Class Name: ContainerImplPojo, src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- Provided Classes:  [ ContainerImplPojo ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Subunit ]  [ Container ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\pojo\DepartmentImpl.java:11:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.pojo.DepartmentImpl matches.
-
-
-Class Name: DepartmentImplPojo, src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
- Provided Classes:  [ DepartmentImplPojo ] 
-
- Required Classes:  [ ContainerImplPojo ]  [ Subunit ]  [ Department ]  [ Employee ] 
-
-
-Class Name: EmployeeImplPojo, src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- Provided Classes:  [ EmployeeImplPojo ] 
-
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\visitor\ReturningVisitor.java:3,8:
-  Semantic Error: org.softlang.company not found
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\visitor\ReturningVisitor.java:7:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\visitor\ReturningVisitor.java:8:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-
-
-Class Name: ReturningVisitor, src\org/softlang/visitor/ReturningVisitor.java
-
- Provided Classes:  [ ReturningVisitor ] 
-
- Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\util\ObservableSimpleList.java:60:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\util\ObservableSimpleList.java:69:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-
-Class Name: ObservableSimpleList, src\org/softlang/util/ObservableSimpleList.java
-
- Provided Classes:  [ ObservableSimpleList ] 
-
- Required Classes:  [ AddToList ]  [ SimpleList ]  [ RemoveFromList ] 
-
-
-Class Name: SimpleList, src\org/softlang/util/SimpleList.java
-
- Provided Classes:  [ SimpleList ] 
+ Provided Classes:  [ Walker ] 
 
  Required Classes: 
 
+source Configuration Knowledge Items:
+Feature Expression: logging
+Provided: {Main=src\org\softlang\main\Main.java}
+Required: [Logging, Employee]
 
-Class Name: SimpleLinkedList, src\org/softlang/util/SimpleLinkedList.java
+Feature Expression: logging
+Provided: {Walker=src\org\softlang\main\Walker.java}
+Required: []
 
- Provided Classes:  [ SimpleLinkedList ] 
+Feature Expression: tree
+Provided: {Employee=src\org\softlang\company\Employee.java}
+Required: [Walker]
 
- Required Classes:  [ SimpleList ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\util\AddToList.java:4,36:
-  Semantic Error: no field named element
+Feature Expression: logging
+Provided: {Employee=src\org\softlang\company\Employee.java}
+Required: [Walker]
 
-
-Class Name: AddToList, src\org/softlang/util/AddToList.java
-
- Provided Classes:  [ AddToList ] 
-
- Required Classes:  [ ChangeList ] 
-
-
-Class Name: ChangeList, src\org/softlang/util/ChangeList.java
-
- Provided Classes:  [ ChangeList ] 
-
- Required Classes: 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\util\RemoveFromList.java:4,41:
-  Semantic Error: no field named element
+Feature Expression: logging
+Provided: {Logging=src\org\softlang\features\Logging.java}
+Required: [Employee]
 
 
-Class Name: RemoveFromList, src\org/softlang/util/RemoveFromList.java
+Feature: tree - Files: tree
+Feature: logging - Files: LOG
+Feature: preprocess - Files: src\org\softlang\company\Employee.java,src\org\softlang\company\Employee.java
+Alloy File Content: open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
 
- Provided Classes:  [ RemoveFromList ] 
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
 
- Required Classes:  [ ChangeList ] 
+ pred semanticaCK[] { provided[] => required[] }
 
 
-Class Name: Logging, src\org/softlang/features/Logging.java
+Correct Set of Features:
+
+Feature: tree
+
+Feature: littlespl
+
+Feature: logging
+
+Including CK Signatures in Correct Set
+
+Signature: Logging
+
+Signature: Main
+
+Signature: tree
+
+Signature: logging
+
+Signature: Walker
+
+Signature: Employee
+
+Correct Ser Filled:
+
+Correct Item: Logging
+
+Correct Item: Main
+
+Correct Item: tree
+
+Correct Item: littlespl
+
+Correct Item: logging
+
+Correct Item: Employee
+
+Correct Item: Walker
+
+Create Alloy CK File:
+File Name: D:/documentos/Msc/SE/workspace/ferramentaLPSSM\Alloy\sourceCKAlloy.als
+Content: module sourceCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticasource[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] )
+ }
+assert WT {semanticasource[] => semanticaCK[]}
+check WT for 2
+
+Build the TARGET Configuration Knowledge Alloy file:
+
+Class Content:
+package org.softlang.company;
+import java.util.Observable;
+
+//#if($LOG)
+import org.softlang.main.Walker;
+#end
+
+public class Employee extends Observable{
+
+	private String name;
+	private double salary;
+	
+	public Employee(String name, double salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+		//#if($LOG || $Precedence)
+		Walker walker = new Walker();
+		walker.m();
+		setChanged();
+ 		notifyObservers("salary");
+ 		#end
+	
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+}
+
+Parametros para o SOOT -> Classe:Employee path:D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\company
+
+Provided Class: Employee Dependence: org.softlang.main.Walker
+
+Provided Class: Employee Its Dependencies: org.softlang.main.Walker - constant Required: Walker
+
+Provided Class: Employee Dependence: Walker
+
+Provided Class: Employee Its Dependencies: Walker - constant Required: Walker
+
+Provided Class: Employee Dependence: package org.softlang.company;
+
+
+Class Name: Employee, src\org\softlang\company\Employee.java
+
+ Provided Classes:  [ Employee ] 
+
+ Required Classes:  [ Walker ] 
+
+Class Content:
+package org.softlang.features;
+
+import java.util.Observable;
+import java.util.Observer;
+
+import org.softlang.company.Employee;
+
+/**
+ * Log all changes to salaries of employees.
+ * Log them on stdout and count them.
+ */
+public class Logging implements Observer {
+	public void update(Observable o, Object arg) {
+		if (o instanceof Employee && arg instanceof String) {
+			Employee e = (Employee)o;
+			if (((String)arg).equals("salary")) {
+				System.out.println("Salary of " + e.getName() + " adjusted to " + e.getSalary());
+			}
+		}
+	}
+}
+
+Parametros para o SOOT -> Classe:Logging path:D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\features
+
+Provided Class: Logging Dependence: org.softlang.company.Employee
+
+Provided Class: Logging Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Logging Dependence: Employee
+
+Provided Class: Logging Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Logging Dependence: package org.softlang.features;
+
+
+Class Name: Logging, src\org\softlang\features\Logging.java
 
  Provided Classes:  [ Logging ] 
 
- Required Classes:  [ EmployeeImplBean ]  [ EmployeeImplPojo ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:29:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:30:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:41:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:42:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:57:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:58:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:76:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\company\impl\bean\EmployeeImpl.java:77:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+ Required Classes:  [ Employee ] 
+
+Class Content:
+package org.softlang.main;
+
+import org.softlang.company.Employee;
+import org.softlang.features.Logging;
+
+public class Main {
+
+	public static void main(String[] args) {
+		System.out.println("Main\n");
+		Logging log = new Logging();
+		Employee employee = new Employee("Jefferson", 10000.0);
+		employee.addObserver(log);
+		employee.setSalary(20000.0);
+	}
+
+}
+
+Parametros para o SOOT -> Classe:Main path:D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\main
+D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\main\Main.java:11:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+Provided Class: Main Dependence: Logging
+
+Provided Class: Main Its Dependencies: Logging - constant Required: Logging
+
+Provided Class: Main Dependence: org.softlang.features.Logging
+
+Provided Class: Main Its Dependencies: org.softlang.features.Logging - constant Required: Logging
+
+Provided Class: Main Dependence: org.softlang.company.Employee
+
+Provided Class: Main Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Main Dependence: Employee
+
+Provided Class: Main Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Main Dependence: package org.softlang.main;
 
 
-Class Name: EmployeeImplBean, src\org/softlang/company/impl/bean/EmployeeImpl.java
+Class Name: Main, src\org\softlang\main\Main.java
 
- Provided Classes:  [ EmployeeImplBean ] 
+ Provided Classes:  [ Main ] 
 
- Required Classes:  [ ComponentImplPojo ]  [ Employee ] 
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\features\Precedence.java:3,8:
-  Semantic Error: org.softlang.company not found
-D:\101Companies\SecondCategory\ToySPL03T\src\org\softlang\features\Precedence.java:4,8:
-  Semantic Error: org.softlang.company.impl.bean not found
+ Required Classes:  [ Logging ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company;
+import java.util.Observable;
+
+//#if($LOG)
+import org.softlang.main.Walker;
+#end
+
+public class Employee extends Observable{
+
+	private String name;
+	private double salary;
+	
+	public Employee(String name, double salary) {
+		super();
+		this.name = name;
+		this.salary = salary;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public double getSalary() {
+		return salary;
+	}
+	public void setSalary(double salary) {
+		this.salary = salary;
+		//#if($LOG || $Precedence)
+		Walker walker = new Walker();
+		walker.m();
+		setChanged();
+ 		notifyObservers("salary");
+ 		#end
+	
+	}
+	@Override
+	public String toString() {
+		return "Employee [name=" + name + ", salary=" + salary + "]";
+	}
+}
+
+Parametros para o SOOT -> Classe:Employee path:D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\company
+
+Provided Class: Employee Dependence: org.softlang.main.Walker
+
+Provided Class: Employee Its Dependencies: org.softlang.main.Walker - constant Required: Walker
+
+Provided Class: Employee Dependence: Walker
+
+Provided Class: Employee Its Dependencies: Walker - constant Required: Walker
+
+Provided Class: Employee Dependence: package org.softlang.company;
 
 
-Class Name: Precedence, src/org/softlang/features/Precedence.java
+Class Name: Employee, src\org\softlang\company\Employee.java
 
- Provided Classes:  [ Precedence ] 
+ Provided Classes:  [ Employee ] 
 
- Required Classes:  [ EmployeeImplPojo ]  [ Subunit ]  [ DepartmentImplBean ]  [ Employee ] 
+ Required Classes:  [ Walker ] 
+
+Class Content:
+package org.softlang.main;
+
+public class Walker {
+	public Walker(){
+		super();
+	}
+	public void m(){
+		System.out.println("M()");
+	}
+}
+
+Parametros para o SOOT -> Classe:Walker path:D:\101Companies\SecondCategory\littleSPLT02\src\org\softlang\main
+
+Provided Class: Walker Dependence: package org.softlang.main;
 
 
-		The beginning of the safe composition test.
+Class Name: Walker, src\org\softlang\main\Walker.java
+
+ Provided Classes:  [ Walker ] 
+
+ Required Classes: 
+
+target Configuration Knowledge Items:
+Feature Expression: logging
+Provided: {Main=src\org\softlang\main\Main.java}
+Required: [Logging, Employee]
+
+Feature Expression: logging
+Provided: {Walker=src\org\softlang\main\Walker.java}
+Required: []
+
+Feature Expression: tree
+Provided: {Employee=src\org\softlang\company\Employee.java}
+Required: [Walker]
+
+Feature Expression: logging
+Provided: {Employee=src\org\softlang\company\Employee.java}
+Required: [Walker]
+
+Feature Expression: logging
+Provided: {Logging=src\org\softlang\features\Logging.java}
+Required: [Employee]
 
 
-		End of Safe Composition test.
+Feature: precedence - Files: Precedence
+Feature: tree - Files: tree
+Feature: logging - Files: LOG
+Feature: preprocess - Files: src\org\softlang\company\Employee.java,src\org\softlang\company\Employee.java,src\org\softlang\company\Employee.java
+Alloy File Content: open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
 
-Well Formedness to the <Source> SPL: true
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
 
 
-		The beginning of the safe composition test.
+Correct Set of Features:
+
+Feature: tree
+
+Feature: precedence
+
+Feature: littlespl
+
+Feature: logging
+
+Including CK Signatures in Correct Set
+
+Signature: Logging
+
+Signature: Main
+
+Signature: tree
+
+Signature: logging
+
+Signature: Walker
+
+Signature: Employee
+
+Correct Ser Filled:
+
+Correct Item: Logging
+
+Correct Item: Main
+
+Correct Item: tree
+
+Correct Item: precedence
+
+Correct Item: littlespl
+
+Correct Item: logging
+
+Correct Item: Employee
+
+Correct Item: Walker
+
+Create Alloy CK File:
+File Name: D:/documentos/Msc/SE/workspace/ferramentaLPSSM\Alloy\targetCKAlloy.als
+Content: module targetCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, precedence, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticatarget[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] ) and ( isTrue[precedence] => isTrue[littlespl] )
+ }
+assert WT {semanticatarget[] => semanticaCK[]}
+check WT for 2
 
 
-		End of Safe Composition test.
+		The beginning of the safe composition test to the source SPL
 
-Well Formedness to the <Target> SPL.: true
+
+Features: < 3 >
+ [ tree ]  [ littlespl ]  [ logging ] 
+
+Checking CK ... 
+
+FileContent: module sourceCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticasource[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] )
+ }
+assert WT {semanticasource[] => semanticaCK[]}
+check WT for 2
+
+
+Content: module sourceCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticasource[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] )
+ }
+assert WT {semanticasource[] => semanticaCK[]}
+check WT for 2
+
+world get All Commands SIZE: 1
+Command: Check WT for 2
+
+ans:
+ ---INSTANCE---
+integers={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+univ={default/FM$0, default/True$0, default/False$0, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+Int={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+seq/Int={0, 1}
+String={}
+none={}
+default/FM={default/FM$0}
+default/FM<:features={default/FM$0->default/True$0}
+default/True={default/True$0}
+default/False={default/False$0}
+default/Bool={default/True$0, default/False$0}
+this/Logging={default/False$0}
+this/Main={default/True$0}
+this/tree={default/True$0}
+this/littlespl={default/True$0}
+this/logging={default/False$0}
+this/Employee={default/True$0}
+this/Walker={default/False$0}
+
+
+1 -> Feature Name: tree
+
+Result: {default/True$0}
+tree = True
+
+2 -> Feature Name: littlespl
+
+Result: {default/True$0}
+littlespl = True
+
+3 -> Feature Name: logging
+
+Result: {default/False$0}
+logging = False
+
+Feature Assignment:
+1 -> tree=True
+2 -> littlespl=True
+3 -> logging=False
+returnn: true -  num: 1
+world get All Commands SIZE: 2
+Command: Check WT for 2
+
+ans:
+ ---INSTANCE---
+integers={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+univ={default/FM$0, default/True$0, default/False$0, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+Int={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+seq/Int={0, 1}
+String={}
+none={}
+default/FM={default/FM$0}
+default/FM<:features={default/FM$0->default/True$0}
+default/True={default/True$0}
+default/False={default/False$0}
+default/Bool={default/True$0, default/False$0}
+this/Logging={default/False$0}
+this/Main={default/True$0}
+this/tree={default/True$0}
+this/littlespl={default/True$0}
+this/logging={default/False$0}
+this/Employee={default/True$0}
+this/Walker={default/False$0}
+
+
+1 -> Feature Name: tree
+
+Result: {default/True$0}
+tree = True
+
+2 -> Feature Name: littlespl
+
+Result: {default/True$0}
+littlespl = True
+
+3 -> Feature Name: logging
+
+Result: {default/False$0}
+logging = False
+
+Feature Assignment:
+1 -> tree=True
+2 -> littlespl=True
+3 -> logging=False
+returnn: false -  num: 2
+duplicated product: {tree=True, littlespl=True, logging=False}
+
+		End of Safe Composition test to the + source SPL
+
+Well Formedness to the <Source> SPL: false
+
+
+		The beginning of the safe composition test to the target SPL
+
+
+Features: < 4 >
+ [ tree ]  [ precedence ]  [ littlespl ]  [ logging ] 
+
+Checking CK ... 
+
+FileContent: module targetCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, precedence, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticatarget[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] ) and ( isTrue[precedence] => isTrue[littlespl] )
+ }
+assert WT {semanticatarget[] => semanticaCK[]}
+check WT for 2
+
+
+Content: module targetCKAlloy
+open default
+ pred provided[] { 
+( isTrue[logging] => (isTrue[Main]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[tree] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Employee]) )
+( isTrue[logging] => (isTrue[Logging]) )
+ }
+
+ pred required[] { 
+( isTrue[logging] => (isTrue[Logging] and isTrue[Employee]) )
+( isTrue[tree] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Walker]) )
+( isTrue[logging] => (isTrue[Employee]) )
+ }
+
+ pred semanticaCK[] { provided[] => required[] }
+one sig Logging, Main, tree, precedence, littlespl, logging, Employee, Walker in Bool{}
+
+pred semanticatarget[] { 
+isTrue[littlespl] and ( isTrue[tree] <=> isTrue[littlespl] ) and ( isTrue[logging] => isTrue[littlespl] ) and ( isTrue[precedence] => isTrue[littlespl] )
+ }
+assert WT {semanticatarget[] => semanticaCK[]}
+check WT for 2
+
+world get All Commands SIZE: 1
+Command: Check WT for 2
+
+ans:
+ ---INSTANCE---
+integers={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+univ={default/FM$0, default/True$0, default/False$0, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+Int={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+seq/Int={0, 1}
+String={}
+none={}
+default/FM={default/FM$0}
+default/FM<:features={default/FM$0->default/True$0}
+default/True={default/True$0}
+default/False={default/False$0}
+default/Bool={default/True$0, default/False$0}
+this/Logging={default/False$0}
+this/Main={default/True$0}
+this/tree={default/True$0}
+this/precedence={default/True$0}
+this/littlespl={default/True$0}
+this/logging={default/False$0}
+this/Employee={default/True$0}
+this/Walker={default/False$0}
+
+
+1 -> Feature Name: tree
+
+Result: {default/True$0}
+tree = True
+
+2 -> Feature Name: precedence
+
+Result: {default/True$0}
+precedence = True
+
+3 -> Feature Name: littlespl
+
+Result: {default/True$0}
+littlespl = True
+
+4 -> Feature Name: logging
+
+Result: {default/False$0}
+logging = False
+
+Feature Assignment:
+1 -> precedence=True
+2 -> tree=True
+3 -> littlespl=True
+4 -> logging=False
+returnn: true -  num: 1
+world get All Commands SIZE: 2
+Command: Check WT for 2
+
+ans:
+ ---INSTANCE---
+integers={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+univ={default/FM$0, default/True$0, default/False$0, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+Int={-8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7}
+seq/Int={0, 1}
+String={}
+none={}
+default/FM={default/FM$0}
+default/FM<:features={default/FM$0->default/True$0}
+default/True={default/True$0}
+default/False={default/False$0}
+default/Bool={default/True$0, default/False$0}
+this/Logging={default/False$0}
+this/Main={default/True$0}
+this/tree={default/True$0}
+this/precedence={default/True$0}
+this/littlespl={default/True$0}
+this/logging={default/False$0}
+this/Employee={default/True$0}
+this/Walker={default/False$0}
+
+
+1 -> Feature Name: tree
+
+Result: {default/True$0}
+tree = True
+
+2 -> Feature Name: precedence
+
+Result: {default/True$0}
+precedence = True
+
+3 -> Feature Name: littlespl
+
+Result: {default/True$0}
+littlespl = True
+
+4 -> Feature Name: logging
+
+Result: {default/False$0}
+logging = False
+
+Feature Assignment:
+1 -> precedence=True
+2 -> tree=True
+3 -> littlespl=True
+4 -> logging=False
+returnn: false -  num: 2
+duplicated product: {precedence=True, tree=True, littlespl=True, logging=False}
+
+		End of Safe Composition test to the + target SPL
+
+Well Formedness to the <Target> SPL.: false
 
 
 
@@ -644,1322 +1142,27 @@ Well Formedness to the <Target> SPL.: true
 		Ok. We have already checked the well formedness.
 
 
-	 -> WF: true
+	 -> WF: false
 
 
-# SOURCE Products List<2> #
+ Software Product Line Short Report :
 
-1 -> [ javaexorcismspl ] [ logging ] [ treestructure ] 
+- It is NOT a refinement.
 
-2 -> [ javaexorcismspl ] [ treestructure ] 
+- It is NOT well formed.
 
-# TARGET Products List<4> #
 
-1 -> [ javaexorcismspl ] [ precedence ] [ logging ] [ treestructure ] 
+new directory: D:/documentos/Msc/SE/workspace/ferramentaLPSSM\Resultados\Report-littleSPLT-littleSPLT02
 
-2 -> [ javaexorcismspl ] [ logging ] [ treestructure ] 
+	 SPL REPORT: 
 
-3 -> [ javaexorcismspl ] [ precedence ] [ treestructure ] 
+-> Source Product Line is Well Formed:?  false
+-> Target Product Line is Well Formed:?  false
+-> Asset Mappings are Equals :?false
+-> Are Configuration Knowledge and Feature Model a refinement:?  false
+-> The evolution has a compatible observable behavior:?  true
+-> My Whole Software Product Line is Well Formed:?  false
+-> My Whole Software Product Line is a Refinement:?  false
 
-4 -> [ javaexorcismspl ] [ treestructure ] 
 
-Product 0 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
 
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ AddToList ] - src\org\softlang\util\AddToList.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ ChangeList ] - src\org\softlang\util\ChangeList.java
-
- [ Build ] - build.xml
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ Logging ] - src\org\softlang\features\Logging.java
-
- [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
-
- [ SimpleList ] - src\org\softlang\util\SimpleList.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-
-	Correspondent Product
-
-Product 1 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
-
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ SimpleList ] - src\org/softlang/util/SimpleList.java
-
- [ EmployeeImplBean ] - src\org/softlang/company/impl/bean/EmployeeImpl.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ Logging ] - src\org/softlang/features/Logging.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ Build ] - build.xml
-
- [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
-
- [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
-
- [ ChangeList ] - src\org/softlang/util/ChangeList.java
-
- [ AddToList ] - src\org/softlang/util/AddToList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: Logging content: src\org/softlang/features/Logging.java
- key 5: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Department content: src\org\softlang\company\Department.java
- key 13: Company content: src\org\softlang\company\Company.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: Logging content: src\org/softlang/features/Logging.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: VoidVisitor content: null
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
-
-The two products below do not have the same set of assets:
-
-Product2 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
-
-Product1 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
-
-Product 2 ::  [ javaexorcismspl ] [ treestructure ]
-
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ AddToList ] - src\org\softlang\util\AddToList.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ ChangeList ] - src\org\softlang\util\ChangeList.java
-
- [ Build ] - build.xml
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
-
- [ SimpleList ] - src\org\softlang\util\SimpleList.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-
-	Correspondent Product
-
-Product 3 ::  [ javaexorcismspl ] [ treestructure ]
-
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ SimpleList ] - src\org/softlang/util/SimpleList.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ Build ] - build.xml
-
- [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
-
- [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
-
- [ ChangeList ] - src\org/softlang/util/ChangeList.java
-
- [ AddToList ] - src\org/softlang/util/AddToList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: Build content: build.xml
- key 9: ChangeList content: src\org/softlang/util/ChangeList.java
- key 10: Component content: src\org\softlang\company\Component.java
- key 11: Department content: src\org\softlang\company\Department.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: Container content: src\org\softlang\company\Container.java
- key 16: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 17: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 18: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 19: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 20: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 21: Factory content: src\org\softlang\company\factory\Factory.java
- key 22: Employee content: src\org\softlang\company\Employee.java
- key 23: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 24: AddToList content: src\org/softlang/util/AddToList.java
- key 25: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 26: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 27: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 28: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: VoidVisitor content: null
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
-
-The two products below do not have the same set of assets:
-
-Product4 ::  [ javaexorcismspl ] [ treestructure ]
-
-Product3 ::  [ javaexorcismspl ] [ treestructure ]
-
-Product 4 ::  [ javaexorcismspl ] [ precedence ] [ logging ] [ treestructure ]
-
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ SimpleList ] - src\org/softlang/util/SimpleList.java
-
- [ EmployeeImplBean ] - src\org/softlang/company/impl/bean/EmployeeImpl.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ Logging ] - src\org/softlang/features/Logging.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ Build ] - build.xml
-
- [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
-
- [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
-
- [ ChangeList ] - src\org/softlang/util/ChangeList.java
-
- [ AddToList ] - src\org/softlang/util/AddToList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ Precedence ] - src/org/softlang/features/Precedence.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-Product 5 ::  [ javaexorcismspl ] [ precedence ] [ treestructure ]
-
- [ Subunit ] - src\org\softlang\company\Subunit.java
-
- [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
-
- [ Company ] - src\org\softlang\company\Company.java
-
- [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
-
- [ RemoveFromList ] - src\org/softlang/util/RemoveFromList.java
-
- [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
-
- [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
-
- [ SimpleList ] - src\org/softlang/util/SimpleList.java
-
- [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
-
- [ Factory ] - src\org\softlang\company\factory\Factory.java
-
- [ Build ] - build.xml
-
- [ SimpleLinkedList ] - src\org/softlang/util/SimpleLinkedList.java
-
- [ Basics ] - src\org\softlang\tests\Basics.java
-
- [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
-
- [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
-
- [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
-
- [ Container ] - src\org\softlang\company\Container.java
-
- [ ObservableSimpleList ] - src\org/softlang/util/ObservableSimpleList.java
-
- [ ReturningVisitor ] - src\org/softlang/visitor/ReturningVisitor.java
-
- [ ChangeList ] - src\org/softlang/util/ChangeList.java
-
- [ AddToList ] - src\org/softlang/util/AddToList.java
-
- [ Component ] - src\org\softlang\company\Component.java
-
- [ Junit ] - lib\Junit.jar
-
- [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
-
- [ Employee ] - src\org\softlang\company\Employee.java
-
- [ Department ] - src\org\softlang\company\Department.java
-
- [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
-
- [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
-
- [ Precedence ] - src/org/softlang/features/Precedence.java
-
- [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
-
-
- ... Attempting to marry products that did not have a par.
-
-This product did not have a really correspondent target product:
-
-Product  ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: Logging content: src\org/softlang/features/Logging.java
- key 5: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Department content: src\org\softlang\company\Department.java
- key 13: Company content: src\org\softlang\company\Company.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: Logging content: src\org/softlang/features/Logging.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: VoidVisitor content: null
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: Build content: build.xml
- key 9: ChangeList content: src\org/softlang/util/ChangeList.java
- key 10: Component content: src\org\softlang\company\Component.java
- key 11: Department content: src\org\softlang\company\Department.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: Container content: src\org\softlang\company\Container.java
- key 16: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 17: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 18: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 19: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 20: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 21: Factory content: src\org\softlang\company\factory\Factory.java
- key 22: Employee content: src\org\softlang\company\Employee.java
- key 23: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 24: AddToList content: src\org/softlang/util/AddToList.java
- key 25: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 26: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 27: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 28: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: Logging content: null
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: VoidVisitor content: null
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: Logging content: src\org/softlang/features/Logging.java
- key 5: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: Precedence content: src/org/softlang/features/Precedence.java
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: Logging content: src\org/softlang/features/Logging.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: VoidVisitor content: null
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: Precedence content: src/org/softlang/features/Precedence.java
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Department content: src\org\softlang\company\Department.java
- key 13: Company content: src\org\softlang\company\Company.java
- key 14: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: Logging content: null
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: VoidVisitor content: null
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-This product did not have a really correspondent target product:
-
-Product  ::  [ javaexorcismspl ] [ treestructure ]
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: Logging content: src\org/softlang/features/Logging.java
- key 5: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Department content: src\org\softlang\company\Department.java
- key 13: Company content: src\org\softlang\company\Company.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: VoidVisitor content: null
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: Build content: build.xml
- key 9: ChangeList content: src\org/softlang/util/ChangeList.java
- key 10: Component content: src\org\softlang\company\Component.java
- key 11: Department content: src\org\softlang\company\Department.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: Container content: src\org\softlang\company\Container.java
- key 16: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 17: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 18: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 19: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 20: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 21: Factory content: src\org\softlang\company\factory\Factory.java
- key 22: Employee content: src\org\softlang\company\Employee.java
- key 23: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 24: AddToList content: src\org/softlang/util/AddToList.java
- key 25: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 26: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 27: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 28: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: VoidVisitor content: null
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: Logging content: src\org/softlang/features/Logging.java
- key 5: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 6: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 7: Junit content: lib\Junit.jar
- key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 9: Precedence content: src/org/softlang/features/Precedence.java
- key 10: Build content: build.xml
- key 11: ChangeList content: src\org/softlang/util/ChangeList.java
- key 12: Component content: src\org\softlang\company\Component.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: Company content: src\org\softlang\company\Company.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 17: Container content: src\org\softlang\company\Container.java
- key 18: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 21: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 23: Factory content: src\org\softlang\company\factory\Factory.java
- key 24: Employee content: src\org\softlang\company\Employee.java
- key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 26: AddToList content: src\org/softlang/util/AddToList.java
- key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: VoidVisitor content: null
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org/softlang/company/impl/bean/EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-	 Mapping Asset Destiny
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: Precedence content: src/org/softlang/features/Precedence.java
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Department content: src\org\softlang\company\Department.java
- key 13: Company content: src\org\softlang\company\Company.java
- key 14: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 15: SimpleList content: src\org/softlang/util/SimpleList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
- key 0: ReturningVisitor content: src\org/softlang/visitor/ReturningVisitor.java
- key 1: Basics content: src\org\softlang\tests\Basics.java
- key 2: Subunit content: src\org\softlang\company\Subunit.java
- key 3: RemoveFromList content: src\org/softlang/util/RemoveFromList.java
- key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
- key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
- key 6: Junit content: lib\Junit.jar
- key 7: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- key 8: VoidVisitor content: null
- key 9: Build content: build.xml
- key 10: ChangeList content: src\org/softlang/util/ChangeList.java
- key 11: Component content: src\org\softlang\company\Component.java
- key 12: Company content: src\org\softlang\company\Company.java
- key 13: Department content: src\org\softlang\company\Department.java
- key 14: SimpleList content: src\org/softlang/util/SimpleList.java
- key 15: SimpleLinkedList content: src\org/softlang/util/SimpleLinkedList.java
- key 16: Container content: src\org\softlang\company\Container.java
- key 17: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
- key 18: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
- key 19: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
- key 20: ObservableSimpleList content: src\org/softlang/util/ObservableSimpleList.java
- key 21: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
- key 22: Factory content: src\org\softlang\company\factory\Factory.java
- key 23: Employee content: src\org\softlang\company\Employee.java
- key 24: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
- key 25: AddToList content: src\org/softlang/util/AddToList.java
- key 26: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- key 27: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
- key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
- key 29: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
-mappingAssetDestiny: false mappingAssetOrigin: false preProcess: false
-
-
-All products in the source have a really correspondent target product ?: false
-FM and CK are refinement:- true
-
-Have Source and Target the same assets ?:false 
-
-
-
-Testing Products: 
-
-Product1 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
-
-Assests Origem
- asset: \src/org/softlang/visitor/ReturningVisitor.java
- asset: \src/org/softlang/tests/Basics.java
- asset: \src/org/softlang/company/Subunit.java
- asset: \src/org/softlang/util/RemoveFromList.java
- asset: \src/org/softlang/features/Logging.java
- asset: \src/org/softlang/company/impl/pojo/ComponentImpl.java
- asset: \lib/Junit.jar
- asset: \src/org/softlang/company/factory/PojoFactory.java
- asset: \src/org/softlang/company/impl/pojo/EmployeeImpl.java
- asset: \src/org/softlang/visitor/VoidVisitor.java
- asset: \build.xml
- asset: \src/org/softlang/util/ChangeList.java
- asset: \src/org/softlang/company/Component.java
- asset: \src/org/softlang/company/Department.java
- asset: \src/org/softlang/company/Company.java
- asset: \src/org/softlang/util/SimpleList.java
- asset: \src/org/softlang/util/SimpleLinkedList.java
- asset: \src/org/softlang/company/Container.java
- asset: \src/org/softlang/company/impl/bean/EmployeeImpl.java
- asset: \src/org/softlang/company/impl/pojo/ContainerImpl.java
- asset: \src/org/softlang/company/impl/bean/ComponentImpl.java
- asset: \src/org/softlang/util/ObservableSimpleList.java
- asset: \src/org/softlang/company/impl/bean/CompanyImpl.java
- asset: \src/org/softlang/company/factory/Factory.java
- asset: \src/org/softlang/company/Employee.java
- asset: \src/org/softlang/company/impl/bean/ContainerImpl.java
- asset: \src/org/softlang/util/AddToList.java
- asset: \src/org/softlang/company/impl/bean/DepartmentImpl.java
- asset: \src/org/softlang/company/impl/pojo/CompanyImpl.java
- asset: \src/org/softlang/company/impl/pojo/DepartmentImpl.java
- asset: \src/org/softlang/company/factory/BeanFactory.java
-
-Assests Destino
- asset: src\org\softlang\visitor\ReturningVisitor.java
- asset: src\org\softlang\tests\Basics.java
- asset: src\org\softlang\company\Subunit.java
- asset: src\org\softlang\util\RemoveFromList.java
- asset: src\org\softlang\features\Logging.java
- asset: src\org\softlang\company\impl\pojo\ComponentImpl.java
- asset: lib\Junit.jar
- asset: src\org\softlang\company\factory\PojoFactory.java
- asset: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- asset: src\org\softlang\visitor\VoidVisitor.java
- asset: build.xml
- asset: src\org\softlang\util\ChangeList.java
- asset: src\org\softlang\company\Component.java
- asset: src\org\softlang\company\Department.java
- asset: src\org\softlang\company\Company.java
- asset: src\org\softlang\util\SimpleList.java
- asset: src\org\softlang\util\SimpleLinkedList.java
- asset: src\org\softlang\company\Container.java
- asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
- asset: src\org\softlang\company\impl\pojo\ContainerImpl.java
- asset: src\org\softlang\company\impl\bean\ComponentImpl.java
- asset: src\org\softlang\util\ObservableSimpleList.java
- asset: src\org\softlang\company\impl\bean\CompanyImpl.java
- asset: src\org\softlang\company\factory\Factory.java
- asset: src\org\softlang\company\Employee.java
- asset: src\org\softlang\company\impl\bean\ContainerImpl.java
- asset: src\org\softlang\util\AddToList.java
- asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
- asset: src\org\softlang\company\impl\pojo\CompanyImpl.java
- asset: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- asset: src\org\softlang\company\factory\BeanFactory.java
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-Creating dir
-@Features Preprocess Velocity :
-
-feature:javaexorcismspl
-
-feature:logging
-
-feature:treestructure
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\build.xml
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Company.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Component.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Container.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Department.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Employee.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory\BeanFactory.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory\Factory.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory\PojoFactory.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean\CompanyImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean\ComponentImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean\ContainerImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean\DepartmentImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean\EmployeeImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo\CompanyImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo\ComponentImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo\ContainerImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo\DepartmentImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo\EmployeeImpl.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\Subunit.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\features\Logging.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\tests\Basics.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\AddToList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\ChangeList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\ObservableSimpleList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\RemoveFromList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\SimpleLinkedList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util\SimpleList.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\visitor\ReturningVisitor.java
-File: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\visitor\VoidVisitor.java
-FileConstants: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\ant\constants.properties
-filesToPreprocessArgument: D:\documentos\Msc\SE\workspace\ferramentaLPSSM\ant\files.properties
-
-velocity:
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1'
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\factory
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\bean
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo
-     [java] Out 26, 2012 2:56:03 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company\impl\pojo
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\company
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\features
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/features'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\tests
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\util
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\visitor
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
-     [java] D:\documentos\Msc\SE\workspace\ferramentaLPSSM\Products\Product1\src\org\softlang\visitor
-     [java] Out 26, 2012 2:56:04 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path 'D:/documentos/Msc/SE/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
-This product does not have a correspondent target product.
-This evolution is a refactoring ?: < false >

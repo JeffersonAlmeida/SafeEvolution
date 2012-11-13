@@ -261,7 +261,7 @@ public class ToolCommandLine {
 	 */
 	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
 		
-		/* Till here this is not a refinment yet. */
+		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 
 		/* Check whether the Software Product Line is well formed. */
@@ -327,7 +327,8 @@ public class ToolCommandLine {
 				}else {
 					/*Set whether the SPL evolution is a refinement. */
 					resultado.getMeasures().setResult(true);
-					System.out.println("\nThe Software Product Line was refined.\n");
+					System.out.println("\n\nThe Software Product Line was refined.\n");
+					isRefinement = true;
 					ResultadoLPS.getInstance().setRefinement(true);
 				}
 			} 
@@ -730,7 +731,15 @@ public class ToolCommandLine {
 	 * @see SafeCompositionResult
 	 */
 	private SafeCompositionResult checkSafeCompositionOfLine(String string, HashSet<String> features, String name) {
-		System.out.println("\n\n\t\tThe beginning of the safe composition test.\n");
+		System.out.println("\n\n\t\tThe beginning of the safe composition test to the "+ name + " SPL\n");
+		Iterator<String> i = features.iterator();
+		System.out.println("\nFeatures: < " + features.size() + " >");
+		String featuresList = "";
+		while(i.hasNext()){
+			String s = (String) i.next();
+			featuresList = featuresList + " [ " + s + " ] ";
+		}
+		System.out.println(featuresList);
 		SafeCompositionResult checkCKSource = null;
 		try {
 			checkCKSource = SafeCompositionVerifier.checkCK(Constants.ALLOY_PATH, string, Constants.ALLOY_EXTENSION, string + Constants.ALLOY_EXTENSION, features, name);
@@ -738,7 +747,7 @@ public class ToolCommandLine {
 			System.out.println("\nAn Error Occurred when trying to do Safe Composition Test.\n\n" + e.getMessage());
 			e.printStackTrace();
 		}
-		System.out.println("\n\t\tEnd of Safe Composition test.\n");
+		System.out.println("\n\t\tEnd of Safe Composition test to the + "+ name + " SPL\n");
 		return checkCKSource;
 	}
 
@@ -761,11 +770,17 @@ public class ToolCommandLine {
 
 		productLine.setFeatures(featureModelReader.getFeatures());
 
+		System.out.println(moduleName+" Set OF Features: ");
+		productLine.printFeatures(moduleName);
+		
 		if (moduleName.equals("source")) {
 			this.sourceFMSemantics = featureModelReader.getSemanticsFM();
+			System.out.println("\nSOURCE FM Semantics: " + this.sourceFMSemantics);
 		} else if (moduleName.equals("target")) {
 			this.targetFMSemantics = featureModelReader.getSemanticsFM();
+			System.out.println("\nTARGET FM Semantics: " + this.targetFMSemantics);
 		}
+		
 		try {
 			featureModelReader.buildAlloyFile(moduleName, sourceFmAlloyName);
 		} catch (FileNotFoundException e) {
@@ -775,23 +790,33 @@ public class ToolCommandLine {
 
 	private void buildAlloyCKFile(String name, String fMSemantics, String indicator, ProductLine productLine) {
 		ConfigurationKnowledge ck = productLine.getCk();
+		ck.print(indicator);
+		productLine.printPreprocessProperties(indicator);
 		String alloy = ck.toAlloy();
 
+		System.out.println("Alloy File Content: " + alloy);
+		
 		HashSet<String> correctSet = new HashSet<String>();
+		System.out.println("\nCorrect Set of Features:");
 		for (String string : productLine.getFeatures()) {
-			// correctSet.add(string.trim().toLowerCase());
+			System.out.println("\nFeature: " + string);
 			correctSet.add(string.trim());
 		}
 		HashSet<String> ckSigs = ck.getSignatures();
+		System.out.println("\nIncluding CK Signatures in Correct Set");
 		for (String string : ckSigs) {
+			System.out.println("\nSignature: " + string);
 			correctSet.add(string.trim());
 		}
 		String header = "module " + name + Constants.LINE_SEPARATOR;
 
 		String sigs = "one sig ";
 		String separador = "";
+		
+		System.out.println("\nCorrect Ser Filled:");
 		for (String string : correctSet) {
 			string = string.trim();
+			System.out.println("\nCorrect Item: " + string);
 			if (string != null && !string.equals("")) {
 				sigs += separador + string;
 				separador = ", ";
@@ -803,8 +828,11 @@ public class ToolCommandLine {
 		assertText += Constants.LINE_SEPARATOR;
 		assertText += "check WT for 2";
 
-		filesManager.createFile(Constants.ALLOY_PATH + name + Constants.ALLOY_EXTENSION, header + alloy + sigs + fMSemantics
-				+ Constants.LINE_SEPARATOR + assertText);
+		String fileName = Constants.ALLOY_PATH + name + Constants.ALLOY_EXTENSION;
+		String content = header + alloy + sigs + fMSemantics + Constants.LINE_SEPARATOR + assertText;
+		System.out.println("\nCreate Alloy CK File:\nFile Name: " + fileName + "\nContent: " + content);
+		/* Create Alloy Ck File: FileName and Content*/
+		filesManager.createFile(fileName, content);
 	}
 
 	/**
@@ -996,8 +1024,10 @@ public class ToolCommandLine {
 
 	/**
 	 * Checa apenas classes modificadas. Se mais de MAX_CLASSES_MODIFICADAS
-	 * forem alteradas, a otimizacao eh descartada. This methods also is responsible to answer whether the evolution is a refactoring or not.
-	 * It means, is the evolution preserving behavior ?  <br></br>
+	 * forem alteradas, a otimizacao eh descartada. This methods also is
+	 * responsible to answer whether the evolution is a refactoring or not. It
+	 * means, is the evolution preserving behavior ? <br>
+	 * </br>
 	 * 
 	 * @param sourcePath
 	 * @param targetPath
@@ -1008,7 +1038,7 @@ public class ToolCommandLine {
 	 * @return
 	 * @throws IOException
 	 * @throws AssetNotFoundException
-	 * @throws DirectoryException 
+	 * @throws DirectoryException
 	 */
 	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
