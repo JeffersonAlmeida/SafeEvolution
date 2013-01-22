@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Properties;
+import java.util.Set;
 
 import soot.Main;
 import br.edu.ufcg.dsc.am.AMFormat;
@@ -79,6 +80,9 @@ public class ProductLine {
 	/** The library path of the SPL.*/
 	private String libPath;
 	
+	/** List of files to preProcess found in CK */
+	private Set<String> filesToPreProcess;
+	
 	/**
 	 * 
 	 * @param path SPL path
@@ -100,6 +104,7 @@ public class ProductLine {
 		this.controladoresFachadas = controladoresFachadas;
 		this.ckFormat = ckFormat;
 		this.amFormat = amFormat;
+		this.filesToPreProcess = new HashSet<String>();
 	}
 	
 	/**
@@ -341,5 +346,23 @@ public class ProductLine {
 			System.out.println("Feature: " + feature + " - " + "Files: " + this.preprocessProperties.getProperty(feature));
 		}
 	}
+	
+	public void printFilesListToPreProcess(){
+		Iterator<String> i = this.filesToPreProcess.iterator();
+		System.out.println("\nFile To PreProcess:\n");
+		while(i.hasNext()){
+			System.out.println("->  " + (String)i.next());
+		}
+	}
+
+	public Set<String> getFilesToPreProcess() {
+		return filesToPreProcess;
+	}
+
+	public void setFilesToPreProcess(Set<String> filesToPreProcess) {
+		this.filesToPreProcess = filesToPreProcess;
+	}
+	
+	
 	
 }

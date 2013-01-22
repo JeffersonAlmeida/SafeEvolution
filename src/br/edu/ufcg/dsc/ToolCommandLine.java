@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.naming.ConfigurationException;
 import org.apache.tools.ant.DefaultLogger;
@@ -28,6 +29,7 @@ import br.edu.ufcg.dsc.builders.TargetBuilder;
 import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
+import br.edu.ufcg.dsc.ck.HephaestusCKReader;
 import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
@@ -263,7 +265,19 @@ public class ToolCommandLine {
 		
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
-
+		
+		ConfigurationKnowledge ck = sourceLine.getCk();
+		System.out.println("\n\nSOURCE PRODUCT LINE CONFIGURATION KNOWLEDGE:\n\n");
+		ck.print("SOURCE");
+		sourceLine.getPreprocessProperties();
+		System.out.println("\n\nSOURCE PRODUCT LINE PRE-PROCESS PROPERTIES:\n\n");
+		sourceLine.printPreprocessProperties("SOURCE");
+		System.out.println("\n\nSOURCE PRODUCT LINE PRE-PROCESS FILES:\n\n");
+		sourceLine.printFilesListToPreProcess();
+		generateFilesWithoutPreProcessTags(sourceLine);
+		
+		
+		
 		/* Check whether the Software Product Line is well formed. */
 		System.out.println("\n\n\n\n\t\tLet's check if the SPL is well formed.\n");
 		boolean isWF = this.isWF(sourceLine, targetLine);
@@ -293,18 +307,18 @@ public class ToolCommandLine {
 
 					HashSet<String> changedFeatures = null;
 
-					if (approach == Approach.IMPACTED_FEATURES || approach == Approach.ONLY_CHANGED_CLASSES) {
+					if (approach == Approach.IMPACTED_FEATURES || approach == Approach.ONLY_CHANGED_CLASSES || approach==Approach.EIC) {
 						/* Generate tests only for impacted features. */
 						changedFeatures = getChangedFeatureNames(targetLine);
 					}
 
 					resultado.getMeasures().getTempoExecucaoAbordagem().startContinue();
 
-					if (approach == Approach.ONLY_CHANGED_CLASSES) {
+					if (approach == Approach.ONLY_CHANGED_CLASSES || approach==Approach.EIC) {
 						/* Only generates tests for modified classes and do not generate products. */
 						/* Generates two tests per method. */
 						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
-						/*Ja supoe que o comportamento também não foi preservado.*/
+						/*Ja supoe que o comportamento tambï¿½m nï¿½o foi preservado.*/
 						ResultadoLPS.getInstance().setCompObservableBehavior(isRefinement);
 						if(isRefinement){System.out.println("\nAsset Mapping Refined.\n");} else {System.out.println("\nSorry to inform you that Asset Mapping was not refined.\n");}
 					} else {
@@ -349,6 +363,48 @@ public class ToolCommandLine {
 			/* It is not a refinement. It is not well formed. */
 		}
 		return isRefinement;
+	}
+
+	private void generateFilesWithoutPreProcessTags(ProductLine sourceLine) {
+		Iterator<String> i = sourceLine.getFilesToPreProcess().iterator();
+		while(i.hasNext()){
+			String relativeDirectory = (String) i.next();
+			relativeDirectory = relativeDirectory.replaceAll("\\\\", System.getProperty("file.separator"));			
+			System.out.println("\nrelativeDirectory = " + relativeDirectory);
+			String fullDirectory = sourceLine.getPath() + Constants.FILE_SEPARATOR + relativeDirectory;
+			System.out.println("\nFull File Directory: " + fullDirectory);
+			getConditionalCompilationTags(new File(fullDirectory));
+		}
+	}
+
+	private Set<String> getConditionalCompilationTags(File file) {
+		Set<String> ccTags = new HashSet();
+		try{
+            BufferedReader reader = new BufferedReader(new FileReader(file));
+            String line = "", fileContent = "";
+            while((line = reader.readLine()) != null){
+                fileContent += line + "\r\n";
+            }
+            reader.close();
+           
+            Pattern regex = Pattern.compile("\\$\\w+");
+    	    Matcher regexMatcher = regex.matcher(fileContent);
+    	    int i = 1;
+    	    while (regexMatcher.find()){
+    	    	String s = regexMatcher.group();
+    	      	System.out.println("s: " + (i++) + " - " + s);
+    	      	/* Add the conditional Compilation tag without dollar symbol. */
+    	      	ccTags.add(s.substring(1));
+    	    } 
+    	    System.out.println("\nsize: " + ccTags.size());
+    	    Iterator<String> it = ccTags.iterator();
+    	    while(it.hasNext()){
+    	    	System.out.println("-> " + it.next());
+    	    }
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ccTags;
 	}
 
 	/**
@@ -1021,6 +1077,55 @@ public class ToolCommandLine {
 		return value;
 	}
 
+	private Collection<String> getAboveDependencies(File classe, HashSet<String> dependenciesOfModifiedClasses) {
+		if (classe.isDirectory() && !classe.getAbsolutePath().contains(".svn") ) { 
+			System.out.println("\nDirectory: " + classe.getAbsolutePath());
+			File[] files = classe.listFiles();
+			for (File subFile : files) {
+				this.getAboveDependencies(subFile, dependenciesOfModifiedClasses);
+			}
+		} else {
+			if (classe.getAbsolutePath().endsWith("java") && !classe.getAbsolutePath().contains("ProjectManagerController.java")) {
+				System.out.println("\nFile: " + classe.getAbsolutePath());
+				// Get All Dependencies of this Class
+				Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent()); 
+				dependenciesOfModifiedClasses = belongToModifiedClasses(getPackageName(classe),dependencias, dependenciesOfModifiedClasses);
+			}
+		}
+		return dependenciesOfModifiedClasses;
+	}
+
+	private String getPackageName(File classe) {
+		String words[] = classe.getAbsolutePath().split("src/");
+		String packagePath =  "";
+		if(words.length>2){
+			/* Target Case */
+			packagePath = words[words.length-2] + "src/" +words[words.length-1];
+		}else if (words.length==2){
+			packagePath =  words[1];
+		}
+		return packagePath.replaceAll("/", ".");
+	}
+
+	private HashSet<String> belongToModifiedClasses(String classe, Collection<String> dependencias, HashSet<String> dependenciesOfModifiedClasses) {
+		Iterator<String> i = dependencias.iterator();
+		while(i.hasNext()){
+			String s = i.next();
+			System.out.println("\nDependencia: " + s);
+			Iterator<String> iterator2 = this.classesModificaadas.iterator();
+			while(iterator2.hasNext()){
+				String string2 = iterator2.next();
+				String[] words = string2.split("\\.");//words[words.length-1];
+				String w = words[words.length-2];
+				if(s.equals(w)){
+					// Add class in the dependencies of modified classes set.
+					dependenciesOfModifiedClasses.add(classe);
+					break;
+				}
+			}
+		}
+		return dependenciesOfModifiedClasses;
+	}
 
 	/**
 	 * Checa apenas classes modificadas. Se mais de MAX_CLASSES_MODIFICADAS
@@ -1042,6 +1147,15 @@ public class ToolCommandLine {
 	 */
 	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
+		
+		/* Looking for classes that depends of the modified classes to compile. */
+		if(approach==Approach.EIC){
+			this.classesModificaadas = this.getAboveDependencies(new File(sourceLine.getPath()+"/src"),new HashSet<String>());
+		}
+	    /*____________________________________*/
+		
+		printListofModifiedClasses();
+		
 		long startedTime = System.currentTimeMillis();
 
 		/* The amount of modified classes are greater than MAX_CLASSES_MODIFICADAS */
@@ -1083,53 +1197,56 @@ public class ToolCommandLine {
 			/* walk through all changed classes. */
 			for (String classe : this.classesModificaadas) {
 				System.out.println(" - Modified: " + classe);
-
+				
 				/* Get the whole path of the modified class. */
 				String fileSourcePath = sourceLine.getMappingClassesSistemaDeArquivos().get(classe);
 				String fileTargetPath = targetLine.getMappingClassesSistemaDeArquivos().get(classe);
 
-				/*Copying source version of the modified file. */
-				String destinationPath = null;
-				File fileDestination = null;
-				destinationPath = testSourceDirectory.getAbsolutePath() + FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
-				fileDestination = new File(destinationPath);
-				classeToGenerateTestes = classe;
-				System.out.println("$classeToGenerateTestes Antes: " + classeToGenerateTestes);
+				if(fileSourcePath!=null && fileTargetPath!=null){
+					/*Copying source version of the modified file. */
+					String destinationPath = null;
+					File fileDestination = null;
+					destinationPath = testSourceDirectory.getAbsolutePath() + FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
+					fileDestination = new File(destinationPath);
+					classeToGenerateTestes = classe;
+					System.out.println("$classeToGenerateTestes Antes: " + classeToGenerateTestes);
+					
+					if (this.line == Lines.TARGET){
+						classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
+					}
+					System.out.println("*classeToGenerateTestes Depois: " + classeToGenerateTestes);
+					FilesManager.getInstance().createDir(fileDestination.getParent());
+					FilesManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
+
+					/* Catch the class path in source version. */
+					File fileSource = fileDestination;
+					destinationPath = testTargetDirectory.getAbsolutePath()	+ FilesManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
+					fileDestination = new File(destinationPath);
+					FilesManager.getInstance().createDir(fileDestination.getParent());
+					FilesManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
+
+					/* Catch the class path in source version. */
+					File fileTarget = fileDestination;
+
+					this.dependenciasCopiadas = new HashSet<String>();
+
+					this.copyDependencies(fileSource, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), null, sourceLine.getDependencias());
+					this.copyDependencies(fileTarget, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), null, targetLine.getDependencias());
+
+					/* As aspects are not preprocessed, it will be necessary to manually move the aspects to the src folder after the preprocessing. */
+					if (fileSource.getAbsolutePath().endsWith("aj")) {
+						this.listaAspectos.add(fileSource.getAbsolutePath());
+					}
+					if (fileTarget.getAbsolutePath().endsWith("aj")) {
+						this.listaAspectos.add(fileTarget.getAbsolutePath());
+					}
+					if (classes.equals("")){
+						classes = classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
+					} else if (!classes.contains(classeToGenerateTestes.replaceAll(".java", ""))) {
+						classes = classes + "|" + classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
+					}
+				}
 				
-				if (this.line == Lines.TARGET){
-					classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
-				}
-				System.out.println("*classeToGenerateTestes Depois: " + classeToGenerateTestes);
-				FilesManager.getInstance().createDir(fileDestination.getParent());
-				FilesManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
-
-				/* Catch the class path in source version. */
-				File fileSource = fileDestination;
-				destinationPath = testTargetDirectory.getAbsolutePath()	+ FilesManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
-				fileDestination = new File(destinationPath);
-				FilesManager.getInstance().createDir(fileDestination.getParent());
-				FilesManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
-
-				/* Catch the class path in source version. */
-				File fileTarget = fileDestination;
-
-				this.dependenciasCopiadas = new HashSet<String>();
-
-				this.copyDependencies(fileSource, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), null, sourceLine.getDependencias());
-				this.copyDependencies(fileTarget, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), null, targetLine.getDependencias());
-
-				/* As aspects are not preprocessed, it will be necessary to manually move the aspects to the src folder after the preprocessing. */
-				if (fileSource.getAbsolutePath().endsWith("aj")) {
-					this.listaAspectos.add(fileSource.getAbsolutePath());
-				}
-				if (fileTarget.getAbsolutePath().endsWith("aj")) {
-					this.listaAspectos.add(fileTarget.getAbsolutePath());
-				}
-				if (classes.equals("")){
-					classes = classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
-				} else if (!classes.contains(classeToGenerateTestes.replaceAll(".java", ""))) {
-					classes = classes + "|" + classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
-				}
 			}
 
 			/* Check only products that have any of the modified classes. */
@@ -1333,6 +1450,15 @@ public class ToolCommandLine {
 			System.out.println("Asset mapping verificado em: " + String.valueOf((finishedTime - startedTime) / 1000) + " segundos.");
 		}
 		return sameBehavior;
+	}
+
+	private void printListofModifiedClasses() {
+		Iterator<String> i = this.classesModificaadas.iterator();
+		System.out.println("\nList of Modified Classes: ");
+		while(i.hasNext()){
+			System.out.println(i.next());
+		}
+		System.out.println("\n--------------------------");
 	}
 
 	/**
@@ -1755,17 +1881,17 @@ public class ToolCommandLine {
 	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/*This part creates a representation of the source product line.*/
-		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "\\Hephaestus\\ck.xml", sourcePath + "\\Hephaestus\\fm.xml", sourcePath + "\\Hephaestus\\am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
+		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
 		/*Set the libraries path for the source product line.*/
 		sourceLine.setLibPath(libPathSource);
 		
 		/*This part creates a representation of the target product line.*/
-		ProductLine targetLine = new ProductLine(targetPath, targetPath + "\\Hephaestus\\ck.xml", targetPath + "\\Hephaestus\\fm.xml", targetPath + "\\Hephaestus\\am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
+		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 		
 		/*Set the libraries path for the target product line.*/
 		targetLine.setLibPath(libPathTarget);
-
+		
 		/* Verify the SPL with the created source and target product line.*/
 		return this.verifyLine(sourceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
 	}

@@ -143,6 +143,7 @@ public class HephaestusCKReader {
 						String[] fileNames = args.split(",");
 						String preprocess = preprocessProperties.getProperty("preprocess");
 						for(String fileName : fileNames){
+							productLine.getFilesToPreProcess().add(fileName);
 							if(preprocess == null){
 								preprocess = fileName;
 							}
@@ -150,7 +151,6 @@ public class HephaestusCKReader {
 								preprocess = preprocess + "," + fileName;
 							}
 						}
-						//preprocessProperties.setProperty(fExp, args);
 						preprocessProperties.setProperty("preprocess", preprocess);
 					}
 				} /* FOR end */

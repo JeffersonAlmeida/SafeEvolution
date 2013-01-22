@@ -63,26 +63,27 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				Avaliador avaliador = new Avaliador();
-
+				String source = "/home/jefferson/pairs/MobileMedia04_OO";
+				String target = "/home/jefferson/pairs/MobileMedia04_OO_Refactored_5miss";
 				try {
 					System.out.println("### ONLY_CHANGED_CLASSES ###");
 					avaliador
 							.avalie(
-									Lines.DEFAULT, // Escolha de qual linha de produtos será avaliada.  Mobile Media, Default ou Target.
-									"D:\\101Companies\\SecondCategory\\littleSPLT",  // SPL Original  (SPL)
-									"D:\\101Companies\\SecondCategory\\littleSPLT02",  // Evolução/refactoring da SPL.   (SPL')
-									60,  // timeOut
-									4,   // A quantidade de testes que será gerada para cada método.
-									Approach.NAIVE_1_APROXIMACAO, // A abordagem que será utilizada
+									Lines.DEFAULT, // Escolha de qual linha de produtos serï¿½ avaliada.  Mobile Media, Default ou Target.
+									source,  // SPL Original  (SPL)
+									target,  // Evoluï¿½ï¿½o/refactoring da SPL.   (SPL')
+									120,  // timeOut
+									4,   // A quantidade de testes que serï¿½ gerada para cada mï¿½todo.
+									Approach.EIC, // A abordagem que serï¿½ utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.
-									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critério.
-									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
-									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
+									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o critï¿½rio. // ONLY_COMMON_METHODS_SUBSET_DEFAULT
+									CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
+									CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
 									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
 									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
-									"D:\\101Companies\\SecondCategory\\littleSPLT\\lib", "D:\\101Companies\\SecondCategory\\littleSPLT02\\lib"); // Uma sequência de bibliotecas (String)
+									source+"/lib",target+"/lib"); // Uma sequencia de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
 					e.printStackTrace();
