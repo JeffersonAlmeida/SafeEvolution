@@ -27,5 +27,5 @@ Checando quais produtos cont�m esses nomes de assets, � identificado os prod
 Ent�o, s�o geradas e avaliadas produtos da SPL source contendo pelo menos um asset alterado.<br></br>
  */
 public enum Approach {
-	NAIVE_2_ICTAC, NAIVE_1_APROXIMACAO, ONLY_CHANGED_CLASSES, IMPACTED_FEATURES, EIC;
+	APP, AP, IC, IP, EIC;
 }

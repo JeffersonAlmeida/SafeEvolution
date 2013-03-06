@@ -9,13 +9,14 @@ import java.util.Properties;
 
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
+import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 
 /**
  * 
  *   @author Jefferson Almeida - jra at cin dot ufpe dot br
  * 
- * <strong><p>Esta classe é responsável por calcular o tempo necessário para realizar determinadas tarefas
- *  ao avaliar a evolução da LPS. Como por exemplo:<br></br>
+ * <strong><p>Esta classe ï¿½ responsï¿½vel por calcular o tempo necessï¿½rio para realizar determinadas tarefas
+ *  ao avaliar a evoluï¿½ï¿½o da LPS. Como por exemplo:<br></br>
  *  - tempo para compilar os produtos.<br></br>
  *  - tempo para compilar os teste.<br></br>
  *  - tempo para executar a abordagem.<br></br></p></strong>
@@ -23,16 +24,16 @@ import br.edu.ufcg.dsc.Constants;
  */
 public class Measures {
 	
-	/**Tempo total gasto na avaliação da LPS>*/
+	/**Tempo total gasto na avaliaï¿½ï¿½o da LPS>*/
 	private Timer tempoTotal;
 	
 	/**Tempo gasto para comilar os produtos da LPS>*/
 	private Timer tempoCompilacaoProdutos;
 	
-	/**Tempo necessário para compilar os testes aplicados aos produtos.*/
+	/**Tempo necessï¿½rio para compilar os testes aplicados aos produtos.*/
 	private Timer tempoCompilacaoTestes;
 	
-	/**Tempo gasto na execução dos testes*/
+	/**Tempo gasto na execuï¿½ï¿½o dos testes*/
 	private Timer tempoExecucaoTestes;
 	
 	/**Tempo para executar a abordagem selecionada: <strong><NAIVE_2_ICTAC>, <NAIVE_1_APROXIMACAO>, <ONLY_CHANGED_CLASSES>, <IMPACTED_FEATURES></strong>*/
@@ -56,16 +57,16 @@ public class Measures {
 	/**Quantidade de testes aplicados por produto.*/
 	private int quantidadeTestesPorProduto;
 
-	/**Nome resultante do arquivo para gerar o relatório.*/
+	/**Nome resultante do arquivo para gerar o relatï¿½rio.*/
 	private String fileResultName;
 	
-	/**Variável usada para armazenar o tempo corrente em milisegundos.*/
+	/**Variï¿½vel usada para armazenar o tempo corrente em milisegundos.*/
 	private String execucao;
 	
 	/**Arquivo de propriedades*/
 	private String filePropertiesName;
 	
-	/**Variável boolena para determinar se houve refinamento ou não na Evolução da LPS.*/
+	/**Variï¿½vel boolena para determinar se houve refinamento ou nï¿½o na Evoluï¿½ï¿½o da LPS.*/
 	private boolean isRefinement;
 	
 	/**
@@ -111,7 +112,7 @@ public class Measures {
 		File file = new File(this.filePropertiesName);
 		File fileSource = new File(this.sourcePath);
 		File targetPath = new File(this.targetPath);
-		/*Se o arquivo não existir, cria um novo arquivo.*/
+		/*Se o arquivo nï¿½o existir, cria um novo arquivo.*/
 		if(!file.exists()){
 			file.createNewFile();
 		}
@@ -144,7 +145,7 @@ public class Measures {
 	 * @param file
 	 * @throws IOException
 	 */
-	public void printProperties(File file)throws IOException {		
+	public void printProperties(File file, ResultadoLPS r, String evolutionName)throws IOException {		
 		File fileSource = new File(this.sourcePath);
 		File targetPath = new File(this.targetPath);
 		
@@ -158,6 +159,8 @@ public class Measures {
 		properties.load(fileInputStream);
 		fileInputStream.close();
 		
+		
+		properties.setProperty("EvolutionName", evolutionName);
 		properties.setProperty("source", fileSource.getName());
 		properties.setProperty("target", targetPath.getName());
 		
@@ -171,13 +174,22 @@ public class Measures {
 			String.valueOf(this.tempoExecucaoTestes.getTotal()) + "," +
 			String.valueOf(this.quatidadeTotalTestes) + "," +
 			String.valueOf(this.quantidadeProdutosCompilados) + "," +
-			String.valueOf(this.isRefinement) + "," +
-			String.valueOf(this.tempoExecucaoAbordagem.getTotal());
+			String.valueOf(this.tempoExecucaoAbordagem.getTotal()) ;
+		
+		//Formato 
+		// SourceWF, TargetWF, AM' refine AM, CK/FM refine CK'/FM', COB, Refinement
+		value = value + "," + r.isSourceIsWellFormed() + "," +
+		                r.isTargetIsWellFormed() + "," +
+		                r.isAssetMappingsEqual() + "," +
+		                r.isFmAndCKRefinement() + "," +
+		                r. isCompObservableBehavior() + "," +
+		                r. isRefinement();
+		                
 		
 		properties.setProperty(this.approach.toString(), value);
 		
 		FileOutputStream fileOutputStream = new FileOutputStream(file);
-		properties.store(fileOutputStream,"Abordagem = tempoTotal, tempoCompilacaoProdutos, tempoCompilacaoTestes, tempoExecucaoTestes, qtdTestes, quantidadeProdutosCompilados, isRefinement, tempoExecucaoAbordagem");
+		properties.store(fileOutputStream,"Abordagem = tempoTotal, tempoCompilacaoProdutos, tempoCompilacaoTestes, tempoExecucaoTestes, qtdTestes, quantidadeProdutosCompilados, isRefinement, tempoExecucaoAbordagem, SourceWF, TargetWF, AM' refine AM, CK/FM refine CK'/FM', COB, Refinement");
 		fileOutputStream.close();
 	}
 

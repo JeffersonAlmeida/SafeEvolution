@@ -70,8 +70,8 @@ public class AppWindow extends ApplicationWindow {
 		this.campoTarget = SWTFactory.createTextWithLabel(targetComposite, "Target");
 		this.botaoBrowseTarget = SWTFactory.createButton(targetComposite, "Browse");
 
-		this.comboApproaches = SWTFactory.createComboBoxWithLabel(compositePrincipal, "Aproach", Approach.NAIVE_2_ICTAC.toString(),
-				Approach.ONLY_CHANGED_CLASSES.toString(), Approach.IMPACTED_FEATURES.toString());
+		this.comboApproaches = SWTFactory.createComboBoxWithLabel(compositePrincipal, "Aproach", Approach.APP.toString(),
+				Approach.IC.toString(), Approach.IP.toString());
 
 		Composite compositeCheck = SWTFactory.createComposite(compositePrincipal, 1, true);
 		compositeCheck.setLayoutData(new GridData(GridData.CENTER, GridData.CENTER, true, false));

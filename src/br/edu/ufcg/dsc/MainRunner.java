@@ -63,18 +63,19 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				Avaliador avaliador = new Avaliador();
-				String source = "/home/jefferson/pairs/MobileMedia04_OO";
-				String target = "/home/jefferson/pairs/MobileMedia04_OO_Refactored_5miss";
+				String evolution = "Motivating Example Master Thesis 02";
+				String source = "/home/jefferson/pairs/motivating_source2";
+				String target = "/home/jefferson/pairs/motivating_target_2";
 				try {
 					System.out.println("### ONLY_CHANGED_CLASSES ###");
 					avaliador
-							.avalie(
+							.avalie(evolution,
 									Lines.DEFAULT, // Escolha de qual linha de produtos ser� avaliada.  Mobile Media, Default ou Target.
 									source,  // SPL Original  (SPL)
 									target,  // Evolu��o/refactoring da SPL.   (SPL')
 									120,  // timeOut
 									4,   // A quantidade de testes que ser� gerada para cada m�todo.
-									Approach.EIC, // A abordagem que ser� utilizada
+									Approach.IP, // A abordagem que ser� utilizada
 									true, // A SPL Source possui aspectos.
 									true,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.

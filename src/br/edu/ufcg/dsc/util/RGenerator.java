@@ -153,9 +153,9 @@ public class RGenerator {
 			this.generateLinesGraphic(title, naiveTimes,onlyChangedClassesTimes,impactedFeaturesTimes);
 		}
 		
-		this.generateHistogramas(naiveTimes,title + " " + Approach.NAIVE_2_ICTAC, ylabel);
-		this.generateHistogramas(onlyChangedClassesTimes,title + " " + Approach.ONLY_CHANGED_CLASSES, ylabel);
-		this.generateHistogramas(impactedFeaturesTimes,title + " " + Approach.IMPACTED_FEATURES, ylabel);
+		this.generateHistogramas(naiveTimes,title + " " + Approach.APP, ylabel);
+		this.generateHistogramas(onlyChangedClassesTimes,title + " " + Approach.IC, ylabel);
+		this.generateHistogramas(impactedFeaturesTimes,title + " " + Approach.IP, ylabel);
 		
 		this.file.write("\n\n\n\n");
 	}
@@ -296,13 +296,13 @@ public class RGenerator {
 				value = this.getCoverageChangedClasses(file, linhaOuBloco);
 			}
 			
-			if(file.getName().contains(Approach.NAIVE_2_ICTAC.toString())){
+			if(file.getName().contains(Approach.APP.toString())){
 				valoresNaive.add(value);
 			}
-			else if(file.getName().contains(Approach.ONLY_CHANGED_CLASSES.toString())){
+			else if(file.getName().contains(Approach.IC.toString())){
 				valoresOnlyChangedClassesTimes.add(value);
 			}
-			else if(file.getName().contains(Approach.IMPACTED_FEATURES.toString())){
+			else if(file.getName().contains(Approach.IP.toString())){
 				valoresImpactedFeaturesTimes.add(value);
 			}
 		}
@@ -448,14 +448,14 @@ public class RGenerator {
 		ArrayList<Properties> execucoesSourceTarget = this.getExecucoesSourceTarget(sourceTarget);
 		
 		for(Properties property : execucoesSourceTarget){
-			valoresNaive.add((property.getProperty(Approach.NAIVE_2_ICTAC.toString()) != null) ? 
-					property.getProperty(Approach.NAIVE_2_ICTAC.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
+			valoresNaive.add((property.getProperty(Approach.APP.toString()) != null) ? 
+					property.getProperty(Approach.APP.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
 			
-			valoresOnlyChangedClassesTimes.add((property.getProperty(Approach.ONLY_CHANGED_CLASSES.toString()) != null) ? 
-					property.getProperty(Approach.ONLY_CHANGED_CLASSES.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
+			valoresOnlyChangedClassesTimes.add((property.getProperty(Approach.IC.toString()) != null) ? 
+					property.getProperty(Approach.IC.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
 			
-			valoresImpactedFeaturesTimes.add((property.getProperty(Approach.IMPACTED_FEATURES.toString()) != null) ? 
-					property.getProperty(Approach.IMPACTED_FEATURES.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
+			valoresImpactedFeaturesTimes.add((property.getProperty(Approach.IP.toString()) != null) ? 
+					property.getProperty(Approach.IP.toString()).split(",")[resultData.ordinal()] : String.valueOf(0));
 		}
 	}
 
@@ -474,19 +474,19 @@ public class RGenerator {
 			for(Properties property : execucoesSourceTarget){
 				String value;
 				
-				value = (property.getProperty("QUANTIDADE_" + Approach.NAIVE_2_ICTAC.toString()) != null) ? 
-						property.getProperty("QUANTIDADE_" + Approach.NAIVE_2_ICTAC.toString()) : 
+				value = (property.getProperty("QUANTIDADE_" + Approach.APP.toString()) != null) ? 
+						property.getProperty("QUANTIDADE_" + Approach.APP.toString()) : 
 						String.valueOf("0");
 						
 				valoresNaive.add(value);
 				
-				value = (property.getProperty("QUANTIDADE_" + Approach.ONLY_CHANGED_CLASSES.toString()) != null) ? 
-						property.getProperty("QUANTIDADE_" + Approach.ONLY_CHANGED_CLASSES.toString()) : 
+				value = (property.getProperty("QUANTIDADE_" + Approach.IC.toString()) != null) ? 
+						property.getProperty("QUANTIDADE_" + Approach.IC.toString()) : 
 						String.valueOf("0");
 				valoresOnlyChangedClassesTimes.add(value);
 
-				value = (property.getProperty("QUANTIDADE_" + Approach.IMPACTED_FEATURES.toString()) != null) ? 
-						property.getProperty("QUANTIDADE_" + Approach.IMPACTED_FEATURES.toString()) : 
+				value = (property.getProperty("QUANTIDADE_" + Approach.IP.toString()) != null) ? 
+						property.getProperty("QUANTIDADE_" + Approach.IP.toString()) : 
 						String.valueOf("0");
 				valoresImpactedFeaturesTimes.add(value);
 			}

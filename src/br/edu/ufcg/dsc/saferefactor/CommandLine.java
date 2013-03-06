@@ -116,7 +116,7 @@ public class CommandLine {
 		/*  Initialise the project. */	
 		helper.parse(p, buildFile);
 
-		if (approach == Approach.ONLY_CHANGED_CLASSES) {
+		if (approach == Approach.IC) {
 			/*Execute the specified target and any targets it depends on.*/
 			p.executeTarget("clean_tests");
 		} else {

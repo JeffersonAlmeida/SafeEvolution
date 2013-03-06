@@ -296,25 +296,25 @@ public class ToolCommandLine {
 			resultado.setFMAndCKRefinement(isFMAndCKRefinement);
 
 			/*which approach is settled ? */
-			if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || isFMAndCKRefinement) {
+			if (approach == Approach.APP || approach == Approach.AP || isFMAndCKRefinement) {
 
 				/* verify whether two AM's is equal. */
 				boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
 				/* Set it down in the results. */
 				resultado.setAssetMappingsEqual(isAssetMappingsEqual);
 
-				if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || !isAssetMappingsEqual) {
+				if (approach == Approach.APP || approach == Approach.AP || !isAssetMappingsEqual) {
 
 					HashSet<String> changedFeatures = null;
 
-					if (approach == Approach.IMPACTED_FEATURES || approach == Approach.ONLY_CHANGED_CLASSES || approach==Approach.EIC) {
+					if (approach == Approach.IP || approach == Approach.IC || approach==Approach.EIC) {
 						/* Generate tests only for impacted features. */
 						changedFeatures = getChangedFeatureNames(targetLine);
 					}
 
 					resultado.getMeasures().getTempoExecucaoAbordagem().startContinue();
 
-					if (approach == Approach.ONLY_CHANGED_CLASSES || approach==Approach.EIC) {
+					if (approach == Approach.IC || approach==Approach.EIC) {
 						/* Only generates tests for modified classes and do not generate products. */
 						/* Generates two tests per method. */
 						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
@@ -625,7 +625,7 @@ public class ToolCommandLine {
 
 			for (Product productSource : sourceLine.getProducts()) {
 				productSource.printSetOfFeatures();
-				if (approach == Approach.NAIVE_2_ICTAC || approach == Approach.NAIVE_1_APROXIMACAO || (approach == Approach.IMPACTED_FEATURES && productSource.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
+				if (approach == Approach.APP || approach == Approach.AP || (approach == Approach.IP && productSource.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
 					
 					this.builder.generateProduct(productSource, sourceLine.getPath(), resultado);
 
@@ -641,7 +641,7 @@ public class ToolCommandLine {
 						isRefactoring = false;
 					}
 
-					if (approach != Approach.NAIVE_1_APROXIMACAO && approach != Approach.IMPACTED_FEATURES) {
+					if (approach != Approach.AP && approach != Approach.IP) {
 
 						//Testa se o comportamento nao bate com nenhum outro destino. Exceto para o caso de NAIVE_WITHOUT_RENAMING.
 						if (!isRefactoring) {
