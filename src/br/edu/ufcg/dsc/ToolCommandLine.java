@@ -64,7 +64,7 @@ public class ToolCommandLine {
 	private HashSet<String> dependenciasCopiadas;
 
 	/*A string collection of changed classes.*/
-	private Collection<String> classesModificaadas;
+	private Collection<String> classesModificadas;
 	
 	/**/
 	private ProductBuilder builder;
@@ -181,7 +181,7 @@ public class ToolCommandLine {
 		this.sourceFMSemantics = null;
 		this.targetFMSemantics = null;
 		this.dependenciasCopiadas = null;
-		this.classesModificaadas = null;
+		this.classesModificadas = null;
 		this.testsCompileTimeout = 0;
 		this.testsExecutionTimeout = 0;
 		this.testsGenerationTimeout = 0;
@@ -549,9 +549,7 @@ public class ToolCommandLine {
 		/* <AssetName, path> Get in CK the DESTINY of the assets. */
  		HashMap<String, String> constantesDestinos = productLine.getCk().evalCKDestinos(featureSet);
 		
-		if(constantesDestinos.isEmpty()){
-			System.out.println("constante destino esta vazio: " + constantesDestinos.isEmpty());
-		}
+		System.out.println("constante destino esta vazio: " + constantesDestinos.isEmpty());
 
 		/* <AssetName, path> Get in CK the ORIGIN of the assets.*/
 		HashMap<String, String> constantesOrigens = new HashMap<String, String>();
@@ -571,7 +569,7 @@ public class ToolCommandLine {
 	}
 
 	/**
-	 * This method checks if the SPL is well formed.	 <br></br>
+	 * This method checks if the SPL is well formed.<br></br>
 	 * @param sourceLine SOURCE product line.  <br></br>
 	 * @param targetLine TARGET product line.  <br></br>
 	 * @return if the SPL is well formed.  <br></br>
@@ -625,7 +623,7 @@ public class ToolCommandLine {
 
 			for (Product productSource : sourceLine.getProducts()) {
 				productSource.printSetOfFeatures();
-				if (approach == Approach.APP || approach == Approach.AP || (approach == Approach.IP && productSource.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
+				if (approach == Approach.APP || approach == Approach.AP || (approach == Approach.IP && productSource.containsSomeAsset(this.classesModificadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
 					
 					this.builder.generateProduct(productSource, sourceLine.getPath(), resultado);
 
@@ -969,7 +967,7 @@ public class ToolCommandLine {
 		Set<String> targetKeySet = targetLine.getMappingClassesSistemaDeArquivos().keySet();
 
 		/* Initialize the modified classes variable. */
-		this.classesModificaadas = new HashSet<String>();
+		this.classesModificadas = new HashSet<String>();
 		
 		/* Initialize the changed assets variable. */
 		this.changedAssets = new HashSet<String>();
@@ -1001,7 +999,7 @@ public class ToolCommandLine {
 					if (!equals) {
 						result = false;
 						/*Put the asset in the modified classes.*/
-						this.classesModificaadas.add(asset);
+						this.classesModificadas.add(asset);
 						this.changedAssets.add(this.filesManager.getPath("src." + asset));
 					}
 				} catch (JavaModelException e) {
@@ -1112,7 +1110,7 @@ public class ToolCommandLine {
 		while(i.hasNext()){
 			String s = i.next();
 			System.out.println("\nDependencia: " + s);
-			Iterator<String> iterator2 = this.classesModificaadas.iterator();
+			Iterator<String> iterator2 = this.classesModificadas.iterator();
 			while(iterator2.hasNext()){
 				String string2 = iterator2.next();
 				String[] words = string2.split("\\.");//words[words.length-1];
@@ -1150,7 +1148,7 @@ public class ToolCommandLine {
 		
 		/* Looking for classes that depends of the modified classes to compile. */
 		if(approach==Approach.EIC){
-			this.classesModificaadas = this.getAboveDependencies(new File(sourceLine.getPath()+"/src"),new HashSet<String>());
+			this.classesModificadas = this.getAboveDependencies(new File(sourceLine.getPath()+"/src"),new HashSet<String>());
 		}
 	    /*____________________________________*/
 		
@@ -1160,7 +1158,7 @@ public class ToolCommandLine {
 
 		/* The amount of modified classes are greater than MAX_CLASSES_MODIFICADAS */
 		/* The optimization for AM won't be realized. */
-		if (this.classesModificaadas.size() > MAX_CLASSES_MODIFICADAS) {
+		if (this.classesModificadas.size() > MAX_CLASSES_MODIFICADAS) {
 			System.out.println("\n\n ! Warning: The amount of modified classes are greater than" + MAX_CLASSES_MODIFICADAS);
 			System.out.println("The optimization for AM won't be realized.\n");
 		} else {
@@ -1193,9 +1191,9 @@ public class ToolCommandLine {
 
 			this.listaAspectos = new HashSet<String>();
 
-			System.out.println("\n Amount of modified classes: " + classesModificaadas.size()+"\n");
+			System.out.println("\n Amount of modified classes: " + classesModificadas.size()+"\n");
 			/* walk through all changed classes. */
-			for (String classe : this.classesModificaadas) {
+			for (String classe : this.classesModificadas) {
 				System.out.println(" - Modified: " + classe);
 				
 				/* Get the whole path of the modified class. */
@@ -1255,7 +1253,7 @@ public class ToolCommandLine {
 			
 			for (Product product : sourceLine.getProducts()){
 				/* Is this product contains at least one modified asset ? */
-				if (product.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
+				if (product.containsSomeAsset(this.classesModificadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
 					/* if the answer is YES, add this product to the modified products variable. */
 					produtosQueContemClassesModificadas.add(product);
 				}
@@ -1277,7 +1275,7 @@ public class ToolCommandLine {
 
 				for (Product product : sourceLine.getProducts()) {
 					/* Is this product contains at least one modified asset ? */
-					if (product.containsSomeAsset(this.classesModificaadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
+					if (product.containsSomeAsset(this.classesModificadas, sourceLine.getMappingClassesSistemaDeArquivos())) {
 						produtosQueContemClassesModificadas.add(product);
 						products.add(product.getFeaturesList());
 					}
@@ -1318,7 +1316,7 @@ public class ToolCommandLine {
 
 					for (String aspecto : aspectosDaConfiguracaoSource) {
 						String destinationPath = testSourceDirectory.getAbsolutePath() + aspecto.split("src")[1];
-						if (!this.classesModificaadas.contains(aspecto) && !this.listaAspectos.contains(destinationPath)) {
+						if (!this.classesModificadas.contains(aspecto) && !this.listaAspectos.contains(destinationPath)) {
 							File fileDestination = new File(destinationPath);
 							FilesManager.getInstance().createDir(fileDestination.getParent());
 							FilesManager.getInstance().copyFile(sourceLine.getMappingClassesSistemaDeArquivos().get(FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
@@ -1332,7 +1330,7 @@ public class ToolCommandLine {
 					for (String aspecto : aspectosDaConfiguracaoTarget) {
 						String destinationPath = testTargetDirectory.getAbsolutePath() + aspecto.split("src")[1];
 
-						if (!this.classesModificaadas.contains(aspecto) && !this.listaAspectos.contains(aspecto)) {
+						if (!this.classesModificadas.contains(aspecto) && !this.listaAspectos.contains(aspecto)) {
 							File fileDestination = new File(destinationPath);
 
 							FilesManager.getInstance().createDir(fileDestination.getParent());
@@ -1453,7 +1451,7 @@ public class ToolCommandLine {
 	}
 
 	private void printListofModifiedClasses() {
-		Iterator<String> i = this.classesModificaadas.iterator();
+		Iterator<String> i = this.classesModificadas.iterator();
 		System.out.println("\nList of Modified Classes: ");
 		while(i.hasNext()){
 			System.out.println(i.next());
@@ -1616,7 +1614,7 @@ public class ToolCommandLine {
 
 			Collection<String> classesEmQueOAspectoInterfe = FilesManager.getInstance().getDependenciasAspectos(new File(path));
 
-			for (String classeModificada : this.classesModificaadas) {
+			for (String classeModificada : this.classesModificadas) {
 
 				for (String classeEmQueAspectoInterfere : classesEmQueOAspectoInterfe) {
 					if (classeModificada.contains(classeEmQueAspectoInterfere)) {
@@ -1841,10 +1839,10 @@ public class ToolCommandLine {
 		//	sourcePath = sourcePath.startsWith("/") ? sourcePath : Constants.PLUGIN_PATH + "/../Exemplos/" + sourcePath;
 	//	targetPath = targetPath.startsWith("/") ? targetPath : Constants.PLUGIN_PATH + "/../Exemplos/" + targetPath;
 
-		ProductLine souceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt",
+		ProductLine souceLine = new ProductLine(sourcePath, sourcePath + "/Hephaestus/ck.xml", sourcePath + "/Hephaestus/fm.xml", sourcePath + "/Hephaestus/am.txt",
 				temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
-		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt",
+		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/Hephaestus/ck.xml", targetPath + "/Hephaestus/fm.xml", targetPath + "/Hephaestus/am.txt",
 				temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 
 		return this.verifyLine(souceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
@@ -1881,13 +1879,13 @@ public class ToolCommandLine {
 	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/*This part creates a representation of the source product line.*/
-		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/ck.xml", sourcePath + "/fm.xml", sourcePath + "/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
+		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/Hephaestus/ck.xml", sourcePath + "/Hephaestus/fm.xml", sourcePath + "/Hephaestus/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
 
 		/*Set the libraries path for the source product line.*/
 		sourceLine.setLibPath(libPathSource);
 		
 		/*This part creates a representation of the target product line.*/
-		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/ck.xml", targetPath + "/fm.xml", targetPath + "/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
+		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/Hephaestus/ck.xml", targetPath + "/Hephaestus/fm.xml", targetPath + "/Hephaestus/am.txt", temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 		
 		/*Set the libraries path for the target product line.*/
 		targetLine.setLibPath(libPathTarget);

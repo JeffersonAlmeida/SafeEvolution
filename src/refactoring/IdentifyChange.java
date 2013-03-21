@@ -17,7 +17,7 @@ import randoop.main.Main;
 
 public class IdentifyChange {
 
-	public static final String PROPERTIES_FILE_PATH = "/ant/" + "tests.properties"; // ->  /home/felype/workspaceMestrado/ferramentaLPSSM/ant/
+	public static final String PROPERTIES_FILE_PATH = "/ant/" + "tests.properties"; //  => /../ferramentaLPSSM/ant/
 	
 //	public static final String PROPERTIES_FILE_PATH = "/Users/felype/Documents/CIn/Mestrado/workspaceMestrado/ferramentaLPSSM/ant/"
 //			+ "tests.properties";

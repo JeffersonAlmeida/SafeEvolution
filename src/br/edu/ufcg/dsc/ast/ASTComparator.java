@@ -45,7 +45,7 @@ public class ASTComparator {
 	private String classeName;
 
     /**
-     * Este método cria um projeto java com o nome JavaProject + miliseconds
+     * Este mï¿½todo cria um projeto java com o nome JavaProject + miliseconds
      * 
      * @return IJavaProject: retorna um projeto java 
      * @throws ConfigurationException
@@ -71,9 +71,7 @@ public class ASTComparator {
 	 * @throws JavaModelException 
 	 */
 	public void setInputs(File fileA, File fileASecond) throws IOException, JavaModelException {
-		if (fileA.exists() && fileASecond.exists())
-			setInputs(fileA.getName(), getContents(fileA),
-					fileASecond.getName() , getContents(fileASecond));
+		if (fileA.exists() && fileASecond.exists())setInputs(fileA.getName(), getContents(fileA),fileASecond.getName() , getContents(fileASecond));
 		else throw new IOException("one of the input files does not exist");
 	}
 
@@ -219,8 +217,7 @@ public class ASTComparator {
 			for (int i = 0; i < methodsA.length; i++) {
 				IMethod methodA = methodsA[i];
 
-				IMethod[] methodsCorresponding = typeASecond
-						.findMethods(methodA);
+				IMethod[] methodsCorresponding = typeASecond.findMethods(methodA);
 				if (methodsCorresponding == null) {
 					compareMessage += "\n There is no method correspoding to "
 							+ methodA.getElementName() + " in type "

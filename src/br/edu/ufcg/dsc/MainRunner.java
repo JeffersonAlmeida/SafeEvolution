@@ -63,9 +63,9 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				Avaliador avaliador = new Avaliador();
-				String evolution = "Motivating Example Master Thesis 02";
-				String source = "/home/jefferson/pairs/motivating_source2";
-				String target = "/home/jefferson/pairs/motivating_target_2";
+				String evolution = "Teste";
+				String source = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02";
+				String target = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02Teste";
 				try {
 					System.out.println("### ONLY_CHANGED_CLASSES ###");
 					avaliador
@@ -75,15 +75,15 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									target,  // Evolu��o/refactoring da SPL.   (SPL')
 									120,  // timeOut
 									4,   // A quantidade de testes que ser� gerada para cada m�todo.
-									Approach.IP, // A abordagem que ser� utilizada
-									true, // A SPL Source possui aspectos.
-									true,  // A SPL Target possui aspectos.
+									Approach.IC, // A abordagem que ser� utilizada
+									false, // A SPL Source possui aspectos.
+									false,  // A SPL Target possui aspectos.
 									null, // String: controladores fachadas.
 									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o crit�rio. // ONLY_COMMON_METHODS_SUBSET_DEFAULT
-									CKFormat.SIMPLE, // Qual o formato do CK da LPS Original.
-									CKFormat.SIMPLE, //  Qual o formato do CK da LPS Target.
-									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
-									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
+									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
+									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
+									AMFormat.HEPHAESTUS, //  Qual o formato do AM da LPS Original.
+									AMFormat.HEPHAESTUS,  //  Qual o formato do AM da LPS Target.
 									source+"/lib",target+"/lib"); // Uma sequencia de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");
