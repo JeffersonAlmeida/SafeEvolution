@@ -5,21 +5,22 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.naming.ConfigurationException;
+
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
+
 import soot.Main;
 import br.cin.ufpe.br.matching.ProductMatching;
 import br.cin.ufpe.br.wf.WellFormedness;
@@ -31,18 +32,13 @@ import br.edu.ufcg.dsc.builders.TargetBuilder;
 import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
-import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.fm.AlloyFMEvolutionBuilder;
-import br.edu.ufcg.dsc.fm.FeatureModelRefactVerifier;
-import br.edu.ufcg.dsc.refactoringresults.FeatureModelEvolutionResult;
-import br.edu.ufcg.dsc.refactoringresults.SafeCompositionResult;
 import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
-import br.edu.ufcg.dsc.util.Comparador;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.dsc.util.FileManager;
 import br.edu.ufcg.saferefactor.core.Criteria;
@@ -529,15 +525,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	private boolean isFeatureModelRefinement(String sourceFMXML, String targetFMXML) {
-
-		buildFMEvolutionAlloyFile(sourceFMXML, targetFMXML);
-		FeatureModelEvolutionResult checkFMEvolutionAlloyFile = checkFMEvolutionAlloyFile(Constants.ALLOY_PATH
-				+ Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION);
-
-		return checkFMEvolutionAlloyFile.getAnalysisResult();
-	}
-
 	/**
 	 * Asks if the asset mapping is a refinement .	 <br></br>
 	 * @param sourceLine
@@ -563,114 +550,10 @@ public class ToolCommandLine {
 		return ehAssetMappingRefinement;
 	}
 
-	private FeatureModelEvolutionResult checkFMEvolutionAlloyFile(String string) {
-		long startedTime = System.currentTimeMillis();
-		FeatureModelRefactVerifier instance = FeatureModelRefactVerifier.getInstance();
-		boolean fmRefactoring = false;
-		try {
-			fmRefactoring = instance.isFMRefactoring(string);
-		} catch (Err e) {
-			e.printStackTrace();
-		}
-		long finishedTime = System.currentTimeMillis();
-		FeatureModelEvolutionResult fmResult = new FeatureModelEvolutionResult(startedTime, finishedTime, fmRefactoring);
-		return fmResult;
-	}
-
-	/**
-	 * This method checks the Safe Composition of the SPL.	 <br></br>
-	 * @param string
-	 * @param features
-	 * @param name
-	 * @return returns a SafeCompositionResult
-	 * @see SafeCompositionResult
-	 */
-	private SafeCompositionResult checkSafeCompositionOfLine(String string, HashSet<String> features, String name) {
-		System.out.println("\n\n\t\tThe beginning of the safe composition test to the "+ name + " SPL\n");
-		Iterator<String> i = features.iterator();
-		System.out.println("\nFeatures: < " + features.size() + " >");
-		String featuresList = "";
-		while(i.hasNext()){
-			String s = (String) i.next();
-			featuresList = featuresList + " [ " + s + " ] ";
-		}
-		System.out.println(featuresList);
-		SafeCompositionResult checkCKSource = null;
-		try {
-			checkCKSource = SafeCompositionVerifier.checkCK(Constants.ALLOY_PATH, string, Constants.ALLOY_EXTENSION, string + Constants.ALLOY_EXTENSION, features, name);
-		} catch (Err e) {
-			System.out.println("\nAn Error Occurred when trying to do Safe Composition Test.\n\n" + e.getMessage());
-			e.printStackTrace();
-		}
-		System.out.println("\n\t\tEnd of Safe Composition test to the + "+ name + " SPL\n");
-		return checkCKSource;
-	}
 
 	private void buildFMEvolutionAlloyFile(String sourceFMXML, String targetFMXML) {
 		AlloyFMEvolutionBuilder evolutionAlloy = new AlloyFMEvolutionBuilder();
 		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, "source", sourceFMXML, "target", targetFMXML);
-	}
-
-
-	/**
-	 * Compara os AM - Supoe um assetname comecando com # no assetmapping e
-	 * linha em branco separando
-	 * 
-	 * @param sourceAssetMapping
-	 * @param targetAssetMapping
-	 * @return
-	 */
-	private boolean isAssetMappingEqual(String sourceAssetMapping, String targetAssetMapping) {
-
-		FileManager manager = FileManager.getInstance();
-
-		ArrayList<String> sourceMappingContent = manager.getFileContent(sourceAssetMapping);
-
-		ArrayList<String> targetMappingContent = manager.getFileContent(targetAssetMapping);
-
-		TreeMap<String, ArrayList<String>> mappingSource = getMapping(sourceMappingContent);
-		TreeMap<String, ArrayList<String>> mappingTarget = getMapping(targetMappingContent);
-
-		if (Comparador.equalSets(mappingSource.keySet(), mappingTarget.keySet())) {
-			Set<String> keys = mappingSource.keySet();
-			for (String key : keys) {
-				ArrayList<String> sourceAssets = mappingSource.get(key);
-				ArrayList<String> targetAssets = mappingTarget.get(key);
-				if (!Comparador.equalSets(sourceAssets, targetAssets)) {
-					return false;
-				}
-			}
-			return true;
-		}
-		return false;
-	}
-
-	private TreeMap<String, ArrayList<String>> getMapping(ArrayList<String> mappingContent) {
-
-		TreeMap<String, ArrayList<String>> mapping = new TreeMap<String, ArrayList<String>>();
-		int index = 0;
-
-		while (true) {
-			if (index >= mappingContent.size()) {
-				break;
-			}
-			String line = mappingContent.get(index);
-			ArrayList<String> mapped = new ArrayList<String>();
-			index++;
-			while (true) {
-				if (index >= mappingContent.size()) {
-					break;
-				}
-				String nextEntry = mappingContent.get(index);
-				if (nextEntry.startsWith("#") || nextEntry.equals("")) {
-					break;
-				}
-				mapped.add(nextEntry);
-				index++;
-			}
-			mapping.put(line, mapped);
-		}
-		return mapping;
 	}
 
 	/**
@@ -775,28 +658,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	/**
-	 * Compara dois arquivos.
-	 * 
-	 * @param locationSource
-	 * @param locationTarget
-	 * @return Zero se igual.
-	 * @throws IOException
-	 */
-	private long compare(String locationSource, String locationTarget) throws IOException {
-		long value;
-		String command = "python script.py " + locationSource + " " + locationTarget;
-		System.out.println("COMANDO " + command);
-
-		Process process = Runtime.getRuntime().exec(command);
-		BufferedReader stdInput = new BufferedReader(new InputStreamReader(process.getInputStream()));
-
-		String linha = stdInput.readLine();
-		System.out.println(linha);
-		value = Long.parseLong(linha);
-
-		return value;
-	}
 
 	private Collection<String> getAboveDependencies(File classe, HashSet<String> dependenciesOfModifiedClasses) {
 		if (classe.isDirectory() && !classe.getAbsolutePath().contains(".svn") ) { 
@@ -1182,46 +1043,6 @@ public class ToolCommandLine {
 		System.out.println("\n--------------------------");
 	}
 
-	/**
-	 * Conjuntos de features mapeados para conjuntos de Aspectos.
-	 * 
-	 * @param products
-	 * @param am
-	 * @param ck
-	 * @return
-	 * @throws AssetNotFoundException
-	 * @throws IOException
-	 */
-	private HashMap<HashSet<String>, HashSet<String>> getConjuntosDeAspectosPossiveis(HashSet<HashSet<String>> products,
-			ProductLine productLine) throws IOException, AssetNotFoundException {
-
-		HashMap<HashSet<String>, HashSet<String>> result = new HashMap<HashSet<String>, HashSet<String>>();
-
-		for (HashSet<String> product : products) {
-			Set<String> constantesArquivos = productLine.getCk().evalCKDestinos(product).keySet();
-
-			ArrayList<String> aspectosDaConfiguracao = new ArrayList<String>();
-
-			for (String constante : constantesArquivos) {
-				String file = productLine.getAssetMapping().get(constante.trim());
-
-				if (file.endsWith(".aj")) {
-					aspectosDaConfiguracao.add(file);
-				}
-			}
-
-			//Checa quais aspectos influenciam no conjunto de classes modificadas. 
-			//Soh eles importam.
-
-			HashSet<String> aspectosQueInterferem = this.getAspectosQueInterferemNaClasseModificada(aspectosDaConfiguracao, productLine
-					.getAssetMapping());
-
-			result.put(product, aspectosQueInterferem);
-		}
-
-		return result;
-	}
-
 	private HashSet<String> getFeaturesEmComum(HashSet<String> product, HashSet<String> constantsPreProcessor) {
 		HashSet<String> result = new HashSet<String>();
 
@@ -1234,12 +1055,6 @@ public class ToolCommandLine {
 		}
 
 		return result;
-	}
-
-	private String getPathName(String classe) {
-		classe = classe.replaceAll(Pattern.quote("."), "/");
-
-		return "/src/" + classe.replaceAll(Pattern.quote("/java"), ".java");
 	}
 
 	/**
@@ -1417,28 +1232,6 @@ public class ToolCommandLine {
 			in.close();
 			reader.close();
 		}
-	}
-
-	private Collection<String> getDependeciasConstrutor(String location) {
-		Collection<String> result = new ArrayList<String>();
-
-		if (location.endsWith("java")) {
-			File sourceFile = new File(location);
-
-			try {
-				this.astComparator.setInput(sourceFile);
-				result = this.astComparator.getConstructorParameters();
-
-			} catch (JavaModelException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		return result;
 	}
 
 	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash, HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
