@@ -9,9 +9,9 @@ import br.edu.ufcg.dsc.util.Measures;
  * @author Jefferson Almeida - jra at cin dot ufpe dot br 
  * This class is responsible to present the SPL evolution results.
  */
-public class ResultadoLPS {
+public class SPLOutcomes {
 	
-	private static ResultadoLPS instance;
+	private static SPLOutcomes instance;
 	
 	/**SPL Measures. Time to compile products. Time to compile tests and so on.*/
 	private Measures measures;
@@ -41,7 +41,7 @@ public class ResultadoLPS {
 	 * Initiate the properties of the class.
 	 * Default Values.
 	 */
-	private ResultadoLPS() {
+	private SPLOutcomes() {
 		this.measures = new Measures();
 		this.isWF = false;
 		this.fmAndCKRefinement = false;
@@ -55,9 +55,9 @@ public class ResultadoLPS {
 	 * Singleton
 	 * @return ResultadoLPS
 	 */
-	public static ResultadoLPS getInstance(){  
+	public static SPLOutcomes getInstance(){  
         if (instance == null){  
-            instance = new ResultadoLPS();  
+            instance = new SPLOutcomes();  
         }  
         return instance;  
     }  
@@ -114,15 +114,15 @@ public class ResultadoLPS {
 		}
 		
 		if(!metodosAdicionadosString.equals("")){
-			result += "Métodos adicionados:\n";
+			result += "Mï¿½todos adicionados:\n";
 			result += metodosAdicionadosString + "\n";
 		}
 		if(!metodosRemovidosString.equals("")){
-			result += "Métodos removidos:\n";
+			result += "Mï¿½todos removidos:\n";
 			result += metodosRemovidosString + "\n";
 		}
 		if(!metodosComComportamentoDiferenteString.equals("")){
-			result += "Métodos com comportamento diferente:\n";
+			result += "Mï¿½todos com comportamento diferente:\n";
 			result += metodosComComportamentoDiferenteString + "\n";
 		}
 

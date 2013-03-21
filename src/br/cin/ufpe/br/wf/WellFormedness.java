@@ -9,7 +9,7 @@ import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.fm.FeatureModelReader;
 import br.edu.ufcg.dsc.refactoringresults.SafeCompositionResult;
 import br.edu.ufcg.dsc.util.FileManager;
@@ -154,12 +154,12 @@ public class WellFormedness {
 	
 		    /* Well Formedness to the <Source> SPL */
 			SafeCompositionResult sourceComposition = checkSafeCompositionOfLine(Constants.SOURCE_CK_ALLOY_NAME, sourceLine.getFeatures(), "source");
-			ResultadoLPS.getInstance().setSourceIsWellFormed(!sourceComposition.getAnalysisResult());
+			SPLOutcomes.getInstance().setSourceIsWellFormed(!sourceComposition.getAnalysisResult());
 			System.out.println("Well Formedness to the <Source> SPL: " + !sourceComposition.getAnalysisResult());
 	
 			/*Well Formedness to the <Target> SPL*/
 			SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(), "target");
-			ResultadoLPS.getInstance().setTargetIsWellFormed(!targetComposition.getAnalysisResult());
+			SPLOutcomes.getInstance().setTargetIsWellFormed(!targetComposition.getAnalysisResult());
 			System.out.println("Well Formedness to the <Target> SPL.: " + !targetComposition.getAnalysisResult());
 	
 			return !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();

@@ -84,7 +84,7 @@ public class Analyzer {
 					}
 				}
 				
-				ResultadoLPS resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
+				SPLOutcomes resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
 				
 				String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +evolutionName;
 				 
@@ -128,9 +128,9 @@ public class Analyzer {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	public ResultadoLPS verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public SPLOutcomes verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
-		ResultadoLPS resultado = ResultadoLPS.getInstance();
+		SPLOutcomes resultado = SPLOutcomes.getInstance();
 		
 		resultado.setSubject(sourcePath, targetPath);
 		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
@@ -168,10 +168,10 @@ public class Analyzer {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	public ResultadoLPS verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public SPLOutcomes verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
 		/* SPL evolution results */
-		ResultadoLPS resultado = ResultadoLPS.getInstance();
+		SPLOutcomes resultado = SPLOutcomes.getInstance();
 		
 		/*Set the Original SPL source path and the SPL Target source path from the ResultadoLPS Class */
 		resultado.setSubject(sourcePath, targetPath);
@@ -183,7 +183,7 @@ public class Analyzer {
 		resultado.resetExecution();
 
 		/* Delega a responsabilidade de verificar se a linha � refinamento para a classe ToolCommandLine */
-		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, resultado, libPathSource, libPathTarget);
+		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
 		
 		/* Is this Evolution a refinement. Put it down in the Results please. */
 		resultado.setRefinement(isRefinement);

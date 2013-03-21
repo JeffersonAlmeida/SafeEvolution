@@ -9,7 +9,7 @@ import java.util.Properties;
 
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 
 /**
  * 
@@ -145,7 +145,7 @@ public class Measures {
 	 * @param file
 	 * @throws IOException
 	 */
-	public void printProperties(File file, ResultadoLPS r, String evolutionName)throws IOException {		
+	public void printProperties(File file, SPLOutcomes r, String evolutionName)throws IOException {		
 		File fileSource = new File(this.sourcePath);
 		File targetPath = new File(this.targetPath);
 		

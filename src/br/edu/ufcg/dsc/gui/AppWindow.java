@@ -21,7 +21,7 @@ import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.saferefactor.core.Criteria;
@@ -140,7 +140,7 @@ public class AppWindow extends ApplicationWindow {
 
 				try {
 
-					ResultadoLPS resultado = null;
+					SPLOutcomes resultado = null;
 
 					if (AppWindow.this.sourceCKSimpleOptionRadioButton.getSelection()) {
 						try {

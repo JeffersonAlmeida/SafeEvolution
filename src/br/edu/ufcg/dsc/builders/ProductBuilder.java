@@ -15,7 +15,7 @@ import org.apache.tools.ant.ProjectHelper;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.Comparador;
 import br.edu.ufcg.dsc.util.DirectoryException;
@@ -50,12 +50,12 @@ public abstract class ProductBuilder {
 	 * @throws IOException
 	 * @throws DirectoryException
 	 */
-	public abstract void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, IOException, DirectoryException;
+	public abstract void generateProduct(Product product, String pathSPL) throws AssetNotFoundException, IOException, DirectoryException;
 
-	public void preprocessVelocity(HashSet<String> features, File file, ProductLine productLine, String productPath, ResultadoLPS resultado) throws IOException {
+	public void preprocessVelocity(HashSet<String> features, File file, ProductLine productLine, String productPath) throws IOException {
 		ArrayList<String> filesToPreprocess = new ArrayList<String>();
 		this.getFilesInDirectory(file, filesToPreprocess);
-		this.preprocessVelocity(features, filesToPreprocess, productLine, productPath, resultado);
+		this.preprocessVelocity(features, filesToPreprocess, productLine, productPath);
 	}
 
 	private void getFilesInDirectory(File file, ArrayList<String> filesToPreprocess) {
@@ -73,7 +73,7 @@ public abstract class ProductBuilder {
 		}
 	}
 
-	public void preprocessVelocity(HashSet<String> features, ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath, ResultadoLPS resultado) throws IOException {
+	public void preprocessVelocity(HashSet<String> features, ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath) throws IOException {
 		System.out.println("@Features Preprocess Velocity :");
 		for (String feature : features) {
 			System.out.println("\nfeature:" + feature);
@@ -103,9 +103,9 @@ public abstract class ProductBuilder {
 		helper.parse(p, buildFile);
 
 		//O pre-processamento contarah como tempo de compilacao tambem.
-		resultado.getMeasures().getTempoCompilacaoProdutos().startContinue();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().startContinue();
 		p.executeTarget("velocity");
-		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 	}
 
 	private String createFilesToPreprocessArgument(ArrayList<String> filesToPreprocess, ProductLine productLine, String productPath) throws IOException {
@@ -280,7 +280,7 @@ public abstract class ProductBuilder {
 	 * @param srcDir
 	 * @param resultado
 	 */
-	public void preprocess(String symbols, String srcDir, ResultadoLPS resultado) {
+	public void preprocess(String symbols, String srcDir) {
 		
 		
 		/*Create an ANT build file*/
@@ -317,13 +317,13 @@ public abstract class ProductBuilder {
 		helper.parse(p, buildFile);
 
 		/* The pre-processing time will be part of time to compile. */
-		resultado.getMeasures().getTempoCompilacaoProdutos().startContinue();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().startContinue();
 		
 		/* Execute the specified target and any targets it depends on.*/
 		p.executeTarget("preprocess");
 		
 		/* The pre-processing time will be part of time to compile. */
-		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 	}
 
 	public HashSet<HashSet<String>> filter(HashSet<HashSet<String>> products, HashSet<String> changedFeatures) {

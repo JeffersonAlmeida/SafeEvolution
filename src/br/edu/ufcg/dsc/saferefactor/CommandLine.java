@@ -13,7 +13,7 @@ import refactoring.Constants;
 import refactoring.FileUtil;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Product;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.saferefactor.core.Criteria;
 import br.edu.ufcg.saferefactor.core.Saferefactor;
 
@@ -44,7 +44,7 @@ public class CommandLine {
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean isRefactoring(int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, ResultadoLPS resultado, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
+	public static boolean isRefactoring(int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
 
 		boolean isRefinement = true;
 
@@ -124,7 +124,7 @@ public class CommandLine {
 			p.executeTarget("clean");
 		}
 
-		resultado.getMeasures().getTempoCompilacaoProdutos().startContinue();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().startContinue();
 
 		if (!targetIsCompiled) {
 			p.executeTarget("compile_target_ind");
@@ -133,7 +133,7 @@ public class CommandLine {
 			p.executeTarget("compile_source");
 		}
 
-		resultado.getMeasures().getTempoCompilacaoProdutos().pause();
+		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 
 		Saferefactor sr = new Saferefactor(source, target, "bin", "src", "lib", classes, maxTests, criteria);
 
@@ -163,7 +163,7 @@ public class CommandLine {
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException {
+	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, String classes, int timeout, int maxTests, Approach approach, Criteria criteria) throws IOException {
 
 		boolean result = false;
 
@@ -176,7 +176,7 @@ public class CommandLine {
 		int idSource = sourceProduct.getId();
 		int idTarget = targetProduct.getId();
 
-		result = isRefactoring(idSource, idTarget, source, target, classes, timeout, maxTests, approach, criteria, sourceLPSPath, targetLPSPath, resultado, sourceProduct.isCompiled(), targetProduct.isCompiled());
+		result = isRefactoring(idSource, idTarget, source, target, classes, timeout, maxTests, approach, criteria, sourceLPSPath, targetLPSPath, sourceProduct.isCompiled(), targetProduct.isCompiled());
 
 		sourceProduct.setCompiled(true);
 		targetProduct.setCompiled(true);

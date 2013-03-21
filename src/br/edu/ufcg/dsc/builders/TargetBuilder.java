@@ -7,7 +7,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 
 import br.edu.ufcg.dsc.Product;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.dsc.util.FileManager;
@@ -89,7 +89,7 @@ public class TargetBuilder extends ProductBuilder {
 	}
 
 	@Override
-	public void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, IOException, DirectoryException {
+	public void generateProduct(Product product, String pathSPL) throws AssetNotFoundException, IOException, DirectoryException {
 		
 		if(!product.isGenerated()){
 			ArrayList<String> assetsOrigens = new ArrayList<String>();
@@ -104,7 +104,7 @@ public class TargetBuilder extends ProductBuilder {
 			
 			File productDirectory = new File(product.getPath());
 			HashSet<String> featuresList = product.getFeaturesList();
-			this.preprocessVelocity(featuresList, productDirectory, product.getSpl(), product.getPath(), resultado);
+			this.preprocessVelocity(featuresList, productDirectory, product.getSpl(), product.getPath());
 			
 			String libPath = product.getSpl().getLibPath();
 			
@@ -113,7 +113,7 @@ public class TargetBuilder extends ProductBuilder {
 			}
 			
 			product.setGenerated(true);
-			resultado.getMeasures().setQuantidadeProdutosCompilados(resultado.getMeasures().getQuantidadeProdutosCompilados() + 1);
+			SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(SPLOutcomes.getInstance().getMeasures().getQuantidadeProdutosCompilados() + 1);
 		}
 	}
 }

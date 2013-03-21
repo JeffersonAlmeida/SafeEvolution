@@ -35,7 +35,7 @@ import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.ck.xml.XMLReader;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.fm.AlloyFMEvolutionBuilder;
 import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -103,7 +103,7 @@ public class ToolCommandLine {
 		this.productMatching = new ProductMatching(this.builder);
 	}
 
-	public boolean verifyLine(ProductLine souceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public boolean verifyLine(ProductLine souceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
@@ -115,16 +115,17 @@ public class ToolCommandLine {
 		this.putProductsInCache(souceLine, targetLine);
 
 		/* Reset results variables .*/
-		resultado.getMeasures().reset();
-		resultado.getMeasures().setApproach(approach);
-		resultado.getMeasures().getTempoTotal().startContinue();
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		sOutcomes.getMeasures().reset();
+		sOutcomes.getMeasures().setApproach(approach);
+		sOutcomes.getMeasures().getTempoTotal().startContinue();
 
 		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
-		isRefinement = this.checkLPS(souceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
+		isRefinement = this.checkLPS(souceLine, targetLine, timeout, qtdTestes, approach, criteria);
 
 		/*Report Variables: Pause total time to check the SPL.*/
-		resultado.getMeasures().getTempoTotal().pause();
-		resultado.getMeasures().print();
+		sOutcomes.getMeasures().getTempoTotal().pause();
+		sOutcomes.getMeasures().print();
 
 		return isRefinement;
 	}
@@ -249,7 +250,7 @@ public class ToolCommandLine {
 	 * @throws AssetNotFoundException Case this is not successful, throws IO Asset Not Found Exception. <br></br>
 	 * @throws DirectoryException  Case this is not successful, throws Directory Exception. <br></br>
 	 */
-	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
+	public boolean checkLPS(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria) throws IOException, AssetNotFoundException, DirectoryException {
 		
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
@@ -272,7 +273,7 @@ public class ToolCommandLine {
 		System.out.println("\n\n\n\n\t\tOk. We have already checked the well formedness.\n");
 		System.out.println("\n\t -> WF: " + isWF+ "\n");
 		/* Set this property in Results Class - To be used as a report later.*/
-		resultado.setWF(isWF);
+		SPLOutcomes.getInstance().setWF(isWF);
 
 		/*Verify Feature Model -  FM is not verified for the Naive Approach, ONLY Well Formedness*/
 		if (isWF) {
@@ -284,7 +285,7 @@ public class ToolCommandLine {
 			System.out.println("FM and CK are refinement:- " + areAllProductsMatched );
 			
 			/*Set this information in the Results/Short Report.*/
-			resultado.setFMAndCKRefinement(areAllProductsMatched);
+			SPLOutcomes.getInstance().setFMAndCKRefinement(areAllProductsMatched);
 
 			/*which approach is settled ? */
 			if (approach == Approach.APP || approach == Approach.AP || areAllProductsMatched) {
@@ -292,7 +293,7 @@ public class ToolCommandLine {
 				/* verify whether two AM's is equal. */
 				boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
 				/* Set it down in the results. */
-				resultado.setAssetMappingsEqual(isAssetMappingsEqual);
+				SPLOutcomes.getInstance().setAssetMappingsEqual(isAssetMappingsEqual);
 
 				if (approach == Approach.APP || approach == Approach.AP || !isAssetMappingsEqual) {
 
@@ -303,38 +304,38 @@ public class ToolCommandLine {
 						changedFeatures = getChangedFeatureNames(targetLine);
 					}
 
-					resultado.getMeasures().getTempoExecucaoAbordagem().startContinue();
+					SPLOutcomes.getInstance().getMeasures().getTempoExecucaoAbordagem().startContinue();
 
 					if (approach == Approach.IC || approach==Approach.EIC) {
 						/* Only generates tests for modified classes and do not generate products. */
 						/* Generates two tests per method. */
-						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
+						isRefinement = this.isAssetMappingRefinement(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria);
 						/*Ja supoe que o comportamento tamb�m n�o foi preservado.*/
-						ResultadoLPS.getInstance().setCompObservableBehavior(isRefinement);
+						SPLOutcomes.getInstance().setCompObservableBehavior(isRefinement);
 						if(isRefinement){System.out.println("\nAsset Mapping Refined.\n");} else {System.out.println("\nSorry to inform you that Asset Mapping was not refined.\n");}
 					} else {
 						/* Generate tests for all classes and all products. */
-						isRefinement = this.testProducts(sourceLine, targetLine, timeout, qtdTestes, approach, criteria, resultado);
-						ResultadoLPS.getInstance().setCompObservableBehavior(isRefinement);
+						isRefinement = this.testProducts(sourceLine, targetLine, timeout, qtdTestes, approach, criteria);
+						SPLOutcomes.getInstance().setCompObservableBehavior(isRefinement);
 						if(isRefinement){System.out.println("\nCompatible Observable Behavior\n");} else {System.out.println("\nSource and Target do not have compatible observable behavior.\n");} 
 					}
 				
-					resultado.getMeasures().getTempoExecucaoAbordagem().pause();
+					SPLOutcomes.getInstance().getMeasures().getTempoExecucaoAbordagem().pause();
 					/*Set whether the SPL evolution is a refinement. */
-					resultado.getMeasures().setResult(isRefinement);
+					SPLOutcomes.getInstance().getMeasures().setResult(isRefinement);
 
 					if (isRefinement) {
 						System.out.println("\nThe Software Product Line is a refinement.\n");
 					} else {
 						System.out.println("The Software Product Line is NOT a refinement.\n");
 					}
-					ResultadoLPS.getInstance().setRefinement(isRefinement);
+					SPLOutcomes.getInstance().setRefinement(isRefinement);
 				}else {
 					/*Set whether the SPL evolution is a refinement. */
-					resultado.getMeasures().setResult(true);
+					SPLOutcomes.getInstance().getMeasures().setResult(true);
 					System.out.println("\n\nThe Software Product Line was refined.\n");
 					isRefinement = true;
-					ResultadoLPS.getInstance().setRefinement(true);
+					SPLOutcomes.getInstance().setRefinement(true);
 				}
 			} 
 			/* The approaches that can be applied to check the refinement is NAIVE_2_ICTAC and NAIVE_1_APROXIMACAO. */
@@ -342,14 +343,14 @@ public class ToolCommandLine {
 			else {
 				/* This approach can not be applied. */
 				System.out.println("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
-				ResultadoLPS.getInstance().setObservation("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
+				SPLOutcomes.getInstance().setObservation("The " + approach + " approach can not be applied.\nFM' and CK' don't refine FM and CK.");
 			}
 		} else {
 			System.out.println("\n Software Product Line Short Report :\n");
 		    System.out.println("- It is NOT a refinement.\n");
 		    System.out.println("- It is NOT well formed.\n");
-		    ResultadoLPS.getInstance().setWF(false);
-		    ResultadoLPS.getInstance().setRefinement(false);
+		    SPLOutcomes.getInstance().setWF(false);
+		    SPLOutcomes.getInstance().setRefinement(false);
 			/* Software Product Line Short Report : */
 			/* It is not a refinement. It is not well formed. */
 		}
@@ -409,25 +410,25 @@ public class ToolCommandLine {
 		return assetsEqual;
 	}
 
-	private boolean testProducts(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria, ResultadoLPS resultado) throws IOException, DirectoryException {
+	private boolean testProducts(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, Criteria criteria) throws IOException, DirectoryException {
 		
 		System.out.println("\n\nTesting Products: ");
 		boolean isRefactoring = true;
 
 		try {
-			resultado.getMeasures().setQuantidadeProdutosCompilados(0);
+			SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(0);
 
 			for (Product productSource : sourceLine.getProducts()) {
 				productSource.printSetOfFeatures();
 				if (approach == Approach.APP || approach == Approach.AP || (approach == Approach.IP && productSource.containsSomeAsset(this.classesModificadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
 					
-					this.builder.generateProduct(productSource, sourceLine.getPath(), resultado);
+					this.builder.generateProduct(productSource, sourceLine.getPath());
 
 					Product provavelCorrespondente = productSource.getLikelyCorrespondingProduct();
 
 					if (provavelCorrespondente != null) {
-						this.builder.generateProduct(provavelCorrespondente, targetLine.getPath(), resultado);
-						isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria, resultado);
+						this.builder.generateProduct(provavelCorrespondente, targetLine.getPath());
+						isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria);
 					} else {
 						/* If the source product does not have a correspondent target product it is NOT considered a refactoring.
 						 * It means, that the behavior was not preserved once we can not find even a correspondent target product.*/
@@ -441,9 +442,9 @@ public class ToolCommandLine {
 						if (!isRefactoring) {
 							for (Product productTarget : targetLine.getProducts()) {
 								if (productTarget != provavelCorrespondente) {
-									this.builder.generateProduct(productTarget, targetLine.getPath(), resultado);
+									this.builder.generateProduct(productTarget, targetLine.getPath());
 
-									isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria, resultado);
+									isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), timeout, qtdTestes, approach, criteria);
 
 									//Para de procurar se encontrar um par com mesmo comportamento.
 									if (isRefactoring) {
@@ -537,10 +538,10 @@ public class ToolCommandLine {
 	 * @return
 	 * @throws IOException
 	 */
-	private boolean isAssetMappingRefinement(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException {
+	private boolean isAssetMappingRefinement(ProductLine sourceLine, ProductLine targetLine, int timeout, int qtdTestes, Approach approach, HashSet<String> changedFeatures, Criteria criteria) throws IOException {
 		boolean ehAssetMappingRefinement = false;
 		try {
-			ehAssetMappingRefinement = this.checkAssetMappingBehavior(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria, resultado);
+			ehAssetMappingRefinement = this.checkAssetMappingBehavior(sourceLine, targetLine, timeout, qtdTestes, approach, changedFeatures, criteria);
 		} catch (AssetNotFoundException e1) {
 			e1.printStackTrace();
 		} catch (DirectoryException e1) {
@@ -726,7 +727,7 @@ public class ToolCommandLine {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach, HashSet<String> changedFeatures, Criteria criteria, ResultadoLPS resultado) throws IOException, AssetNotFoundException, DirectoryException {
+	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine, int timeout, int maxTests, Approach approach, HashSet<String> changedFeatures, Criteria criteria) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
 		
 		/* Looking for classes that depends of the modified classes to compile. */
@@ -746,7 +747,7 @@ public class ToolCommandLine {
 			System.out.println("The optimization for AM won't be realized.\n");
 		} else {
 			/* Set the amout of compiled products to 1*/
-			resultado.getMeasures().setQuantidadeProdutosCompilados(1);
+			SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(1);
 
 			String productPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR;
 
@@ -877,7 +878,7 @@ public class ToolCommandLine {
 					}
 				}
 
-				resultado.getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
+				SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
 
 				sameBehavior = true;
 
@@ -932,8 +933,8 @@ public class ToolCommandLine {
 						//pasta, sem copias. Com isso, eh necessario renomear a pasta para src manualmente.
 
 						if (prod.size() > 0/* && !(prod.size() == 1 && prod.iterator().next().contains("fake"))*/) {
-							this.builder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent(), resultado);
-							this.builder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent(), resultado);
+							this.builder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent());
+							this.builder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent());
 						}
 						/*Rename srcpreprocess folder to src*/
 						/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
@@ -942,9 +943,9 @@ public class ToolCommandLine {
 					} else {
 						//Para o MobileMedia, pre processa com Antenna, que copia o codigo da pasta
 						//srcprecess para src.
-						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent(), resultado);
+						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent());
 
-						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent(), resultado);
+						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent());
 
 						System.out.println("########################################################" + prod);
 
@@ -959,7 +960,7 @@ public class ToolCommandLine {
 					}
 
 					System.out.println("\nClasses que receberao testes JUNIT: " + classes);
-					sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), resultado, false, false);
+					sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), false, false);
 					for (File file : filesToTrash) {
 						file.delete();
 						this.listaAspectos.remove(file.getAbsolutePath());
@@ -997,19 +998,16 @@ public class ToolCommandLine {
 						}
 					}
 
-					resultado.getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
+					SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
 
 					sameBehavior = true;
 
 					for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
-						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent(), resultado);
+						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent());
 
-						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent(), resultado);
+						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent());
 
-						sameBehavior = sameBehavior
-								&& CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(),
-										classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(),
-										resultado, false, false);
+						sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), false, false);
 
 						System.out.println("###########################" + sameBehavior);
 					}
@@ -1019,7 +1017,7 @@ public class ToolCommandLine {
 					testTargetDirectory.renameTo(new File(testTargetDirectory.getParent() + Constants.FILE_SEPARATOR + "src"));
 
 					sameBehavior = CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(),
-							classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), resultado, false,
+							classes, timeout, maxTests, approach, criteria, sourceLine.getPath(), targetLine.getPath(), false,
 							false);
 
 					System.out.println("###########################" + sameBehavior);
@@ -1350,7 +1348,7 @@ public class ToolCommandLine {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, SPLOutcomes resultado) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		//	sourcePath = sourcePath.startsWith("/") ? sourcePath : Constants.PLUGIN_PATH + "/../Exemplos/" + sourcePath;
 	//	targetPath = targetPath.startsWith("/") ? targetPath : Constants.PLUGIN_PATH + "/../Exemplos/" + targetPath;
 
@@ -1360,7 +1358,7 @@ public class ToolCommandLine {
 		ProductLine targetLine = new ProductLine(targetPath, targetPath + "/Hephaestus/ck.xml", targetPath + "/Hephaestus/fm.xml", targetPath + "/Hephaestus/am.txt",
 				temAspectosTarget, controladoresFachadas, targetCKKind, targetAMFormat);
 
-		return this.verifyLine(souceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
+		return this.verifyLine(souceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria);
 	}
 
 	/**
@@ -1391,7 +1389,7 @@ public class ToolCommandLine {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, ResultadoLPS resultado, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public boolean verifyLine(String sourcePath, String targetPath, int timeout, int qtdTestes, Approach selectedApproaches, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/*This part creates a representation of the source product line.*/
 		ProductLine sourceLine = new ProductLine(sourcePath, sourcePath + "/Hephaestus/ck.xml", sourcePath + "/Hephaestus/fm.xml", sourcePath + "/Hephaestus/am.txt", temAspectosSource, controladoresFachadas, sourceCKKind, sourceAMFormat);
@@ -1406,7 +1404,7 @@ public class ToolCommandLine {
 		targetLine.setLibPath(libPathTarget);
 		
 		/* Verify the SPL with the created source and target product line.*/
-		return this.verifyLine(sourceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria, resultado);
+		return this.verifyLine(sourceLine, targetLine, timeout, qtdTestes, selectedApproaches, criteria);
 	}
 	
 	

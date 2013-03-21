@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.dsc.Product;
-import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.dsc.util.FileManager;
@@ -56,7 +56,7 @@ public class MobileMediaBuilder extends ProductBuilder {
 	 * This Method works properly to generate <strong>Mobile Media</strong> Products with Antenna preprocessor.
 	 * @see Lines
 	 */
-	public void generateProduct(Product product, String pathSPL, ResultadoLPS resultado) throws AssetNotFoundException, DirectoryException {
+	public void generateProduct(Product product, String pathSPL) throws AssetNotFoundException, DirectoryException {
 		if(!product.isGenerated()){
 
 			ArrayList<String> assetsOrigens = new ArrayList<String>();
@@ -72,7 +72,7 @@ public class MobileMediaBuilder extends ProductBuilder {
 			this.createDirs(product, filesToPreProcess, pathSPL);
 			this.filesManager.copyFiles(pathSPL, assetsOrigens, filesToPreProcess, product.getPath());
 
-			this.preprocess(this.generateStringPreProcessTags(product.getPreProcessTags()), product.getPath(), resultado);
+			this.preprocess(this.generateStringPreProcessTags(product.getPreProcessTags()), product.getPath());
 			
 			/*Aspectos precisam ser copiados manualmente quando o preprocessador utilizado eh o Antenna. */
 			String libPath = product.getSpl().getLibPath();
@@ -83,7 +83,7 @@ public class MobileMediaBuilder extends ProductBuilder {
 			
 			product.setGenerated(true);
 			
-			resultado.getMeasures().setQuantidadeProdutosCompilados(resultado.getMeasures().getQuantidadeProdutosCompilados() + 1);
+			SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(SPLOutcomes.getInstance().getMeasures().getQuantidadeProdutosCompilados() + 1);
 		}
 	}
 }
