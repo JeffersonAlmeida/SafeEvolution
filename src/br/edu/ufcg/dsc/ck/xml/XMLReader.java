@@ -30,7 +30,7 @@ import br.edu.ufcg.dsc.ck.parser.scanner;
 import br.edu.ufcg.dsc.ck.tasks.SelectClass;
 import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 
 public class XMLReader {
 	
@@ -229,12 +229,12 @@ public class XMLReader {
 					System.out.println("Parametros para o SOOT -> Classe:" + clazz + " path:" + path);
 					dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
 					/* Catch the aspects needed to compile the class. This class can depend on aspects. Who are these aspects ? */
-					dependencias.addAll(FilesManager.getInstance().getDependenciasAspectos(classFile));
+					dependencias.addAll(FileManager.getInstance().getDependenciasAspectos(classFile));
 				}
 				/* Is the file an aspect ? */
 				else if(classeRelativePath.endsWith(".aj")){
 					/* get the aspect dependencies looking for the imports. */
-					dependencias = FilesManager.getInstance().getDependenciasDeAspectosPeloImport(classFile);
+					dependencias = FileManager.getInstance().getDependenciasDeAspectosPeloImport(classFile);
 				}
 				
 				/* Does it have dependencies ? */

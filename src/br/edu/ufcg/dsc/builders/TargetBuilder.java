@@ -10,7 +10,7 @@ import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 
 public class TargetBuilder extends ProductBuilder {
 
@@ -109,7 +109,7 @@ public class TargetBuilder extends ProductBuilder {
 			String libPath = product.getSpl().getLibPath();
 			
 			if(libPath != null){
-				FilesManager.getInstance().copyLibs(libPath, product.getPath() + File.separator + "lib");
+				FileManager.getInstance().copyLibs(libPath, product.getPath() + File.separator + "lib");
 			}
 			
 			product.setGenerated(true);

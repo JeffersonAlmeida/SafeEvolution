@@ -15,12 +15,16 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import javax.naming.ConfigurationException;
+
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
+
 import soot.Main;
+import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.builders.MobileMediaBuilder;
@@ -29,7 +33,6 @@ import br.edu.ufcg.dsc.builders.TargetBuilder;
 import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
-import br.edu.ufcg.dsc.ck.HephaestusCKReader;
 import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
@@ -44,7 +47,7 @@ import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.Comparador;
 import br.edu.ufcg.dsc.util.DirectoryException;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 import br.edu.ufcg.saferefactor.core.Criteria;
 import edu.mit.csail.sdg.alloy4.Err;
 
@@ -52,13 +55,7 @@ public class ToolCommandLine {
 
 	private static final int MAX_CLASSES_MODIFICADAS = 1000;
 
-	/*What does it means ? */
-	private String sourceFMSemantics;
-	/*What does it means ? */
-	private String targetFMSemantics;
-	
-	/* This instance managers the files and look for its dependencies needed to compile: Class, Aspects. In addition, it copies the file from the source to the target product. Like hephaestus tool does.*/
-	private FilesManager filesManager;
+	private WellFormedness wellFormedness;
 	
 	/*Hashset of dependencies to the compile the file. */
 	private HashSet<String> dependenciasCopiadas;
@@ -90,9 +87,9 @@ public class ToolCommandLine {
 	private Lines line;
 
 	public ToolCommandLine() {
-		this.filesManager = FilesManager.getInstance();
 		this.cacheProducts = new HashMap<String, HashSet<HashSet<String>>>();
 		this.astComparator = new ASTComparator();
+		this.wellFormedness = new WellFormedness();
 		try {
 			this.astComparator.setUpProject();
 		} catch (ConfigurationException e) {
@@ -147,11 +144,11 @@ public class ToolCommandLine {
 		if (this.cacheProducts.get(sourceLine.getPath()) == null || this.cacheProducts.get(targetLine.getPath()) == null) {
 			/*Build the Source Feature Model Alloy file.*/
 			System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
-			buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
+			this.wellFormedness.buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
 			
 			/*Build the Target Feature Model Alloy file.*/
 			System.out.println("\nBuild the TARGET Feature Model Alloy file:");
-			buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
+			this.wellFormedness.buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
 
 			/*Build the Evolution Alloy file.*/
 			System.out.println("\nBuild the EVOLUTION Alloy file:");
@@ -178,8 +175,6 @@ public class ToolCommandLine {
 	}
 
 	private void setup(ProductLine souceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
-		this.sourceFMSemantics = null;
-		this.targetFMSemantics = null;
 		this.dependenciasCopiadas = null;
 		this.classesModificadas = null;
 		this.testsCompileTimeout = 0;
@@ -280,7 +275,12 @@ public class ToolCommandLine {
 		
 		/* Check whether the Software Product Line is well formed. */
 		System.out.println("\n\n\n\n\t\tLet's check if the SPL is well formed.\n");
-		boolean isWF = this.isWF(sourceLine, targetLine);
+		
+		
+		
+		boolean isWF = this.wellFormedness.isWF(sourceLine, targetLine); 
+		
+		
 		System.out.println("\n\n\n\n\t\tOk. We have already checked the well formedness.\n");
 		System.out.println("\n\t -> WF: " + isWF+ "\n");
 		/* Set this property in Results Class - To be used as a report later.*/
@@ -569,40 +569,6 @@ public class ToolCommandLine {
 	}
 
 	/**
-	 * This method checks if the SPL is well formed.<br></br>
-	 * @param sourceLine SOURCE product line.  <br></br>
-	 * @param targetLine TARGET product line.  <br></br>
-	 * @return if the SPL is well formed.  <br></br>
-	 */
-	private boolean isWF(ProductLine sourceLine, ProductLine targetLine) {
-		
-		System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
-		this.buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
-		
-		System.out.println("\nBuild the TARGET Feature Model Alloy file:");
-		this.buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
-
-		System.out.println("\nBuild the SOURCE Configuration Knowledge Alloy file:");
-		this.buildAlloyCKFile(Constants.SOURCE_CK_ALLOY_NAME, this.sourceFMSemantics, "source", sourceLine);
-		
-		System.out.println("\nBuild the TARGET Configuration Knowledge Alloy file:");
-		this.buildAlloyCKFile(Constants.TARGET_CK_ALLOY_NAME, this.targetFMSemantics, "target", targetLine);
-
-	    /* Well Formedness to the <Source> SPL */
-		SafeCompositionResult sourceComposition = checkSafeCompositionOfLine(Constants.SOURCE_CK_ALLOY_NAME, sourceLine.getFeatures(), "source");
-		ResultadoLPS.getInstance().setSourceIsWellFormed(!sourceComposition.getAnalysisResult());
-		System.out.println("Well Formedness to the <Source> SPL: " + !sourceComposition.getAnalysisResult());
-
-		/*Well Formedness to the <Target> SPL*/
-		SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(), "target");
-		ResultadoLPS.getInstance().setTargetIsWellFormed(!targetComposition.getAnalysisResult());
-		System.out.println("Well Formedness to the <Target> SPL.: " + !targetComposition.getAnalysisResult());
-
-		return !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();
-		/* End of th Well Formedness Test */ 
-	}
-
-	/**
 	 * Verifica se tanto mapeamento quanto conteudo das classes eh igual.
 	 * 
 	 * @return
@@ -810,84 +776,6 @@ public class ToolCommandLine {
 		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, "source", sourceFMXML, "target", targetFMXML);
 	}
 
-	/**
-	 * This Method builds FM Alloy FIle <br></br>
-	 * @param moduleName
-	 * @param sourceFmAlloyName
-	 * @param productLine
-	 */
-	private void buildFMAlloyFile(String moduleName, String sourceFmAlloyName, ProductLine productLine) {
-		
-		FeatureModelReader featureModelReader = new FeatureModelReader();
-
-		featureModelReader.readFM(moduleName, productLine.getFmPath());
-
-		productLine.setFeatures(featureModelReader.getFeatures());
-
-		System.out.println(moduleName+" Set OF Features: ");
-		productLine.printFeatures(moduleName);
-		
-		if (moduleName.equals("source")) {
-			this.sourceFMSemantics = featureModelReader.getSemanticsFM();
-			System.out.println("\nSOURCE FM Semantics: " + this.sourceFMSemantics);
-		} else if (moduleName.equals("target")) {
-			this.targetFMSemantics = featureModelReader.getSemanticsFM();
-			System.out.println("\nTARGET FM Semantics: " + this.targetFMSemantics);
-		}
-		
-		try {
-			featureModelReader.buildAlloyFile(moduleName, sourceFmAlloyName);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private void buildAlloyCKFile(String name, String fMSemantics, String indicator, ProductLine productLine) {
-		ConfigurationKnowledge ck = productLine.getCk();
-		ck.print(indicator);
-		productLine.printPreprocessProperties(indicator);
-		String alloy = ck.toAlloy();
-
-		System.out.println("Alloy File Content: " + alloy);
-		
-		HashSet<String> correctSet = new HashSet<String>();
-		System.out.println("\nCorrect Set of Features:");
-		for (String string : productLine.getFeatures()) {
-			System.out.println("\nFeature: " + string);
-			correctSet.add(string.trim());
-		}
-		HashSet<String> ckSigs = ck.getSignatures();
-		System.out.println("\nIncluding CK Signatures in Correct Set");
-		for (String string : ckSigs) {
-			System.out.println("\nSignature: " + string);
-			correctSet.add(string.trim());
-		}
-		String header = "module " + name + Constants.LINE_SEPARATOR;
-
-		String sigs = "one sig ";
-		String separador = "";
-		
-		System.out.println("\nCorrect Ser Filled:");
-		for (String string : correctSet) {
-			string = string.trim();
-			System.out.println("\nCorrect Item: " + string);
-			if (string != null && !string.equals("")) {
-				sigs += separador + string;
-				separador = ", ";
-			}
-		}
-		sigs += " in Bool{}" + Constants.LINE_SEPARATOR + Constants.LINE_SEPARATOR;
-
-		String assertText = "assert WT {semantica" + indicator + "[] => semanticaCK[]}";
-		assertText += Constants.LINE_SEPARATOR;
-		assertText += "check WT for 2";
-
-		String fileName = Constants.ALLOY_PATH + name + Constants.ALLOY_EXTENSION;
-		String content = header + alloy + sigs + fMSemantics + Constants.LINE_SEPARATOR + assertText;
-		System.out.println("\nCreate Alloy CK File:\nFile Name: " + fileName + "\nContent: " + content);
-		/* Create Alloy Ck File: FileName and Content*/
-		filesManager.createFile(fileName, content);
-	}
 
 	/**
 	 * Compara os AM - Supoe um assetname comecando com # no assetmapping e
@@ -899,7 +787,7 @@ public class ToolCommandLine {
 	 */
 	private boolean isAssetMappingEqual(String sourceAssetMapping, String targetAssetMapping) {
 
-		FilesManager manager = FilesManager.getInstance();
+		FileManager manager = FileManager.getInstance();
 
 		ArrayList<String> sourceMappingContent = manager.getFileContent(sourceAssetMapping);
 
@@ -1000,7 +888,7 @@ public class ToolCommandLine {
 						result = false;
 						/*Put the asset in the modified classes.*/
 						this.classesModificadas.add(asset);
-						this.changedAssets.add(this.filesManager.getPath("src." + asset));
+						this.changedAssets.add(FileManager.getInstance().getPath("src." + asset));
 					}
 				} catch (JavaModelException e) {
 					e.printStackTrace();
@@ -1168,12 +1056,12 @@ public class ToolCommandLine {
 			String productPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR;
 
 			/* Creating folders for source and target products, which will be the same for all modified classes and their dependencies. */
-			File testSourceDirectory = FilesManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
-			File testTargetDirectory = FilesManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
+			File testSourceDirectory = FileManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
+			File testTargetDirectory = FileManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (line == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
 
 			/* This creates bin folder for SOURCE PRODUCT and TARGET PRODUCT. */
-			FilesManager.getInstance().createDir(productPath + "source" + Constants.FILE_SEPARATOR + "bin");
-			FilesManager.getInstance().createDir(productPath + "target" + Constants.FILE_SEPARATOR + "bin");
+			FileManager.getInstance().createDir(productPath + "source" + Constants.FILE_SEPARATOR + "bin");
+			FileManager.getInstance().createDir(productPath + "target" + Constants.FILE_SEPARATOR + "bin");
 
 			/* Get library path of the SOURCE and TARGET SPL*/
 			String libPathSource = sourceLine.getLibPath();
@@ -1181,8 +1069,8 @@ public class ToolCommandLine {
 
 			if (libPathSource != null && libPathtarget != null) {
 				/* This copies all library files for SOURCE PRODUCT and TARGET PRODUCT lib path. */
-				FilesManager.getInstance().copyLibs(libPathSource, productPath + "source" + Constants.FILE_SEPARATOR + "lib");
-				FilesManager.getInstance().copyLibs(libPathtarget, productPath + "target" + Constants.FILE_SEPARATOR + "lib");
+				FileManager.getInstance().copyLibs(libPathSource, productPath + "source" + Constants.FILE_SEPARATOR + "lib");
+				FileManager.getInstance().copyLibs(libPathtarget, productPath + "target" + Constants.FILE_SEPARATOR + "lib");
 			}
 
 			/* Classes that will have generated tests. */
@@ -1204,24 +1092,24 @@ public class ToolCommandLine {
 					/*Copying source version of the modified file. */
 					String destinationPath = null;
 					File fileDestination = null;
-					destinationPath = testSourceDirectory.getAbsolutePath() + FilesManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
+					destinationPath = testSourceDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
 					fileDestination = new File(destinationPath);
 					classeToGenerateTestes = classe;
 					System.out.println("$classeToGenerateTestes Antes: " + classeToGenerateTestes);
 					
 					if (this.line == Lines.TARGET){
-						classeToGenerateTestes = FilesManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
+						classeToGenerateTestes = FileManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
 					}
 					System.out.println("*classeToGenerateTestes Depois: " + classeToGenerateTestes);
-					FilesManager.getInstance().createDir(fileDestination.getParent());
-					FilesManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
+					FileManager.getInstance().createDir(fileDestination.getParent());
+					FileManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
 
 					/* Catch the class path in source version. */
 					File fileSource = fileDestination;
-					destinationPath = testTargetDirectory.getAbsolutePath()	+ FilesManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
+					destinationPath = testTargetDirectory.getAbsolutePath()	+ FileManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
 					fileDestination = new File(destinationPath);
-					FilesManager.getInstance().createDir(fileDestination.getParent());
-					FilesManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
+					FileManager.getInstance().createDir(fileDestination.getParent());
+					FileManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
 
 					/* Catch the class path in source version. */
 					File fileTarget = fileDestination;
@@ -1318,8 +1206,8 @@ public class ToolCommandLine {
 						String destinationPath = testSourceDirectory.getAbsolutePath() + aspecto.split("src")[1];
 						if (!this.classesModificadas.contains(aspecto) && !this.listaAspectos.contains(destinationPath)) {
 							File fileDestination = new File(destinationPath);
-							FilesManager.getInstance().createDir(fileDestination.getParent());
-							FilesManager.getInstance().copyFile(sourceLine.getMappingClassesSistemaDeArquivos().get(FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
+							FileManager.getInstance().createDir(fileDestination.getParent());
+							FileManager.getInstance().copyFile(sourceLine.getMappingClassesSistemaDeArquivos().get(FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 							filesToTrash.add(fileDestination);
 							filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
 							this.listaAspectos.add(fileDestination.getAbsolutePath());
@@ -1333,8 +1221,8 @@ public class ToolCommandLine {
 						if (!this.classesModificadas.contains(aspecto) && !this.listaAspectos.contains(aspecto)) {
 							File fileDestination = new File(destinationPath);
 
-							FilesManager.getInstance().createDir(fileDestination.getParent());
-							FilesManager.getInstance().copyFile(targetLine.getMappingClassesSistemaDeArquivos().get( FilesManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
+							FileManager.getInstance().createDir(fileDestination.getParent());
+							FileManager.getInstance().copyFile(targetLine.getMappingClassesSistemaDeArquivos().get( FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 
 							filesToTrash.add(fileDestination);
 							filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
@@ -1370,8 +1258,8 @@ public class ToolCommandLine {
 						for (String aspect : this.listaAspectos) {
 							String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile()
 									.getAbsolutePath();
-							FilesManager.getInstance().createDir(dir);
-							FilesManager.getInstance().copyFile(aspect, aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src"));
+							FileManager.getInstance().createDir(dir);
+							FileManager.getInstance().copyFile(aspect, aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src"));
 						}
 					}
 
@@ -1610,9 +1498,9 @@ public class ToolCommandLine {
 			//As classes em que um aspecto interferem sao informadas na primeira
 			//linha do arquivo aj.
 
-			String path = mapping.get(FilesManager.getInstance().getCorrectName(this.replaceBarrasPorSeparator(aspecto)));
+			String path = mapping.get(FileManager.getInstance().getCorrectName(this.replaceBarrasPorSeparator(aspecto)));
 
-			Collection<String> classesEmQueOAspectoInterfe = FilesManager.getInstance().getDependenciasAspectos(new File(path));
+			Collection<String> classesEmQueOAspectoInterfe = FileManager.getInstance().getDependenciasAspectos(new File(path));
 
 			for (String classeModificada : this.classesModificadas) {
 
@@ -1720,7 +1608,7 @@ public class ToolCommandLine {
 
 	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash, HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
 
-		String pathDependencia = FilesManager.getInstance().getPathAPartirDoSrc( classe.getAbsolutePath().replaceFirst("srcpreprocess", "src"));
+		String pathDependencia = FileManager.getInstance().getPathAPartirDoSrc( classe.getAbsolutePath().replaceFirst("srcpreprocess", "src"));
 
 		if (!pathDependencia.startsWith("/")) {
 			pathDependencia = "/" + pathDependencia;
@@ -1736,10 +1624,10 @@ public class ToolCommandLine {
 
 				//Classes podem ser dependentes de aspectos
 				//Ocorre quando excecoes lancadas em classes sao tratadas apenas em Aspectos.
-				dependencias.addAll(FilesManager.getInstance().getDependenciasAspectos(classe));
+				dependencias.addAll(FileManager.getInstance().getDependenciasAspectos(classe));
 			} else {
 				//Dependencias de aspectos serao identificadas pelo import deles.
-				dependencias = FilesManager.getInstance().getDependenciasDeAspectosPeloImport(classe);
+				dependencias = FileManager.getInstance().getDependenciasDeAspectosPeloImport(classe);
 			}
 		}
 
@@ -1755,15 +1643,15 @@ public class ToolCommandLine {
 					// destinationFolder inclui as pastas intermediarias ate o arquivo.
 					// destinationDirectory soh vai ate source ou target.
 					String destinationFolder = destinationDirectory.getAbsolutePath()
-							+ FilesManager.getInstance().getPathAPartirDoSrc(file.getAbsolutePath()).replaceFirst("src", "");
+							+ FileManager.getInstance().getPathAPartirDoSrc(file.getAbsolutePath()).replaceFirst("src", "");
 
 					File fileDestination = new File(destinationFolder);
 
 					if (this.dependenciasCopiadas.add(fileDestination.getAbsolutePath())) {
-						FilesManager.getInstance().createDir(fileDestination.getParent());
+						FileManager.getInstance().createDir(fileDestination.getParent());
 
 						if (!fileDestination.exists()) {
-							FilesManager.getInstance().copyFile(file.getAbsolutePath(), fileDestination.getAbsolutePath());
+							FileManager.getInstance().copyFile(file.getAbsolutePath(), fileDestination.getAbsolutePath());
 
 							if (fileDestination.getAbsolutePath().endsWith("aj")) {
 								this.listaAspectos.add(fileDestination.getAbsolutePath());

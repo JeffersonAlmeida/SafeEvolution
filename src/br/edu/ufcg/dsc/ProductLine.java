@@ -19,7 +19,7 @@ import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.HephaestusCKReader;
 import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 
 
 /**
@@ -117,7 +117,7 @@ public class ProductLine {
 			this.assetMapping = ReadAM.readAM(this.amPath);
 		}
 		else if(this.amFormat == AMFormat.SIMPLE){
-			this.assetMapping = FilesManager.getInstance().getAssets(this.amPath);
+			this.assetMapping = FileManager.getInstance().getAssets(this.amPath);
 		}
 	}
 
@@ -144,14 +144,14 @@ public class ProductLine {
 			if(asset.endsWith(".java")){
 				dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
 
-				dependencias.addAll(FilesManager.getInstance().getDependenciasAspectos(classFile));
+				dependencias.addAll(FileManager.getInstance().getDependenciasAspectos(classFile));
 			}
 			else if(asset.endsWith(".aj")){
-				dependencias = FilesManager.getInstance().getDependenciasDeAspectosPeloImport(classFile);
+				dependencias = FileManager.getInstance().getDependenciasDeAspectosPeloImport(classFile);
 			}
 
 			if(dependencias != null){
-				this.dependencias.put(FilesManager.getInstance().getPathAPartirDoSrc(asset),dependencias);
+				this.dependencias.put(FileManager.getInstance().getPathAPartirDoSrc(asset),dependencias);
 			}
 		}
 	}
@@ -189,7 +189,7 @@ public class ProductLine {
 		}else if (f.isFile()){
 			if (f.getName().endsWith(".java") || f.getName().endsWith(".aj")) {
 				String path = f.getPath();
-				this.mappingClassesSistemaDeArquivos.put(FilesManager.getInstance().getCorrectName(path), path);
+				this.mappingClassesSistemaDeArquivos.put(FileManager.getInstance().getCorrectName(path), path);
 			}
 		}
 	}

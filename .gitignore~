@@ -1,4 +1,4 @@
-Output/
+Output/outputfile.ods
 Resultados/
 ant/
 bin/
@@ -28,3 +28,6 @@ Execution*
 limitacoesTestes.txt
 junit*.properties
 javaDoc/
+resultFiles/*.properties
+
+

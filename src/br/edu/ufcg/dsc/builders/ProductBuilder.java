@@ -19,7 +19,7 @@ import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.Comparador;
 import br.edu.ufcg.dsc.util.DirectoryException;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 
 public abstract class ProductBuilder {
 	public static final String FILES_DIR = Constants.PRODUCTS_DIR;
@@ -28,7 +28,7 @@ public abstract class ProductBuilder {
 	protected String defaultTargetPath;
 	protected String defaultSourcePath;
 	protected ArrayList<Product> prods;
-	protected FilesManager filesManager;
+	protected FileManager filesManager;
 
 	public static final String SRCPREPROCESS = "srcpreprocess";
 
@@ -37,7 +37,7 @@ public abstract class ProductBuilder {
 	protected HashMap<String, String> preprocessConstantsToFeatures;
 
 	public ProductBuilder() {
-		this.filesManager = FilesManager.getInstance();
+		this.filesManager = FileManager.getInstance();
 	}
 
 	/**
@@ -383,7 +383,7 @@ public abstract class ProductBuilder {
 		return prods;
 	}
 
-	public FilesManager getFilesManager() {
+	public FileManager getFilesManager() {
 		return filesManager;
 	}
 }

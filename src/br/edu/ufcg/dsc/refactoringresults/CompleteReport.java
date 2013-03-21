@@ -3,7 +3,7 @@ package br.edu.ufcg.dsc.refactoringresults;
 import java.util.ArrayList;
 
 import br.edu.ufcg.dsc.Constants;
-import br.edu.ufcg.dsc.util.FilesManager;
+import br.edu.ufcg.dsc.util.FileManager;
 
 public class CompleteReport {
 
@@ -24,7 +24,7 @@ public class CompleteReport {
 	}
 
 	public void saveReport(int counter) {
-		FilesManager.getInstance().createFile(
+		FileManager.getInstance().createFile(
 				Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR
 						+ "RefactoringReport" + counter + ".txt", toString());
 	}
