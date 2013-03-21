@@ -20,7 +20,7 @@ import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.CKFormat;
-import br.edu.ufcg.dsc.evaluation.Avaliador;
+import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.evaluation.ResultadoLPS;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
@@ -139,13 +139,12 @@ public class AppWindow extends ApplicationWindow {
 				ProductGenerator.MAX_TENTATIVAS = 5000;
 
 				try {
-					Avaliador avaliador = new Avaliador();
 
 					ResultadoLPS resultado = null;
 
 					if (AppWindow.this.sourceCKSimpleOptionRadioButton.getSelection()) {
 						try {
-							resultado = avaliador.verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
+							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
 									true, true, null, Criteria.ALL_METHODS_IN_SOURCE_AND_TARGET, CKFormat.SIMPLE, CKFormat.SIMPLE,
 									AMFormat.SIMPLE, AMFormat.SIMPLE);
 						} catch (DirectoryException e1) {
@@ -154,7 +153,7 @@ public class AppWindow extends ApplicationWindow {
 						}
 					} else if (AppWindow.this.sourceCKHeaphestusOptionRadioButton.getSelection()) {
 						try {
-							resultado = avaliador.verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
+							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
 									true, true, null, Criteria.ALL_METHODS_IN_SOURCE_AND_TARGET, CKFormat.HEPHAESTUS, CKFormat.HEPHAESTUS,
 									AMFormat.HEPHAESTUS, AMFormat.HEPHAESTUS);
 						} catch (DirectoryException e1) {

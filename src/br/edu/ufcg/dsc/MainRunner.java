@@ -15,7 +15,7 @@ import org.eclipse.ui.testing.TestableObject;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.CKFormat;
-import br.edu.ufcg.dsc.evaluation.Avaliador;
+import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.gui.AppWindow;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.saferefactor.core.Criteria;
@@ -23,33 +23,23 @@ import br.edu.ufcg.saferefactor.core.Criteria;
 public class MainRunner implements IPlatformRunnable, ITestHarness {
 
 	private TestableObject testableObject;
-	private String[] args;
+	private String[] arguments;
 
 	public Object run(Object args) throws Exception {
-		this.args = (String[]) args;
+		this.setArguments((String[]) args);
 		testableObject = PlatformUI.getTestableObject();
 		testableObject.setTestHarness(this);
-
 		Display display = PlatformUI.createDisplay();
-
 		try {
-
 			PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
-
-			AppWindow refinementChecker = new AppWindow(
-					"LPS Refinements Checker");
-
+			AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
 			refinementChecker.open();
-
 			Shell shell = refinementChecker.getShell();
-
 			while (!shell.isDisposed()) {
 				if (!display.readAndDispatch())
 					display.sleep();
 			}
-
 			return EXIT_OK;
-
 		} finally {
 			display.dispose();
 		}
@@ -62,14 +52,12 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
-				Avaliador avaliador = new Avaliador();
 				String evolution = "Teste";
 				String source = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02";
 				String target = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02T";
 				try {
 					System.out.println("### ONLY_CHANGED_CLASSES ###");
-					avaliador
-							.avalie(evolution,
+					Analyzer.getInstance().avalie(evolution,
 									Lines.DEFAULT, // Escolha de qual linha de produtos ser� avaliada.  Mobile Media, Default ou Target.
 									source,  // SPL Original  (SPL)
 									target,  // Evolu��o/refactoring da SPL.   (SPL')
@@ -94,10 +82,12 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		testableObject.testingFinished();
 	}
 	
-	// }
+	public void setArguments(String[] arguments) {
+		this.arguments = arguments;
+	}
 
-	private void printUsage() {
-		System.out.println("Usage: RefactoringTestPlugin.MainRunner [-list] [-runall] [-[-]h[elp]] TestClass [TestClass ...]");
+	public String[] getArguments() {
+		return arguments;
 	}
 
 	public static class NullAdvisor extends WorkbenchAdvisor {
@@ -106,4 +96,5 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			return null;
 		}
 	}
+	
 }

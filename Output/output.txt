@@ -7624,14 +7624,14 @@ generate_tests:
      [java] Explorer = randoop.ForwardGenerator@60765a16
      [java] Começo!!
      [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Thu Mar 21 16:00:36 BRT 2013)FIM!!!
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Thu Mar 21 16:10:21 BRT 2013)FIM!!!
      [java] 
-     [java] Progress update: test inputs generated=500, failing inputs=0      (Thu Mar 21 16:00:39 BRT 2013)
+     [java] Progress update: test inputs generated=500, failing inputs=0      (Thu Mar 21 16:10:24 BRT 2013)
      [java] Normal method executions:12948
      [java] Exceptional method executions:13
      [java] 
-     [java] Average method execution time (normal termination):     0.155
-     [java] Average method execution time (exceptional termination):0.167
+     [java] Average method execution time (normal termination):     0.185
+     [java] Average method execution time (exceptional termination):0.152
      [java] 
      [java] Creating Junit tests (500 tests)...Writing 500 junit tests
      [java] 
@@ -7647,15 +7647,15 @@ compile_tests:
 run_tests:
      [echo] Running JUnit to test the "source"
     [junit] Running RandoopTest0
-    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.363 sec
+    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.372 sec
+    [junit] Test RandoopTest0 FAILED
      [echo] Running JUnit to test the "target"
-    [junit] Test RandoopTest0 FAILED
     [junit] Running RandoopTest0
-    [junit] Tests run: 500, Failures: 109, Errors: 1, Time elapsed: 0.617 sec
-    [junit] Test RandoopTest0 FAILED
+    [junit] Tests run: 500, Failures: 109, Errors: 1, Time elapsed: 0.454 sec
      [echo] Running JUnit to test the "source" again
+    [junit] Test RandoopTest0 FAILED
     [junit] Running RandoopTest0
-    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.344 sec
+    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.419 sec
     [junit] Test RandoopTest0 FAILED
  Print Report :
 Testes generated: 500
@@ -7783,14 +7783,14 @@ coverage:
     [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/outinstr
     [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr
 processing instrumentation path ...
-instrumentation path processed in 126 ms
+instrumentation path processed in 119 ms
 [15 class(es) instrumented, 0 resource(s) copied]
-metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr/metadata_source.emma] {in 54 ms}
+metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr/metadata_source.emma] {in 64 ms}
     [junit] Running RandoopTest0
-    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.454 sec
+    [junit] Tests run: 500, Failures: 0, Errors: 1, Time elapsed: 0.417 sec
     [junit] Test RandoopTest0 FAILED
 processing input files ...
-1 file(s) read and merged in 4 ms
+1 file(s) read and merged in 2 ms
 writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.xml] ...
 writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.html] ...
 

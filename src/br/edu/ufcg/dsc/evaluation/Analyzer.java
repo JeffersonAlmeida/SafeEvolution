@@ -20,8 +20,20 @@ import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.saferefactor.core.Criteria;
 import edu.mit.csail.sdg.alloy4.Err;
 
-public class Avaliador {
+public class Analyzer {
+	
+	private static Analyzer instance;
 
+	public static synchronized Analyzer getInstance() {
+		if (instance == null) {
+			instance = new Analyzer();
+		}
+		return instance;
+	}
+	
+	private Analyzer(){
+		super();
+	}
 	
 	/**
 	 * {@link #avalie(Lines, String, String, int, int, Approach, boolean, boolean, String, Criteria, CKFormat, CKFormat, AMFormat, AMFormat, String...)}

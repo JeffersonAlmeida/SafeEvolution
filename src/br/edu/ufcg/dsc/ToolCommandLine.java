@@ -279,7 +279,6 @@ public class ToolCommandLine {
 			
 			/* Verify whether Configuration knowledge and Feature Model is a refinement */
 			
-			
 			boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
 			
 			System.out.println("FM and CK are refinement:- " + areAllProductsMatched );
