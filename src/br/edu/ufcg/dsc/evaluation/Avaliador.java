@@ -74,26 +74,11 @@ public class Avaliador {
 				
 				ResultadoLPS resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
 				
-				//File sourceFile = new File(sourcePath);File targetFile = new File(targetPath);
-				/*String path = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Report-"+sourceFile.getName() + "-"+targetFile.getName();
-				System.out.println("\nnew directory: " + path);
-				File f = new File(path);
-				if (!f.exists()) {
-					f.mkdirs();
-				}*/
-				
-				// String resultFileName = Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "Resultados" + Constants.FILE_SEPARATOR + "Execucao" + System.currentTimeMillis();
 				String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +evolutionName;
 				 
-				//FileWriter resultFile = new FileWriter(resultFileName + ".txt");
-				//resultFile.write(resultado.toString());
-				//resultFile.close();
-				
 				System.out.println("\n\t SPL REPORT: \n");
 				System.out.println(resultado.toString());
-				
 				File fileProperties = new File(resultFileName + ".properties");
-					
 				resultado.getMeasures().printProperties(fileProperties,resultado, evolutionName);
 			
 		} catch (Err e) {

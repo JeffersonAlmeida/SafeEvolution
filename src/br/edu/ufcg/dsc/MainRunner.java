@@ -65,7 +65,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				Avaliador avaliador = new Avaliador();
 				String evolution = "Teste";
 				String source = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02";
-				String target = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02Teste";
+				String target = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02T";
 				try {
 					System.out.println("### ONLY_CHANGED_CLASSES ###");
 					avaliador
@@ -82,8 +82,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 									Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT,  // Qual o crit�rio. // ONLY_COMMON_METHODS_SUBSET_DEFAULT
 									CKFormat.HEPHAESTUS, // Qual o formato do CK da LPS Original.
 									CKFormat.HEPHAESTUS, //  Qual o formato do CK da LPS Target.
-									AMFormat.HEPHAESTUS, //  Qual o formato do AM da LPS Original.
-									AMFormat.HEPHAESTUS,  //  Qual o formato do AM da LPS Target.
+									AMFormat.SIMPLE, //  Qual o formato do AM da LPS Original.
+									AMFormat.SIMPLE,  //  Qual o formato do AM da LPS Target.
 									source+"/lib",target+"/lib"); // Uma sequencia de bibliotecas (String)
 				} catch (DirectoryException e) {
 					System.out.println(e.getMessage()+ "\n\n\n\n");

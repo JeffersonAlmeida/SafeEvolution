@@ -159,9 +159,7 @@ public class ProductLine {
 	public void setup() throws IOException, AssetNotFoundException {
 		this.features = new HashSet<String>();
 		this.dependencias = new HashMap<String, Collection<String>>();
-		
 		this.products = new ArrayList<Product>();
-		
 		this.mappingClassesSistemaDeArquivos = new HashMap<String, String>();
 		
 		String dir = this.getPath() + Constants.FILE_SEPARATOR + "src";

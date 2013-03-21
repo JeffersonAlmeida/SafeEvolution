@@ -110,7 +110,10 @@ public class HephaestusCKReader {
 					/* is the name selectAndMoveComponent ? */
 					if(name.equalsIgnoreCase("selectAndMoveComponent")){
 						/* This variable will store the provided and required classes. */
-						Map<String, Object> providedWithRequired = getProvidedRequired(productLine, transformation.child("name").content().trim(), transformation.child("args").content().trim());
+						
+						String transformationStr = transformation.child("name").content().trim() ;
+						String arguments  = transformation.child("args").content().trim();
+						Map<String, Object> providedWithRequired = getProvidedRequired(productLine, transformationStr, arguments);
 
 						/* This variable will store the provided classes.*/
 						HashMap<String,String> provided = (HashMap<String,String>) providedWithRequired.get("provided");
