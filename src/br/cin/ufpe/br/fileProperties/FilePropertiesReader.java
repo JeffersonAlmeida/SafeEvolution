@@ -27,6 +27,9 @@ public class FilePropertiesReader {
 				
 				FilePropertiesObject filePropertiesObject = new FilePropertiesObject();
 				
+				String evolutionDescription = this.properties.getProperty("evolutionDescription");
+				filePropertiesObject.setEvolutionDescription(evolutionDescription);
+				
 				String sourceLineDirectory = this.properties.getProperty("sourceLineDirectory");
 				filePropertiesObject.setSourceLineDirectory(sourceLineDirectory);
 				

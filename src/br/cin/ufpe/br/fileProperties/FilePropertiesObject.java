@@ -8,6 +8,7 @@ import br.edu.ufcg.saferefactor.core.Criteria;
 
 public class FilePropertiesObject {
 	
+			private String evolutionDescription;
 			private String sourceLineDirectory;
 			private String targetLineDirectory;
 			private String sourceLineLibDirectory;
@@ -119,6 +120,13 @@ public class FilePropertiesObject {
 			public void setAmFormatTargetSPL(AMFormat amFormatTargetSPL) {
 				this.amFormatTargetSPL = amFormatTargetSPL;
 			}
+			public void setEvolutionDescription(String evolutionDescription) {
+				this.evolutionDescription = evolutionDescription;
+			}
+			public String getEvolutionDescription() {
+				return evolutionDescription;
+			}
+	
 			
 			/*............................................................toString*/
 		
@@ -128,7 +136,8 @@ public class FilePropertiesObject {
 			@Override
 			public String toString() {
 				
-				return  "sourceLineDirectory = " + sourceLineDirectory + "\n" + 
+				return "evolutionDescription = " + evolutionDescription + "\n" +
+				        "sourceLineDirectory = " + sourceLineDirectory + "\n" + 
 				        "targetLineDirectory = " + targetLineDirectory + "\n" +
 				   	    "sourceLineLibDirectory = " + sourceLineLibDirectory + "\n" +
 						"targetLineLibDirectory = " + targetLineLibDirectory + "\n" +
@@ -144,6 +153,5 @@ public class FilePropertiesObject {
 						"amFormatSourceSPL = " + amFormatSourceSPL + "\n" +
 						"amFormatTargetSPL = " + amFormatTargetSPL ;
 			}
-	
 }
 

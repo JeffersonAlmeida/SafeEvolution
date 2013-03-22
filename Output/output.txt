@@ -1,0 +1,17 @@
+evolutionDescription = Test
+sourceLineDirectory = /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02
+targetLineDirectory = /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02T
+sourceLineLibDirectory = /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/lib
+targetLineLibDirectory = /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/lib
+line = DEFAULT
+timeOut = 5000
+inputLimit = 200
+approach  = IC
+aspectsInSourceSPL = false
+aspectsInTargetSPL = false
+whichMethods = ONLY_COMMON_METHODS_SUBSET_DEFAULT
+ckFormatSourceSPL = HEPHAESTUS
+ckFormatTargetSPL = HEPHAESTUS
+amFormatSourceSPL = SIMPLE
+amFormatTargetSPL = SIMPLE
+### ONLY_CHANGED_CLASSES ###
