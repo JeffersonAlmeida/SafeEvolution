@@ -12,6 +12,8 @@ import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.testing.ITestHarness;
 import org.eclipse.ui.testing.TestableObject;
 
+import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
+import br.cin.ufpe.br.fileProperties.FilePropertiesReader;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.CKFormat;
@@ -51,6 +53,10 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			public void run() {
 
 				ProductGenerator.MAX_TENTATIVAS = 2000;
+				
+				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/input.properties");
+				FilePropertiesObject propertiesObject = propertiesReader.loadData();
+				System.out.println(propertiesObject);
 				
 				String evolution = "Teste";
 				String source = "/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02";
