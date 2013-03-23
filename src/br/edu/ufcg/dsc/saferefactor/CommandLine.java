@@ -11,6 +11,7 @@ import org.apache.tools.ant.ProjectHelper;
 
 import refactoring.Constants;
 import refactoring.FileUtil;
+import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
@@ -44,7 +45,8 @@ public class CommandLine {
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean isRefactoring(int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
+	// int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, boolean sour
+	public static boolean isRefactoring(int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, String classes, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
 
 		boolean isRefinement = true;
 
@@ -55,38 +57,38 @@ public class CommandLine {
 		/* Central representation of an Ant project*/
 		Project p = new Project();
 
-		if (source.startsWith("/") && source.charAt(2) == ':') {
-			source = source.substring(1, source.length());
+		if (sourceProductPath.startsWith("/") && sourceProductPath.charAt(2) == ':') {
+			sourceProductPath = sourceProductPath.substring(1, sourceProductPath.length());
 		}
 
-		if (target.startsWith("/") && target.charAt(2) == ':') {
-			target = target.substring(1, target.length());
+		if (targetProductPath.startsWith("/") && targetProductPath.charAt(2) == ':') {
+			targetProductPath = targetProductPath.substring(1, targetProductPath.length());
 		}
 
 		/* Set a user property, which cannot be overwritten by set/unset property calls. */
 		p.setUserProperty(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.properties", buildFile.getAbsolutePath());
 
-		if (timeout != 0) {
+		if (propertiesObject.getTimeOut() != 0) {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("timeout", String.valueOf(timeout));
+			p.setProperty("timeout", String.valueOf(propertiesObject.getTimeOut()));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 			p.setProperty("timeout", "60");
 		}
 
-		if (maxTests != 0) {
+		if (propertiesObject.getInputLimit() != 0) {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("maxtests", String.valueOf(maxTests));
+			p.setProperty("maxtests", String.valueOf(propertiesObject.getInputLimit()));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 			p.setProperty("maxtests", "60");
 		}
 
 		/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-		p.setProperty("source", source);
-		p.setProperty("target", target);
-		p.setProperty("lpsSource", sourceLpsPath);
-		p.setProperty("lpsTarget", targetLpsPath);
+		p.setProperty("source", sourceProductPath);
+		p.setProperty("target", targetProductPath);
+		p.setProperty("lpsSource", propertiesObject.getSourceLineDirectory());
+		p.setProperty("lpsTarget", propertiesObject.getTargetLineDirectory());
 
 		if (classes != null) {
 			p.setProperty("classes", classes);
@@ -94,12 +96,12 @@ public class CommandLine {
 
 		p.setProperty("tests.folder", Constants.TEST);
 		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
-		p.setProperty("abordagem", approach.toString());
-		p.setProperty("criteria", criteria.toString());
+		p.setProperty("abordagem", propertiesObject.getApproach().toString());
+		p.setProperty("criteria", propertiesObject.getWhichMethods().toString());
 
 		String pathCobertura = null;
 
-		p.setProperty("coverage_name", pathCobertura + "+" + approach);
+		p.setProperty("coverage_name", pathCobertura + "+" + propertiesObject.getApproach());
 
 		/* Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged. */
 		DefaultLogger consoleLogger = new DefaultLogger();
@@ -116,7 +118,7 @@ public class CommandLine {
 		/*  Initialise the project. */	
 		helper.parse(p, buildFile);
 
-		if (approach == Approach.IC) {
+		if (propertiesObject.getApproach() == Approach.IC) {
 			/*Execute the specified target and any targets it depends on.*/
 			p.executeTarget("clean_tests");
 		} else {
@@ -135,10 +137,10 @@ public class CommandLine {
 
 		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 
-		Saferefactor sr = new Saferefactor(source, target, "bin", "src", "lib", classes, maxTests, criteria);
+		Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
 
 		System.out.println("Safe Refactor!");
-		isRefinement = sr.isRefactoring(String.valueOf(timeout), true);
+		isRefinement = sr.isRefactoring(String.valueOf(propertiesObject.getTimeOut()), true);
 
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");
@@ -163,20 +165,19 @@ public class CommandLine {
 	 * @return
 	 * @throws IOException
 	 */
-	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, String classes, int timeout, int maxTests, Approach approach, Criteria criteria) throws IOException {
+	//Product sourceProduct, Product targetProduct, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, ResultadoLPS resultado
+	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, String classes, FilePropertiesObject propertiesObject) throws IOException {
 
 		boolean result = false;
 
-		String source = sourceProduct.getPath();
-		String target = targetProduct.getPath();
+		String sourceProductPath = sourceProduct.getPath();
+		String targetProductPath = targetProduct.getPath();
 
-		String sourceLPSPath = sourceProduct.getSpl().getPath();
-		String targetLPSPath = targetProduct.getSpl().getPath();
+		int sourceProductId = sourceProduct.getId();
+		int targetProductId = targetProduct.getId();
 
-		int idSource = sourceProduct.getId();
-		int idTarget = targetProduct.getId();
-
-		result = isRefactoring(idSource, idTarget, source, target, classes, timeout, maxTests, approach, criteria, sourceLPSPath, targetLPSPath, sourceProduct.isCompiled(), targetProduct.isCompiled());
+		// idSource, idTarget, source, target, classes, timeout, maxTests, approach, criteria, sourceLPSPath, targetLPSPath, sourceProduct.isCompiled(), targetProduct.isCompiled()
+		result = isRefactoring(sourceProductId, targetProductId, sourceProductPath, targetProductPath, classes, propertiesObject, sourceProduct.isCompiled(), targetProduct.isCompiled());
 
 		sourceProduct.setCompiled(true);
 		targetProduct.setCompiled(true);

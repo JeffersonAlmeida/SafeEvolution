@@ -107,6 +107,8 @@ public class ProductLine {
 		this.filesToPreProcess = new HashSet<String>();
 	}
 	
+
+
 	/**
 	 * This method loads the Asset Mapping depending on AM Format. <br></br>
 	 * @throws IOException throws I/O Exception

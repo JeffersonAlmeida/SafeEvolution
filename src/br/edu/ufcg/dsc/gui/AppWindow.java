@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
+import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
+import br.cin.ufpe.br.fileProperties.FilePropertiesReader;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.dsc.ToolCommandLine;
@@ -136,6 +138,9 @@ public class AppWindow extends ApplicationWindow {
 				String approach = AppWindow.this.comboApproaches.getItem(AppWindow.this.comboApproaches.getSelectionIndex());
 
 				ToolCommandLine toolCommandLine = new ToolCommandLine(Lines.TARGET);
+				FilePropertiesReader reader = new FilePropertiesReader();
+				FilePropertiesObject propertiesObject = reader.getPropertiesObject();
+				
 				ProductGenerator.MAX_TENTATIVAS = 5000;
 
 				try {
@@ -144,20 +149,14 @@ public class AppWindow extends ApplicationWindow {
 
 					if (AppWindow.this.sourceCKSimpleOptionRadioButton.getSelection()) {
 						try {
-							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
-									true, true, null, Criteria.ALL_METHODS_IN_SOURCE_AND_TARGET, CKFormat.SIMPLE, CKFormat.SIMPLE,
-									AMFormat.SIMPLE, AMFormat.SIMPLE);
+							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, propertiesObject);
 						} catch (DirectoryException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					} else if (AppWindow.this.sourceCKHeaphestusOptionRadioButton.getSelection()) {
 						try {
-							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, sourcePath, targetPath, 60, 1, Approach.valueOf(approach),
-									true, true, null, Criteria.ALL_METHODS_IN_SOURCE_AND_TARGET, CKFormat.HEPHAESTUS, CKFormat.HEPHAESTUS,
-									AMFormat.HEPHAESTUS, AMFormat.HEPHAESTUS);
+							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, propertiesObject);
 						} catch (DirectoryException e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
 					}

@@ -9,6 +9,8 @@ package br.edu.ufcg.dsc.evaluation;
 
 import java.io.File;
 import java.io.IOException;
+
+import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.Lines;
@@ -64,34 +66,22 @@ public class Analyzer {
 	 * @see Approach
 	 * @see CKFormat
 	 * */	
-	public void avalie(String evolutionName, Lines line, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String... libs) throws DirectoryException{
+	public void avalie(FilePropertiesObject propertiesObject) throws DirectoryException{
 		
-		ToolCommandLine toolCommandLine = new ToolCommandLine(line);
+		ToolCommandLine toolCommandLine = new ToolCommandLine(propertiesObject.getLine());
 		
 		System.out.println("Avaliando A LPS.");
 		
 		try {
-				String libPathSource = null;
-				String libPathTarget = null;
-				/*Pega as bibliotecas da SPL Original e da SPL Target */
-				if(libs != null){
-					if(libs.length > 0){
-						libPathSource = libs[0];
-						libPathTarget = libs[0];
-						if(libs.length > 1){
-							libPathTarget = libs[1];
-						}
-					}
-				}
 				
-				SPLOutcomes resultado = this.verifyLine(toolCommandLine, sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
+				SPLOutcomes resultado = this.verifyLine(toolCommandLine, propertiesObject);
 				
-				String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +evolutionName;
+				String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +propertiesObject.getEvolutionDescription();
 				 
 				System.out.println("\n\t SPL REPORT: \n");
 				System.out.println(resultado.toString());
 				File fileProperties = new File(resultFileName + ".properties");
-				resultado.getMeasures().printProperties(fileProperties,resultado, evolutionName);
+				resultado.getMeasures().printProperties(fileProperties,resultado, propertiesObject.getEvolutionDescription());
 			
 		} catch (Err e) {
 			System.out.println(e.getMessage()+"\n\n\n\n");
@@ -103,45 +93,6 @@ public class Analyzer {
 			System.out.println(e.getMessage()+"\n\n\n\n");
 			e.printStackTrace();
 		}		
-	}
-	
-	
-	
-	/**  
-	 * @param toolCommandLine
-	 * @param sourcePath
-	 * @param targetPath
-	 * @param timeout
-	 * @param qtdTestes
-	 * @param approach
-	 * @param temAspectosSource
-	 * @param temAspectosTarget
-	 * @param controladoresFachadas
-	 * @param criteria
-	 * @param sourceCKKind
-	 * @param targetCKKind
-	 * @param sourceAMFormat
-	 * @param targetAMFormat
-	 * @return
-	 * @throws Err
-	 * @throws IOException
-	 * @throws AssetNotFoundException
-	 * @throws DirectoryException
-	 */
-	public SPLOutcomes verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat) throws Err, IOException, AssetNotFoundException, DirectoryException {
-		
-		SPLOutcomes resultado = SPLOutcomes.getInstance();
-		
-		resultado.setSubject(sourcePath, targetPath);
-		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
-		resultado.resetExecution();
-
-		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, resultado);
-		
-		resultado.setRefinement(isRefinement);
-		
-		return resultado;
-
 	}
 	
 	/**
@@ -168,22 +119,22 @@ public class Analyzer {
 	 * @throws AssetNotFoundException
 	 * @throws DirectoryException
 	 */
-	public SPLOutcomes verifyLine(ToolCommandLine toolCommandLine, String sourcePath, String targetPath, int timeout, int qtdTestes, Approach approach, boolean temAspectosSource, boolean temAspectosTarget, String controladoresFachadas, Criteria criteria, CKFormat sourceCKKind, CKFormat targetCKKind, AMFormat sourceAMFormat, AMFormat targetAMFormat, String libPathSource, String libPathTarget) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public SPLOutcomes verifyLine(ToolCommandLine toolCommandLine, FilePropertiesObject propertiesObject) throws Err, IOException, AssetNotFoundException, DirectoryException {
 		
 		/* SPL evolution results */
 		SPLOutcomes resultado = SPLOutcomes.getInstance();
 		
 		/*Set the Original SPL source path and the SPL Target source path from the ResultadoLPS Class */
-		resultado.setSubject(sourcePath, targetPath);
+		resultado.setSubject(propertiesObject.getSourceLineDirectory(), propertiesObject.getTargetLineDirectory());
 		
 		/* Set the amount of junit tests applied for each product*/
-		resultado.getMeasures().setQuantidadeTestesPorProduto(qtdTestes);
+		resultado.getMeasures().setQuantidadeTestesPorProduto(propertiesObject.getInputLimit());
 	
 		/* This method reset the execution. Set the measures properties to Default values again.*/
 		resultado.resetExecution();
 
 		/* Delega a responsabilidade de verificar se a linha � refinamento para a classe ToolCommandLine */
-		boolean isRefinement = toolCommandLine.verifyLine(sourcePath, targetPath, timeout, qtdTestes, approach, temAspectosSource, temAspectosTarget, controladoresFachadas, criteria, sourceCKKind, targetCKKind, sourceAMFormat, targetAMFormat, libPathSource, libPathTarget);
+		boolean isRefinement = toolCommandLine.verifyLine(propertiesObject);
 		
 		/* Is this Evolution a refinement. Put it down in the Results please. */
 		resultado.setRefinement(isRefinement);

@@ -24,6 +24,8 @@ public class FilePropertiesObject {
 			private CKFormat ckFormatTargetSPL;
 			private AMFormat amFormatSourceSPL;
 			private AMFormat amFormatTargetSPL;
+			private String artifactsSourceDir;
+			private String artifactsTargetDir;
 			
 			public FilePropertiesObject() {
 				super();
@@ -126,7 +128,19 @@ public class FilePropertiesObject {
 			public String getEvolutionDescription() {
 				return evolutionDescription;
 			}
-	
+			public String getArtifactsSourceDir() {
+				return artifactsSourceDir;
+			}
+			public void setArtifactsSourceDir(String artifactsSourceDir) {
+				this.artifactsSourceDir = artifactsSourceDir;
+			}
+
+			public void setArtifactsTargetDir(String artifactsTargetDir) {
+				this.artifactsTargetDir = artifactsTargetDir;
+			}
+			public String getArtifactsTargetDir() {
+				return artifactsTargetDir;
+			}
 			
 			/*............................................................toString*/
 		
@@ -151,7 +165,10 @@ public class FilePropertiesObject {
 						"ckFormatSourceSPL = " + ckFormatSourceSPL + "\n" +
 						"ckFormatTargetSPL = " + ckFormatTargetSPL + "\n" +
 						"amFormatSourceSPL = " + amFormatSourceSPL + "\n" +
-						"amFormatTargetSPL = " + amFormatTargetSPL ;
+						"amFormatTargetSPL = " + amFormatTargetSPL + "\n" +
+						"artifactsSourceDir = " + artifactsSourceDir + "\n" +
+						"artifactsTargetDir = " + artifactsTargetDir + "\n";
 			}
-}
 
+			
+}

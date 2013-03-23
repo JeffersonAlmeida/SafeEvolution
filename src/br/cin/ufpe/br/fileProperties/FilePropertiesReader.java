@@ -15,69 +15,85 @@ public class FilePropertiesReader {
 	
 			private String filePropertiesDirectory;
 			private Properties properties;
+			private FilePropertiesObject propertiesObject;
+			private boolean isLoaded;
+			
+			public FilePropertiesReader() {
+				super();
+			}
 			
 			public FilePropertiesReader(String filePropertiesDirectory) {
 				super();
+				this.isLoaded = false;
+				this.propertiesObject = new FilePropertiesObject();
 				this.filePropertiesDirectory = filePropertiesDirectory;
 				this.properties = new Properties();
 				this.createFileProperty();
+				this.loadData();
 			}
 			
-			public FilePropertiesObject loadData() {
+			private FilePropertiesObject loadData() {
 				
 				FilePropertiesObject filePropertiesObject = new FilePropertiesObject();
 				
 				String evolutionDescription = this.properties.getProperty("evolutionDescription");
-				filePropertiesObject.setEvolutionDescription(evolutionDescription);
+				this.propertiesObject.setEvolutionDescription(evolutionDescription);
 				
 				String sourceLineDirectory = this.properties.getProperty("sourceLineDirectory");
-				filePropertiesObject.setSourceLineDirectory(sourceLineDirectory);
+				this.propertiesObject.setSourceLineDirectory(sourceLineDirectory);
 				
 				String targetLineDirectory = this.properties.getProperty("targetLineDirectory");
-				filePropertiesObject.setTargetLineDirectory(targetLineDirectory);
+				this.propertiesObject.setTargetLineDirectory(targetLineDirectory);
 				
 				String sourceLineLibDirectory = this.properties.getProperty("sourceLineLibDirectory");
-				filePropertiesObject.setSourceLineLibDirectory(sourceLineLibDirectory);
+				this.propertiesObject.setSourceLineLibDirectory(sourceLineLibDirectory);
 				
 				String targetLineLibDirectory = this.properties.getProperty("targetLineLibDirectory");
-				filePropertiesObject.setTargetLineLibDirectory(targetLineLibDirectory);
+				this.propertiesObject.setTargetLineLibDirectory(targetLineLibDirectory);
 				
 				/* TaRGeT, MobileMeida, Default */
 				Lines splType = findOutSplType(this.properties.getProperty("line"));
-				filePropertiesObject.setLine(splType);
+				this.propertiesObject.setLine(splType);
 				
 				String timeOut = this.properties.getProperty("timeout");
-				filePropertiesObject.setTimeOut(Integer.parseInt(timeOut)); 
+				this.propertiesObject.setTimeOut(Integer.parseInt(timeOut)); 
 				
 				String inputLimit = this.properties.getProperty("inputlimit");
-				filePropertiesObject.setInputLimit(Integer.parseInt(inputLimit));
+				this.propertiesObject.setInputLimit(Integer.parseInt(inputLimit));
 				
 				/* APP, AP, IC, IP, EIC */
 				Approach ap = findOutApproachType(this.properties.getProperty("approach")); 
-				filePropertiesObject.setApproach(ap);
+				this.propertiesObject.setApproach(ap);
 				
 				String aspectsInSourceSPL = this.properties.getProperty("aspectsInSourceSPL");
-				filePropertiesObject.setAspectsInSourceSPL(findOutTrueOrFalse(aspectsInSourceSPL));
+				this.propertiesObject.setAspectsInSourceSPL(findOutTrueOrFalse(aspectsInSourceSPL));
 				
 				String aspectsInTargetSPL = this.properties.getProperty("aspectsInTargetSPL");
-				filePropertiesObject.setAspectsInTargetSPL(findOutTrueOrFalse(aspectsInTargetSPL));
+				this.propertiesObject.setAspectsInTargetSPL(findOutTrueOrFalse(aspectsInTargetSPL));
 				
 				String whichMethods = this.properties.getProperty("whichMethods");
-				filePropertiesObject.setWhichMethods( findOutCriteria(whichMethods));
+				this.propertiesObject.setWhichMethods( findOutCriteria(whichMethods));
 				
 				String ckFormatSourceSPL = this.properties.getProperty("ckFormatSourceSPL");
-				filePropertiesObject.setCkFormatSourceSPL(findOutCKFormat(ckFormatSourceSPL));
+				this.propertiesObject.setCkFormatSourceSPL(findOutCKFormat(ckFormatSourceSPL));
 				
 				String ckFormatTargetSPL = this.properties.getProperty("ckFormatTargetSPL");
-				filePropertiesObject.setCkFormatTargetSPL(findOutCKFormat(ckFormatTargetSPL));
+				this.propertiesObject.setCkFormatTargetSPL(findOutCKFormat(ckFormatTargetSPL));
 				
 				String amFormatSourceSPL = this.properties.getProperty("amFormatSourceSPL");
-				filePropertiesObject.setAmFormatSourceSPL(findOutAmFormat(amFormatSourceSPL));
+				this.propertiesObject.setAmFormatSourceSPL(findOutAmFormat(amFormatSourceSPL));
 				
 				String amFormatTargetSPL = this.properties.getProperty("amFormatTargetSPL");
-				filePropertiesObject.setAmFormatTargetSPL(findOutAmFormat(amFormatTargetSPL));
+				this.propertiesObject.setAmFormatTargetSPL(findOutAmFormat(amFormatTargetSPL));
 				
-				return filePropertiesObject;
+				String artifactsSourceDir = this.properties.getProperty("artifactsSourceDir");
+				this.propertiesObject.setArtifactsSourceDir(artifactsSourceDir);
+				
+				String artifactsTargetDir = this.properties.getProperty("artifactsTargetDir");
+				this.propertiesObject.setArtifactsTargetDir(artifactsTargetDir);
+				
+				this.isLoaded = true;
+				return this.propertiesObject;
 			}
 		
 			private AMFormat findOutAmFormat(String amFormatSourceSPL) {
@@ -167,15 +183,26 @@ public class FilePropertiesReader {
 			public void setFilePropertiesDirectory(String filePropertiesDirectory) {
 				this.filePropertiesDirectory = filePropertiesDirectory;
 			}
-		
 			public String getFilePropertiesDirectory() {
 				return filePropertiesDirectory;
 			} 
-			
 			public static void main(String [] args){
 				System.out.println("File Properties");
 				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/input.properties");
-				FilePropertiesObject propertiesObject = propertiesReader.loadData();
+			    FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
 				System.out.println(propertiesObject);
+			}
+			public void setPropertiesObject(FilePropertiesObject propertiesObject) {
+				this.propertiesObject = propertiesObject;
+			}
+			public FilePropertiesObject getPropertiesObject() {
+				if(this.isLoaded){
+					return propertiesObject;	
+				}else{
+					return this.loadData();
+				}
+			}
+			public boolean isLoaded() {
+				return isLoaded;
 			}
 }

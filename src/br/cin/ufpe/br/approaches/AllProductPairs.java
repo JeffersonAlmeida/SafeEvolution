@@ -1,16 +1,14 @@
 package br.cin.ufpe.br.approaches;
 
 import java.io.IOException;
-
+import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.wf.WellFormedness;
-import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
-import br.edu.ufcg.saferefactor.core.Criteria;
 
 
 public class AllProductPairs {
@@ -30,7 +28,7 @@ public class AllProductPairs {
 		 * @throws IOException 
 		 * @throws DirectoryException 
 		 */
-		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine) throws IOException, AssetNotFoundException, DirectoryException{
+		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws IOException, AssetNotFoundException, DirectoryException{
 			boolean isRefactoring = true;
 			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
 			if(isSPLWellFormed){
@@ -41,7 +39,7 @@ public class AllProductPairs {
 		
 							if (provavelCorrespondente != null) {
 								this.productBuilder.generateProduct(provavelCorrespondente, targetLine.getPath());
-								isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), 60, 4, Approach.APP, Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT);
+								isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), propertiesObject);
 							} else {
 								/* If the source product does not have a correspondent target product it is NOT considered a refactoring.
 								 * It means, that the behavior was not preserved once we can not find even a correspondent target product.*/
@@ -55,7 +53,7 @@ public class AllProductPairs {
 									if (productTarget != provavelCorrespondente) {
 										this.productBuilder.generateProduct(productTarget, targetLine.getPath());
 		
-										isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), 60, 4, Approach.APP, Criteria.ONLY_COMMON_METHODS_SUBSET_DEFAULT);
+										isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject);
 		
 										//Para de procurar se encontrar um par com mesmo comportamento.
 										if (isRefactoring) {
