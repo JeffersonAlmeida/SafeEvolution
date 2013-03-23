@@ -19,23 +19,21 @@ public class ImpactedProducts {
 		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
-		public ImpactedProducts(WellFormedness wellFormedness, ProductBuilder productBuilder) {
+		public ImpactedProducts(WellFormedness wellFormedness, ProductBuilder productBuilder,Collection<String> modifiedClasses ) {
 			super();
 			this.wellFormedness = wellFormedness;
 			this.productBuilder = productBuilder;
+			this.modifiedClasses = modifiedClasses;
 		}
 
 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
-			boolean isRefactoring = true;
+			boolean isRefactoring = false;
 			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
 			if(isSPLWellFormed){
 				for (Product productSource : sourceLine.getProducts()) {
-					productSource.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos());
-					this.productBuilder.generateProduct(productSource, sourceLine.getPath());
-					Product probablyCorrespondentProduct = productSource.getLikelyCorrespondingProduct();
-					/* if these two products do not have the same behavior, IP approach reports a Non - Refinement */ 
-					if(!(isRefactoring = haveSameBehavior(sourceLine, targetLine, propertiesObject, isRefactoring, productSource, probablyCorrespondentProduct))){
-						break;
+					if(productSource.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos())){
+						if(!(isRefactoring = haveSameBehavior(sourceLine, targetLine, propertiesObject, isRefactoring, productSource, productSource.getLikelyCorrespondingProduct())))
+							break;
 					}
 				}
 			}

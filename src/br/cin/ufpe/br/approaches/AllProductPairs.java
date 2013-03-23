@@ -31,7 +31,7 @@ public class AllProductPairs {
 					Product probablyCorrespondentProduct = productSource.getLikelyCorrespondingProduct();
 					/* if these two products do not have the same behavior, APP approach try to find out another product that is behaviorally corresponding to this one in the set of target products */
 					if(!(isRefactoring = haveSameBehavior(sourceLine, targetLine, propertiesObject, isRefactoring, productSource, probablyCorrespondentProduct))){
-						if(!(isRefactoring = tryToFindCorrespondentProduct(sourceLine, targetLine, propertiesObject,productSource)))
+						if(!(isRefactoring = tryToFindCorrespondentProduct(sourceLine, targetLine, propertiesObject,productSource, probablyCorrespondentProduct )))
 							break;  /* APP approach reports a Non - Refinement because It was not able to find a correspondent product even though  with brute force algorithm */
 					}
 			    }
@@ -42,13 +42,14 @@ public class AllProductPairs {
 		/**
 		 * Try to find out another product that is behaviorally corresponding to this one in the set of target products
 		 */
-		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource)throws AssetNotFoundException, IOException, DirectoryException {
+		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
 			boolean isRefactoring = false;
 			for (Product productTarget : targetLine.getProducts()) {
 				this.productBuilder.generateProduct(productTarget, targetLine.getPath());
-				isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject);
-				if (isRefactoring) {
-					break;
+				if(productTarget!=probablyCorrespondentProduct){
+					if (isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject)) {
+						break;
+					}
 				}
 			}
 			return isRefactoring;

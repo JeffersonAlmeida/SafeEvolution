@@ -22,6 +22,9 @@ import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
 
 import soot.Main;
+import br.cin.ufpe.br.approaches.AllProductPairs;
+import br.cin.ufpe.br.approaches.AllProducts;
+import br.cin.ufpe.br.approaches.ImpactedProducts;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.matching.ProductMatching;
 import br.cin.ufpe.br.wf.WellFormedness;
@@ -101,16 +104,16 @@ public class ToolCommandLine {
 		this.productMatching = new ProductMatching(this.builder);
 	}
 
-	public boolean verifyLine(ProductLine souceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws Err, IOException, AssetNotFoundException, DirectoryException {
+	public boolean verifyLine(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 
 	 	/* It cleans the generated products folder. */
-		this.setup(souceLine, targetLine);
+		this.setup(sourceLine, targetLine);
 
 		/* It Calls alloy to build source and target products and put it in cache. */
-		this.putProductsInCache(souceLine, targetLine);
+		this.putProductsInCache(sourceLine, targetLine);
 
 		/* Reset results variables .*/
 		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
@@ -118,8 +121,25 @@ public class ToolCommandLine {
 		sOutcomes.getMeasures().setApproach(propertiesObject.getApproach());
 		sOutcomes.getMeasures().getTempoTotal().startContinue();
 
+		WellFormedness wellFormedness =  new WellFormedness();
+		
+		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
+		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
+		
+		/*AllProductPairs app = new AllProductPairs(wellFormedness, this.builder);
+		System.out.println("Refactoring ? " + app.evaluate(sourceLine, targetLine, propertiesObject));*/
+		
+		/*AllProducts ap = new AllProducts(wellFormedness, this.builder);
+		System.out.println("Refactoring ? " + ap.evaluate(sourceLine, targetLine, propertiesObject));*/
+		
+		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
+		System.out.println("\n AM changed: " + isAssetMappingsEqual);
+		ImpactedProducts ip = new ImpactedProducts(wellFormedness, builder, this.classesModificadas);
+		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));
+		
+		
 		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
-		isRefinement = this.checkLPS(souceLine, targetLine, propertiesObject);
+		isRefinement = this.checkLPS(sourceLine, targetLine, propertiesObject);
 
 		/*Report Variables: Pause total time to check the SPL.*/
 		sOutcomes.getMeasures().getTempoTotal().pause();
@@ -253,14 +273,19 @@ public class ToolCommandLine {
 		/* Till here this is not a refinement yet. */
 		boolean isRefinement = false;
 		
-		ConfigurationKnowledge ck = sourceLine.getCk();
+		ConfigurationKnowledge configurationKnoledge = sourceLine.getCk();
 		System.out.println("\n\nSOURCE PRODUCT LINE CONFIGURATION KNOWLEDGE:\n\n");
-		ck.print("SOURCE");
+		
+		configurationKnoledge.print("SOURCE");
+		
 		sourceLine.getPreprocessProperties();
+
 		System.out.println("\n\nSOURCE PRODUCT LINE PRE-PROCESS PROPERTIES:\n\n");
 		sourceLine.printPreprocessProperties("SOURCE");
+
 		System.out.println("\n\nSOURCE PRODUCT LINE PRE-PROCESS FILES:\n\n");
 		sourceLine.printFilesListToPreProcess();
+		
 		generateFilesWithoutPreProcessTags(sourceLine);
 		
 		/* Check whether the Software Product Line is well formed. */
@@ -1363,6 +1388,7 @@ public class ToolCommandLine {
 		
 		sourceSPL.setLibPath(in.getSourceLineLibDirectory());
 		targetSPL.setLibPath(in.getTargetLineLibDirectory());
+		
 		return this.verifyLine(sourceSPL, targetSPL, in);
 	}
 
