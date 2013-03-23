@@ -22,16 +22,13 @@ import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
 
 import soot.Main;
-import sun.swing.plaf.synth.Paint9Painter.PaintType;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.matching.ProductMatching;
 import br.cin.ufpe.br.wf.WellFormedness;
-import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.builders.MobileMediaBuilder;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.builders.TargetBuilder;
-import br.edu.ufcg.dsc.ck.CKFormat;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
@@ -43,7 +40,6 @@ import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 import br.edu.ufcg.dsc.util.FileManager;
-import br.edu.ufcg.saferefactor.core.Criteria;
 import edu.mit.csail.sdg.alloy4.Err;
 
 public class ToolCommandLine {

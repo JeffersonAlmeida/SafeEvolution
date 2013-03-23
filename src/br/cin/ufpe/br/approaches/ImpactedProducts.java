@@ -1,6 +1,7 @@
 package br.cin.ufpe.br.approaches;
 
 import java.io.IOException;
+import java.util.Collection;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.Product;
@@ -10,45 +11,32 @@ import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 
-public class AllProductPairs {
-	
+public class ImpactedProducts {
+		
+		/** A string collection of changed classes.*/
+		private Collection<String> modifiedClasses;
+		
 		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
-		public AllProductPairs(WellFormedness wellFormedness, ProductBuilder pBuilder) {
+		public ImpactedProducts(WellFormedness wellFormedness, ProductBuilder productBuilder) {
 			super();
 			this.wellFormedness = wellFormedness;
-			this.productBuilder = pBuilder;
+			this.productBuilder = productBuilder;
 		}
-	
-		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws IOException, AssetNotFoundException, DirectoryException{
+
+		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
 			boolean isRefactoring = true;
 			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
 			if(isSPLWellFormed){
 				for (Product productSource : sourceLine.getProducts()) {
-					productSource.printSetOfFeatures();
+					productSource.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos());
 					this.productBuilder.generateProduct(productSource, sourceLine.getPath());
 					Product probablyCorrespondentProduct = productSource.getLikelyCorrespondingProduct();
-					/* if these two products do not have the same behavior, APP approach try to find out another product that is behaviorally corresponding to this one in the set of target products */
+					/* if these two products do not have the same behavior, IP approach reports a Non - Refinement */ 
 					if(!(isRefactoring = haveSameBehavior(sourceLine, targetLine, propertiesObject, isRefactoring, productSource, probablyCorrespondentProduct))){
-						if(!(isRefactoring = tryToFindCorrespondentProduct(sourceLine, targetLine, propertiesObject,productSource)))
-							break;  /* APP approach reports a Non - Refinement because It was not able to find a correspondent product even though  with brute force algorithm */
+						break;
 					}
-			    }
-		    }
-		    return isRefactoring;
-		}
-		
-		/**
-		 * Try to find out another product that is behaviorally corresponding to this one in the set of target products
-		 */
-		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource)throws AssetNotFoundException, IOException, DirectoryException {
-			boolean isRefactoring = false;
-			for (Product productTarget : targetLine.getProducts()) {
-				this.productBuilder.generateProduct(productTarget, targetLine.getPath());
-				isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject);
-				if (isRefactoring) {
-					break;
 				}
 			}
 			return isRefactoring;
@@ -60,5 +48,20 @@ public class AllProductPairs {
 				isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, probablyCorrespondentProduct, sourceLine.getControladoresFachadas(), propertiesObject);
 			}
 			return isRefactoring;
+		}
+		
+
+		/*......................................................... Getters and Setters */
+		public void setProductBuilder(ProductBuilder productBuilder) {
+			this.productBuilder = productBuilder;
+		}
+		public ProductBuilder getProductBuilder() {
+			return productBuilder;
+		}
+		public void setWellFormedness(WellFormedness wellFormedness) {
+			this.wellFormedness = wellFormedness;
+		}
+		public WellFormedness getWellFormedness() {
+			return wellFormedness;
 		}
 }

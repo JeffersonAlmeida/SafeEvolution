@@ -89,7 +89,7 @@ public class TargetBuilder extends ProductBuilder {
 	}
 
 	@Override
-	public void generateProduct(Product product, String pathSPL) throws AssetNotFoundException, IOException, DirectoryException {
+	public void generateProduct(Product product, String pathSPL){
 		
 		if(!product.isGenerated()){
 			ArrayList<String> assetsOrigens = new ArrayList<String>();
@@ -97,19 +97,33 @@ public class TargetBuilder extends ProductBuilder {
 			
 			product.sortAssetNames(assetsOrigens, assetsDestinos);
 			
-			this.createDirs(product, assetsDestinos, pathSPL);
+			try {
+				this.createDirs(product, assetsDestinos, pathSPL);
+			} catch (AssetNotFoundException e) {
+				e.printStackTrace();
+			}
 			
 			this.filesManager.copyFilesDirectory(pathSPL, assetsOrigens, assetsDestinos, product.getPath(), true);
 			
 			
 			File productDirectory = new File(product.getPath());
 			HashSet<String> featuresList = product.getFeaturesList();
-			this.preprocessVelocity(featuresList, productDirectory, product.getSpl(), product.getPath());
+			try {
+				this.preprocessVelocity(featuresList, productDirectory, product.getSpl(), product.getPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			String libPath = product.getSpl().getLibPath();
 			
 			if(libPath != null){
-				FileManager.getInstance().copyLibs(libPath, product.getPath() + File.separator + "lib");
+				try {
+					FileManager.getInstance().copyLibs(libPath, product.getPath() + File.separator + "lib");
+				} catch (AssetNotFoundException e) {
+					e.printStackTrace();
+				} catch (DirectoryException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			product.setGenerated(true);

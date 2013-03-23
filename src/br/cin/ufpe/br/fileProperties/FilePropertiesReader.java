@@ -34,8 +34,6 @@ public class FilePropertiesReader {
 			
 			private FilePropertiesObject loadData() {
 				
-				FilePropertiesObject filePropertiesObject = new FilePropertiesObject();
-				
 				String evolutionDescription = this.properties.getProperty("evolutionDescription");
 				this.propertiesObject.setEvolutionDescription(evolutionDescription);
 				
@@ -141,15 +139,15 @@ public class FilePropertiesReader {
 		
 			private Approach findOutApproachType(String approach) {
 				Approach app = Approach.IC;
-				if (approach.trim().toLowerCase().equals("APP")){
+				if (approach.trim().toLowerCase().equals("app")){
 					app = Approach.APP;
-				}else if (approach.trim().toLowerCase().equals("AP")){
+				}else if (approach.trim().toLowerCase().equals("ap")){
 					app = Approach.AP;
-				}else if (approach.trim().toLowerCase().equals("IP")){
+				}else if (approach.trim().toLowerCase().equals("ip")){
 					app = Approach.IP;
-				}else if (approach.trim().toLowerCase().equals("IC")){
+				}else if (approach.trim().toLowerCase().equals("ic")){
 					app = Approach.IC;
-				}else if (approach.trim().toLowerCase().equals("EIC")){
+				}else if (approach.trim().toLowerCase().equals("eic")){
 					app = Approach.EIC;
 				}
 				return app;
