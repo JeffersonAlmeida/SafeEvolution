@@ -132,12 +132,7 @@ public class AppWindow extends ApplicationWindow {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				String sourcePath = AppWindow.this.campoSource.getText();
-				String targetPath = AppWindow.this.campoTarget.getText();
-
-				String approach = AppWindow.this.comboApproaches.getItem(AppWindow.this.comboApproaches.getSelectionIndex());
-
-				ToolCommandLine toolCommandLine = new ToolCommandLine(Lines.TARGET);
+				
 				FilePropertiesReader reader = new FilePropertiesReader();
 				FilePropertiesObject propertiesObject = reader.getPropertiesObject();
 				
@@ -145,17 +140,16 @@ public class AppWindow extends ApplicationWindow {
 
 				try {
 
-					SPLOutcomes resultado = null;
 
 					if (AppWindow.this.sourceCKSimpleOptionRadioButton.getSelection()) {
 						try {
-							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, propertiesObject);
+							Analyzer.getInstance().analize(propertiesObject);
 						} catch (DirectoryException e1) {
 							e1.printStackTrace();
 						}
 					} else if (AppWindow.this.sourceCKHeaphestusOptionRadioButton.getSelection()) {
 						try {
-							resultado = Analyzer.getInstance().verifyLine(toolCommandLine, propertiesObject);
+							Analyzer.getInstance().analize(propertiesObject);
 						} catch (DirectoryException e1) {
 							e1.printStackTrace();
 						}
@@ -163,11 +157,11 @@ public class AppWindow extends ApplicationWindow {
 
 					String message = "";
 
-					if (resultado.isRefinement()) {
+					if (SPLOutcomes.getInstance().isRefinement()) {
 						message = "A LPS FOI refinanada\n";
 					} else {
 						message = "A LPS NAO foi refinada\n";
-						message += resultado.toString();
+						message += SPLOutcomes.getInstance().toString();
 
 					}
 

@@ -4,6 +4,8 @@ package br.edu.ufcg.dsc;
  * @author Jefferson Almeida - jra at cin dot ufpe dot br 
  */
 
+import java.io.IOException;
+
 import org.eclipse.core.runtime.IPlatformRunnable;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -11,11 +13,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.testing.ITestHarness;
 import org.eclipse.ui.testing.TestableObject;
+
+import edu.mit.csail.sdg.alloy4.Err;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.fileProperties.FilePropertiesReader;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.gui.AppWindow;
+import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 
 public class MainRunner implements IPlatformRunnable, ITestHarness {
@@ -51,8 +56,14 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/input.properties");
 				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
 				try {
-					Analyzer.getInstance().avalie(propertiesObject);
+					Analyzer.getInstance().analize(propertiesObject);
 				} catch (DirectoryException e) {
+					e.printStackTrace();
+				} catch (Err e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (AssetNotFoundException e) {
 					e.printStackTrace();
 				}
 			}
