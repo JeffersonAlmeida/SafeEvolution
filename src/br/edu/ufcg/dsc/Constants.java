@@ -22,6 +22,8 @@ public class Constants {
 	<br></br>Pegar caminho de forma autom�tica: Activator.getDefault().getPluginFolder();*/  
 	public static final String PLUGIN_PATH = "/home/jefferson/workspace/ferramentaLPSSM"; 
 	
+	public static final String BUILD_FILE_PATH = "/home/jefferson/workspace/ferramentaLPSSM/ant/build.xml";
+	
 	/**Home Path para o Alloy*/
 	public static final String ALLOY_PATH = PLUGIN_PATH + FILE_SEPARATOR + "Alloy" + FILE_SEPARATOR;
     

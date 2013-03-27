@@ -32,27 +32,22 @@ public class Analyzer {
 		}
 		
 		public void analize(FilePropertiesObject propertiesObject) throws DirectoryException, Err, IOException, AssetNotFoundException{
-			
 			ToolCommandLine toolCommandLine = new ToolCommandLine(propertiesObject.getLine());
-					
 			/* SPL evolution results */
 			SPLOutcomes resultado = SPLOutcomes.getInstance();
-			
 			/*Set the Original SPL source path and the SPL Target source path from the ResultadoLPS Class */
 			resultado.setSubject(propertiesObject.getSourceLineDirectory(), propertiesObject.getTargetLineDirectory());
-			
 			/* Set the amount of junit tests applied for each product*/
 			resultado.getMeasures().setQuantidadeTestesPorProduto(propertiesObject.getInputLimit());
-		
 			/* This method reset the execution. Set the measures properties to Default values again.*/
 			resultado.resetExecution();
-	
-			boolean isRefinement = toolCommandLine.verifyLine(propertiesObject);
-			
-			resultado.setRefinement(isRefinement);
-			
+			/* Is SPL refactoring a	 REFINEMENT ?*/
+			resultado.setRefinement(toolCommandLine.verifyLine(propertiesObject));
+			createOutcomesPropertyFile(propertiesObject, resultado);
+		}
+
+		private void createOutcomesPropertyFile(FilePropertiesObject propertiesObject, SPLOutcomes resultado) {
 			String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +propertiesObject.getEvolutionDescription();
-			 
 			System.out.println("\n\t SPL REPORT: \n");
 			System.out.println(resultado.toString());
 			File fileProperties = new File(resultFileName + ".properties");

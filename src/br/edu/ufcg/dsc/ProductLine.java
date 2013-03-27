@@ -163,13 +163,10 @@ public class ProductLine {
 		this.dependencias = new HashMap<String, Collection<String>>();
 		this.products = new ArrayList<Product>();
 		this.mappingClassesSistemaDeArquivos = new HashMap<String, String>();
-		
 		String dir = this.getPath() + Constants.FILE_SEPARATOR + "src";
 		System.out.println("Walk through this directory and get all files: " + dir);
 		this.walkSrc(dir);
-		
 		this.loadPreprocessProperties();
-		
 		this.loadAssetMapping();
 		
 	}

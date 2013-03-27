@@ -13,18 +13,11 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.naming.ConfigurationException;
-
-import org.apache.tools.ant.DefaultLogger;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.ProjectHelper;
 import org.eclipse.jdt.core.JavaModelException;
-
 import soot.Main;
-import br.cin.ufpe.br.approaches.AllProductPairs;
-import br.cin.ufpe.br.approaches.AllProducts;
-import br.cin.ufpe.br.approaches.ImpactedProducts;
+import br.cin.ufpe.br.alloy.products.AlloyProductGenerator;
+import br.cin.ufpe.br.clean.ProductsCleaner;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.matching.ProductMatching;
 import br.cin.ufpe.br.wf.WellFormedness;
@@ -38,7 +31,6 @@ import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
-import br.edu.ufcg.dsc.fm.AlloyFMEvolutionBuilder;
 import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
@@ -48,6 +40,10 @@ import edu.mit.csail.sdg.alloy4.Err;
 public class ToolCommandLine {
 
 	private ProductMatching productMatching;
+	
+	private ProductsCleaner productsCleaner;
+	
+	private AlloyProductGenerator alloyProductGenerator;
 	
 	private static final int MAX_CLASSES_MODIFICADAS = 1000;
 
@@ -60,7 +56,7 @@ public class ToolCommandLine {
 	private Collection<String> classesModificadas;
 	
 	/**/
-	private ProductBuilder builder;
+	private ProductBuilder productBuilder;
 	
 	private long testsCompileTimeout;
 	
@@ -72,7 +68,7 @@ public class ToolCommandLine {
 
 	private ASTComparator astComparator;
 
-	private HashMap<String, HashSet<HashSet<String>>> cacheProducts;
+	private HashMap<String, HashSet<HashSet<String>>> productsCache;
 
 	private HashSet<String> constantsPreProcessor;
 	private HashSet<String> listaAspectos;
@@ -83,9 +79,11 @@ public class ToolCommandLine {
 	private Lines line;
 
 	public ToolCommandLine() {
-		this.cacheProducts = new HashMap<String, HashSet<HashSet<String>>>();
+		this.productsCache = new HashMap<String, HashSet<HashSet<String>>>();
 		this.astComparator = new ASTComparator();
 		this.wellFormedness = new WellFormedness();
+		this.productsCleaner = new ProductsCleaner();
+		
 		try {
 			this.astComparator.setUpProject();
 		} catch (ConfigurationException e) {
@@ -97,93 +95,12 @@ public class ToolCommandLine {
 		this();
 		this.line = line;
 		if (line.equals(Lines.MOBILE_MEDIA)) {
-			this.builder = new MobileMediaBuilder();
+			this.productBuilder = new MobileMediaBuilder();
 		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
-			this.builder = TargetBuilder.getInstance();
+			this.productBuilder = TargetBuilder.getInstance();
 		}
-		this.productMatching = new ProductMatching(this.builder);
-	}
-
-	public boolean verifyLine(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws Err, IOException, AssetNotFoundException, DirectoryException {
-
-		/* Till here this is not a refinement yet. */
-		boolean isRefinement = false;
-
-	 	/* It cleans the generated products folder. */
-		this.setup(sourceLine, targetLine);
-
-		/* It Calls alloy to build source and target products and put it in cache. */
-		this.putProductsInCache(sourceLine, targetLine);
-
-		/* Reset results variables .*/
-		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
-		sOutcomes.getMeasures().reset();
-		sOutcomes.getMeasures().setApproach(propertiesObject.getApproach());
-		sOutcomes.getMeasures().getTempoTotal().startContinue();
-
-		/*WellFormedness wellFormedness =  new WellFormedness();
-		
-		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
-		System.out.println("areAllProductsMatched: " + areAllProductsMatched);*/
-		
-		/*AllProductPairs app = new AllProductPairs(wellFormedness, this.builder);
-		System.out.println("Refactoring ? " + app.evaluate(sourceLine, targetLine, propertiesObject));*/
-		
-		/*AllProducts ap = new AllProducts(wellFormedness, this.builder);
-		System.out.println("Refactoring ? " + ap.evaluate(sourceLine, targetLine, propertiesObject));*/
-		
-		/*boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
-		System.out.println("\n AM changed: " + isAssetMappingsEqual);
-		ImpactedProducts ip = new ImpactedProducts(wellFormedness, builder, this.classesModificadas);
-		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));
-		*/
-		
-		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
-		isRefinement = this.checkLPS(sourceLine, targetLine, propertiesObject);
-
-		/*Report Variables: Pause total time to check the SPL.*/
-		sOutcomes.getMeasures().getTempoTotal().pause();
-		sOutcomes.getMeasures().print();
-
-		return isRefinement;
-	}
-
-	/** This method calls alloy to build source and target products and put it in cache.
-	 * @param sourceLine Source Product Line.
-	 * @param targetLine Target Product Line.
-	 */
-	private void putProductsInCache(ProductLine sourceLine, ProductLine targetLine) {
-		System.out.println("\n\n\n\t\tLet's put the products in cache.\n");
-		if (this.cacheProducts.get(sourceLine.getPath()) == null || this.cacheProducts.get(targetLine.getPath()) == null) {
-			/*Build the Source Feature Model Alloy file.*/
-			System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
-			this.wellFormedness.buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
-			
-			/*Build the Target Feature Model Alloy file.*/
-			System.out.println("\nBuild the TARGET Feature Model Alloy file:");
-			this.wellFormedness.buildFMAlloyFile("target", Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, targetLine);
-
-			/*Build the Evolution Alloy file.*/
-			System.out.println("\nBuild the EVOLUTION Alloy file:");
-			buildFMEvolutionAlloyFile(sourceLine.getFmPath(), targetLine.getFmPath());
-
-			if (this.cacheProducts.get(sourceLine.getPath()) == null) {
-				/* This method calls alloy to build source products and put it in cache. */
-				HashSet<HashSet<String>> productsSource = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME);
-				this.cacheProducts.put(sourceLine.getPath(), productsSource);
-			}
-
-			if (this.cacheProducts.get(targetLine.getPath()) == null) {
-				/* This method calls alloy to build target products and put it in cache. */
-				HashSet<HashSet<String>> productsTarget = this.builder.getProductsFromAlloy(Constants.ALLOY_PATH + Constants.TARGET_FM_ALLOY_NAME);
-				this.cacheProducts.put(targetLine.getPath(), productsTarget);
-			}
-		}
-		
-		/* A set of features that compose a product. */
-		sourceLine.setSetsOfFeatures(this.cacheProducts.get(sourceLine.getPath()));
-		targetLine.setSetsOfFeatures(this.cacheProducts.get(targetLine.getPath()));
-		System.out.println("\n\t\tThe products are already in cache.");
+		this.productMatching = new ProductMatching(this.productBuilder);
+		this.alloyProductGenerator = new AlloyProductGenerator(wellFormedness,this.productBuilder);
 	}
 
 	private void setup(ProductLine souceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
@@ -193,66 +110,15 @@ public class ToolCommandLine {
 		this.testsExecutionTimeout = 0;
 		this.testsGenerationTimeout = 0;
 		this.changedAssets = null;
-
 		/* Removes all of the mappings from this map. The map will be empty after this call returns. */
 		XMLReader.getInstance().reset();
-
-		/* cleans the generated products folder. */
-		this.cleanProducts();
-
+		/* Cleans the generated products folder. */
+		this.productsCleaner.cleanProductsFolder();
 		souceLine.setup();
 		targetLine.setup();
 	}
 
-	/**
-	 * This method cleans the generated products folder.
-	 */
-	private void cleanProducts() {
-		
-		/*It creates an ANT build file in the tool directory + ant/build.xml*/
-		File buildFile = new File(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.xml");
-
-		/*It creates a new ANT project.*/
-		Project p = new Project();
-		
-		/*This is the directory of the generated products: */
-		System.out.println("\nThe directory of the generated products: " + "<  Tool Path + Products  >\n");
-		
-		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
-		
-		/*  productsFolder =>                   The name of property to set. 
-		 *  Constants.PRODUCTS_DIR =>           The new value of the property.*/
-		p.setProperty("productsFolder", Constants.PRODUCTS_DIR);
-
-		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
-		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
-
-		/* Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged.*/
-		DefaultLogger consoleLogger = new DefaultLogger();
-		consoleLogger.setErrorPrintStream(System.err);
-		consoleLogger.setOutputPrintStream(System.out);
-		consoleLogger.setMessageOutputLevel(Project.MSG_INFO);
-		p.addBuildListener(consoleLogger);
-
-		/*Initialise the ANT project.*/
-		p.init();
-		
-		/* Configures a Project (complete with Targets and Tasks) based on a XML build file. It'll rely on a plugin to do the actual processing of the xml file.*/
-		ProjectHelper helper = ProjectHelper.getProjectHelper();
-		
-		/*Add a reference to the project.*/
-		p.addReference("ant.projectHelper", helper);
-		
-		/*Parses the project file, configuring the project as it goes.*/
-		helper.parse(p, buildFile);
-
-		/*Execute the specified target and any targets it depends on.*/
-		p.executeTarget("clean_products_folder");
-		/*It cleans all of the product directories.*/ /*Two directories have been deleted: productsFolder and ${pluginpath}/emma/instr/.*/
-		// productsFolder =>               Tool Path + Products
-		//                =>               pluginpath + /emma/instr/
-		System.out.println("\n Two directories have been deleted:  < Tool Path + Products > and < pluginpath + emma + instr >");
-	}
+	
 
 	/**
 	 * One of the main methods of this class. It is responsible to check the SPL. <br></br>
@@ -446,12 +312,12 @@ public class ToolCommandLine {
 				productSource.printSetOfFeatures();
 				if (approach == Approach.APP || approach == Approach.AP || (approach == Approach.IP && productSource.containsSomeAsset(this.classesModificadas, sourceLine.getMappingClassesSistemaDeArquivos()))) {
 					
-					this.builder.generateProduct(productSource, sourceLine.getPath());
+					this.productBuilder.generateProduct(productSource, sourceLine.getPath());
 
 					Product provavelCorrespondente = productSource.getLikelyCorrespondingProduct();
 
 					if (provavelCorrespondente != null) {
-						this.builder.generateProduct(provavelCorrespondente, targetLine.getPath());
+						this.productBuilder.generateProduct(provavelCorrespondente, targetLine.getPath());
 						isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, provavelCorrespondente, sourceLine.getControladoresFachadas(), propertiesObject);
 					} else {
 						/* If the source product does not have a correspondent target product it is NOT considered a refactoring.
@@ -466,7 +332,7 @@ public class ToolCommandLine {
 						if (!isRefactoring) {
 							for (Product productTarget : targetLine.getProducts()) {
 								if (productTarget != provavelCorrespondente) {
-									this.builder.generateProduct(productTarget, targetLine.getPath());
+									this.productBuilder.generateProduct(productTarget, targetLine.getPath());
 
 									isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject);
 
@@ -572,12 +438,6 @@ public class ToolCommandLine {
 			e1.printStackTrace();
 		}
 		return ehAssetMappingRefinement;
-	}
-
-
-	private void buildFMEvolutionAlloyFile(String sourceFMXML, String targetFMXML) {
-		AlloyFMEvolutionBuilder evolutionAlloy = new AlloyFMEvolutionBuilder();
-		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, "source", sourceFMXML, "target", targetFMXML);
 	}
 
 	/**
@@ -957,8 +817,8 @@ public class ToolCommandLine {
 						//pasta, sem copias. Com isso, eh necessario renomear a pasta para src manualmente.
 
 						if (prod.size() > 0/* && !(prod.size() == 1 && prod.iterator().next().contains("fake"))*/) {
-							this.builder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent());
-							this.builder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent());
+							this.productBuilder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent());
+							this.productBuilder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent());
 						}
 						/*Rename srcpreprocess folder to src*/
 						/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
@@ -967,9 +827,9 @@ public class ToolCommandLine {
 					} else {
 						//Para o MobileMedia, pre processa com Antenna, que copia o codigo da pasta
 						//srcprecess para src.
-						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent());
+						this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testSourceDirectory.getParent());
 
-						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent());
+						this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testTargetDirectory.getParent());
 
 						System.out.println("########################################################" + prod);
 
@@ -1011,7 +871,7 @@ public class ToolCommandLine {
 				if (this.constantsPreProcessor.size() > 0) {
 					HashSet<HashSet<String>> products = sourceLine.getSetsOfFeatures();
 
-					products = this.builder.filter(products, changedFeatures);
+					products = this.productBuilder.filter(products, changedFeatures);
 
 					HashSet<HashSet<String>> pseudoProductsToBePreprocessed = new HashSet<HashSet<String>>();
 
@@ -1028,9 +888,9 @@ public class ToolCommandLine {
 					sameBehavior = true;
 
 					for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
-						this.builder.preprocess(this.builder.getSymbols(prod), testSourceDirectory.getParent());
+						this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testSourceDirectory.getParent());
 
-						this.builder.preprocess(this.builder.getSymbols(prod), testTargetDirectory.getParent());
+						this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testTargetDirectory.getParent());
 
 						sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, in , false, false);
 
@@ -1065,7 +925,7 @@ public class ToolCommandLine {
 		HashSet<String> result = new HashSet<String>();
 
 		for (String constant : constantsPreProcessor) {
-			String feat = this.builder.getPreprocessConstantsToFeatures().get(constant);
+			String feat = this.productBuilder.getPreprocessConstantsToFeatures().get(constant);
 
 			if (product.contains(feat)) {
 				result.add(feat);
@@ -1093,7 +953,7 @@ public class ToolCommandLine {
 		HashSet<String> aspectosQueInterferemNaClasseModificadaTarget = this.getAspectosQueInterferemNaClasseModificada(aspectosDoProdutoSource, targetLine.getMappingClassesSistemaDeArquivos());
 
 		for (String feature : product) {
-			HashMap<String, String> FeaturesConstants = this.builder.getPreprocessFeaturesToConstants();
+			HashMap<String, String> FeaturesConstants = this.productBuilder.getPreprocessFeaturesToConstants();
 			String feat = FeaturesConstants.get(feature);
 			System.out.println("\n feat: " + feat);
 			if (feat != null) {
@@ -1347,28 +1207,6 @@ public class ToolCommandLine {
 		return testsGenerationTimeout;
 	}
 
-	/**
-	 * 
-	 * @param sourcePath
-	 * @param targetPath
-	 * @param timeout
-	 * @param qtdTestes
-	 * @param selectedApproaches
-	 * @param temAspectosSource
-	 * @param temAspectosTarget
-	 * @param controladoresFachadas
-	 * @param criteria
-	 * @param sourceCKKind
-	 * @param targetCKKind
-	 * @param sourceAMFormat
-	 * @param targetAMFormat
-	 * @param resultado
-	 * @return
-	 * @throws Err
-	 * @throws IOException
-	 * @throws AssetNotFoundException
-	 * @throws DirectoryException
-	 */
 	public boolean verifyLine(FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		String fachadaSource = null;
@@ -1385,68 +1223,48 @@ public class ToolCommandLine {
 		
 		ProductLine sourceSPL = new ProductLine(in.getSourceLineDirectory(), ckSource, fmSource, amSource, in.isAspectsInSourceSPL(), fachadaSource, in.getCkFormatSourceSPL(),in.getAmFormatSourceSPL());
 		ProductLine targetSPL = new ProductLine(in.getTargetLineDirectory(), ckTarget, fmTarget, amTarget, in.isAspectsInTargetSPL(), fachadaTarget, in.getCkFormatTargetSPL(), in.getAmFormatTargetSPL());
-		
 		sourceSPL.setLibPath(in.getSourceLineLibDirectory());
 		targetSPL.setLibPath(in.getTargetLineLibDirectory());
+		sourceSPL.setSetsOfFeatures(this.productsCache.get(sourceSPL.getPath()));
+		targetSPL.setSetsOfFeatures(this.productsCache.get(targetSPL.getPath()));
 		
-		return this.verifyLine(sourceSPL, targetSPL, in);
+	 	/* It cleans the generated products folder. */
+		this.setup(sourceSPL, targetSPL);
+
+		/* It Calls alloy to build source and target products and put it in cache. */
+		this.alloyProductGenerator.generateProductsFromAlloyFile(sourceSPL, targetSPL);
+
+		/* Reset results variables .*/
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		sOutcomes.getMeasures().reset();
+		sOutcomes.getMeasures().setApproach(in.getApproach());
+		sOutcomes.getMeasures().getTempoTotal().startContinue();
+
+		/*WellFormedness wellFormedness =  new WellFormedness();
+		
+		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
+		System.out.println("areAllProductsMatched: " + areAllProductsMatched);*/
+		
+		/*AllProductPairs app = new AllProductPairs(wellFormedness, this.builder);
+		System.out.println("Refactoring ? " + app.evaluate(sourceLine, targetLine, propertiesObject));*/
+		
+		/*AllProducts ap = new AllProducts(wellFormedness, this.builder);
+		System.out.println("Refactoring ? " + ap.evaluate(sourceLine, targetLine, propertiesObject));*/
+		
+		/*boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
+		System.out.println("\n AM changed: " + isAssetMappingsEqual);
+		ImpactedProducts ip = new ImpactedProducts(wellFormedness, builder, this.classesModificadas);
+		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));
+		*/
+		
+		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
+		boolean isRefinement = this.checkLPS(sourceSPL, targetSPL, in);
+
+		/*Report Variables: Pause total time to check the SPL.*/
+		sOutcomes.getMeasures().getTempoTotal().pause();
+		sOutcomes.getMeasures().print();
+
+		
+		return isRefinement;
 	}
-
-	/**
-	 * This method creates a representation of the source and target product line. 
-	 * In addition, set the libraries path for the target and source product lines.
-	 * 
-	 * Note: This name is not fair enough. It is necessary to apply a refactoring.
-	 * 
-	 * @param sourcePath
-	 * @param targetPath
-	 * @param timeout
-	 * @param qtdTestes
-	 * @param selectedApproaches
-	 * @param temAspectosSource
-	 * @param temAspectosTarget
-	 * @param controladoresFachadas
-	 * @param criteria
-	 * @param sourceCKKind
-	 * @param targetCKKind
-	 * @param sourceAMFormat
-	 * @param targetAMFormat
-	 * @param resultado
-	 * @param libPathSource
-	 * @param libPathTarget
-	 * @return
-	 * @throws Err
-	 * @throws IOException
-	 * @throws AssetNotFoundException
-	 * @throws DirectoryException
-	 */
-	public boolean verifyLine(String controladoresFachadas, FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
-
-		String ckSource = in.getArtifactsSourceDir() + "ck.xml";
-		String ckTarget = in.getArtifactsTargetDir() + "ck.xml";
-		
-		String fmSource = in.getArtifactsSourceDir() + "fm.xml";
-		String fmTarget = in.getArtifactsTargetDir() + "fm.xml";
-		
-		String amSource = in.getArtifactsSourceDir() + "am.txt";
-		String amTarget = in.getArtifactsTargetDir() + "am.txt";
-		
-		/*This part creates a representation of the source product line.*/
-		ProductLine sourceSPL = new ProductLine(in.getSourceLineDirectory(), ckSource, fmSource, amSource, in.isAspectsInSourceSPL(), controladoresFachadas, in.getCkFormatSourceSPL(),in.getAmFormatSourceSPL());
-
-		/*Set the libraries path for the source product line.*/
-		sourceSPL.setLibPath(in.getSourceLineLibDirectory());
-		
-		/*This part creates a representation of the target product line.*/
-		ProductLine targetSPL = new ProductLine(in.getTargetLineDirectory(), ckTarget, fmTarget, amTarget, in.isAspectsInTargetSPL(), controladoresFachadas, in.getCkFormatTargetSPL(), in.getAmFormatTargetSPL());
-		
-		/*Set the libraries path for the target product line.*/
-		targetSPL.setLibPath(in.getTargetLineLibDirectory());
-		
-		/* Verify the SPL with the created source and target product line.*/
-		return this.verifyLine(sourceSPL, targetSPL, in);
-	}
-	
-	
-
 }
