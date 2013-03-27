@@ -121,10 +121,10 @@ public class ToolCommandLine {
 		sOutcomes.getMeasures().setApproach(propertiesObject.getApproach());
 		sOutcomes.getMeasures().getTempoTotal().startContinue();
 
-		WellFormedness wellFormedness =  new WellFormedness();
+		/*WellFormedness wellFormedness =  new WellFormedness();
 		
 		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
-		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
+		System.out.println("areAllProductsMatched: " + areAllProductsMatched);*/
 		
 		/*AllProductPairs app = new AllProductPairs(wellFormedness, this.builder);
 		System.out.println("Refactoring ? " + app.evaluate(sourceLine, targetLine, propertiesObject));*/
@@ -132,11 +132,11 @@ public class ToolCommandLine {
 		/*AllProducts ap = new AllProducts(wellFormedness, this.builder);
 		System.out.println("Refactoring ? " + ap.evaluate(sourceLine, targetLine, propertiesObject));*/
 		
-		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
+		/*boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
 		System.out.println("\n AM changed: " + isAssetMappingsEqual);
 		ImpactedProducts ip = new ImpactedProducts(wellFormedness, builder, this.classesModificadas);
 		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));
-		
+		*/
 		
 		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
 		isRefinement = this.checkLPS(sourceLine, targetLine, propertiesObject);
