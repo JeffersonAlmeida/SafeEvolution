@@ -39,9 +39,9 @@ public class ImpactedClasses {
 	/** Hashset of dependencies to the compile the file. */
 	private HashSet<String> dependencies;
 	
-	private HashMap<HashSet<String>, HashSet<String>> mapeamentoFeaturesAspectosSource;
+	private HashMap<HashSet<String>, HashSet<String>> aspectsSourceFeatureMapping;
 	
-	private HashMap<HashSet<String>, HashSet<String>> mapeamentoFeaturesAspectosTarget;
+	private HashMap<HashSet<String>, HashSet<String>> aspectsTargetFeatureMapping;
 	
 	private HashSet<String> constantsPreProcessor;
 	
@@ -51,7 +51,12 @@ public class ImpactedClasses {
 	private FilePropertiesObject input;
 	private String classes;
 	private String classeToGenerateTestes;
-	private ArrayList<Product> productsThatHaveModifiedClasses;
+	
+	private HashSet<HashSet<String>> modifiedProducts;
+	
+	private HashSet<HashSet<String>> pseudoProductsToBePreprocessed;
+	
+	private ArrayList<File> filesToTrash;
 	
 	public ImpactedClasses(WellFormedness wellFormedness, ProductBuilder productBuilder, FilePropertiesObject in) {
 		super();
@@ -60,7 +65,12 @@ public class ImpactedClasses {
 		this.input = in;
 		this.dependencies = new HashSet<String>();
 		this.aspectList = new HashSet<String>();
-		this.productsThatHaveModifiedClasses = new ArrayList<Product>();
+		this.modifiedProducts = new HashSet<HashSet<String>>();
+		this.pseudoProductsToBePreprocessed = new HashSet<HashSet<String>>();
+		this.aspectsSourceFeatureMapping = new HashMap<HashSet<String>, HashSet<String>>();
+		this.aspectsTargetFeatureMapping = new HashMap<HashSet<String>, HashSet<String>>();
+		this.filesToTrash = new ArrayList<File>();
+		this.constantsPreProcessor = new HashSet<String>();
 	}
 
 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
@@ -76,23 +86,6 @@ public class ImpactedClasses {
 		FileManager.getInstance().createDir(this.uniqueProductPath + "target" + Constants.FILE_SEPARATOR + "bin"); // This creates bin folder for TARGET PRODUCT.
 	}
 	
-	/**
-	 * Copy modified class and its dependencies to the SPL product folder.
-	 */
-	private void processModifiedClass(String clazz, ProductLine SPL, File splFileDirectory) throws AssetNotFoundException, DirectoryException {
-		System.out.println(" - Modified Class: " + clazz);
-		String modifiedClassDirectory = SPL.getMappingClassesSistemaDeArquivos().get(clazz); // Get the whole path of the modified class in SOURCE spl file system
-		if (!(modifiedClassDirectory.isEmpty())){
-			String destinationDirectory = splFileDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(modifiedClassDirectory).replaceFirst("src", "");
-			File destinationFile = new File(destinationDirectory);
-			FileManager.getInstance().createDir(destinationFile.getParent());
-			FileManager.getInstance().copyFile(modifiedClassDirectory, destinationFile.getAbsolutePath());
-			this.copyDependencies(destinationFile, splFileDirectory, SPL.getMappingClassesSistemaDeArquivos(), null, SPL.getDependencias());
-			isThisClazzFileAspect(destinationFile); // if the answer is YES, add this aspect file to the aspectList
-			setClassToGenerateTests();
-		}
-	}
-
 	private void setClassToGenerateTests() {
 		if (this.input.getLine() == Lines.TARGET){
 			classeToGenerateTestes = FileManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
@@ -114,16 +107,96 @@ public class ImpactedClasses {
 	 *  Check which products have any of the modified classes. 
 	 *	Products that have at least one modified asset.   
 	 */
-	 private void checkModifiedProducts(ProductLine sourceSPL) {
+	 private void findModifiedProducts(ProductLine sourceSPL) {
 		for (Product product : sourceSPL.getProducts()){
 			if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
-				productsThatHaveModifiedClasses.add(product);  // if the answer is YES, add this product to the modified products variable.
+				this.modifiedProducts.add(product.getFeaturesList());
 			}
 		}
 	 }
+	 
+	 private void findPseudoProductsToPreProcess(ProductLine sourceSPL, ProductLine targetSPL) {
+		 System.out.println("\n Amount of Pseudo Products: " + pseudoProductsToBePreprocessed.size());	
+		 for (HashSet<String> product : modifiedProducts) {
+				HashSet<String> prodToBuild = this.makeCombination(product, sourceSPL, targetSPL);
+				if (prodToBuild.size() > 0) {
+					pseudoProductsToBePreprocessed.add(prodToBuild);
+				}
+		}
+		SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
+	}
+	 
+	 private void printPseudoProduct(int i, HashSet<String> prod) {
+			System.out.print("Pseudo Product: " + (i++) + " -> ");
+			Iterator<String> it = prod.iterator();
+			String s = "";
+			while(it.hasNext()){
+				s = s + "[ " + it.next() + " ]";
+			}
+			System.out.println(s);
+	}
+	 
+	 /**
+	 * Copy modified class and its dependencies to the SPL product folder.
+	 */
+    private void processModifiedClass(String clazz, ProductLine SPL, File splFileDirectory) throws AssetNotFoundException, DirectoryException {
+		System.out.println(" - Modified Class: " + clazz);
+		String modifiedClassDirectory = SPL.getMappingClassesSistemaDeArquivos().get(clazz); // Get the whole path of the modified class in SOURCE spl file system
+		if (!(modifiedClassDirectory.isEmpty())){
+			String destinationDirectory = splFileDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(modifiedClassDirectory).replaceFirst("src", "");
+			File destinationFile = new File(destinationDirectory);
+			FileManager.getInstance().createDir(destinationFile.getParent());
+			FileManager.getInstance().copyFile(modifiedClassDirectory, destinationFile.getAbsolutePath());
+			this.copyDependencies(destinationFile, splFileDirectory, SPL.getMappingClassesSistemaDeArquivos(), null, SPL.getDependencias());
+			isThisClazzFileAspect(destinationFile); // if the answer is YES, add this aspect file to the aspectList
+			setClassToGenerateTests();
+		}
+	}
+	 
+    /**
+	 * Copy modified aspects and its dependencies to the SPL product folder.
+	 */
+	private void processModifiedAspect(ProductLine SPL, HashSet<String> aspectsSet, File splFileDirectory) throws AssetNotFoundException,DirectoryException {
+		for (String aspecto : aspectsSet) {
+			String destinationPath = splFileDirectory.getAbsolutePath() + aspecto.split("src")[1];
+			if (!this.modifiedClasses.contains(aspecto) && !this.aspectList.contains(destinationPath)) {
+				File fileDestination = new File(destinationPath);
+				FileManager.getInstance().createDir(fileDestination.getParent()); // create aspect directory
+				FileManager.getInstance().copyFile(SPL.getMappingClassesSistemaDeArquivos().get(FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath()); // copy aspect to the target directory
+				filesToTrash.add(fileDestination);
+				filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
+				this.aspectList.add(fileDestination.getAbsolutePath());
+				this.copyDependencies(fileDestination, splFileDirectory, SPL.getMappingClassesSistemaDeArquivos(), filesToTrash, SPL.getDependencias());
+			}
+		}
+	}
+	
+	private void preProcessFilesWithAntenna(HashSet<String> prod)throws AssetNotFoundException, DirectoryException {
+		/*Mobile Media SPL Files are pre-processed with Antenna Tool. It copies code from  srcprecess folder to src folder*/
+		this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
+		this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
+		/*Antenna does not process aspects. They are copied to the src folder.*/
+		for (String aspect : this.aspectList) {
+			String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile().getAbsolutePath();
+			FileManager.getInstance().createDir(dir);
+			FileManager.getInstance().copyFile(aspect, aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src"));
+		}
+	}
+	
+	private void preProcessFilesWithVelocity(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> prod) throws IOException {
+		/*TaRGeT SPL Files are pre-processed with Velocity Tool - This process is done into the own folder, without copies.
+		 * It is necessary to rename folder to src */
+		if (prod.size() > 0) {
+			this.productBuilder.preprocessVelocity(prod, this.sourceProductFile, sourceSPL, this.sourceProductFile.getParent());
+			this.productBuilder.preprocessVelocity(prod, this.targetProductFile, targetSPL, this.targetProductFile.getParent());
+		}
+		/*Rename srcpreprocess folder to src
+		/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
+		testTargetDirectory.renameTo(new File(testTargetDirectory.getParent()+ System.getProperty("file.separator") + "src"));*/
+	}
 	
 	private boolean checkAssetMappingBehavior(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, FilePropertiesObject in) throws IOException, AssetNotFoundException, DirectoryException {
-		boolean sameBehavior = false;
+		boolean sameBehavior = true;
 		this.printListofModifiedClasses();
 		long startedTime = System.currentTimeMillis();
 		SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(1); // Set the amout of compiled products to 1
@@ -134,152 +207,34 @@ public class ImpactedClasses {
 			this.processModifiedClass(clazz,sourceSPL, this.sourceProductFile);
 			this.processModifiedClass(clazz,targetSPL, this.targetProductFile);
 		}
-		checkModifiedProducts(sourceSPL); // Check products that have any of the modified classes. 
-
-		//Se tiver aspectos ou tags de pre-processamento no codigo, faz um for com todos os produtos possiveis.
-		//Filtrar entre os produtos poss�veis, removendo os que tiverem mesmos conjuntos de aspectos que interferem
-
-		//		**Eh melhor entrar aqui se temAspectos, mesmo que nao tenha preprocess
-		//		**Quando tiver soh preprocess entra no else
-		//		**
-		
-		if (sourceSPL.temAspectos()) {  // Does SOURCE product line contains aspectos ? 
-			HashSet<HashSet<String>> products = new HashSet<HashSet<String>>();
-			productsThatHaveModifiedClasses.clear(); // Removes all of the elements from this list. 
-			for (Product product : sourceSPL.getProducts()) {
-				/* Is this product contains at least one modified asset ? */
-				if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
-					productsThatHaveModifiedClasses.add(product);
-					products.add(product.getFeaturesList());
-				}
-			}
-
-			/* if it has aspects, but there are no classes with more than one version in the SPL. */
-			HashSet<HashSet<String>> pseudoProductsToBePreprocessed = new HashSet<HashSet<String>>();
-
-			this.mapeamentoFeaturesAspectosSource = new HashMap<HashSet<String>, HashSet<String>>();
-			this.mapeamentoFeaturesAspectosTarget = new HashMap<HashSet<String>, HashSet<String>>();
-
-			for (HashSet<String> product : products) {
-				HashSet<String> prodToBuild = this.makeCombination(product, sourceSPL, targetSPL);
-				if (prodToBuild.size() > 0) {
-					pseudoProductsToBePreprocessed.add(prodToBuild);
-				}
-			}
-
-			SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(pseudoProductsToBePreprocessed.size());
-
-			sameBehavior = true;
-
-			System.out.println("\n products size: " + pseudoProductsToBePreprocessed.size());
+		findModifiedProducts(sourceSPL); // Check products that have any of the modified classes. 
+		if (sourceSPL.temAspectos()) { 
+			findPseudoProductsToPreProcess(sourceSPL, targetSPL);
 			int i = 0;
 			for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
-				System.out.print("&PRODUCT: " + (i++) + " -> ");
-				Iterator<String> it = prod.iterator();
-				String s = "";
-				while(it.hasNext()){
-					s = s + "[ " + it.next() + " ]";
-					
-				}
-				System.out.println(s);
-				HashSet<String> aspectosDaConfiguracaoSource = this.mapeamentoFeaturesAspectosSource.get(prod);
-				HashSet<String> aspectosDaConfiguracaoTarget = this.mapeamentoFeaturesAspectosTarget.get(prod);
-
-				ArrayList<File> filesToTrash = new ArrayList<File>();
-
-				for (String aspecto : aspectosDaConfiguracaoSource) {
-					String destinationPath = this.sourceProductFile.getAbsolutePath() + aspecto.split("src")[1];
-					if (!this.modifiedClasses.contains(aspecto) && !this.aspectList.contains(destinationPath)) {
-						File fileDestination = new File(destinationPath);
-						FileManager.getInstance().createDir(fileDestination.getParent());
-						FileManager.getInstance().copyFile(sourceSPL.getMappingClassesSistemaDeArquivos().get(FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
-						filesToTrash.add(fileDestination);
-						filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
-						this.aspectList.add(fileDestination.getAbsolutePath());
-						this.copyDependencies(fileDestination, this.sourceProductFile, sourceSPL.getMappingClassesSistemaDeArquivos(), filesToTrash, sourceSPL.getDependencias());
-					}
-				}
-
-				for (String aspecto : aspectosDaConfiguracaoTarget) {
-					String destinationPath = this.targetProductFile.getAbsolutePath() + aspecto.split("src")[1];
-
-					if (!this.modifiedClasses.contains(aspecto) && !this.aspectList.contains(aspecto)) {
-						File fileDestination = new File(destinationPath);
-
-						FileManager.getInstance().createDir(fileDestination.getParent());
-						FileManager.getInstance().copyFile(targetSPL.getMappingClassesSistemaDeArquivos().get( FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
-
-						filesToTrash.add(fileDestination);
-						filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
-						this.aspectList.add(fileDestination.getAbsolutePath());
-
-						this.copyDependencies(fileDestination, this.targetProductFile, targetSPL.getMappingClassesSistemaDeArquivos(), filesToTrash, targetSPL.getDependencias());
-					}
-				}
-
+				printPseudoProduct(i, prod);
+				processModifiedAspect(sourceSPL, this.aspectsSourceFeatureMapping.get(prod), this.sourceProductFile); // Copy modified aspects and its dependencies to the SPL product folder.
+				processModifiedAspect(targetSPL, this.aspectsTargetFeatureMapping.get(prod), this.targetProductFile); // Copy modified aspects and its dependencies to the SPL product folder.
 				if (in.getLine() == Lines.TARGET || in.getLine() == Lines.DEFAULT) {
-					//Para a TaRGeT, os arquivos sao pre processados com o Velocity dentro da propria
-					//pasta, sem copias. Com isso, eh necessario renomear a pasta para src manualmente.
-
-					if (prod.size() > 0/* && !(prod.size() == 1 && prod.iterator().next().contains("fake"))*/) {
-						this.productBuilder.preprocessVelocity(prod, this.sourceProductFile, sourceSPL, this.sourceProductFile.getParent());
-						this.productBuilder.preprocessVelocity(prod, this.targetProductFile, targetSPL, this.targetProductFile.getParent());
-					}
-					/*Rename srcpreprocess folder to src*/
-					/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
-					testTargetDirectory.renameTo(new File(testTargetDirectory.getParent()+ System.getProperty("file.separator") + "src"));*/
-					
+					preProcessFilesWithVelocity(sourceSPL, targetSPL, prod);
 				} else {
-					//Para o MobileMedia, pre processa com Antenna, que copia o codigo da pasta
-					//srcprecess para src.
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
-
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
-
-					System.out.println("########################################################" + prod);
-
-					//Como o Antenna nao pre processa aspectos, eles tambem nao sao copiados para 
-					//a pasta src. Eh necessario copia-los manualmente.
-					for (String aspect : this.aspectList) {
-						String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile()
-								.getAbsolutePath();
-						FileManager.getInstance().createDir(dir);
-						FileManager.getInstance().copyFile(aspect, aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src"));
-					}
+					preProcessFilesWithAntenna(prod);
 				}
 
 				System.out.println("\nClasses que receberao testes JUNIT: " + classes);
-				// int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, String classes, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled
 				sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
-				for (File file : filesToTrash) {
-					file.delete();
-					this.aspectList.remove(file.getAbsolutePath());
-					this.dependencies.remove(file.getAbsolutePath());
-				}
-
-				filesToTrash.clear();
-				
+				deleteFileToTrash(); // delete files, clean dependencies and aspectsList
 				System.out.println("###########################" + sameBehavior);
-				
 				if(!sameBehavior){
 					break;
 				}
 			}
-		} else {
-			//Entra aqui sempre que nao tem Aspectos.
-			//Pode haver pre processamento.
-			//Soh MobileMediaOO entra aqui
-
-			this.constantsPreProcessor = new HashSet<String>();
+		}else{
 			this.getPreProcessorConstantes(this.sourceProductFile);
-
 			if (this.constantsPreProcessor.size() > 0) {
 				HashSet<HashSet<String>> products = sourceSPL.getSetsOfFeatures();
-
 				products = this.productBuilder.filter(products, changedFeatures);
-
 				HashSet<HashSet<String>> pseudoProductsToBePreprocessed = new HashSet<HashSet<String>>();
-
 				for (HashSet<String> product : products) {
 					HashSet<String> prodToBuild = this.getFeaturesEmComum(product, this.constantsPreProcessor);
 
@@ -313,6 +268,17 @@ public class ImpactedClasses {
 		long finishedTime = System.currentTimeMillis();
 		System.out.println("Asset mapping verificado em: " + String.valueOf((finishedTime - startedTime) / 1000) + " segundos.");
 		return sameBehavior;
+	}
+	/**
+	 *  Delete files, clean dependencies and aspectsList
+	 */
+	private void deleteFileToTrash() {
+		for (File file : filesToTrash) {
+			file.delete();
+			this.aspectList.remove(file.getAbsolutePath());
+			this.dependencies.remove(file.getAbsolutePath());
+		}
+		filesToTrash.clear();
 	}
 
 	/**
@@ -399,6 +365,13 @@ public class ImpactedClasses {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param product Modified Product
+	 * @param sourceLine Source SPL
+	 * @param targetLine Target SPL
+	 * @return HashSet<String>
+	 */
 	private HashSet<String> makeCombination(HashSet<String> product, ProductLine sourceLine, ProductLine targetLine) {
 		
 		HashSet<String> result = new HashSet<String>();
@@ -422,25 +395,25 @@ public class ImpactedClasses {
 		boolean jaExiste = false;
 
 		//Verifica se o mesmo conjunto de features j� foi mapeado em outro conjunto de aspectos.
-		if (!this.mapeamentoFeaturesAspectosSource.values().contains(aspectosQueInterferemNaClasseModificadaSource)) {
-			if (this.mapeamentoFeaturesAspectosSource.containsKey(result) || result.isEmpty()) {
+		if (!this.aspectsSourceFeatureMapping.values().contains(aspectosQueInterferemNaClasseModificadaSource)) {
+			if (this.aspectsSourceFeatureMapping.containsKey(result) || result.isEmpty()) {
 				result.add("fake" + Math.random());
 			}
 
-			this.mapeamentoFeaturesAspectosSource.put(result, aspectosQueInterferemNaClasseModificadaSource);
-			this.mapeamentoFeaturesAspectosTarget.put(result, aspectosQueInterferemNaClasseModificadaTarget);
+			this.aspectsSourceFeatureMapping.put(result, aspectosQueInterferemNaClasseModificadaSource);
+			this.aspectsTargetFeatureMapping.put(result, aspectosQueInterferemNaClasseModificadaTarget);
 		} else {
-			for (HashSet<String> prodKey : this.mapeamentoFeaturesAspectosSource.keySet()) {
-				if (this.mapeamentoFeaturesAspectosSource.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaSource) && this.mapeamentoFeaturesAspectosTarget.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaTarget)) {
+			for (HashSet<String> prodKey : this.aspectsSourceFeatureMapping.keySet()) {
+				if (this.aspectsSourceFeatureMapping.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaSource) && this.aspectsSourceFeatureMapping.get(prodKey).equals(aspectosQueInterferemNaClasseModificadaTarget)) {
 					jaExiste = this.equivalent(prodKey, result);
 				}
 			}
 			if (!jaExiste) {
-				if (this.mapeamentoFeaturesAspectosSource.containsKey(result) || result.isEmpty()) {
+				if (this.aspectsSourceFeatureMapping.containsKey(result) || result.isEmpty()) {
 					result.add("fake" + Math.random());
 				}
-				this.mapeamentoFeaturesAspectosSource.put(result, aspectosQueInterferemNaClasseModificadaSource);
-				this.mapeamentoFeaturesAspectosTarget.put(result, aspectosQueInterferemNaClasseModificadaTarget);
+				this.aspectsSourceFeatureMapping.put(result, aspectosQueInterferemNaClasseModificadaSource);
+				this.aspectsSourceFeatureMapping.put(result, aspectosQueInterferemNaClasseModificadaTarget);
 			}
 		}
 
