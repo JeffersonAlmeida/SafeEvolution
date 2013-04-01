@@ -34,10 +34,10 @@ public class ImpactedClasses {
 	private Collection<String> modifiedClasses;
 	
 	/** Aspects List*/
-	private HashSet<String> listaAspectos;
+	private HashSet<String> aspectList;
 	
 	/** Hashset of dependencies to the compile the file. */
-	private HashSet<String> dependenciasCopiadas;
+	private HashSet<String> dependencies;
 	
 	private HashMap<HashSet<String>, HashSet<String>> mapeamentoFeaturesAspectosSource;
 	
@@ -45,113 +45,84 @@ public class ImpactedClasses {
 	
 	private HashSet<String> constantsPreProcessor;
 	
+	private String uniqueProductPath;
+	private File sourceProductFile;
+	private File targetProductFile;
+	private FilePropertiesObject input;
+	private String classes;
+	private String classeToGenerateTestes;
+	private ArrayList<Product> productsThatHaveModifiedClasses;
+	
+	public ImpactedClasses(WellFormedness wellFormedness, ProductBuilder productBuilder, FilePropertiesObject in) {
+		super();
+		this.wellFormedness = wellFormedness;
+		this.productBuilder = productBuilder;
+		this.input = in;
+		this.dependencies = new HashSet<String>();
+		this.aspectList = new HashSet<String>();
+		this.productsThatHaveModifiedClasses = new ArrayList<Product>();
+	}
+
 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
 		return false;
 		
 	}
 	
-	private boolean checkAssetMappingBehavior(ProductLine sourceLine, ProductLine targetLine,HashSet<String> changedFeatures, FilePropertiesObject in) throws IOException, AssetNotFoundException, DirectoryException {
+	private void createProductFolderStructure(ProductLine sourceSPL, ProductLine targetSPL){
+		this.uniqueProductPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR; // This creates product0 directory
+		this.sourceProductFile = FileManager.getInstance().createDir( this.uniqueProductPath + "source" + Constants.FILE_SEPARATOR + (input.getLine() == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src")); 
+		this.targetProductFile = FileManager.getInstance().createDir( this.uniqueProductPath + "target" + Constants.FILE_SEPARATOR + (input.getLine() == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
+		FileManager.getInstance().createDir(this.uniqueProductPath + "source" + Constants.FILE_SEPARATOR + "bin"); // This creates bin folder for SOURCE PRODUCT
+		FileManager.getInstance().createDir(this.uniqueProductPath + "target" + Constants.FILE_SEPARATOR + "bin"); // This creates bin folder for TARGET PRODUCT.
+	}
+	
+	/**
+	 * Copy modified class and its dependencies to the SPL product folder.
+	 */
+	private void processModifiedClass(String clazz, ProductLine SPL, File splFileDirectory) throws AssetNotFoundException, DirectoryException {
+		System.out.println(" - Modified Class: " + clazz);
+		String modifiedClassDirectory = SPL.getMappingClassesSistemaDeArquivos().get(clazz); // Get the whole path of the modified class in SOURCE spl file system
+		if (!(modifiedClassDirectory.isEmpty())){
+			String destinationDirectory = splFileDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(modifiedClassDirectory).replaceFirst("src", "");
+			File destinationFile = new File(destinationDirectory);
+			FileManager.getInstance().createDir(destinationFile.getParent());
+			FileManager.getInstance().copyFile(modifiedClassDirectory, destinationFile.getAbsolutePath());
+			this.copyDependencies(destinationFile, splFileDirectory, SPL.getMappingClassesSistemaDeArquivos(), null, SPL.getDependencias());
+			isThisClazzFileAspect(destinationFile); // if the answer is YES, add this aspect file to the aspectList
+			setClassToGenerateTests();
+		}
+	}
+
+	private void setClassToGenerateTests() {
+		if (this.input.getLine() == Lines.TARGET){
+			classeToGenerateTestes = FileManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
+		}
+		if (classes.equals("")){
+			classes = classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
+		} else if (!classes.contains(classeToGenerateTestes.replaceAll(".java", ""))) {
+			classes = classes + "|" + classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
+		}
+	}
+
+	private void isThisClazzFileAspect(File destinationFile) {
+		if (destinationFile.getAbsolutePath().endsWith("aj")) { 
+			this.aspectList.add(destinationFile.getAbsolutePath()); 	// As aspects are not preprocessed, it will be necessary to manually move the aspects to the src folder after the preprocessing.
+		}
+	}
+	
+	private boolean checkAssetMappingBehavior(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, FilePropertiesObject in) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
 		this.printListofModifiedClasses();
-		
 		long startedTime = System.currentTimeMillis();
+		SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(1); // Set the amout of compiled products to 1
+		createProductFolderStructure(sourceSPL, targetSPL);
+		copyLibrariesFromSplToProductFolder(sourceSPL, targetSPL, this.uniqueProductPath);
 
-		/* Set the amout of compiled products to 1*/
-		SPLOutcomes.getInstance().getMeasures().setQuantidadeProdutosCompilados(1);
-
-		String productPath = Constants.PRODUCTS_DIR + Constants.FILE_SEPARATOR + "Product0" + Constants.FILE_SEPARATOR;
-
-		/* Creating folders for source and target products, which will be the same for all modified classes and their dependencies. */
-		File testSourceDirectory = FileManager.getInstance().createDir( productPath + "source" + Constants.FILE_SEPARATOR + (in.getLine() == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
-		File testTargetDirectory = FileManager.getInstance().createDir( productPath + "target" + Constants.FILE_SEPARATOR + (in.getLine() == Lines.MOBILE_MEDIA ? ProductBuilder.SRCPREPROCESS : "src"));
-
-		/* This creates bin folder for SOURCE PRODUCT and TARGET PRODUCT. */
-		FileManager.getInstance().createDir(productPath + "source" + Constants.FILE_SEPARATOR + "bin");
-		FileManager.getInstance().createDir(productPath + "target" + Constants.FILE_SEPARATOR + "bin");
-
-		/* Get library path of the SOURCE and TARGET SPL*/
-		String libPathSource = sourceLine.getLibPath();
-		String libPathtarget = targetLine.getLibPath();
-
-		if (libPathSource != null && libPathtarget != null) {
-			/* This copies all library files for SOURCE PRODUCT and TARGET PRODUCT lib path. */
-			FileManager.getInstance().copyLibs(libPathSource, productPath + "source" + Constants.FILE_SEPARATOR + "lib");
-			FileManager.getInstance().copyLibs(libPathtarget, productPath + "target" + Constants.FILE_SEPARATOR + "lib");
+		for (String clazz : this.modifiedClasses) { 
+			this.processModifiedClass(clazz,sourceSPL, this.sourceProductFile);
+			this.processModifiedClass(clazz,targetSPL, this.targetProductFile);
 		}
-
-		/* Classes that will have generated tests. */
-		String classes = "";
-		String classeToGenerateTestes = "";
-
-		this.listaAspectos = new HashSet<String>();
-
-		System.out.println("\n Amount of modified classes: " + modifiedClasses.size()+"\n");
-		/* walk through all changed classes. */
-		for (String classe : this.modifiedClasses) {
-			System.out.println(" - Modified: " + classe);
-			
-			/* Get the whole path of the modified class. */
-			String fileSourcePath = sourceLine.getMappingClassesSistemaDeArquivos().get(classe);
-			String fileTargetPath = targetLine.getMappingClassesSistemaDeArquivos().get(classe);
-
-			if(fileSourcePath!=null && fileTargetPath!=null){
-				/*Copying source version of the modified file. */
-				String destinationPath = null;
-				File fileDestination = null;
-				destinationPath = testSourceDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(fileSourcePath).replaceFirst("src", "");
-				fileDestination = new File(destinationPath);
-				classeToGenerateTestes = classe;
-				System.out.println("$classeToGenerateTestes Antes: " + classeToGenerateTestes);
-				
-				if (in.getLine() == Lines.TARGET){
-					classeToGenerateTestes = FileManager.getInstance().getPathAPartirDoSrc(classeToGenerateTestes).replaceFirst(Pattern.quote("src.java."), "");
-				}
-				System.out.println("*classeToGenerateTestes Depois: " + classeToGenerateTestes);
-				FileManager.getInstance().createDir(fileDestination.getParent());
-				FileManager.getInstance().copyFile(fileSourcePath, fileDestination.getAbsolutePath());
-
-				/* Catch the class path in source version. */
-				File fileSource = fileDestination;
-				destinationPath = testTargetDirectory.getAbsolutePath()	+ FileManager.getInstance().getPathAPartirDoSrc(fileTargetPath).replaceFirst("src", "");
-				fileDestination = new File(destinationPath);
-				FileManager.getInstance().createDir(fileDestination.getParent());
-				FileManager.getInstance().copyFile(fileTargetPath, fileDestination.getAbsolutePath());
-
-				/* Catch the class path in source version. */
-				File fileTarget = fileDestination;
-
-				this.dependenciasCopiadas = new HashSet<String>();
-
-				this.copyDependencies(fileSource, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), null, sourceLine.getDependencias());
-				this.copyDependencies(fileTarget, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), null, targetLine.getDependencias());
-
-				/* As aspects are not preprocessed, it will be necessary to manually move the aspects to the src folder after the preprocessing. */
-				if (fileSource.getAbsolutePath().endsWith("aj")) {
-					this.listaAspectos.add(fileSource.getAbsolutePath());
-				}
-				if (fileTarget.getAbsolutePath().endsWith("aj")) {
-					this.listaAspectos.add(fileTarget.getAbsolutePath());
-				}
-				if (classes.equals("")){
-					classes = classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
-				} else if (!classes.contains(classeToGenerateTestes.replaceAll(".java", ""))) {
-					classes = classes + "|" + classeToGenerateTestes.replaceAll(".java", "").replaceAll(".aj", "");
-				}
-			}
-			
-		}
-
-		/* Check only products that have any of the modified classes. */
-		/* This variable will store modified products. It means, products that have at least one modified asset. */ 
-		ArrayList<Product> produtosQueContemClassesModificadas = new ArrayList<Product>();
-		
-		for (Product product : sourceLine.getProducts()){
-			/* Is this product contains at least one modified asset ? */
-			if (product.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos())) {
-				/* if the answer is YES, add this product to the modified products variable. */
-				produtosQueContemClassesModificadas.add(product);
-			}
-		}
+		checkModifiedProducts(sourceSPL); // heck products that have any of the modified classes. 
 
 		//Se tiver aspectos ou tags de pre-processamento no codigo, faz um for com todos os produtos possiveis.
 		//Filtrar entre os produtos poss�veis, removendo os que tiverem mesmos conjuntos de aspectos que interferem
@@ -160,17 +131,13 @@ public class ImpactedClasses {
 		//		**Quando tiver soh preprocess entra no else
 		//		**
 		
-		/* Does SOURCE product line contains aspectos ? */
-		if (sourceLine.temAspectos()) {
+		if (sourceSPL.temAspectos()) {  // Does SOURCE product line contains aspectos ? 
 			HashSet<HashSet<String>> products = new HashSet<HashSet<String>>();
-			
-			/* Removes all of the elements from this list. */
-			produtosQueContemClassesModificadas.clear();
-
-			for (Product product : sourceLine.getProducts()) {
+			productsThatHaveModifiedClasses.clear(); // Removes all of the elements from this list. 
+			for (Product product : sourceSPL.getProducts()) {
 				/* Is this product contains at least one modified asset ? */
-				if (product.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos())) {
-					produtosQueContemClassesModificadas.add(product);
+				if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
+					productsThatHaveModifiedClasses.add(product);
 					products.add(product.getFeaturesList());
 				}
 			}
@@ -182,7 +149,7 @@ public class ImpactedClasses {
 			this.mapeamentoFeaturesAspectosTarget = new HashMap<HashSet<String>, HashSet<String>>();
 
 			for (HashSet<String> product : products) {
-				HashSet<String> prodToBuild = this.makeCombination(product, sourceLine, targetLine);
+				HashSet<String> prodToBuild = this.makeCombination(product, sourceSPL, targetSPL);
 				if (prodToBuild.size() > 0) {
 					pseudoProductsToBePreprocessed.add(prodToBuild);
 				}
@@ -209,32 +176,32 @@ public class ImpactedClasses {
 				ArrayList<File> filesToTrash = new ArrayList<File>();
 
 				for (String aspecto : aspectosDaConfiguracaoSource) {
-					String destinationPath = testSourceDirectory.getAbsolutePath() + aspecto.split("src")[1];
-					if (!this.modifiedClasses.contains(aspecto) && !this.listaAspectos.contains(destinationPath)) {
+					String destinationPath = this.sourceProductFile.getAbsolutePath() + aspecto.split("src")[1];
+					if (!this.modifiedClasses.contains(aspecto) && !this.aspectList.contains(destinationPath)) {
 						File fileDestination = new File(destinationPath);
 						FileManager.getInstance().createDir(fileDestination.getParent());
-						FileManager.getInstance().copyFile(sourceLine.getMappingClassesSistemaDeArquivos().get(FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
+						FileManager.getInstance().copyFile(sourceSPL.getMappingClassesSistemaDeArquivos().get(FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 						filesToTrash.add(fileDestination);
 						filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
-						this.listaAspectos.add(fileDestination.getAbsolutePath());
-						this.copyDependencies(fileDestination, testSourceDirectory, sourceLine.getMappingClassesSistemaDeArquivos(), filesToTrash, sourceLine.getDependencias());
+						this.aspectList.add(fileDestination.getAbsolutePath());
+						this.copyDependencies(fileDestination, this.sourceProductFile, sourceSPL.getMappingClassesSistemaDeArquivos(), filesToTrash, sourceSPL.getDependencias());
 					}
 				}
 
 				for (String aspecto : aspectosDaConfiguracaoTarget) {
-					String destinationPath = testTargetDirectory.getAbsolutePath() + aspecto.split("src")[1];
+					String destinationPath = this.targetProductFile.getAbsolutePath() + aspecto.split("src")[1];
 
-					if (!this.modifiedClasses.contains(aspecto) && !this.listaAspectos.contains(aspecto)) {
+					if (!this.modifiedClasses.contains(aspecto) && !this.aspectList.contains(aspecto)) {
 						File fileDestination = new File(destinationPath);
 
 						FileManager.getInstance().createDir(fileDestination.getParent());
-						FileManager.getInstance().copyFile(targetLine.getMappingClassesSistemaDeArquivos().get( FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
+						FileManager.getInstance().copyFile(targetSPL.getMappingClassesSistemaDeArquivos().get( FileManager.getInstance().getCorrectName(aspecto)), fileDestination.getAbsolutePath());
 
 						filesToTrash.add(fileDestination);
 						filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
-						this.listaAspectos.add(fileDestination.getAbsolutePath());
+						this.aspectList.add(fileDestination.getAbsolutePath());
 
-						this.copyDependencies(fileDestination, testTargetDirectory, targetLine.getMappingClassesSistemaDeArquivos(), filesToTrash, targetLine.getDependencias());
+						this.copyDependencies(fileDestination, this.targetProductFile, targetSPL.getMappingClassesSistemaDeArquivos(), filesToTrash, targetSPL.getDependencias());
 					}
 				}
 
@@ -243,8 +210,8 @@ public class ImpactedClasses {
 					//pasta, sem copias. Com isso, eh necessario renomear a pasta para src manualmente.
 
 					if (prod.size() > 0/* && !(prod.size() == 1 && prod.iterator().next().contains("fake"))*/) {
-						this.productBuilder.preprocessVelocity(prod, testSourceDirectory, sourceLine, testSourceDirectory.getParent());
-						this.productBuilder.preprocessVelocity(prod, testTargetDirectory, targetLine, testTargetDirectory.getParent());
+						this.productBuilder.preprocessVelocity(prod, this.sourceProductFile, sourceSPL, this.sourceProductFile.getParent());
+						this.productBuilder.preprocessVelocity(prod, this.targetProductFile, targetSPL, this.targetProductFile.getParent());
 					}
 					/*Rename srcpreprocess folder to src*/
 					/*testSourceDirectory.renameTo(new File(testSourceDirectory.getParent()+ System.getProperty("file.separator") + "src"));
@@ -253,15 +220,15 @@ public class ImpactedClasses {
 				} else {
 					//Para o MobileMedia, pre processa com Antenna, que copia o codigo da pasta
 					//srcprecess para src.
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testSourceDirectory.getParent());
+					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
 
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testTargetDirectory.getParent());
+					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
 
 					System.out.println("########################################################" + prod);
 
 					//Como o Antenna nao pre processa aspectos, eles tambem nao sao copiados para 
 					//a pasta src. Eh necessario copia-los manualmente.
-					for (String aspect : this.listaAspectos) {
+					for (String aspect : this.aspectList) {
 						String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile()
 								.getAbsolutePath();
 						FileManager.getInstance().createDir(dir);
@@ -271,11 +238,11 @@ public class ImpactedClasses {
 
 				System.out.println("\nClasses que receberao testes JUNIT: " + classes);
 				// int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, String classes, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled
-				sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, in , false, false);
+				sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
 				for (File file : filesToTrash) {
 					file.delete();
-					this.listaAspectos.remove(file.getAbsolutePath());
-					this.dependenciasCopiadas.remove(file.getAbsolutePath());
+					this.aspectList.remove(file.getAbsolutePath());
+					this.dependencies.remove(file.getAbsolutePath());
 				}
 
 				filesToTrash.clear();
@@ -292,10 +259,10 @@ public class ImpactedClasses {
 			//Soh MobileMediaOO entra aqui
 
 			this.constantsPreProcessor = new HashSet<String>();
-			this.getPreProcessorConstantes(testSourceDirectory);
+			this.getPreProcessorConstantes(this.sourceProductFile);
 
 			if (this.constantsPreProcessor.size() > 0) {
-				HashSet<HashSet<String>> products = sourceLine.getSetsOfFeatures();
+				HashSet<HashSet<String>> products = sourceSPL.getSetsOfFeatures();
 
 				products = this.productBuilder.filter(products, changedFeatures);
 
@@ -314,19 +281,19 @@ public class ImpactedClasses {
 				sameBehavior = true;
 
 				for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testSourceDirectory.getParent());
+					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
 
-					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), testTargetDirectory.getParent());
+					this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
 
-					sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, in , false, false);
+					sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
 
 					System.out.println("###########################" + sameBehavior);
 				}
 			} else {
 				//Se nem tem aspectos nem preprocessamento.
-				testSourceDirectory.renameTo(new File(testSourceDirectory.getParent() + Constants.FILE_SEPARATOR + "src"));
-				testTargetDirectory.renameTo(new File(testTargetDirectory.getParent() + Constants.FILE_SEPARATOR + "src"));
-				sameBehavior = CommandLine.isRefactoring(0, 0, testSourceDirectory.getParent(), testTargetDirectory.getParent(), classes, in , false, false);
+				this.sourceProductFile.renameTo(new File(this.sourceProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
+				this.targetProductFile.renameTo(new File(this.targetProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
+				sameBehavior = CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
 				System.out.println("###########################" + sameBehavior);
 			}
 		}
@@ -336,9 +303,35 @@ public class ImpactedClasses {
 		return sameBehavior;
 	}
 
+	/**
+	 *  Check which products have any of the modified classes. 
+	 *	Products that have at least one modified asset.   
+	 */
+	 private void checkModifiedProducts(ProductLine sourceSPL) {
+		for (Product product : sourceSPL.getProducts()){
+			if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
+				productsThatHaveModifiedClasses.add(product);  // if the answer is YES, add this product to the modified products variable.
+			}
+		}
+	 }
+
+	
+
+	/**
+	 * This copies all library files for SOURCE PRODUCT and TARGET PRODUCT lib path. 
+	 *  */
+	private void copyLibrariesFromSplToProductFolder(ProductLine sourceLine, ProductLine targetLine, String productPath) throws AssetNotFoundException, DirectoryException {
+		String sourceLibDirectory = sourceLine.getLibPath(); 
+		String targetLibDirectory = targetLine.getLibPath();
+		if (!(sourceLibDirectory.isEmpty()) && !(targetLibDirectory.isEmpty())) {
+			FileManager.getInstance().copyLibs(sourceLibDirectory, productPath + "source" + Constants.FILE_SEPARATOR + "lib");
+			FileManager.getInstance().copyLibs(targetLibDirectory, productPath + "target" + Constants.FILE_SEPARATOR + "lib");
+		}
+	}
+
 	private void printListofModifiedClasses() {
 		Iterator<String> i = this.modifiedClasses.iterator();
-		System.out.println("\nList of Modified Classes: ");
+		System.out.println("\nList of Modified Classes: " + this.modifiedClasses.size());
 		while(i.hasNext()){
 			System.out.println(i.next());
 		}
@@ -386,15 +379,13 @@ public class ImpactedClasses {
 
 					File fileDestination = new File(destinationFolder);
 
-					if (this.dependenciasCopiadas.add(fileDestination.getAbsolutePath())) {
+					if (this.dependencies.add(fileDestination.getAbsolutePath())) {
 						FileManager.getInstance().createDir(fileDestination.getParent());
 
 						if (!fileDestination.exists()) {
 							FileManager.getInstance().copyFile(file.getAbsolutePath(), fileDestination.getAbsolutePath());
 
-							if (fileDestination.getAbsolutePath().endsWith("aj")) {
-								this.listaAspectos.add(fileDestination.getAbsolutePath());
-							}
+							isThisClazzFileAspect(fileDestination);
 
 							if (filesToTrash != null) {
 								filesToTrash.add(fileDestination);
