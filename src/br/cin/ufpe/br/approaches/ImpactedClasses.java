@@ -110,6 +110,18 @@ public class ImpactedClasses {
 		}
 	}
 	
+	/**
+	 *  Check which products have any of the modified classes. 
+	 *	Products that have at least one modified asset.   
+	 */
+	 private void checkModifiedProducts(ProductLine sourceSPL) {
+		for (Product product : sourceSPL.getProducts()){
+			if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
+				productsThatHaveModifiedClasses.add(product);  // if the answer is YES, add this product to the modified products variable.
+			}
+		}
+	 }
+	
 	private boolean checkAssetMappingBehavior(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, FilePropertiesObject in) throws IOException, AssetNotFoundException, DirectoryException {
 		boolean sameBehavior = false;
 		this.printListofModifiedClasses();
@@ -122,7 +134,7 @@ public class ImpactedClasses {
 			this.processModifiedClass(clazz,sourceSPL, this.sourceProductFile);
 			this.processModifiedClass(clazz,targetSPL, this.targetProductFile);
 		}
-		checkModifiedProducts(sourceSPL); // heck products that have any of the modified classes. 
+		checkModifiedProducts(sourceSPL); // Check products that have any of the modified classes. 
 
 		//Se tiver aspectos ou tags de pre-processamento no codigo, faz um for com todos os produtos possiveis.
 		//Filtrar entre os produtos poss�veis, removendo os que tiverem mesmos conjuntos de aspectos que interferem
@@ -302,20 +314,6 @@ public class ImpactedClasses {
 		System.out.println("Asset mapping verificado em: " + String.valueOf((finishedTime - startedTime) / 1000) + " segundos.");
 		return sameBehavior;
 	}
-
-	/**
-	 *  Check which products have any of the modified classes. 
-	 *	Products that have at least one modified asset.   
-	 */
-	 private void checkModifiedProducts(ProductLine sourceSPL) {
-		for (Product product : sourceSPL.getProducts()){
-			if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
-				productsThatHaveModifiedClasses.add(product);  // if the answer is YES, add this product to the modified products variable.
-			}
-		}
-	 }
-
-	
 
 	/**
 	 * This copies all library files for SOURCE PRODUCT and TARGET PRODUCT lib path. 
