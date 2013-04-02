@@ -328,13 +328,11 @@ public abstract class ProductBuilder {
 
 	public HashSet<HashSet<String>> filter(HashSet<HashSet<String>> products, HashSet<String> changedFeatures) {
 		HashSet<HashSet<String>> output = new HashSet<HashSet<String>>();
-
 		for (HashSet<String> hashSet : products) {
 			if (Comparador.containsSome(hashSet, changedFeatures)) {
 				output.add(hashSet);
 			}
 		}
-
 		return output;
 	}
 

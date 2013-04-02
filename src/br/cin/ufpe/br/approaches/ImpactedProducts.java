@@ -47,7 +47,6 @@ public class ImpactedProducts {
 			}
 			return isRefactoring;
 		}
-		
 
 		/*......................................................... Getters and Setters */
 		public void setProductBuilder(ProductBuilder productBuilder) {
