@@ -1261,6 +1261,7 @@ public class ToolCommandLine {
 		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
 		System.out.println("\n AM changed: " + isAssetMappingsEqual);
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
+		this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
 		ImpactedClasses ic = new ImpactedClasses(wellFormedness, productBuilder, in, this.classesModificadas);
 		System.out.println("Refactoring ? " + ic.evaluate(sourceSPL, targetSPL, changedFeatures));
 		

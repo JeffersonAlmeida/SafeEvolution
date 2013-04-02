@@ -85,7 +85,7 @@ public class ImpactedClasses {
 			copyLibrariesFromSplToProductFolder(sourceSPL, targetSPL, this.uniqueProductPath);
 			copyModifiedClassAndDependencies(sourceSPL, targetSPL); // Copy modified class and its dependencies to the SPL product folder.
 			findModifiedProducts(sourceSPL); // Check products that have any of the modified classes. Store it in this.modifiedProducts
-			if (sourceSPL.temAspectos()) { 
+			if (sourceSPL.temAspectos() || (this.input.getLine() == Lines.DEFAULT)) { 
 					findPseudoProductsToPreProcess(sourceSPL, targetSPL); // find which products contains assets with Conditional Compilation - store it in this.pseudoProductsToBePreprocessed
 					for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
 						if (!(sameBehavior = CheckProductBehavior(sourceSPL, targetSPL, sameBehavior, prod))) 
@@ -101,7 +101,7 @@ public class ImpactedClasses {
 						if (!(sameBehavior = CheckProductBehavior(this.input, sameBehavior, prod)))
 							break;
 					}
-				} else { // No preProcess, aspects
+				} else { // No preProcess, No aspects
 					this.sourceProductFile.renameTo(new File(this.sourceProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
 					this.targetProductFile.renameTo(new File(this.targetProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
 					sameBehavior = CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
@@ -173,7 +173,6 @@ public class ImpactedClasses {
 		 * Copy modified class and its dependencies to the SPL product folder.
 		 */
 	    private void processModifiedClass(String clazz, ProductLine SPL, File splFileDirectory) throws AssetNotFoundException, DirectoryException {
-			System.out.println(" - Modified Class: " + clazz);
 			String modifiedClassDirectory = SPL.getMappingClassesSistemaDeArquivos().get(clazz); // Get the whole path of the modified class in SOURCE spl file system
 			if (!(modifiedClassDirectory.isEmpty())){
 				String destinationDirectory = splFileDirectory.getAbsolutePath() + FileManager.getInstance().getPathAPartirDoSrc(modifiedClassDirectory).replaceFirst("src", "");

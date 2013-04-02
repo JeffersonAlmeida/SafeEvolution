@@ -1720,6 +1720,2067 @@ Class Name: Logging, src\org\softlang\features\Logging.java
 
  Required Classes:  [ EmployeeImplBean ]  [ EmployeeImplPojo ] 
 
+# SOURCE Products List<1> #
+
+1 -> [ javaexorcismspl ] [ treestructure ] 
+
+# TARGET Products List<2> #
+
+1 -> [ javaexorcismspl ] [ logging ] [ treestructure ] 
+
+2 -> [ javaexorcismspl ] [ treestructure ] 
+
+Product 0 ::  [ javaexorcismspl ] [ treestructure ]
+
+Class Content:
+package org.softlang.tests;
+
+import org.junit.Test;
+import org.softlang.company.Company;
+import org.softlang.company.Department;
+import org.softlang.company.Employee;
+import org.softlang.company.factory.Factory;
+
+/**
+ * Test/demonstrate basic operations for totaling and cutting salaries.
+ */
+public class Basics {
+	
+	static Company createSampleCompany(Factory f) {
+		
+		// Create company
+		Company sampleCompany = f.mkCompany();
+		sampleCompany.setName("meganalysis");
+		
+		// Create all employees
+		Employee craig = f.mkEmployee();
+		craig.setName("Craig");
+		craig.setAddress("Redmond");
+		craig.setSalary(123456);
+		craig.setManager(true);
+
+		Employee erik = f.mkEmployee();
+		erik.setName("Erik");
+		erik.setAddress("Utrecht");
+		erik.setSalary(12345);
+
+		Employee ralf = f.mkEmployee();
+		ralf.setName("Ralf");
+		ralf.setAddress("Koblenz");
+		ralf.setSalary(1234);		
+
+		Employee ray = f.mkEmployee();
+		ray.setName("Ray");
+		ray.setAddress("Redmond");
+		ray.setSalary(234567);
+		ray.setManager(true);
+
+		Employee klaus = f.mkEmployee();
+		klaus.setName("Klaus");
+		klaus.setAddress("Boston");
+		klaus.setSalary(23456);
+		klaus.setManager(true);
+		
+		Employee karl = f.mkEmployee();
+		karl.setName("Karl");
+		karl.setAddress("Riga");
+		karl.setSalary(2345);
+		karl.setManager(true);
+		
+		Employee joe = f.mkEmployee();
+		joe.setName("Joe");
+		joe.setAddress("Wifi City");
+		joe.setSalary(2344);								
+
+		// Create research department
+		Department research = f.mkDepartment();
+		research.setName("Research");
+		research.add(craig);
+		research.add(erik);
+		research.add(ralf);
+		sampleCompany.add(research);
+
+		// Create development department
+		Department development = f.mkDepartment();
+		development.setName("Development");
+		development.add(ray);
+		sampleCompany.add(development);
+
+		// Create sub-department dev1
+		Department dev1 = f.mkDepartment();
+		dev1.setName("Dev1");
+		dev1.add(klaus);
+		development.add(dev1);
+
+		// Create sub-department dev11
+		Department dev11 = f.mkDepartment();
+		dev11.setName("Dev1.1");
+		dev11.add(karl);
+		dev11.add(joe);
+		dev1.add(dev11);
+		
+		return sampleCompany;
+	}
+	
+	@Test
+	public void test() {
+	}
+}
+
+Parametros para o SOOT -> Classe:Basics path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests
+
+Provided Class: Basics Dependence: Test
+
+Provided Class: Basics Dependence: org.softlang.company.factory.Factory
+
+Provided Class: Basics Its Dependencies: org.softlang.company.factory.Factory - constant Required: Factory
+
+Provided Class: Basics Dependence: org.softlang.company.Company
+
+Provided Class: Basics Its Dependencies: org.softlang.company.Company - constant Required: Company
+
+Provided Class: Basics Dependence: Factory
+
+Provided Class: Basics Its Dependencies: Factory - constant Required: Factory
+
+Provided Class: Basics Dependence: Department
+
+Provided Class: Basics Its Dependencies: Department - constant Required: Department
+
+Provided Class: Basics Dependence: Company
+
+Provided Class: Basics Its Dependencies: Company - constant Required: Company
+
+Provided Class: Basics Dependence: org.softlang.company.Employee
+
+Provided Class: Basics Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Basics Dependence: Employee
+
+Provided Class: Basics Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Basics Dependence: org.junit.Test
+
+Provided Class: Basics Dependence: org.softlang.company.Department
+
+Provided Class: Basics Its Dependencies: org.softlang.company.Department - constant Required: Department
+
+Provided Class: Basics Dependence: package org.softlang.tests;
+
+
+Class Name: Basics,  src\org\softlang\tests\Basics.java
+
+ Provided Classes:  [ Basics ] 
+
+ Required Classes:  [ Factory ]  [ Department ]  [ Company ]  [ Employee ] 
+
+
+Class Name: Junit, lib\Junit.jar
+
+ Provided Classes:  [ Junit ] 
+
+ Required Classes: 
+
+
+Class Name: Build, build.xml
+
+ Provided Classes:  [ Build ] 
+
+ Required Classes: 
+
+Class Content:
+package org.softlang.company;
+
+/**
+ * A company has a name and consists of (possibly nested) departments.
+ * This is sufficiently covered by the Container interface.
+ * Hence, the present interface is essentially a marker.
+ */
+public interface Company extends Container { }
+
+Parametros para o SOOT -> Classe:Company path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+Provided Class: Company Dependence: Container
+
+Provided Class: Company Its Dependencies: Container - constant Required: Container
+
+Provided Class: Company Dependence: package org.softlang.company;
+
+
+Class Name: Company,  src\org\softlang\company\Company.java
+
+ Provided Classes:  [ Company ] 
+
+ Required Classes:  [ Container ] 
+
+Class Content:
+package org.softlang.company;
+
+import org.softlang.visitor.ReturningVisitor;
+import org.softlang.visitor.VoidVisitor;
+
+/**
+ * The root class of the object model for companies.
+ * All objects in a company have a name.
+ * There is also general visitor support.
+ */
+public interface Component {
+	String getName();
+	void setName(String name);
+	void accept(VoidVisitor v);
+	<R> R accept(ReturningVisitor<R> v);
+}
+
+Parametros para o SOOT -> Classe:Component path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java:14:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.Component
+
+Provided Class: Component Dependence: ReturningVisitor
+
+Provided Class: Component Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: Component Dependence: VoidVisitor
+
+Provided Class: Component Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: Component Dependence: org.softlang.visitor.VoidVisitor
+
+Provided Class: Component Its Dependencies: org.softlang.visitor.VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: Component Dependence: org.softlang.visitor.ReturningVisitor
+
+Provided Class: Component Its Dependencies: org.softlang.visitor.ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: Component Dependence: package org.softlang.company;
+
+
+Class Name: Component, src\org\softlang\company\Component.java
+
+ Provided Classes:  [ Component ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ] 
+
+Class Content:
+package org.softlang.company;
+
+/**
+ * An interface for all composites in an company object structure.
+ * Containers are supposed to aggregate sub-units.
+ */
+public interface Container extends Component {
+	Iterable<? extends Subunit> subunits();
+	boolean add(Subunit u);
+	boolean remove(Subunit u);
+}
+
+Parametros para o SOOT -> Classe:Container path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+Provided Class: Container Dependence: Subunit
+
+Provided Class: Container Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: Container Dependence: Component
+
+Provided Class: Container Its Dependencies: Component - constant Required: Component
+
+Provided Class: Container Dependence: package org.softlang.company;
+
+
+Class Name: Container, src\org\softlang\company\Container.java
+
+ Provided Classes:  [ Container ] 
+
+ Required Classes:  [ Subunit ]  [ Component ] 
+
+Class Content:
+package org.softlang.company;
+
+/**
+ * A department has a name, employees, and sub-departments.
+ * One of the employees is supposed to be the manager.
+ * We add a getter for the manager for convenience's sake.
+ */
+public interface Department extends Subunit, Container {
+	Employee getManager();
+}
+
+Parametros para o SOOT -> Classe:Department path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+Provided Class: Department Dependence: Subunit
+
+Provided Class: Department Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: Department Dependence: Employee
+
+Provided Class: Department Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Department Dependence: Container
+
+Provided Class: Department Its Dependencies: Container - constant Required: Container
+
+Provided Class: Department Dependence: package org.softlang.company;
+
+
+Class Name: Department, src\org\softlang\company\Department.java
+
+ Provided Classes:  [ Department ] 
+
+ Required Classes:  [ Subunit ]  [ Employee ]  [ Container ] 
+
+Class Content:
+package org.softlang.company;
+
+/**
+ * An employee has a name, an address, and a salary. 
+ * Also, an employee may be flagged to be a manager.
+ */
+public interface Employee extends Subunit {
+	String getAddress();
+	void setAddress(String address);
+	double getSalary();
+	void setSalary(double salary);
+	boolean getManager();
+	void setManager(boolean manager);
+	
+	String getCep();
+}
+
+Parametros para o SOOT -> Classe:Employee path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+Provided Class: Employee Dependence: Subunit
+
+Provided Class: Employee Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: Employee Dependence: package org.softlang.company;
+
+
+Class Name: Employee,  src\org\softlang\company\Employee.java
+
+ Provided Classes:  [ Employee ] 
+
+ Required Classes:  [ Subunit ] 
+
+Class Content:
+package org.softlang.company;
+
+/**
+ * A subunit is either an employee unit or a department unit.
+ * The interface is only needed as a common base type.
+ * That is, no members are added here to Component.
+ */
+public interface Subunit extends Component { }
+
+Parametros para o SOOT -> Classe:Subunit path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+Provided Class: Subunit Dependence: Component
+
+Provided Class: Subunit Its Dependencies: Component - constant Required: Component
+
+Provided Class: Subunit Dependence: package org.softlang.company;
+
+
+Class Name: Subunit,  src\org\softlang\company\Subunit.java
+
+ Provided Classes:  [ Subunit ] 
+
+ Required Classes:  [ Component ] 
+
+Class Content:
+package org.softlang.company.factory;
+
+import org.softlang.company.*;
+import org.softlang.company.impl.bean.*;
+
+/**
+ * A factory that constructs (a kind of) "beans" as opposed to POJPs
+ */
+public class BeanFactory implements Factory {
+	public Company mkCompany() { return new CompanyImpl(); }
+	public Department mkDepartment() { return new DepartmentImpl(); }
+	public Employee mkEmployee() { return new EmployeeImpl(); }
+}
+
+Parametros para o SOOT -> Classe:BeanFactory path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.bean not found
+
+Provided Class: BeanFactory Dependence: DepartmentImpl
+
+Provided Class: BeanFactory Its Dependencies: DepartmentImpl - constant Required: DepartmentImplPojo
+
+Provided Class: BeanFactory Dependence: EmployeeImpl
+
+Provided Class: BeanFactory Its Dependencies: EmployeeImpl - constant Required: EmployeeImplPojo
+
+Provided Class: BeanFactory Dependence: Factory
+
+Provided Class: BeanFactory Its Dependencies: Factory - constant Required: Factory
+
+Provided Class: BeanFactory Dependence: Department
+
+Provided Class: BeanFactory Its Dependencies: Department - constant Required: Department
+
+Provided Class: BeanFactory Dependence: Company
+
+Provided Class: BeanFactory Its Dependencies: Company - constant Required: Company
+
+Provided Class: BeanFactory Dependence: Employee
+
+Provided Class: BeanFactory Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: BeanFactory Dependence: CompanyImpl
+
+Provided Class: BeanFactory Its Dependencies: CompanyImpl - constant Required: CompanyImplBean
+
+Provided Class: BeanFactory Dependence: package org.softlang.company.factory;
+
+
+Class Name: BeanFactory,  src\org\softlang\company\factory\BeanFactory.java
+
+ Provided Classes:  [ BeanFactory ] 
+
+ Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplPojo ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company.factory;
+
+import org.softlang.company.Company;
+import org.softlang.company.Department;
+import org.softlang.company.Employee;
+
+/**
+ * The factory interface for constructing all possible company objects
+ */
+public interface Factory {
+	Company mkCompany();
+	Department mkDepartment();
+	Employee mkEmployee();
+}
+
+Parametros para o SOOT -> Classe:Factory path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+Provided Class: Factory Dependence: org.softlang.company.Company
+
+Provided Class: Factory Its Dependencies: org.softlang.company.Company - constant Required: Company
+
+Provided Class: Factory Dependence: Department
+
+Provided Class: Factory Its Dependencies: Department - constant Required: Department
+
+Provided Class: Factory Dependence: Company
+
+Provided Class: Factory Its Dependencies: Company - constant Required: Company
+
+Provided Class: Factory Dependence: org.softlang.company.Employee
+
+Provided Class: Factory Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Factory Dependence: Employee
+
+Provided Class: Factory Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Factory Dependence: org.softlang.company.Department
+
+Provided Class: Factory Its Dependencies: org.softlang.company.Department - constant Required: Department
+
+Provided Class: Factory Dependence: package org.softlang.company.factory;
+
+
+Class Name: Factory,  src\org\softlang\company\factory\Factory.java
+
+ Provided Classes:  [ Factory ] 
+
+ Required Classes:  [ Department ]  [ Company ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company.impl.bean;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+import org.softlang.visitor.VoidVisitor;
+
+public class CompanyImpl extends ContainerImpl implements Company {
+
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}	
+}
+
+Parametros para o SOOT -> Classe:CompanyImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java:9:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.CompanyImpl
+
+Provided Class: CompanyImplBean Dependence: ReturningVisitor
+
+Provided Class: CompanyImplBean Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: CompanyImplBean Dependence: VoidVisitor
+
+Provided Class: CompanyImplBean Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: CompanyImplBean Dependence: ContainerImpl
+
+Provided Class: CompanyImplBean Its Dependencies: ContainerImpl - constant Required: ContainerImplPojo
+
+Provided Class: CompanyImplBean Dependence: org.softlang.visitor.VoidVisitor
+
+Provided Class: CompanyImplBean Its Dependencies: org.softlang.visitor.VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: CompanyImplBean Dependence: Company
+
+Provided Class: CompanyImplBean Its Dependencies: Company - constant Required: Company
+
+Provided Class: CompanyImplBean Dependence: package org.softlang.company.impl.bean;
+
+
+Class Name: CompanyImplBean,  src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ Provided Classes:  [ CompanyImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ ContainerImplPojo ]  [ VoidVisitor ]  [ Company ] 
+
+Class Content:
+package org.softlang.company.impl.bean;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+import java.util.Observable;
+
+/**
+ * Observability and a parent axis are added on top of the Component interface.
+ */
+public abstract class ComponentImpl extends Observable implements Component {
+	private ComponentImpl parent;
+	private String name;
+	public String getName() {
+		return name; 
+	}
+	public void setName(String name) { 
+		this.name = name; 
+		setChanged();
+		notifyObservers("name");		
+	}
+	public ComponentImpl getParent() { return parent; }
+	/* package */ void setParent(ComponentImpl parent) { this.parent = parent; }
+	public abstract void accept(VoidVisitor v);
+	public abstract <R> R accept(ReturningVisitor<R> v);
+}
+
+Parametros para o SOOT -> Classe:ComponentImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java:23:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.ComponentImpl
+
+Provided Class: ComponentImplBean Dependence: ReturningVisitor
+
+Provided Class: ComponentImplBean Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: ComponentImplBean Dependence: VoidVisitor
+
+Provided Class: ComponentImplBean Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: ComponentImplBean Dependence: Component
+
+Provided Class: ComponentImplBean Its Dependencies: Component - constant Required: Component
+
+Provided Class: ComponentImplBean Dependence: package org.softlang.company.impl.bean;
+
+
+Class Name: ComponentImplBean,  src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ Provided Classes:  [ ComponentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Component ] 
+
+Class Content:
+package org.softlang.company.impl.bean;
+
+import org.softlang.company.*;
+import org.softlang.util.ObservableSimpleList;
+import org.softlang.util.SimpleLinkedList;
+import java.util.Observer;
+
+public abstract class ContainerImpl extends ComponentImpl implements Container {
+
+	private ObservableSimpleList<Subunit> subunits = 
+		new ObservableSimpleList<Subunit>(
+				new SimpleLinkedList<Subunit>());
+	
+	public Iterable<? extends Subunit> subunits() {
+		return subunits;
+	}
+
+	public boolean add(Subunit u) {
+		ComponentImpl i = (ComponentImpl)u;
+		if (i.getParent()!=null)
+			throw new IllegalArgumentException("Attemped re-parenting.");
+		i.setParent(this);
+		return subunits.add(u);
+	}
+
+	public boolean remove(Subunit u) {
+		ComponentImpl i = (ComponentImpl)u;
+		i.setParent(null);
+		return subunits.remove(u);
+	}
+	
+	public void addObserver(Observer o) {
+		super.addObserver(o);
+		subunits.addObserver(o);
+	}
+	
+	public void deleteObserver(Observer o) {
+		super.deleteObserver(o);
+		subunits.deleteObserver(o);		
+	}
+	
+	public void deleteObservers() {
+		super.deleteObservers();
+		subunits.deleteObservers();
+	}			
+}
+
+Parametros para o SOOT -> Classe:ContainerImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java:11:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+Provided Class: ContainerImplBean Dependence: ComponentImpl
+
+Provided Class: ContainerImplBean Its Dependencies: ComponentImpl - constant Required: ComponentImplPojo
+
+Provided Class: ContainerImplBean Dependence: ObservableSimpleList
+
+Provided Class: ContainerImplBean Its Dependencies: ObservableSimpleList - constant Required: ObservableSimpleList
+
+Provided Class: ContainerImplBean Dependence: org.softlang.util.SimpleLinkedList
+
+Provided Class: ContainerImplBean Its Dependencies: org.softlang.util.SimpleLinkedList - constant Required: SimpleLinkedList
+
+Provided Class: ContainerImplBean Dependence: Subunit
+
+Provided Class: ContainerImplBean Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: ContainerImplBean Dependence: org.softlang.util.ObservableSimpleList
+
+Provided Class: ContainerImplBean Its Dependencies: org.softlang.util.ObservableSimpleList - constant Required: ObservableSimpleList
+
+Provided Class: ContainerImplBean Dependence: SimpleLinkedList
+
+Provided Class: ContainerImplBean Its Dependencies: SimpleLinkedList - constant Required: SimpleLinkedList
+
+Provided Class: ContainerImplBean Dependence: Container
+
+Provided Class: ContainerImplBean Its Dependencies: Container - constant Required: Container
+
+Provided Class: ContainerImplBean Dependence: package org.softlang.company.impl.bean;
+
+
+Class Name: ContainerImplBean,  src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ Provided Classes:  [ ContainerImplBean ] 
+
+ Required Classes:  [ ComponentImplPojo ]  [ ObservableSimpleList ]  [ Subunit ]  [ SimpleLinkedList ]  [ Container ] 
+
+Class Content:
+package org.softlang.company.impl.bean;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public class DepartmentImpl extends ContainerImpl implements Department {
+	
+	public Employee getManager() {
+		for (Subunit u : subunits())
+			if (u instanceof Employee) {
+				Employee e = (Employee)u;
+				if (e.getManager())
+					return e;
+			}
+		return null;
+	}	
+
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}
+}
+
+Parametros para o SOOT -> Classe:DepartmentImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java:9:
+  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java:18:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.DepartmentImpl
+
+Provided Class: DepartmentImplBean Dependence: ReturningVisitor
+
+Provided Class: DepartmentImplBean Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: DepartmentImplBean Dependence: VoidVisitor
+
+Provided Class: DepartmentImplBean Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: DepartmentImplBean Dependence: ContainerImpl
+
+Provided Class: DepartmentImplBean Its Dependencies: ContainerImpl - constant Required: ContainerImplPojo
+
+Provided Class: DepartmentImplBean Dependence: Subunit
+
+Provided Class: DepartmentImplBean Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: DepartmentImplBean Dependence: Department
+
+Provided Class: DepartmentImplBean Its Dependencies: Department - constant Required: Department
+
+Provided Class: DepartmentImplBean Dependence: Employee
+
+Provided Class: DepartmentImplBean Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: DepartmentImplBean Dependence: package org.softlang.company.impl.bean;
+
+
+Class Name: DepartmentImplBean,  src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ Provided Classes:  [ DepartmentImplBean ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ ContainerImplPojo ]  [ VoidVisitor ]  [ Subunit ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company.impl.bean;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public class EmployeeImpl extends ComponentImpl implements Employee {
+
+	private String name;
+	private String address;
+	private double salary;
+	private boolean manager;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+		setChanged();
+		notifyObservers("name");
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+		setChanged();
+		notifyObservers("address");
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+		setChanged();
+		notifyObservers("salary");
+	}	
+	
+	public boolean getManager() {
+		return manager;
+	}
+
+	public void setManager(boolean manager) {
+		this.manager = manager;
+		setChanged();
+		notifyObservers("manager");
+	}
+
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}
+
+	public String getCep() {
+		return "cep";
+	}
+}
+
+Parametros para o SOOT -> Classe:EmployeeImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:19:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:20:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:29:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:30:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:39:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:40:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:49:
+  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:50:
+  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java:53:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.EmployeeImpl
+
+Provided Class: EmployeeImplBean Dependence: ReturningVisitor
+
+Provided Class: EmployeeImplBean Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: EmployeeImplBean Dependence: ComponentImpl
+
+Provided Class: EmployeeImplBean Its Dependencies: ComponentImpl - constant Required: ComponentImplPojo
+
+Provided Class: EmployeeImplBean Dependence: VoidVisitor
+
+Provided Class: EmployeeImplBean Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: EmployeeImplBean Dependence: Employee
+
+Provided Class: EmployeeImplBean Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: EmployeeImplBean Dependence: package org.softlang.company.impl.bean;
+
+
+Class Name: EmployeeImplBean,  src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ Provided Classes:  [ EmployeeImplBean ] 
+
+ Required Classes:  [ ComponentImplPojo ]  [ ReturningVisitor ]  [ VoidVisitor ]  [ Employee ] 
+
+Class Content:
+package org.softlang.visitor;
+
+import org.softlang.company.*;
+
+public interface ReturningVisitor<R> {
+
+	R visit(Company o);
+	R visit(Department o);
+	R visit(Employee o);
+
+}
+
+Parametros para o SOOT -> Classe:ReturningVisitor path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+
+Provided Class: ReturningVisitor Dependence: Department
+
+Provided Class: ReturningVisitor Its Dependencies: Department - constant Required: Department
+
+Provided Class: ReturningVisitor Dependence: Company
+
+Provided Class: ReturningVisitor Its Dependencies: Company - constant Required: Company
+
+Provided Class: ReturningVisitor Dependence: Employee
+
+Provided Class: ReturningVisitor Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: ReturningVisitor Dependence: package org.softlang.visitor;
+
+
+Class Name: ReturningVisitor,  src\org\softlang\visitor\ReturningVisitor.java
+
+ Provided Classes:  [ ReturningVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.visitor;
+
+import org.softlang.company.*;
+
+public interface VoidVisitor {
+
+	void visit(Company o);
+	void visit(Department o);
+	void visit(Employee o);
+		
+}
+
+Parametros para o SOOT -> Classe:VoidVisitor path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+
+Provided Class: VoidVisitor Dependence: Department
+
+Provided Class: VoidVisitor Its Dependencies: Department - constant Required: Department
+
+Provided Class: VoidVisitor Dependence: Company
+
+Provided Class: VoidVisitor Its Dependencies: Company - constant Required: Company
+
+Provided Class: VoidVisitor Dependence: Employee
+
+Provided Class: VoidVisitor Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: VoidVisitor Dependence: package org.softlang.visitor;
+
+
+Class Name: VoidVisitor,  src\org\softlang\visitor\VoidVisitor.java
+
+ Provided Classes:  [ VoidVisitor ] 
+
+ Required Classes:  [ Company ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.util;
+
+import java.util.*;
+
+/**
+ * Compose the (Simple)List interface with the Observable base class.
+ * In fact, a given list is decorated with observer capability.
+ * The methods must be adjusted to notify upon changes.
+ * Addition and removal of observers is pushed into elements--if they are observable.
+ */
+public class ObservableSimpleList<X> extends Observable implements SimpleList<X> {
+
+	private SimpleList<X> inner;
+	
+	public ObservableSimpleList(SimpleList<X> inner) {
+		this.inner = inner;
+	}
+	
+	public void addObserver(Observer o) {
+		super.addObserver(o);
+		for (X e : this)
+			if (e instanceof Observable)
+				((Observable)e).addObserver(o);
+	}
+	
+	public void deleteObserver(Observer o) {
+		super.deleteObserver(o);
+		for (X e : this)
+			if (e instanceof Observable)
+				((Observable)e).deleteObserver(o);
+	}
+	
+	public void deleteObservers() {
+		super.deleteObservers();
+		for (X e : this)
+			if (e instanceof Observable)
+				((Observable)e).deleteObservers();
+	}	
+		
+	public Iterator<X> iterator() {
+		return inner.iterator();
+	}
+		
+	public boolean add(X e) {
+		boolean result = inner.add(e);
+		if (result) {
+			setChanged();
+			notifyObservers(new AddToList(e));	
+		}
+		return result;
+	}
+
+	public boolean remove(X e) {
+		boolean result = inner.remove(e);
+		if (result) {
+			setChanged();
+			notifyObservers(new RemoveFromList(e));
+		}
+		return result;
+	}
+}
+
+Parametros para o SOOT -> Classe:ObservableSimpleList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java:48:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java:57:
+  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+
+Provided Class: ObservableSimpleList Dependence: AddToList
+
+Provided Class: ObservableSimpleList Its Dependencies: AddToList - constant Required: AddToList
+
+Provided Class: ObservableSimpleList Dependence: RemoveFromList
+
+Provided Class: ObservableSimpleList Its Dependencies: RemoveFromList - constant Required: RemoveFromList
+
+Provided Class: ObservableSimpleList Dependence: SimpleList
+
+Provided Class: ObservableSimpleList Its Dependencies: SimpleList - constant Required: SimpleList
+
+Provided Class: ObservableSimpleList Dependence: package org.softlang.util;
+
+
+Class Name: ObservableSimpleList,  src\org\softlang\util\ObservableSimpleList.java
+
+ Provided Classes:  [ ObservableSimpleList ] 
+
+ Required Classes:  [ AddToList ]  [ SimpleList ]  [ RemoveFromList ] 
+
+Class Content:
+package org.softlang.util;
+
+/**
+ * This is a down-graded version of java.util.List.
+ */
+public interface SimpleList<X> extends Iterable<X> {
+	boolean add(X x);
+	boolean remove(X x);
+}
+
+Parametros para o SOOT -> Classe:SimpleList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+Provided Class: SimpleList Dependence: package org.softlang.util;
+
+
+Class Name: SimpleList,  src\org\softlang\util\SimpleList.java
+
+ Provided Classes:  [ SimpleList ] 
+
+ Required Classes: 
+
+Class Content:
+package org.softlang.util;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+
+/**
+ * This is a down-graded version of java.util.LinkedList.
+ */
+public class SimpleLinkedList<X> implements SimpleList<X> {
+
+	protected LinkedList<X> inner = 
+		new LinkedList<X>();
+		
+	public Iterator<X> iterator() {
+		return inner.iterator();
+	}
+
+	public boolean add(X x) {
+		return inner.add(x);
+	}
+
+	public boolean remove(X x) {
+		return inner.remove(x);
+	}
+}
+
+Parametros para o SOOT -> Classe:SimpleLinkedList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+Provided Class: SimpleLinkedList Dependence: SimpleList
+
+Provided Class: SimpleLinkedList Its Dependencies: SimpleList - constant Required: SimpleList
+
+Provided Class: SimpleLinkedList Dependence: package org.softlang.util;
+
+
+Class Name: SimpleLinkedList,  src\org\softlang\util\SimpleLinkedList.java
+
+ Provided Classes:  [ SimpleLinkedList ] 
+
+ Required Classes:  [ SimpleList ] 
+
+Class Content:
+package org.softlang.util;
+
+public class AddToList extends ChangeList {
+	public AddToList(Object o) { this.element = o; }
+}
+
+Parametros para o SOOT -> Classe:AddToList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
+  Semantic Error: no field named element
+
+Provided Class: AddToList Dependence: ChangeList
+
+Provided Class: AddToList Its Dependencies: ChangeList - constant Required: ChangeList
+
+Provided Class: AddToList Dependence: package org.softlang.util;
+
+
+Class Name: AddToList,  src\org\softlang\util\AddToList.java
+
+ Provided Classes:  [ AddToList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+Class Content:
+package org.softlang.util;
+
+/**
+ * Represent changes to observable lists
+ */
+public abstract class ChangeList {
+	public Object element;
+}
+
+Parametros para o SOOT -> Classe:ChangeList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+Provided Class: ChangeList Dependence: package org.softlang.util;
+
+
+Class Name: ChangeList,  src\org\softlang\util\ChangeList.java
+
+ Provided Classes:  [ ChangeList ] 
+
+ Required Classes: 
+
+Class Content:
+package org.softlang.util;
+
+public class RemoveFromList extends ChangeList {
+	public RemoveFromList(Object o) { this.element = o; }
+}
+
+Parametros para o SOOT -> Classe:RemoveFromList path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+Provided Class: RemoveFromList Dependence: ChangeList
+
+Provided Class: RemoveFromList Its Dependencies: ChangeList - constant Required: ChangeList
+
+Provided Class: RemoveFromList Dependence: package org.softlang.util;
+
+
+Class Name: RemoveFromList,  src\org\softlang\util\RemoveFromList.java
+
+ Provided Classes:  [ RemoveFromList ] 
+
+ Required Classes:  [ ChangeList ] 
+
+Class Content:
+package org.softlang.company.factory;
+
+import org.softlang.company.*;
+import org.softlang.company.impl.pojo.*;
+
+/**
+ * A factory that constructs POJPs
+ */
+public class PojoFactory implements Factory {
+	public Company mkCompany() { return new CompanyImpl(); }
+	public Department mkDepartment() { return new DepartmentImpl(); }
+	public Employee mkEmployee() { return new EmployeeImpl(); }
+}
+
+Parametros para o SOOT -> Classe:PojoFactory path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.pojo not found
+
+Provided Class: PojoFactory Dependence: DepartmentImpl
+
+Provided Class: PojoFactory Its Dependencies: DepartmentImpl - constant Required: DepartmentImplPojo
+
+Provided Class: PojoFactory Dependence: EmployeeImpl
+
+Provided Class: PojoFactory Its Dependencies: EmployeeImpl - constant Required: EmployeeImplPojo
+
+Provided Class: PojoFactory Dependence: Factory
+
+Provided Class: PojoFactory Its Dependencies: Factory - constant Required: Factory
+
+Provided Class: PojoFactory Dependence: Department
+
+Provided Class: PojoFactory Its Dependencies: Department - constant Required: Department
+
+Provided Class: PojoFactory Dependence: Company
+
+Provided Class: PojoFactory Its Dependencies: Company - constant Required: Company
+
+Provided Class: PojoFactory Dependence: Employee
+
+Provided Class: PojoFactory Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: PojoFactory Dependence: CompanyImpl
+
+Provided Class: PojoFactory Its Dependencies: CompanyImpl - constant Required: CompanyImplBean
+
+Provided Class: PojoFactory Dependence: package org.softlang.company.factory;
+
+
+Class Name: PojoFactory, src\org\softlang\company\factory\PojoFactory.java
+
+ Provided Classes:  [ PojoFactory ] 
+
+ Required Classes:  [ EmployeeImplPojo ]  [ DepartmentImplPojo ]  [ CompanyImplBean ]  [ Factory ]  [ Company ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company.impl.pojo;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public class CompanyImpl extends ContainerImpl implements Company {
+
+	/**
+	 * Enforce the constraint a company can only aggregate departments
+	 */
+	public boolean add(Subunit u) {
+		if (!(u instanceof Department))
+			throw new IllegalArgumentException();
+		return super.add(u);
+	}
+	
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}	
+}
+
+Parametros para o SOOT -> Classe:CompanyImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java:17:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.CompanyImpl
+
+Provided Class: CompanyImplPojo Dependence: ReturningVisitor
+
+Provided Class: CompanyImplPojo Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: CompanyImplPojo Dependence: VoidVisitor
+
+Provided Class: CompanyImplPojo Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: CompanyImplPojo Dependence: ContainerImpl
+
+Provided Class: CompanyImplPojo Its Dependencies: ContainerImpl - constant Required: ContainerImplPojo
+
+Provided Class: CompanyImplPojo Dependence: Subunit
+
+Provided Class: CompanyImplPojo Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: CompanyImplPojo Dependence: Department
+
+Provided Class: CompanyImplPojo Its Dependencies: Department - constant Required: Department
+
+Provided Class: CompanyImplPojo Dependence: Company
+
+Provided Class: CompanyImplPojo Its Dependencies: Company - constant Required: Company
+
+Provided Class: CompanyImplPojo Dependence: package org.softlang.company.impl.pojo;
+
+
+Class Name: CompanyImplPojo, src\org\softlang\company\impl\pojo\CompanyImpl.java
+
+ Provided Classes:  [ CompanyImplPojo ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ ContainerImplPojo ]  [ VoidVisitor ]  [ Subunit ]  [ Company ]  [ Department ] 
+
+Class Content:
+package org.softlang.company.impl.pojo;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public abstract class ComponentImpl implements Component {
+	private String name;
+	public String getName() { return name; }
+	public void setName(String name) { this.name = name; }
+	public abstract void accept(VoidVisitor v);
+	public abstract <R> R accept(ReturningVisitor<R> v);
+}
+
+Parametros para o SOOT -> Classe:ComponentImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java:10:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.ComponentImpl
+
+Provided Class: ComponentImplPojo Dependence: ReturningVisitor
+
+Provided Class: ComponentImplPojo Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: ComponentImplPojo Dependence: VoidVisitor
+
+Provided Class: ComponentImplPojo Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: ComponentImplPojo Dependence: Component
+
+Provided Class: ComponentImplPojo Its Dependencies: Component - constant Required: Component
+
+Provided Class: ComponentImplPojo Dependence: package org.softlang.company.impl.pojo;
+
+
+Class Name: ComponentImplPojo, src\org\softlang\company\impl\pojo\ComponentImpl.java
+
+ Provided Classes:  [ ComponentImplPojo ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ VoidVisitor ]  [ Component ] 
+
+Class Content:
+package org.softlang.company.impl.pojo;
+
+import org.softlang.company.*;
+import java.util.LinkedList;
+import java.util.List;
+
+public abstract class ContainerImpl extends ComponentImpl implements Container {
+
+	private List<Subunit> subunits =
+		new LinkedList<Subunit>();
+	
+	public Iterable<? extends Subunit> subunits() {
+		return subunits;
+	}
+
+	public boolean add(Subunit u) {
+		return subunits.add(u);
+	}
+
+	public boolean remove(Subunit u) {
+		return subunits.remove(u);
+	}
+}
+
+Parametros para o SOOT -> Classe:ContainerImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+Provided Class: ContainerImplPojo Dependence: ComponentImpl
+
+Provided Class: ContainerImplPojo Its Dependencies: ComponentImpl - constant Required: ComponentImplPojo
+
+Provided Class: ContainerImplPojo Dependence: Subunit
+
+Provided Class: ContainerImplPojo Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: ContainerImplPojo Dependence: Container
+
+Provided Class: ContainerImplPojo Its Dependencies: Container - constant Required: Container
+
+Provided Class: ContainerImplPojo Dependence: package org.softlang.company.impl.pojo;
+
+
+Class Name: ContainerImplPojo, src\org\softlang\company\impl\pojo\ContainerImpl.java
+
+ Provided Classes:  [ ContainerImplPojo ] 
+
+ Required Classes:  [ ComponentImplPojo ]  [ Subunit ]  [ Container ] 
+
+Class Content:
+package org.softlang.company.impl.pojo;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public class DepartmentImpl extends ContainerImpl implements Department {
+
+	public Employee getManager() {
+		for (Subunit u : subunits())
+			if (u instanceof Employee) {
+				Employee e = (Employee)u;
+				if (e.getManager())
+					return e;
+			}
+		return null;
+	}	
+
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}
+}
+
+Parametros para o SOOT -> Classe:DepartmentImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java:9:
+  Semantic Error: no method named subunits() in org.softlang.company.impl.pojo.DepartmentImpl matches.
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java:18:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.DepartmentImpl
+
+Provided Class: DepartmentImplPojo Dependence: ReturningVisitor
+
+Provided Class: DepartmentImplPojo Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: DepartmentImplPojo Dependence: VoidVisitor
+
+Provided Class: DepartmentImplPojo Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: DepartmentImplPojo Dependence: ContainerImpl
+
+Provided Class: DepartmentImplPojo Its Dependencies: ContainerImpl - constant Required: ContainerImplPojo
+
+Provided Class: DepartmentImplPojo Dependence: Subunit
+
+Provided Class: DepartmentImplPojo Its Dependencies: Subunit - constant Required: Subunit
+
+Provided Class: DepartmentImplPojo Dependence: Department
+
+Provided Class: DepartmentImplPojo Its Dependencies: Department - constant Required: Department
+
+Provided Class: DepartmentImplPojo Dependence: Employee
+
+Provided Class: DepartmentImplPojo Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: DepartmentImplPojo Dependence: package org.softlang.company.impl.pojo;
+
+
+Class Name: DepartmentImplPojo, src\org\softlang\company\impl\pojo\DepartmentImpl.java
+
+ Provided Classes:  [ DepartmentImplPojo ] 
+
+ Required Classes:  [ ReturningVisitor ]  [ ContainerImplPojo ]  [ VoidVisitor ]  [ Subunit ]  [ Department ]  [ Employee ] 
+
+Class Content:
+package org.softlang.company.impl.pojo;
+
+import org.softlang.company.*;
+import org.softlang.visitor.*;
+
+public class EmployeeImpl extends ComponentImpl implements Employee {
+
+	private String address;
+	private double salary;
+	private boolean manager = false;
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public double getSalary() {
+		return salary;
+	}
+
+	public void setSalary(double salary) {
+		this.salary = salary;
+	}
+
+	public boolean getManager() {
+		return manager;
+	}
+
+	public void setManager(boolean manager) {
+		this.manager = manager;
+	}
+
+	public void accept(VoidVisitor v) {
+		v.visit(this);
+	}
+
+	public <R> R accept(ReturningVisitor<R> v) {
+		return v.visit(this);
+	}
+
+	public String getCep() {
+		return "cep";
+	}
+}
+
+Parametros para o SOOT -> Classe:EmployeeImpl path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java:4,8:
+  Semantic Error: org.softlang.visitor not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java:36:
+  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.EmployeeImpl
+
+Provided Class: EmployeeImplPojo Dependence: ReturningVisitor
+
+Provided Class: EmployeeImplPojo Its Dependencies: ReturningVisitor - constant Required: ReturningVisitor
+
+Provided Class: EmployeeImplPojo Dependence: ComponentImpl
+
+Provided Class: EmployeeImplPojo Its Dependencies: ComponentImpl - constant Required: ComponentImplPojo
+
+Provided Class: EmployeeImplPojo Dependence: VoidVisitor
+
+Provided Class: EmployeeImplPojo Its Dependencies: VoidVisitor - constant Required: VoidVisitor
+
+Provided Class: EmployeeImplPojo Dependence: Employee
+
+Provided Class: EmployeeImplPojo Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: EmployeeImplPojo Dependence: package org.softlang.company.impl.pojo;
+
+
+Class Name: EmployeeImplPojo, src\org\softlang\company\impl\pojo\EmployeeImpl.java
+
+ Provided Classes:  [ EmployeeImplPojo ] 
+
+ Required Classes:  [ ComponentImplPojo ]  [ ReturningVisitor ]  [ VoidVisitor ]  [ Employee ] 
+
+Class Content:
+package org.softlang.main;
+
+import org.softlang.company.Company;
+import org.softlang.company.Department;
+import org.softlang.company.Employee;
+import org.softlang.company.factory.BeanFactory;
+import org.softlang.company.factory.Factory;
+import org.softlang.company.impl.bean.EmployeeImpl;
+
+public class Main {
+	
+	    private Company sampleCompany;
+	    private EmployeeImpl emp;
+	    
+	    public Main(){
+	    	super();
+	    	this.createSampleCompany(new BeanFactory());
+	    }
+	    
+		public void createSampleCompany(Factory f) {
+			// Create company
+			this.sampleCompany = f.mkCompany();
+			sampleCompany.setName("meganalysis");
+			
+			// Create all employees
+			Employee craig = f.mkEmployee();
+			craig.setName("Craig");
+			craig.setAddress("Redmond");
+			craig.setSalary(123456);
+			craig.setManager(true);
+	
+			Employee erik = f.mkEmployee();
+			erik.setName("Erik");
+			erik.setAddress("Utrecht");
+			erik.setSalary(12345);
+	
+			Employee ralf = f.mkEmployee();
+			ralf.setName("Ralf");
+			ralf.setAddress("Koblenz");
+			ralf.setSalary(1234);		
+	
+			Employee ray = f.mkEmployee();
+			ray.setName("Ray");
+			ray.setAddress("Redmond");
+			ray.setSalary(234567);
+			ray.setManager(true);
+	
+			Employee klaus = f.mkEmployee();
+			klaus.setName("Klaus");
+			klaus.setAddress("Boston");
+			klaus.setSalary(23456);
+			klaus.setManager(true);
+			
+			Employee karl = f.mkEmployee();
+			karl.setName("Karl");
+			karl.setAddress("Riga");
+			karl.setSalary(2345);
+			karl.setManager(true);
+			
+			Employee joe = f.mkEmployee();
+			joe.setName("Joe");
+			joe.setAddress("Wifi City");
+			joe.setSalary(2344);								
+	
+			// Create research department
+			Department research = f.mkDepartment();
+			research.setName("Research");
+			research.add(craig);
+			research.add(erik);
+			research.add(ralf);
+			sampleCompany.add(research);
+	
+			// Create development department
+			Department development = f.mkDepartment();
+			development.setName("Development");
+			development.add(ray);
+			sampleCompany.add(development);
+	
+			// Create sub-department dev1
+			Department dev1 = f.mkDepartment();
+			dev1.setName("Dev1");
+			dev1.add(klaus);
+			development.add(dev1);
+	
+			// Create sub-department dev11
+			Department dev11 = f.mkDepartment();
+			dev11.setName("Dev1.1");
+			dev11.add(karl);
+			dev11.add(joe);
+			dev1.add(dev11);
+	}
+		
+	public void setSalary(org.softlang.company.impl.bean.EmployeeImpl e, double salary){
+		e.setSalary(salary);
+	}
+	
+	public double getSalary(org.softlang.company.impl.bean.EmployeeImpl e){
+		return e.getSalary();
+	}
+	
+	public static void main(String[] args) {
+		Main m = new Main();
+		Company c = m.getSampleCompany();
+		
+	}
+
+	
+	
+	
+	
+	/*.................... Getters and Setters */
+	public Company getSampleCompany() {
+		return sampleCompany;
+	}
+	public void setSampleCompany(Company sampleCompany) {
+		this.sampleCompany = sampleCompany;
+	}
+
+	public EmployeeImpl getEmp() {
+		return emp;
+	}
+
+	public void setEmp(EmployeeImpl emp) {
+		this.emp = emp;
+	}
+
+}
+
+Parametros para o SOOT -> Classe:Main path:/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+
+Provided Class: Main Dependence: org.softlang.company.factory.Factory
+
+Provided Class: Main Its Dependencies: org.softlang.company.factory.Factory - constant Required: Factory
+
+Provided Class: Main Dependence: org.softlang.company.Company
+
+Provided Class: Main Its Dependencies: org.softlang.company.Company - constant Required: Company
+
+Provided Class: Main Dependence: org.softlang.company.factory.BeanFactory
+
+Provided Class: Main Its Dependencies: org.softlang.company.factory.BeanFactory - constant Required: BeanFactory
+
+Provided Class: Main Dependence: Factory
+
+Provided Class: Main Its Dependencies: Factory - constant Required: Factory
+
+Provided Class: Main Dependence: EmployeeImpl
+
+Provided Class: Main Its Dependencies: EmployeeImpl - constant Required: EmployeeImplPojo
+
+Provided Class: Main Dependence: org.softlang.company.impl.bean.EmployeeImpl
+
+Provided Class: Main Its Dependencies: org.softlang.company.impl.bean.EmployeeImpl - constant Required: EmployeeImplBean
+
+Provided Class: Main Dependence: Department
+
+Provided Class: Main Its Dependencies: Department - constant Required: Department
+
+Provided Class: Main Dependence: Company
+
+Provided Class: Main Its Dependencies: Company - constant Required: Company
+
+Provided Class: Main Dependence: org.softlang.company.Employee
+
+Provided Class: Main Its Dependencies: org.softlang.company.Employee - constant Required: Employee
+
+Provided Class: Main Dependence: Employee
+
+Provided Class: Main Its Dependencies: Employee - constant Required: Employee
+
+Provided Class: Main Dependence: BeanFactory
+
+Provided Class: Main Its Dependencies: BeanFactory - constant Required: BeanFactory
+
+Provided Class: Main Dependence: org.softlang.company.Department
+
+Provided Class: Main Its Dependencies: org.softlang.company.Department - constant Required: Department
+
+Provided Class: Main Dependence: package org.softlang.main;
+
+
+Class Name: Main, src\org\softlang\main\Main.java
+
+ Provided Classes:  [ Main ] 
+
+ Required Classes:  [ EmployeeImplBean ]  [ EmployeeImplPojo ]  [ Factory ]  [ Department ]  [ Company ]  [ Employee ]  [ BeanFactory ] 
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ AddToList ] - src\org\softlang\util\AddToList.java
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ ChangeList ] - src\org\softlang\util\ChangeList.java
+
+ [ Basics ] - src\org\softlang\tests\Basics.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
+
+ [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
+
+ [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ Main ] - src\org\softlang\main\Main.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
+
+ [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
+
+ [ SimpleList ] - src\org\softlang\util\SimpleList.java
+
+ [ Build ] - build.xml
+
+ [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+constante destino esta vazio: false
+
+
+	Correspondent Product
+
+Product 1 ::  [ javaexorcismspl ] [ treestructure ]
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
+
+ [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
+
+ [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ AddToList ] - src\org\softlang\util\AddToList.java
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ ChangeList ] - src\org\softlang\util\ChangeList.java
+
+ [ Basics ] - src\org\softlang\tests\Basics.java
+
+ [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ Main ] - src\org\softlang\main\Main.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
+
+ [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ [ SimpleList ] - src\org\softlang\util\SimpleList.java
+
+ [ Build ] - build.xml
+
+ [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
+
+ [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
+constante destino esta vazio: false
+
+
+	SOURCE Mapping Asset DESTINY:
+
+ key 0: ReturningVisitor content: src\org\softlang\visitor\ReturningVisitor.java
+ key 1: Basics content: src\org\softlang\tests\Basics.java
+ key 2: Subunit content: src\org\softlang\company\Subunit.java
+ key 3: RemoveFromList content: src\org\softlang\util\RemoveFromList.java
+ key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
+ key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
+ key 6: Junit content: lib\Junit.jar
+ key 7: Main content: src\org\softlang\main\Main.java
+ key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
+ key 9: VoidVisitor content: src\org\softlang\visitor\VoidVisitor.java
+ key 10: Build content: build.xml
+ key 11: ChangeList content: src\org\softlang\util\ChangeList.java
+ key 12: Component content: src\org\softlang\company\Component.java
+ key 13: Company content: src\org\softlang\company\Company.java
+ key 14: Department content: src\org\softlang\company\Department.java
+ key 15: SimpleList content: src\org\softlang\util\SimpleList.java
+ key 16: SimpleLinkedList content: src\org\softlang\util\SimpleLinkedList.java
+ key 17: Container content: src\org\softlang\company\Container.java
+ key 18: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
+ key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
+ key 21: ObservableSimpleList content: src\org\softlang\util\ObservableSimpleList.java
+ key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
+ key 23: Factory content: src\org\softlang\company\factory\Factory.java
+ key 24: Employee content: src\org\softlang\company\Employee.java
+ key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
+ key 26: AddToList content: src\org\softlang\util\AddToList.java
+ key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
+ key 28: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ key 29: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
+ key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
+
+	TARGET Mapping Asset DESTINY:
+
+ key 0: ReturningVisitor content: src\org\softlang\visitor\ReturningVisitor.java
+ key 1: Basics content: src\org\softlang\tests\Basics.java
+ key 2: Subunit content: src\org\softlang\company\Subunit.java
+ key 3: RemoveFromList content: src\org\softlang\util\RemoveFromList.java
+ key 4: ComponentImplPojo content: src\org\softlang\company\impl\pojo\ComponentImpl.java
+ key 5: PojoFactory content: src\org\softlang\company\factory\PojoFactory.java
+ key 6: Junit content: lib\Junit.jar
+ key 7: Main content: src\org\softlang\main\Main.java
+ key 8: EmployeeImplPojo content: src\org\softlang\company\impl\pojo\EmployeeImpl.java
+ key 9: VoidVisitor content: src\org\softlang\visitor\VoidVisitor.java
+ key 10: Build content: build.xml
+ key 11: ChangeList content: src\org\softlang\util\ChangeList.java
+ key 12: Component content: src\org\softlang\company\Component.java
+ key 13: Company content: src\org\softlang\company\Company.java
+ key 14: Department content: src\org\softlang\company\Department.java
+ key 15: SimpleList content: src\org\softlang\util\SimpleList.java
+ key 16: SimpleLinkedList content: src\org\softlang\util\SimpleLinkedList.java
+ key 17: Container content: src\org\softlang\company\Container.java
+ key 18: EmployeeImplBean content: src\org\softlang\company\impl\bean\EmployeeImpl.java
+ key 19: ContainerImplPojo content: src\org\softlang\company\impl\pojo\ContainerImpl.java
+ key 20: ComponentImplBean content: src\org\softlang\company\impl\bean\ComponentImpl.java
+ key 21: ObservableSimpleList content: src\org\softlang\util\ObservableSimpleList.java
+ key 22: CompanyImplBean content: src\org\softlang\company\impl\bean\CompanyImpl.java
+ key 23: Factory content: src\org\softlang\company\factory\Factory.java
+ key 24: Employee content: src\org\softlang\company\Employee.java
+ key 25: ContainerImplBean content: src\org\softlang\company\impl\bean\ContainerImpl.java
+ key 26: AddToList content: src\org\softlang\util\AddToList.java
+ key 27: DepartmentImplPojo content: src\org\softlang\company\impl\pojo\DepartmentImpl.java
+ key 28: CompanyImplPojo content: src\org\softlang\company\impl\pojo\CompanyImpl.java
+ key 29: DepartmentImplBean content: src\org\softlang\company\impl\bean\DepartmentImpl.java
+ key 30: BeanFactory content: src\org\softlang\company\factory\BeanFactory.java
+
+
+	SOURCE Mapping Asset ORGIGEM:
+
+ key 0: ReturningVisitor content: /src/org/softlang/visitor/ReturningVisitor.java
+ key 1: Basics content: /src/org/softlang/tests/Basics.java
+ key 2: Subunit content: /src/org/softlang/company/Subunit.java
+ key 3: RemoveFromList content: /src/org/softlang/util/RemoveFromList.java
+ key 4: ComponentImplPojo content: /src/org/softlang/company/impl/pojo/ComponentImpl.java
+ key 5: Junit content: /lib/Junit.jar
+ key 6: PojoFactory content: /src/org/softlang/company/factory/PojoFactory.java
+ key 7: Main content: /src/org/softlang/main/Main.java
+ key 8: EmployeeImplPojo content: /src/org/softlang/company/impl/pojo/EmployeeImpl.java
+ key 9: VoidVisitor content: /src/org/softlang/visitor/VoidVisitor.java
+ key 10: Build content: /build.xml
+ key 11: ChangeList content: /src/org/softlang/util/ChangeList.java
+ key 12: Component content: /src/org/softlang/company/Component.java
+ key 13: Company content: /src/org/softlang/company/Company.java
+ key 14: Department content: /src/org/softlang/company/Department.java
+ key 15: SimpleList content: /src/org/softlang/util/SimpleList.java
+ key 16: SimpleLinkedList content: /src/org/softlang/util/SimpleLinkedList.java
+ key 17: Container content: /src/org/softlang/company/Container.java
+ key 18: EmployeeImplBean content: /src/org/softlang/company/impl/bean/EmployeeImpl.java
+ key 19: ContainerImplPojo content: /src/org/softlang/company/impl/pojo/ContainerImpl.java
+ key 20: ComponentImplBean content: /src/org/softlang/company/impl/bean/ComponentImpl.java
+ key 21: ObservableSimpleList content: /src/org/softlang/util/ObservableSimpleList.java
+ key 22: CompanyImplBean content: /src/org/softlang/company/impl/bean/CompanyImpl.java
+ key 23: Factory content: /src/org/softlang/company/factory/Factory.java
+ key 24: Employee content: /src/org/softlang/company/Employee.java
+ key 25: ContainerImplBean content: /src/org/softlang/company/impl/bean/ContainerImpl.java
+ key 26: AddToList content: /src/org/softlang/util/AddToList.java
+ key 27: CompanyImplPojo content: /src/org/softlang/company/impl/pojo/CompanyImpl.java
+ key 28: DepartmentImplBean content: /src/org/softlang/company/impl/bean/DepartmentImpl.java
+ key 29: DepartmentImplPojo content: /src/org/softlang/company/impl/pojo/DepartmentImpl.java
+ key 30: BeanFactory content: /src/org/softlang/company/factory/BeanFactory.java
+
+
+	TARGET Mapping Asset ORGIGEM:
+
+ key 0: ReturningVisitor content: /src/org/softlang/visitor/ReturningVisitor.java
+ key 1: Basics content: /src/org/softlang/tests/Basics.java
+ key 2: Subunit content: /src/org/softlang/company/Subunit.java
+ key 3: RemoveFromList content: /src/org/softlang/util/RemoveFromList.java
+ key 4: ComponentImplPojo content: /src/org/softlang/company/impl/pojo/ComponentImpl.java
+ key 5: Junit content: /lib/Junit.jar
+ key 6: PojoFactory content: /src/org/softlang/company/factory/PojoFactory.java
+ key 7: Main content: /src/org/softlang/main/Main.java
+ key 8: EmployeeImplPojo content: /src/org/softlang/company/impl/pojo/EmployeeImpl.java
+ key 9: VoidVisitor content: /src/org/softlang/visitor/VoidVisitor.java
+ key 10: Build content: /build.xml
+ key 11: ChangeList content: /src/org/softlang/util/ChangeList.java
+ key 12: Component content: /src/org/softlang/company/Component.java
+ key 13: Company content: /src/org/softlang/company/Company.java
+ key 14: Department content: /src/org/softlang/company/Department.java
+ key 15: SimpleList content: /src/org/softlang/util/SimpleList.java
+ key 16: SimpleLinkedList content: /src/org/softlang/util/SimpleLinkedList.java
+ key 17: Container content: /src/org/softlang/company/Container.java
+ key 18: EmployeeImplBean content: /src/org/softlang/company/impl/bean/EmployeeImpl.java
+ key 19: ContainerImplPojo content: /src/org/softlang/company/impl/pojo/ContainerImpl.java
+ key 20: ComponentImplBean content: /src/org/softlang/company/impl/bean/ComponentImpl.java
+ key 21: ObservableSimpleList content: /src/org/softlang/util/ObservableSimpleList.java
+ key 22: CompanyImplBean content: /src/org/softlang/company/impl/bean/CompanyImpl.java
+ key 23: Factory content: /src/org/softlang/company/factory/Factory.java
+ key 24: Employee content: /src/org/softlang/company/Employee.java
+ key 25: ContainerImplBean content: /src/org/softlang/company/impl/bean/ContainerImpl.java
+ key 26: AddToList content: /src/org/softlang/util/AddToList.java
+ key 27: DepartmentImplBean content: /src/org/softlang/company/impl/bean/DepartmentImpl.java
+ key 28: CompanyImplPojo content: /src/org/softlang/company/impl/pojo/CompanyImpl.java
+ key 29: DepartmentImplPojo content: /src/org/softlang/company/impl/pojo/DepartmentImpl.java
+ key 30: BeanFactory content: /src/org/softlang/company/factory/BeanFactory.java
+
+
+	SOURCE PREPROCESS TAGS:
+
+ key 0: javaexorcismspl
+ key 1: treestructure
+
+
+	 TARGET PREPROCESS TAGS:
+
+ key 0: javaexorcismspl
+ key 1: treestructure
+
+
+
+mappingAssetDestiny: true mappingAssetOrigin: true preProcess: true
+
+Product 2 ::  [ javaexorcismspl ] [ logging ] [ treestructure ]
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
+
+ [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
+
+ [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ AddToList ] - src\org\softlang\util\AddToList.java
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ ChangeList ] - src\org\softlang\util\ChangeList.java
+
+ [ Basics ] - src\org\softlang\tests\Basics.java
+
+ [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ Logging ] - src\org\softlang\features\Logging.java
+
+ [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ Main ] - src\org\softlang\main\Main.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
+
+ [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ [ SimpleList ] - src\org\softlang\util\SimpleList.java
+
+ [ Build ] - build.xml
+
+ [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
+
+ [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
+constante destino esta vazio: false
+
+
+ ... Attempting to marry products that did not have a par.
+
+
+All products in the source have a really correspondent target product ?: true
+
 List of Modified Classes: 12
 org.softlang.company.impl.pojo.ContainerImpl.java
 org.softlang.company.impl.bean.CompanyImpl.java
@@ -1735,113 +3796,990 @@ org.softlang.company.impl.bean.ComponentImpl.java
 org.softlang.company.impl.pojo.DepartmentImpl.java
 
 --------------------------
- - Modified Class: org.softlang.company.impl.pojo.ContainerImpl.java
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java:23:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.ComponentImpl
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:3,8:
-  Semantic Error: org.softlang.company not found
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:7:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:8:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java:14:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.Component
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:3,8:
-  Semantic Error: org.softlang.company not found
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:7:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:8:
-  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
- - Modified Class: org.softlang.company.impl.pojo.ContainerImpl.java
- - Modified Class: org.softlang.company.impl.bean.CompanyImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/CompanyImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/CompanyImpl.java:9:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.CompanyImpl
- - Modified Class: org.softlang.company.impl.bean.CompanyImpl.java
- - Modified Class: org.softlang.company.impl.pojo.CompanyImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/CompanyImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/CompanyImpl.java:17:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.CompanyImpl
- - Modified Class: org.softlang.company.impl.pojo.CompanyImpl.java
- - Modified Class: org.softlang.company.impl.bean.DepartmentImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/DepartmentImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/DepartmentImpl.java:9:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.bean.DepartmentImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/DepartmentImpl.java:18:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.DepartmentImpl
- - Modified Class: org.softlang.company.impl.bean.DepartmentImpl.java
- - Modified Class: org.softlang.company.impl.bean.ContainerImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ContainerImpl.java:11:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java:48:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java:57:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
-  Semantic Error: no field named element
-/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
-  Semantic Error: no field named element
- - Modified Class: org.softlang.company.impl.bean.ContainerImpl.java
- - Modified Class: org.softlang.company.Component.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Component.java:14:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.Component
- - Modified Class: org.softlang.company.Component.java
- - Modified Class: org.softlang.company.impl.pojo.EmployeeImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/EmployeeImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/EmployeeImpl.java:36:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.EmployeeImpl
- - Modified Class: org.softlang.company.impl.pojo.EmployeeImpl.java
- - Modified Class: org.softlang.company.impl.pojo.ComponentImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ComponentImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ComponentImpl.java:10:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.ComponentImpl
- - Modified Class: org.softlang.company.impl.pojo.ComponentImpl.java
- - Modified Class: org.softlang.util.ObservableSimpleList.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ObservableSimpleList.java:48:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ObservableSimpleList.java:57:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
- - Modified Class: org.softlang.util.ObservableSimpleList.java
- - Modified Class: org.softlang.company.impl.bean.EmployeeImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:19:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:20:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:29:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:30:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:39:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:40:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:49:
-  Semantic Error: no method named setChanged() in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:50:
-  Semantic Error: no method named notifyObservers(java.lang.String) in org.softlang.company.impl.bean.EmployeeImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java:53:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.EmployeeImpl
- - Modified Class: org.softlang.company.impl.bean.EmployeeImpl.java
- - Modified Class: org.softlang.company.impl.bean.ComponentImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ComponentImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ComponentImpl.java:23:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.bean.ComponentImpl
- - Modified Class: org.softlang.company.impl.bean.ComponentImpl.java
- - Modified Class: org.softlang.company.impl.pojo.DepartmentImpl.java
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/DepartmentImpl.java:4,8:
-  Semantic Error: org.softlang.visitor not found
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/DepartmentImpl.java:9:
-  Semantic Error: no method named subunits() in org.softlang.company.impl.pojo.DepartmentImpl matches.
-/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/DepartmentImpl.java:18:
-  Semantic Error: method with signature accept(Unknown) is multiply declared in type org.softlang.company.impl.pojo.DepartmentImpl
- - Modified Class: org.softlang.company.impl.pojo.DepartmentImpl.java
+
+ Amount of Pseudo Products: 0
+
+ [ Subunit ] - src\org\softlang\company\Subunit.java
+
+ [ ComponentImplPojo ] - src\org\softlang\company\impl\pojo\ComponentImpl.java
+
+ [ EmployeeImplBean ] - src\org\softlang\company\impl\bean\EmployeeImpl.java
+
+ [ Company ] - src\org\softlang\company\Company.java
+
+ [ ReturningVisitor ] - src\org\softlang\visitor\ReturningVisitor.java
+
+ [ DepartmentImplBean ] - src\org\softlang\company\impl\bean\DepartmentImpl.java
+
+ [ DepartmentImplPojo ] - src\org\softlang\company\impl\pojo\DepartmentImpl.java
+
+ [ ComponentImplBean ] - src\org\softlang\company\impl\bean\ComponentImpl.java
+
+ [ Component ] - src\org\softlang\company\Component.java
+
+ [ PojoFactory ] - src\org\softlang\company\factory\PojoFactory.java
+
+ [ BeanFactory ] - src\org\softlang\company\factory\BeanFactory.java
+
+ [ AddToList ] - src\org\softlang\util\AddToList.java
+
+ [ Factory ] - src\org\softlang\company\factory\Factory.java
+
+ [ ChangeList ] - src\org\softlang\util\ChangeList.java
+
+ [ Basics ] - src\org\softlang\tests\Basics.java
+
+ [ Container ] - src\org\softlang\company\Container.java
+
+ [ EmployeeImplPojo ] - src\org\softlang\company\impl\pojo\EmployeeImpl.java
+
+ [ SimpleLinkedList ] - src\org\softlang\util\SimpleLinkedList.java
+
+ [ Junit ] - lib\Junit.jar
+
+ [ ContainerImplBean ] - src\org\softlang\company\impl\bean\ContainerImpl.java
+
+ [ ObservableSimpleList ] - src\org\softlang\util\ObservableSimpleList.java
+
+ [ CompanyImplPojo ] - src\org\softlang\company\impl\pojo\CompanyImpl.java
+
+ [ Employee ] - src\org\softlang\company\Employee.java
+
+ [ Main ] - src\org\softlang\main\Main.java
+
+ [ Department ] - src\org\softlang\company\Department.java
+
+ [ VoidVisitor ] - src\org\softlang\visitor\VoidVisitor.java
+
+ [ ContainerImplPojo ] - src\org\softlang\company\impl\pojo\ContainerImpl.java
+
+ [ SimpleList ] - src\org\softlang\util\SimpleList.java
+
+ [ Build ] - build.xml
+
+ [ RemoveFromList ] - src\org\softlang\util\RemoveFromList.java
+
+ [ CompanyImplBean ] - src\org\softlang\company\impl\bean\CompanyImpl.java
+
+ feat: javaexorcismspl
+
+ feat: treestructure
+Pseudo Product: [ javaexorcismspl ][ treestructure ]
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Employee.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Subunit.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Company.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Container.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Component.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Department.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/SimpleLinkedList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ChangeList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/AddToList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/SimpleList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ObservableSimpleList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/RemoveFromList.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor/VoidVisitor.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor/ReturningVisitor.java
+@Features Preprocess Velocity :
+
+feature:javaexorcismspl
+
+feature:treestructure
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Employee.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Subunit.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Company.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/CompanyImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/EmployeeImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/DepartmentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ContainerImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean/ComponentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/CompanyImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ContainerImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo/ComponentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Container.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Component.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/Department.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/SimpleLinkedList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ChangeList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/AddToList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/SimpleList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/ObservableSimpleList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util/RemoveFromList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor/VoidVisitor.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor/ReturningVisitor.java
+FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
+filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
+
+velocity:
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/softlang/visitor'
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Employee.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Subunit.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Company.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Container.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Component.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Department.java
+
+Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/SimpleLinkedList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/ChangeList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/AddToList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/SimpleList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/ObservableSimpleList.java
+
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/RemoveFromList.java
+@Features Preprocess Velocity :
+
+feature:javaexorcismspl
+
+feature:treestructure
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Employee.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Subunit.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Company.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/CompanyImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/EmployeeImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/DepartmentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/ContainerImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean/ComponentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/CompanyImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/ContainerImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo/ComponentImpl.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Container.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Component.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/Department.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/SimpleLinkedList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/ChangeList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/AddToList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/SimpleList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/ObservableSimpleList.java
+File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util/RemoveFromList.java
+FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
+filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
+
+velocity:
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/bean'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company/impl/pojo'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/company'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util
+     [java] Apr 2, 2013 1:52:58 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/softlang/util'
+
+Classes que receberao testes JUNIT: org.softlang.company.impl.pojo.ContainerImpl|org.softlang.company.impl.bean.CompanyImpl|org.softlang.company.impl.pojo.CompanyImpl|org.softlang.company.impl.bean.DepartmentImpl|org.softlang.company.impl.bean.ContainerImpl|org.softlang.company.Component|org.softlang.company.impl.pojo.EmployeeImpl|org.softlang.company.impl.pojo.ComponentImpl|org.softlang.util.ObservableSimpleList|org.softlang.company.impl.bean.EmployeeImpl|org.softlang.company.impl.bean.ComponentImpl|org.softlang.company.impl.pojo.DepartmentImpl
+
+clean_tests:
+     [echo]  This task is responsible to clean all tests. 
+
+compile_target_ind:
+     [echo]  TARGET Compile IND 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+
+compile_source:
+     [echo]  SOURCE Compile 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+Safe Refactor!
+
+
+ANT BUILD DIRECTORY: /build.xml
+
+ You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
+
+  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
+
+init:
+
+clean:
+
+analyze_target:
+     [echo] 
+     [echo] 			            Analyzing target methods
+     [echo] 			        
+     [java] Classes that throw exception and will be not included in the tests: 
+     [java] Removing methods containing unsupported classses parameter
+
+generate_tests:
+     [echo] 
+     [echo] 	            Generating tests
+     [echo] 	        
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getAddress() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getSalary() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setSalary(double) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getManager() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getCep() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.ComponentImpl.getName() : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getCep() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
+     [java] method : org.softlang.company.impl.pojo.DepartmentImpl.getManager() : org.softlang.company.impl.pojo.DepartmentImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.subunits() : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.CompanyImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.CompanyImpl
+     [java] 
+     [java] policy = sun.security.provider.PolicyFile@53ad085
+     [java] PUBLIC MEMBERS=54
+     [java] Explorer = randoop.ForwardGenerator@4998a455
+     [java] Começo!!
+     [java] 
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Tue Apr 02 13:58:32 BRT 2013)FIM!!!
+     [java] 
+     [java] Progress update: test inputs generated=102, failing inputs=0      (Tue Apr 02 13:58:32 BRT 2013)
+     [java] Normal method executions:1079
+     [java] Exceptional method executions:3
+     [java] 
+     [java] Average method execution time (normal termination):     0.150
+     [java] Average method execution time (exceptional termination):0.233
+     [java] 
+     [java] Creating Junit tests (102 tests)...Writing 102 junit tests
+     [java] 
+     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest0.java
+     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest.java
+
+compile_tests:
+     [echo] Compiling the tests
+    [javac] Compiling 2 source files to /tmp/safeRefactorAJ/tests/bin
+
+run_tests:
+     [echo] Running JUnit to test the "source"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.097 sec
+     [echo] Running JUnit to test the "target"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 1, Errors: 0, Time elapsed: 0.091 sec
+    [junit] Test RandoopTest0 FAILED     [echo] Running JUnit to test the "source" again
+
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.097 sec
+ Print Report :
+Testes generated: 102
+Failures on source: 0
+Errors on source: 0
+Failures on target: 1
+Errors on target: 0
+Refactoring? false
+
+
+
+report changes: null
+RandoopTest0.test100 in source is SUCCESS while in target is FAILURE
+
+
+coverage:
+    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/outinstr
+    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr
+processing instrumentation path ...
+instrumentation path processed in 228 ms
+[15 class(es) instrumented, 0 resource(s) copied]
+metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr/metadata_source.emma] {in 97 ms}
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.135 sec
+processing input files ...
+1 file(s) read and merged in 10 ms
+writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.xml] ...
+writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.html] ...
+
+
+ -- SafeRefactor FOUND behavioral changes -- 
+
+ Safe Refactor Tests' directory:< /tmp/safeRefactor/tests >
+
+clean_tests:
+     [echo]  This task is responsible to clean all tests. 
+
+compile_target_ind:
+     [echo]  TARGET Compile IND 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+
+compile_source:
+     [echo]  SOURCE Compile 
+     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
+Safe Refactor!
+
+
+ANT BUILD DIRECTORY: /build.xml
+
+ You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
+
+  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
+
+init:
+
+clean:
+
+analyze_target:
+     [echo] 
+     [echo] 			            Analyzing target methods
+     [echo] 			        
+     [java] Classes that throw exception and will be not included in the tests: 
+     [java] Removing methods containing unsupported classses parameter
+
+generate_tests:
+     [echo] 
+     [echo] 	            Generating tests
+     [echo] 	        
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] org.softlang.visitor.ReturningVisitor<R>
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
+     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
+     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
+     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
+     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
+     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
+     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
+     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getAddress() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getSalary() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setSalary(double) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getManager() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getCep() : org.softlang.company.impl.pojo.EmployeeImpl
+     [java] method : org.softlang.company.impl.pojo.ComponentImpl.getName() : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getCep() : org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
+     [java] method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
+     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
+     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
+     [java] method : org.softlang.company.impl.pojo.DepartmentImpl.getManager() : org.softlang.company.impl.pojo.DepartmentImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.ContainerImpl.subunits() : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
+     [java] method : org.softlang.company.impl.pojo.CompanyImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.CompanyImpl
+     [java] 
+     [java] policy = sun.security.provider.PolicyFile@584fce71
+     [java] PUBLIC MEMBERS=54
+     [java] Explorer = randoop.ForwardGenerator@444cee32
+     [java] Começo!!
+     [java] 
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Tue Apr 02 13:59:30 BRT 2013)FIM!!!
+     [java] 
+     [java] Progress update: test inputs generated=102, failing inputs=0      (Tue Apr 02 13:59:30 BRT 2013)
+     [java] Normal method executions:1079
+     [java] Exceptional method executions:3
+     [java] 
+     [java] Average method execution time (normal termination):     0.158
+     [java] Average method execution time (exceptional termination):0.282
+     [java] 
+     [java] Creating Junit tests (102 tests)...Writing 102 junit tests
+     [java] 
+     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest0.java
+     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest.java
+
+compile_tests:
+     [echo] Compiling the tests
+    [javac] Compiling 2 source files to /tmp/safeRefactorAJ/tests/bin
+
+run_tests:
+     [echo] Running JUnit to test the "source"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.093 sec
+     [echo] Running JUnit to test the "target"
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 1, Errors: 0, Time elapsed: 0.088 sec
+    [junit] Test RandoopTest0 FAILED     [echo] Running JUnit to test the "source" again
+
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.086 sec
+ Print Report :
+Testes generated: 102
+Failures on source: 0
+Errors on source: 0
+Failures on target: 1
+Errors on target: 0
+Refactoring? false
+
+
+
+report changes: null
+RandoopTest0.test100 in source is SUCCESS while in target is FAILURE
+
+
+coverage:
+processing instrumentation path ...
+instrumentation path processed in 212 ms
+[15 class(es) instrumented, 0 resource(s) copied]
+metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/instr/metadata_source.emma] {in 63 ms}
+    [junit] Running RandoopTest0
+    [junit] Tests run: 102, Failures: 0, Errors: 0, Time elapsed: 0.115 sec
+processing input files ...
+1 file(s) read and merged in 14 ms
+writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.xml] ...
+writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/report.html] ...
+
+
+ -- SafeRefactor FOUND behavioral changes -- 
+Asset mapping checked in: 480 segundos. Same Behavior: false
+Refactoring ? false
