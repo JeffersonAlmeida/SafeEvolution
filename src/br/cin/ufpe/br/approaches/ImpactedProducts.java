@@ -3,7 +3,6 @@ package br.cin.ufpe.br.approaches;
 import java.io.IOException;
 import java.util.Collection;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
@@ -15,20 +14,17 @@ public class ImpactedProducts {
 		
 		/** A string collection of changed classes.*/
 		private Collection<String> modifiedClasses;
-		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
-		public ImpactedProducts(WellFormedness wellFormedness, ProductBuilder productBuilder,Collection<String> modifiedClasses ) {
+		public ImpactedProducts(ProductBuilder productBuilder,Collection<String> modifiedClasses ) {
 			super();
-			this.wellFormedness = wellFormedness;
 			this.productBuilder = productBuilder;
 			this.modifiedClasses = modifiedClasses;
 		}
 
-		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
+		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
 			boolean isRefactoring = true;
-			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
-			if(isSPLWellFormed){
+			if(wf && areAllProductsMatched){
 				for (Product productSource : sourceLine.getProducts()) {
 					this.productBuilder.generateProduct(productSource, sourceLine.getPath());
 					if(productSource.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos())){
@@ -36,6 +32,8 @@ public class ImpactedProducts {
 							break;
 					}
 				}
+			}else { 				// Create an Exception!!
+				System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
 			}
 			return isRefactoring;
 		}
@@ -54,11 +52,5 @@ public class ImpactedProducts {
 		}
 		public ProductBuilder getProductBuilder() {
 			return productBuilder;
-		}
-		public void setWellFormedness(WellFormedness wellFormedness) {
-			this.wellFormedness = wellFormedness;
-		}
-		public WellFormedness getWellFormedness() {
-			return wellFormedness;
 		}
 }

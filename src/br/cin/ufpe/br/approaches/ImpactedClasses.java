@@ -12,7 +12,6 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 import soot.Main;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.dsc.Product;
@@ -27,7 +26,6 @@ import br.edu.ufcg.dsc.util.FileManager;
 
 public class ImpactedClasses {
 	
-		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
 		/** A string collection of changed classes.*/
@@ -58,9 +56,8 @@ public class ImpactedClasses {
 		
 		private ArrayList<File> filesToTrash;
 		
-		public ImpactedClasses(WellFormedness wellFormedness, ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> modifiedClasses) {
+		public ImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> modifiedClasses) {
 			super();
-			this.wellFormedness = wellFormedness;
 			this.productBuilder = productBuilder;
 			this.input = in;
 			this.dependencies = new HashSet<String>();
@@ -87,7 +84,18 @@ public class ImpactedClasses {
 			return sameBehavior;
 		}
 	
-		public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures) throws AssetNotFoundException, IOException, DirectoryException{
+		public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
+			boolean isRefinement = false;
+			if(wf && areAllProductsMatched){
+				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);	
+			}else{  // Create an Exception!!
+				System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
+			}
+			return isRefinement;
+			
+		}
+
+		private boolean checkAssetMappingBehavior(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures) throws AssetNotFoundException, DirectoryException, IOException {
 			boolean sameBehavior = true;
 			this.printListofModifiedClasses();
 			long startedTime = System.currentTimeMillis();
@@ -587,11 +595,5 @@ public class ImpactedClasses {
 		}
 		public ProductBuilder getProductBuilder() {
 			return productBuilder;
-		}
-		public void setWellFormedness(WellFormedness wellFormedness) {
-			this.wellFormedness = wellFormedness;
-		}
-		public WellFormedness getWellFormedness() {
-			return wellFormedness;
 		}
 }

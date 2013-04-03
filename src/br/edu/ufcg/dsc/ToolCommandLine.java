@@ -17,7 +17,10 @@ import javax.naming.ConfigurationException;
 import org.eclipse.jdt.core.JavaModelException;
 import soot.Main;
 import br.cin.ufpe.br.alloy.products.AlloyProductGenerator;
+import br.cin.ufpe.br.approaches.AllProductPairs;
+import br.cin.ufpe.br.approaches.AllProducts;
 import br.cin.ufpe.br.approaches.ImpactedClasses;
+import br.cin.ufpe.br.approaches.ImpactedProducts;
 import br.cin.ufpe.br.clean.ProductsCleaner;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
 import br.cin.ufpe.br.matching.ProductMatching;
@@ -1241,34 +1244,43 @@ public class ToolCommandLine {
 		sOutcomes.getMeasures().getTempoTotal().startContinue();
 
 		WellFormedness wellFormedness =  new WellFormedness();
-		
-		/*boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceLine, targetLine); 
-		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
-		
-		AllProductPairs app = new AllProductPairs(wellFormedness, this.builder);
-		System.out.println("Refactoring ? " + app.evaluate(sourceLine, targetLine, propertiesObject));
-		
-		AllProducts ap = new AllProducts(wellFormedness, this.builder);
-		System.out.println("Refactoring ? " + ap.evaluate(sourceLine, targetLine, propertiesObject));
-		
-		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceLine, targetLine);
-		System.out.println("\n AM changed: " + isAssetMappingsEqual);
-		ImpactedProducts ip = new ImpactedProducts(wellFormedness, builder, this.classesModificadas);
-		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));*/
-		
-		
-		/*boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
-		System.out.println("\n AM changed: " + isAssetMappingsEqual);
+		boolean wf = wellFormedness.isWF(sourceSPL, targetSPL);
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
-		this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
-		ImpactedClasses ic = new ImpactedClasses(wellFormedness, productBuilder, in, this.classesModificadas);
-		System.out.println("Refactoring ? " + ic.evaluate(sourceSPL, targetSPL, changedFeatures));*/
+		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
+		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
+		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
+		System.out.println("\n AM Equal: " + isAssetMappingsEqual);
 		
+		boolean isRefinement = false;
+		if(in.getApproach().equals(Approach.APP)){
+			System.out.println("\nALL PRODUCT PAIRS\n");
+			AllProductPairs app = new AllProductPairs(this.productBuilder);
+			System.out.println("Refactoring ? " + (isRefinement = app.evaluate(sourceSPL, targetSPL, in, wf)));
+		}else if(in.getApproach().equals(Approach.AP)){
+			System.out.println("\nALL PRODUCTS\n");
+			AllProducts ap = new AllProducts(this.productBuilder);
+			System.out.println("Refactoring ? " + (isRefinement = ap.evaluate(sourceSPL, targetSPL, in, wf, areAllProductsMatched)));
+		}else if(in.getApproach().equals(Approach.IP)){
+			System.out.println("\nIMPACTED PRODUCTS\n");
+			ImpactedProducts ip = new ImpactedProducts(this.productBuilder, this.classesModificadas);
+			System.out.println("Refactoring ? " + (isRefinement = ip.evaluate(sourceSPL, targetSPL, in, wf, areAllProductsMatched)));
+		}else if(in.getApproach().equals(Approach.IC)){
+			System.out.println("\nIMPACTED ClASSES\n");
+			ImpactedClasses ic = new ImpactedClasses(productBuilder, in, this.classesModificadas);
+			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
+		}else if(in.getApproach().equals(Approach.EIC)){
+			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
+		}
 		
 		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
-		boolean isRefinement = this.checkLPS(sourceSPL, targetSPL, in);
+	//	boolean isRefinement = this.checkLPS(sourceSPL, targetSPL, in);
 
+		
 		/*Report Variables: Pause total time to check the SPL.*/
+		sOutcomes.setWF(wf);
+		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
+		sOutcomes.setRefinement(wf && isRefinement);
+		sOutcomes.setCompObservableBehavior(isRefinement);
 		sOutcomes.getMeasures().getTempoTotal().pause();
 		sOutcomes.getMeasures().print();
 

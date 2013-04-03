@@ -2,7 +2,6 @@ package br.cin.ufpe.br.approaches;
 
 import java.io.IOException;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
@@ -11,19 +10,15 @@ import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 public class AllProducts {
 	
-	private WellFormedness wellFormedness;
 	private ProductBuilder productBuilder;
-	
-	public AllProducts(WellFormedness wellFormedness, ProductBuilder productBuilder) {
+	public AllProducts(ProductBuilder productBuilder) {
 		super();
-		this.wellFormedness = wellFormedness;
 		this.productBuilder = productBuilder;
 	}
 
-	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws IOException, AssetNotFoundException, DirectoryException{
+	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws IOException, AssetNotFoundException, DirectoryException{
 		boolean isRefactoring = true;
-		boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
-		if(isSPLWellFormed){
+		if(wf && areAllProductsMatched){
 			for (Product productSource : sourceLine.getProducts()) {
 				productSource.printSetOfFeatures();
 				this.productBuilder.generateProduct(productSource, sourceLine.getPath());
@@ -33,6 +28,8 @@ public class AllProducts {
 					break;
 				}
 		    }
+	    }else {  // Create an Exception!!
+	    	System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
 	    }
 	    return isRefactoring;
 	}

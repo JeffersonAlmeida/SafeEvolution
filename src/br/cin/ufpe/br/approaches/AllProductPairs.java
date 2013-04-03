@@ -2,7 +2,6 @@ package br.cin.ufpe.br.approaches;
 
 import java.io.IOException;
 import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.wf.WellFormedness;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
@@ -12,19 +11,16 @@ import br.edu.ufcg.dsc.util.DirectoryException;
 
 public class AllProductPairs {
 	
-		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
-		public AllProductPairs(WellFormedness wellFormedness, ProductBuilder pBuilder) {
+		public AllProductPairs(ProductBuilder pBuilder) {
 			super();
-			this.wellFormedness = wellFormedness;
 			this.productBuilder = pBuilder;
 		}
 	
-		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws IOException, AssetNotFoundException, DirectoryException{
+		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf) throws IOException, AssetNotFoundException, DirectoryException{
 			boolean isRefactoring = true;
-			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
-			if(isSPLWellFormed){
+			if(wf){
 				for (Product productSource : sourceLine.getProducts()) {
 					productSource.printSetOfFeatures();
 					this.productBuilder.generateProduct(productSource, sourceLine.getPath());

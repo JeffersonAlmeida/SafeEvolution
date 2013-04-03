@@ -511,9 +511,10 @@ public class FileManager {
 					} catch (DirectoryException e) {
 						// TODO Auto-generated catch block
 						//	e.printStackTrace();
-						System.out.println("Creating dir");
-
+					
+						
 						createDir(e.getDirectory());
+						System.out.println("Creating directory: " + e.getDirectory());
 
 						try {
 							copyFile(sourcePath + assets.get(i), destinationPath + "/" + destAsset);
