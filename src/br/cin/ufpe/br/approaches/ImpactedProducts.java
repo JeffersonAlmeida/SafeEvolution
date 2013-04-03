@@ -15,7 +15,6 @@ public class ImpactedProducts {
 		
 		/** A string collection of changed classes.*/
 		private Collection<String> modifiedClasses;
-		
 		private WellFormedness wellFormedness;
 		private ProductBuilder productBuilder;
 		
@@ -27,10 +26,11 @@ public class ImpactedProducts {
 		}
 
 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws AssetNotFoundException, IOException, DirectoryException{
-			boolean isRefactoring = false;
+			boolean isRefactoring = true;
 			boolean isSPLWellFormed = this.wellFormedness.isWF(sourceLine, targetLine);
 			if(isSPLWellFormed){
 				for (Product productSource : sourceLine.getProducts()) {
+					this.productBuilder.generateProduct(productSource, sourceLine.getPath());
 					if(productSource.containsSomeAsset(this.modifiedClasses, sourceLine.getMappingClassesSistemaDeArquivos())){
 						if(!(isRefactoring = haveSameBehavior(sourceLine, targetLine, propertiesObject, isRefactoring, productSource, productSource.getLikelyCorrespondingProduct())))
 							break;
