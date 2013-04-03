@@ -14,9 +14,10 @@ import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.testing.ITestHarness;
 import org.eclipse.ui.testing.TestableObject;
 
+import safeEvolution.fileProperties.FilePropertiesObject;
+import safeEvolution.fileProperties.FilePropertiesReader;
+
 import edu.mit.csail.sdg.alloy4.Err;
-import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.fileProperties.FilePropertiesReader;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.gui.AppWindow;

@@ -14,8 +14,9 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Text;
 
-import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.fileProperties.FilePropertiesReader;
+import safeEvolution.fileProperties.FilePropertiesObject;
+import safeEvolution.fileProperties.FilePropertiesReader;
+
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.dsc.ToolCommandLine;

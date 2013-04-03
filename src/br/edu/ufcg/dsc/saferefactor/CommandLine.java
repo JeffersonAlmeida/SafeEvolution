@@ -11,7 +11,7 @@ import org.apache.tools.ant.ProjectHelper;
 
 import refactoring.Constants;
 import refactoring.FileUtil;
-import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
+import safeEvolution.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;

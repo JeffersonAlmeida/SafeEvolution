@@ -5010,10 +5010,8 @@ Have Source and Target the same assets ?:false
 
  AM Equal: false
 
-ALL PRODUCTS
+IMPACTED PRODUCTS
 
-
-Product1 ::  [ javaexorcismspl ] [ treestructure ]
 
 Assests Origem
  asset: /src/org/softlang/visitor/ReturningVisitor.java
@@ -5219,132 +5217,132 @@ filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.p
 
 velocity:
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1'
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:44 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
 
 Assests Origem
@@ -5551,132 +5549,132 @@ filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.p
 
 velocity:
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests'
      [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2'
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Apr 3, 2013 3:31:45 PM org.apache.velocity.runtime.log.JdkLogChute log
+     [java] Apr 3, 2013 5:40:57 PM org.apache.velocity.runtime.log.JdkLogChute log
      [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
 
 clean:
@@ -5806,14 +5804,14 @@ generate_tests:
      [java] Explorer = randoop.ForwardGenerator@70ba9340
      [java] Começo!!
      [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Wed Apr 03 15:31:48 BRT 2013)FIM!!!
+     [java] Progress update: test inputs generated=0, failing inputs=0      (Wed Apr 03 17:41:03 BRT 2013)FIM!!!
      [java] 
-     [java] Progress update: test inputs generated=150, failing inputs=0      (Wed Apr 03 15:31:49 BRT 2013)
+     [java] Progress update: test inputs generated=150, failing inputs=0      (Wed Apr 03 17:41:04 BRT 2013)
      [java] Normal method executions:4239
      [java] Exceptional method executions:1
      [java] 
-     [java] Average method execution time (normal termination):     0.204
-     [java] Average method execution time (exceptional termination):0.217
+     [java] Average method execution time (normal termination):     0.124
+     [java] Average method execution time (exceptional termination):0.396
      [java] 
      [java] Creating Junit tests (150 tests)...Writing 150 junit tests
      [java] 
@@ -5829,14 +5827,14 @@ compile_tests:
 run_tests:
      [echo] Running JUnit to test the "source"
     [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.182 sec
+    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 1.523 sec
      [echo] Running JUnit to test the "target"
     [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 52, Errors: 0, Time elapsed: 0.209 sec
+    [junit] Tests run: 150, Failures: 52, Errors: 0, Time elapsed: 0.149 sec
      [echo] Running JUnit to test the "source" again
     [junit] Test RandoopTest0 FAILED
     [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.156 sec
+    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.122 sec
  Print Report :
 Testes generated: 150
 Failures on source: 0
@@ -5906,13 +5904,13 @@ coverage:
     [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/outinstr
     [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/instr
 processing instrumentation path ...
-instrumentation path processed in 122 ms
+instrumentation path processed in 84 ms
 [19 class(es) instrumented, 0 resource(s) copied]
-metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/instr/metadata_source.emma] {in 39 ms}
+metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/instr/metadata_source.emma] {in 91 ms}
     [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.207 sec
+    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.151 sec
 processing input files ...
-1 file(s) read and merged in 5 ms
+1 file(s) read and merged in 3 ms
 writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.xml] ...
 writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.html] ...
 

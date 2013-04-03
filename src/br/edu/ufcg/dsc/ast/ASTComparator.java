@@ -6,9 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-
 import javax.naming.ConfigurationException;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.ICompilationUnit;
@@ -71,8 +69,11 @@ public class ASTComparator {
 	 * @throws JavaModelException 
 	 */
 	public void setInputs(File fileA, File fileASecond) throws IOException, JavaModelException {
-		if (fileA.exists() && fileASecond.exists())setInputs(fileA.getName(), getContents(fileA),fileASecond.getName() , getContents(fileASecond));
-		else throw new IOException("one of the input files does not exist");
+		if (fileA.exists() && fileASecond.exists()){
+			setInputs(fileA.getName(), getContents(fileA),fileASecond.getName() , getContents(fileASecond));
+		}else{
+			throw new IOException("one of the input files does not exist");
+		}
 	}
 
 	public String getContents(File aFile) {

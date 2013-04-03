@@ -25,8 +25,6 @@ public class AssetMappingAnalyzer {
 	private HashSet<String> changedAssetsList;
 	private ASTComparator astComparator;
 	
-	
-	
 	public AssetMappingAnalyzer() {
 		super();
 		this.astComparator = new ASTComparator();

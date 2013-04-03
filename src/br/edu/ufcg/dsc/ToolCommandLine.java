@@ -1,9 +1,5 @@
 package br.edu.ufcg.dsc;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashMap;
@@ -11,16 +7,16 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
 import javax.naming.ConfigurationException;
-import org.eclipse.jdt.core.JavaModelException;
-import br.cin.ufpe.br.alloy.products.AlloyProductGenerator;
-import br.cin.ufpe.br.approaches.AllProductPairs;
-import br.cin.ufpe.br.approaches.AllProducts;
-import br.cin.ufpe.br.approaches.ImpactedClasses;
-import br.cin.ufpe.br.approaches.ImpactedProducts;
-import br.cin.ufpe.br.clean.ProductsCleaner;
-import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
-import br.cin.ufpe.br.matching.ProductMatching;
-import br.cin.ufpe.br.wf.WellFormedness;
+import safeEvolution.alloy.products.AlloyProductGenerator;
+import safeEvolution.am.verifier.AssetMappingAnalyzer;
+import safeEvolution.approaches.AllProductPairs;
+import safeEvolution.approaches.AllProducts;
+import safeEvolution.approaches.ImpactedClasses;
+import safeEvolution.approaches.ImpactedProducts;
+import safeEvolution.fileProperties.FilePropertiesObject;
+import safeEvolution.productMatcher.ProductMatching;
+import safeEvolution.productsCleaner.ProductsCleaner;
+import safeEvolution.wellFormedness.WellFormedness;
 import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.builders.MobileMediaBuilder;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
@@ -33,7 +29,6 @@ import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
-import br.edu.ufcg.dsc.util.FileManager;
 import edu.mit.csail.sdg.alloy4.Err;
 
 public class ToolCommandLine {
@@ -101,19 +96,6 @@ public class ToolCommandLine {
 		targetLine.setup();
 	}
 
-	/**
-	 * Verifica se tanto mapeamento quanto conteudo das classes eh igual.
-	 * 
-	 * @return
-	 */
-	private boolean isAssetMappingEqual(ProductLine sourceLine, ProductLine targetLine) {
-		boolean assetsEqual = false;
-		assetsEqual = this.isSameAssets(sourceLine, targetLine);
-		return assetsEqual;
-	}
-
-	
-
 	private HashSet<String> getChangedFeatureNames(ProductLine targetLine) {
 
 		HashSet<String> output = new HashSet<String>();
@@ -168,108 +150,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	/**
-	 * This methods answers whether the assets of the SOURCE product line is completely equal to the TARGET product line. 
-	 * It means, that it looks for the modified assets.  <br></br>
-	 * @param sourceLine  <br></br>
-	 * @param targetLine  <br></br>
-	 * @return returns is both product lines have the same assets. Without changes.
-	 */
-	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
-		boolean result = true;
-		
-		/* Get all SOURCE product line classes. */
-		Set<String> sourceKeySet = sourceLine.getMappingClassesSistemaDeArquivos().keySet();
-		
-		/* Get all TARGET product line classes. */
-		Set<String> targetKeySet = targetLine.getMappingClassesSistemaDeArquivos().keySet();
-
-		/* Initialize the modified classes variable. */
-		this.classesModificadas = new HashSet<String>();
-		
-		/* Initialize the changed assets variable. */
-		this.changedAssets = new HashSet<String>();
-
-		/* walk through all assets of the SOURCE product line classes. */
-		for (String asset : sourceKeySet) {
-			/* location source file*/
-			String locationSource = sourceLine.getMappingClassesSistemaDeArquivos().get(asset);
-			/* location target file*/
-			String locationTarget = targetLine.getMappingClassesSistemaDeArquivos().get(asset);
-			if (locationSource != null && locationTarget != null) {
-				/* build the two files.*/
-				File sourceFile = new File(locationSource); // source asset File.
-				File targetFile = new File(locationTarget); // target asset File.
-				try {
-					boolean equals;
-					if (asset.endsWith("java")) {
-						/* This methods compares two textual files and return whether they are equal.
-						 * It means, there is no refactoring in the second when compared to the first one. */
-						this.astComparator.setInputs(sourceFile, targetFile);
-						equals = this.astComparator.isIsomorphic();
-					} else if (asset.endsWith("aj")) {
-						/* This methods compares two textual files and return whether they are equal. 
-						 * It means, there is no refactoring in the second when compared to the first one. */
-						equals = this.isTextualFileContentsEquals(sourceFile, targetFile);
-					} else {
-						equals = true;
-					}
-					if (!equals) {
-						result = false;
-						/*Put the asset in the modified classes.*/
-						this.classesModificadas.add(asset);
-						this.changedAssets.add(FileManager.getInstance().getPath("src." + asset));
-					}
-				} catch (JavaModelException e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-		if (!targetKeySet.containsAll((sourceKeySet))) {
-			result = false;
-		}
-		System.out.println("\nHave Source and Target the same assets ?:" + result +" \n");
-		return result;
-	}
-
-	/**
-	 * This methods compares two textual files and return whether they are equal. 
-	 * It means, there is no refactoring in the second when compared to the first one.
-	 * @param sourceFile
-	 * @param targetFile
-	 * @return
-	 */
-	private boolean isTextualFileContentsEquals(File sourceFile, File targetFile) {
-		boolean result = true;
-		String linhaSource = "";
-		String linhaTarget = "";
-		try {
-			FileReader readerSource = new FileReader(sourceFile);
-			FileReader readerTarget = new FileReader(targetFile);
-			BufferedReader inSource = new BufferedReader(readerSource);
-			BufferedReader inTarget = new BufferedReader(readerTarget);
-			while (result && ((linhaSource = inSource.readLine()) != null & (linhaTarget = inTarget.readLine()) != null)) {
-				if (!linhaSource.trim().equals(linhaTarget.trim())) {
-					result = false;
-				}
-			}
-			if (linhaSource != null || linhaTarget != null) {
-				result = false;
-			}
-			inSource.close();
-			inTarget.close();
-			readerSource.close();
-			readerTarget.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
 	public long getTestsCompileTimeout() {
 		return testsCompileTimeout;
 	}
@@ -317,10 +197,14 @@ public class ToolCommandLine {
 
 		WellFormedness wellFormedness =  new WellFormedness();
 		boolean wf = wellFormedness.isWF(sourceSPL, targetSPL);
+		
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
+		
 		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
-		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
+		
+		AssetMappingAnalyzer amAnalyzer = new AssetMappingAnalyzer();
+		boolean isAssetMappingsEqual = amAnalyzer.isSameAssets(sourceSPL, targetSPL);
 		System.out.println("\n AM Equal: " + isAssetMappingsEqual);
 		
 		boolean isRefinement = false;
@@ -334,11 +218,11 @@ public class ToolCommandLine {
 			System.out.println("Refactoring ? " + (isRefinement = ap.evaluate(sourceSPL, targetSPL, in, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.IP)){
 			System.out.println("\nIMPACTED PRODUCTS\n");
-			ImpactedProducts ip = new ImpactedProducts(this.productBuilder, this.classesModificadas);
+			ImpactedProducts ip = new ImpactedProducts(this.productBuilder, amAnalyzer.getModifiedClassesList());
 			System.out.println("Refactoring ? " + (isRefinement = ip.evaluate(sourceSPL, targetSPL, in, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.IC)){
 			System.out.println("\nIMPACTED ClASSES\n");
-			ImpactedClasses ic = new ImpactedClasses(productBuilder, in, this.classesModificadas);
+			ImpactedClasses ic = new ImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");

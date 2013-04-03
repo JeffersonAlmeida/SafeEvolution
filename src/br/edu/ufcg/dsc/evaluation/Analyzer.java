@@ -9,7 +9,8 @@ package br.edu.ufcg.dsc.evaluation;
 
 import java.io.File;
 import java.io.IOException;
-import br.cin.ufpe.br.fileProperties.FilePropertiesObject;
+
+import safeEvolution.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
