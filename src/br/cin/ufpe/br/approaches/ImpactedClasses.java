@@ -75,6 +75,17 @@ public class ImpactedClasses {
 			this.classes = new String();
 			this.classeToGenerateTestes = new String();
 		}
+		
+		private boolean CheckProductBehavior(ProductLine sourceSPL, ProductLine targetSPL, boolean sameBehavior, HashSet<String> prod) throws AssetNotFoundException, DirectoryException, IOException {
+			printPseudoProduct(prod); 
+			processModifiedAspect(sourceSPL, this.aspectsSourceFeatureMapping.get(prod), this.sourceProductFile); // Copy modified aspects and its dependencies to the source SPL product folder.
+			processModifiedAspect(targetSPL, this.aspectsTargetFeatureMapping.get(prod), this.targetProductFile); // Copy modified aspects and its dependencies to the target SPL product folder.
+			preProcessAssets(sourceSPL, targetSPL, this.input, prod);
+			System.out.println("\nClasses que receberao testes JUNIT: " + classes);
+			sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
+			deleteFileToTrash(); // delete files, clean dependencies and aspectsList
+			return sameBehavior;
+		}
 	
 		public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures) throws AssetNotFoundException, IOException, DirectoryException{
 			boolean sameBehavior = true;
@@ -85,7 +96,7 @@ public class ImpactedClasses {
 			copyLibrariesFromSplToProductFolder(sourceSPL, targetSPL, this.uniqueProductPath);
 			copyModifiedClassAndDependencies(sourceSPL, targetSPL); // Copy modified class and its dependencies to the SPL product folder.
 			findModifiedProducts(sourceSPL); // Check products that have any of the modified classes. Store it in this.modifiedProducts
-			if (sourceSPL.temAspectos() || (this.input.getLine() == Lines.DEFAULT)) { 
+			if (sourceSPL.temAspectos() || (this.input.getLine() == Lines.DEFAULT)){ 
 					findPseudoProductsToPreProcess(sourceSPL, targetSPL); // find which products contains assets with Conditional Compilation - store it in this.pseudoProductsToBePreprocessed
 					for (HashSet<String> prod : pseudoProductsToBePreprocessed) {
 						if (!(sameBehavior = CheckProductBehavior(sourceSPL, targetSPL, sameBehavior, prod))) 
@@ -142,6 +153,9 @@ public class ImpactedClasses {
 		 */
 		 private void findModifiedProducts(ProductLine sourceSPL) {
 			for (Product product : sourceSPL.getProducts()){
+				HashSet<String> preProcessTags = product.getPreProcessTags();
+				HashMap<String, String> mapeamentoAssetNameParaOrigem = product.getMapeamentoAssetNameParaOrigem();
+				HashMap<String, String> mapeamentoAssetNameParaDestino = product.getMapeamentoAssetNameParaDestino();
 				if (product.containsSomeAsset(this.modifiedClasses, sourceSPL.getMappingClassesSistemaDeArquivos())) {
 					this.modifiedProducts.add(product.getFeaturesList());
 				}
@@ -231,17 +245,6 @@ public class ImpactedClasses {
 			this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
 			this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
 			sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
-			return sameBehavior;
-		}
-	
-		private boolean CheckProductBehavior(ProductLine sourceSPL, ProductLine targetSPL, boolean sameBehavior, HashSet<String> prod) throws AssetNotFoundException, DirectoryException, IOException {
-			printPseudoProduct(prod); 
-			processModifiedAspect(sourceSPL, this.aspectsSourceFeatureMapping.get(prod), this.sourceProductFile); // Copy modified aspects and its dependencies to the source SPL product folder.
-			processModifiedAspect(targetSPL, this.aspectsTargetFeatureMapping.get(prod), this.targetProductFile); // Copy modified aspects and its dependencies to the target SPL product folder.
-			preProcessAssets(sourceSPL, targetSPL, this.input, prod);
-			System.out.println("\nClasses que receberao testes JUNIT: " + classes);
-			sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
-			deleteFileToTrash(); // delete files, clean dependencies and aspectsList
 			return sameBehavior;
 		}
 	

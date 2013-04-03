@@ -41,7 +41,7 @@ public class ImpactedProducts {
 		}
 		
 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
-			if (probablyCorrespondentProduct != null) {
+			if (probablyCorrespondentProduct != null){
 				this.productBuilder.generateProduct(probablyCorrespondentProduct, targetLine.getPath());
 				isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, probablyCorrespondentProduct, sourceLine.getControladoresFachadas(), propertiesObject);
 			}

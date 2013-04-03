@@ -837,8 +837,7 @@ public class ToolCommandLine {
 						//Como o Antenna nao pre processa aspectos, eles tambem nao sao copiados para 
 						//a pasta src. Eh necessario copia-los manualmente.
 						for (String aspect : this.listaAspectos) {
-							String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile()
-									.getAbsolutePath();
+							String dir = new File(aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src")).getParentFile().getAbsolutePath();
 							FileManager.getInstance().createDir(dir);
 							FileManager.getInstance().copyFile(aspect, aspect.replaceFirst(ProductBuilder.SRCPREPROCESS, "src"));
 						}
@@ -1258,12 +1257,12 @@ public class ToolCommandLine {
 		System.out.println("Refactoring ? " + ip.evaluate(sourceLine, targetLine, propertiesObject));*/
 		
 		
-		boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
+		/*boolean isAssetMappingsEqual = this.isAssetMappingEqual(sourceSPL, targetSPL);
 		System.out.println("\n AM changed: " + isAssetMappingsEqual);
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
 		this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
 		ImpactedClasses ic = new ImpactedClasses(wellFormedness, productBuilder, in, this.classesModificadas);
-		System.out.println("Refactoring ? " + ic.evaluate(sourceSPL, targetSPL, changedFeatures));
+		System.out.println("Refactoring ? " + ic.evaluate(sourceSPL, targetSPL, changedFeatures));*/
 		
 		
 		/*  It is responsible to check the SPL: Well-Formedness and Refinment.*/
