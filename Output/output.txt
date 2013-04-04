@@ -5010,1446 +5010,295 @@ Have Source and Target the same assets ?:false
 
  AM Equal: false
 
-ALL PRODUCT PAIRS
-
-
-Product1 ::  [ javaexorcismspl ] [ treestructure ]
-
-Assests Origem
- asset: /src/org/softlang/visitor/ReturningVisitor.java
- asset: /src/org/softlang/tests/Basics.java
- asset: /src/org/softlang/company/Subunit.java
- asset: /src/org/softlang/util/RemoveFromList.java
- asset: /src/org/softlang/company/impl/pojo/ComponentImpl.java
- asset: /lib/Junit.jar
- asset: /src/org/softlang/company/factory/PojoFactory.java
- asset: /src/org/softlang/main/Main.java
- asset: /src/org/softlang/company/impl/pojo/EmployeeImpl.java
- asset: /src/org/softlang/visitor/VoidVisitor.java
- asset: /build.xml
- asset: /src/org/softlang/util/ChangeList.java
- asset: /src/org/softlang/company/Component.java
- asset: /src/org/softlang/company/Company.java
- asset: /src/org/softlang/company/Department.java
- asset: /src/org/softlang/util/SimpleList.java
- asset: /src/org/softlang/util/SimpleLinkedList.java
- asset: /src/org/softlang/company/Container.java
- asset: /src/org/softlang/company/impl/bean/EmployeeImpl.java
- asset: /src/org/softlang/company/impl/pojo/ContainerImpl.java
- asset: /src/org/softlang/company/impl/bean/ComponentImpl.java
- asset: /src/org/softlang/util/ObservableSimpleList.java
- asset: /src/org/softlang/company/impl/bean/CompanyImpl.java
- asset: /src/org/softlang/company/factory/Factory.java
- asset: /src/org/softlang/company/Employee.java
- asset: /src/org/softlang/company/impl/bean/ContainerImpl.java
- asset: /src/org/softlang/util/AddToList.java
- asset: /src/org/softlang/company/impl/pojo/CompanyImpl.java
- asset: /src/org/softlang/company/impl/bean/DepartmentImpl.java
- asset: /src/org/softlang/company/impl/pojo/DepartmentImpl.java
- asset: /src/org/softlang/company/factory/BeanFactory.java
-
-Assests Destino
- asset: src\org\softlang\visitor\ReturningVisitor.java
- asset: src\org\softlang\tests\Basics.java
- asset: src\org\softlang\company\Subunit.java
- asset: src\org\softlang\util\RemoveFromList.java
- asset: src\org\softlang\company\impl\pojo\ComponentImpl.java
- asset: lib\Junit.jar
- asset: src\org\softlang\company\factory\PojoFactory.java
- asset: src\org\softlang\main\Main.java
- asset: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- asset: src\org\softlang\visitor\VoidVisitor.java
- asset: build.xml
- asset: src\org\softlang\util\ChangeList.java
- asset: src\org\softlang\company\Component.java
- asset: src\org\softlang\company\Company.java
- asset: src\org\softlang\company\Department.java
- asset: src\org\softlang\util\SimpleList.java
- asset: src\org\softlang\util\SimpleLinkedList.java
- asset: src\org\softlang\company\Container.java
- asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
- asset: src\org\softlang\company\impl\pojo\ContainerImpl.java
- asset: src\org\softlang\company\impl\bean\ComponentImpl.java
- asset: src\org\softlang\util\ObservableSimpleList.java
- asset: src\org\softlang\company\impl\bean\CompanyImpl.java
- asset: src\org\softlang\company\factory\Factory.java
- asset: src\org\softlang\company\Employee.java
- asset: src\org\softlang\company\impl\bean\ContainerImpl.java
- asset: src\org\softlang\util\AddToList.java
- asset: src\org\softlang\company\impl\pojo\CompanyImpl.java
- asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
- asset: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- asset: src\org\softlang\company\factory\BeanFactory.java
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/lib
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
+EXTENDED IMPACTED ClASSES
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main/Main.java
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
+It belongs to modified class list ? false
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Employee.java
+Dependencia: org.softlang.company.factory.Factory
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Subunit.java
+Dependencia: org.softlang.company.Company
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Company.java
+Dependencia: org.softlang.company.factory.BeanFactory
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl
+Dependencia: Factory
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
+Dependencia: EmployeeImpl
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/CompanyImpl.java
+Dependencia: org.softlang.company.impl.bean.EmployeeImpl
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/EmployeeImpl.java
+Dependencia: Department
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/DepartmentImpl.java
+Dependencia: Company
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/ContainerImpl.java
+Dependencia: org.softlang.company.Employee
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/ComponentImpl.java
+Dependencia: Employee
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
+Dependencia: BeanFactory
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/CompanyImpl.java
+Dependencia: org.softlang.company.Department
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/ContainerImpl.java
+It belongs to modified class list ? false
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/ComponentImpl.java
+Dependencia: Subunit
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Container.java
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Component.java
+It belongs to modified class list ? false
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Department.java
+Dependencia: Component
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/PojoFactory.java
+It belongs to modified class list ? false
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/Factory.java
+Dependencia: Container
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/BeanFactory.java
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
 
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/SimpleLinkedList.java
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/ChangeList.java
+It belongs to modified class list ? true
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/AddToList.java
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
 
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/SimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/ObservableSimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/RemoveFromList.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor/VoidVisitor.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor/ReturningVisitor.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests/Basics.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/bin
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/build.xml
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/lib
-@Features Preprocess Velocity :
-
-feature:javaexorcismspl
-
-feature:treestructure
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main/Main.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Employee.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Subunit.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Company.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Container.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Component.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/Department.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/PojoFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/Factory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory/BeanFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/SimpleLinkedList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/ChangeList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/AddToList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/SimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/ObservableSimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util/RemoveFromList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor/VoidVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor/ReturningVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests/Basics.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/build.xml
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/main'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/src/org/softlang/tests'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product1
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product1'
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
-
-Assests Origem
- asset: /src/org/softlang/visitor/ReturningVisitor.java
- asset: /src/org/softlang/tests/Basics.java
- asset: /src/org/softlang/company/Subunit.java
- asset: /src/org/softlang/util/RemoveFromList.java
- asset: /src/org/softlang/company/impl/pojo/ComponentImpl.java
- asset: /lib/Junit.jar
- asset: /src/org/softlang/company/factory/PojoFactory.java
- asset: /src/org/softlang/main/Main.java
- asset: /src/org/softlang/company/impl/pojo/EmployeeImpl.java
- asset: /src/org/softlang/visitor/VoidVisitor.java
- asset: /build.xml
- asset: /src/org/softlang/util/ChangeList.java
- asset: /src/org/softlang/company/Component.java
- asset: /src/org/softlang/company/Company.java
- asset: /src/org/softlang/company/Department.java
- asset: /src/org/softlang/util/SimpleList.java
- asset: /src/org/softlang/util/SimpleLinkedList.java
- asset: /src/org/softlang/company/Container.java
- asset: /src/org/softlang/company/impl/bean/EmployeeImpl.java
- asset: /src/org/softlang/company/impl/pojo/ContainerImpl.java
- asset: /src/org/softlang/company/impl/bean/ComponentImpl.java
- asset: /src/org/softlang/util/ObservableSimpleList.java
- asset: /src/org/softlang/company/impl/bean/CompanyImpl.java
- asset: /src/org/softlang/company/factory/Factory.java
- asset: /src/org/softlang/company/Employee.java
- asset: /src/org/softlang/company/impl/bean/ContainerImpl.java
- asset: /src/org/softlang/util/AddToList.java
- asset: /src/org/softlang/company/impl/bean/DepartmentImpl.java
- asset: /src/org/softlang/company/impl/pojo/CompanyImpl.java
- asset: /src/org/softlang/company/impl/pojo/DepartmentImpl.java
- asset: /src/org/softlang/company/factory/BeanFactory.java
-
-Assests Destino
- asset: src\org\softlang\visitor\ReturningVisitor.java
- asset: src\org\softlang\tests\Basics.java
- asset: src\org\softlang\company\Subunit.java
- asset: src\org\softlang\util\RemoveFromList.java
- asset: src\org\softlang\company\impl\pojo\ComponentImpl.java
- asset: lib\Junit.jar
- asset: src\org\softlang\company\factory\PojoFactory.java
- asset: src\org\softlang\main\Main.java
- asset: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- asset: src\org\softlang\visitor\VoidVisitor.java
- asset: build.xml
- asset: src\org\softlang\util\ChangeList.java
- asset: src\org\softlang\company\Component.java
- asset: src\org\softlang\company\Company.java
- asset: src\org\softlang\company\Department.java
- asset: src\org\softlang\util\SimpleList.java
- asset: src\org\softlang\util\SimpleLinkedList.java
- asset: src\org\softlang\company\Container.java
- asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
- asset: src\org\softlang\company\impl\pojo\ContainerImpl.java
- asset: src\org\softlang\company\impl\bean\ComponentImpl.java
- asset: src\org\softlang\util\ObservableSimpleList.java
- asset: src\org\softlang\company\impl\bean\CompanyImpl.java
- asset: src\org\softlang\company\factory\Factory.java
- asset: src\org\softlang\company\Employee.java
- asset: src\org\softlang\company\impl\bean\ContainerImpl.java
- asset: src\org\softlang\util\AddToList.java
- asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
- asset: src\org\softlang\company\impl\pojo\CompanyImpl.java
- asset: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- asset: src\org\softlang\company\factory\BeanFactory.java
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/lib
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main/Main.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Employee.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Subunit.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Company.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/CompanyImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/EmployeeImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/DepartmentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/ContainerImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/ComponentImpl.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/CompanyImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/ContainerImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/ComponentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Container.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Component.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Department.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/PojoFactory.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/Factory.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/BeanFactory.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/SimpleLinkedList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/ChangeList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/AddToList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/SimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/ObservableSimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/RemoveFromList.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor/VoidVisitor.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor/ReturningVisitor.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests/Basics.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/bin
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/build.xml
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/lib
-@Features Preprocess Velocity :
-
-feature:javaexorcismspl
-
-feature:treestructure
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main/Main.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Employee.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Subunit.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Company.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Container.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Component.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/Department.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/PojoFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/Factory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory/BeanFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/SimpleLinkedList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/ChangeList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/AddToList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/SimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/ObservableSimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util/RemoveFromList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor/VoidVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor/ReturningVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests/Basics.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/build.xml
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main
-     [java] Apr 4, 2013 9:27:31 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/main'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2/src/org/softlang/tests'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product2
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product2'
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:32 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
-
-clean:
-     [echo]  This task is responsible to clean all tests. 
-
-compile_target_ind:
-     [echo]  TARGET Compile IND 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-
-compile_source:
-     [echo]  SOURCE Compile 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-Safe Refactor!
-
-
-ANT BUILD DIRECTORY: /build.xml
-
- You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
-
-  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
-
-init:
-
-clean:
-
-analyze_target:
-     [echo] 
-     [echo] 			            Analyzing target methods
-     [echo] 			        
-     [java] Classes that throw exception and will be not included in the tests: 
-     [java] Removing methods containing unsupported classses parameter
-
-generate_tests:
-     [echo] 
-     [echo] 	            Generating tests
-     [echo] 	        
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
-     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
-     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
-     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
-     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
-     [java] cons : org.softlang.tests.Basics.<init>()
-     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
-     [java] cons : org.softlang.company.factory.BeanFactory.<init>()
-     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
-     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
-     [java] cons : org.softlang.main.Main.<init>()
-     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
-     [java] cons : org.softlang.company.factory.PojoFactory.<init>()
-     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
-     [java] method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.util.SimpleLinkedList.iterator() : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getAddress() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setSalary(double) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getSalary() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getManager() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getCep() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.ComponentImpl.getName() : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.pojo.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getCep() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.tests.Basics.test() : org.softlang.tests.Basics
-     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.company.factory.BeanFactory.mkCompany() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.factory.BeanFactory.mkEmployee() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.factory.BeanFactory.mkDepartment() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
-     [java] method : org.softlang.company.impl.pojo.DepartmentImpl.getManager() : org.softlang.company.impl.pojo.DepartmentImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.subunits() : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.main.Main.main([Ljava.lang.String;) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.createSampleCompany(org.softlang.company.factory.Factory) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setSalary(org.softlang.company.impl.bean.EmployeeImpl, double) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getSalary(org.softlang.company.impl.bean.EmployeeImpl) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getSampleCompany() : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setSampleCompany(org.softlang.company.Company) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getEmp() : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setEmp(org.softlang.company.impl.bean.EmployeeImpl) : org.softlang.main.Main
-     [java] method : org.softlang.company.factory.PojoFactory.mkCompany() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.factory.PojoFactory.mkEmployee() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.factory.PojoFactory.mkDepartment() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.impl.pojo.CompanyImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.CompanyImpl
-     [java] 
-     [java] policy = sun.security.provider.PolicyFile@7a3570b0
-     [java] PUBLIC MEMBERS=75
-     [java] Explorer = randoop.ForwardGenerator@70ba9340
-     [java] Começo!!
-     [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Thu Apr 04 09:27:35 BRT 2013)FIM!!!
-     [java] 
-     [java] Progress update: test inputs generated=150, failing inputs=0      (Thu Apr 04 09:27:36 BRT 2013)
-     [java] Normal method executions:4239
-     [java] Exceptional method executions:1
-     [java] 
-     [java] Average method execution time (normal termination):     0.135
-     [java] Average method execution time (exceptional termination):0.178
-     [java] 
-     [java] Creating Junit tests (150 tests)...Writing 150 junit tests
-     [java] 
-     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest0.java
-     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest.java
-
-compile_tests:
-     [echo] Compiling the tests
-    [javac] Compiling 2 source files to /tmp/safeRefactorAJ/tests/bin
-    [javac] Note: /tmp/safeRefactorAJ/tests/RandoopTest0.java uses unchecked or unsafe operations.
-    [javac] Note: Recompile with -Xlint:unchecked for details.
-
-run_tests:
-     [echo] Running JUnit to test the "source"
-    [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.53 sec
-     [echo] Running JUnit to test the "target"
-    [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 52, Errors: 0, Time elapsed: 0.198 sec
-     [echo] Running JUnit to test the "source" again
-    [junit] Test RandoopTest0 FAILED
-    [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.152 sec
- Print Report :
-Testes generated: 150
-Failures on source: 0
-Errors on source: 0
-Failures on target: 52
-Errors on target: 0
-Refactoring? false
-
-
-
-report changes: null
-RandoopTest0.test148 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test74 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test72 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test78 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test76 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test145 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test144 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test146 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test139 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test83 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test138 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test85 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test88 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test89 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test130 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test81 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test55 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test50 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test69 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test66 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test64 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test39 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test38 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test102 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test48 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test47 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test100 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test108 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test40 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test42 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test45 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test90 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test18 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test93 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test16 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test15 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test114 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test14 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test115 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test98 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test116 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test99 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test117 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test119 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test97 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test124 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test25 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test122 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test126 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test127 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test22 in source is SUCCESS while in target is FAILURE
-RandoopTest0.test24 in source is SUCCESS while in target is FAILURE
-
-
-coverage:
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/outinstr
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product1/instr
-processing instrumentation path ...
-instrumentation path processed in 218 ms
-[19 class(es) instrumented, 0 resource(s) copied]
-metadata merged into [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/instr/metadata_source.emma] {in 87 ms}
-    [junit] Running RandoopTest0
-    [junit] Tests run: 150, Failures: 0, Errors: 0, Time elapsed: 0.418 sec
-processing input files ...
-1 file(s) read and merged in 3 ms
-writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.xml] ...
-writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.html] ...
-
-
- -- SafeRefactor FOUND behavioral changes -- 
-
-Assests Origem
- asset: /src/org/softlang/visitor/ReturningVisitor.java
- asset: /src/org/softlang/tests/Basics.java
- asset: /src/org/softlang/company/Subunit.java
- asset: /src/org/softlang/util/RemoveFromList.java
- asset: /src/org/softlang/features/Logging.java
- asset: /src/org/softlang/company/impl/pojo/ComponentImpl.java
- asset: /lib/Junit.jar
- asset: /src/org/softlang/company/factory/PojoFactory.java
- asset: /src/org/softlang/main/Main.java
- asset: /src/org/softlang/company/impl/pojo/EmployeeImpl.java
- asset: /src/org/softlang/visitor/VoidVisitor.java
- asset: /build.xml
- asset: /src/org/softlang/util/ChangeList.java
- asset: /src/org/softlang/company/Component.java
- asset: /src/org/softlang/company/Company.java
- asset: /src/org/softlang/company/Department.java
- asset: /src/org/softlang/util/SimpleList.java
- asset: /src/org/softlang/util/SimpleLinkedList.java
- asset: /src/org/softlang/company/Container.java
- asset: /src/org/softlang/company/impl/bean/EmployeeImpl.java
- asset: /src/org/softlang/company/impl/pojo/ContainerImpl.java
- asset: /src/org/softlang/company/impl/bean/ComponentImpl.java
- asset: /src/org/softlang/util/ObservableSimpleList.java
- asset: /src/org/softlang/company/impl/bean/CompanyImpl.java
- asset: /src/org/softlang/company/factory/Factory.java
- asset: /src/org/softlang/company/Employee.java
- asset: /src/org/softlang/company/impl/bean/ContainerImpl.java
- asset: /src/org/softlang/util/AddToList.java
- asset: /src/org/softlang/company/impl/bean/DepartmentImpl.java
- asset: /src/org/softlang/company/impl/pojo/CompanyImpl.java
- asset: /src/org/softlang/company/impl/pojo/DepartmentImpl.java
- asset: /src/org/softlang/company/factory/BeanFactory.java
-
-Assests Destino
- asset: src\org\softlang\visitor\ReturningVisitor.java
- asset: src\org\softlang\tests\Basics.java
- asset: src\org\softlang\company\Subunit.java
- asset: src\org\softlang\util\RemoveFromList.java
- asset: src\org\softlang\features\Logging.java
- asset: src\org\softlang\company\impl\pojo\ComponentImpl.java
- asset: lib\Junit.jar
- asset: src\org\softlang\company\factory\PojoFactory.java
- asset: src\org\softlang\main\Main.java
- asset: src\org\softlang\company\impl\pojo\EmployeeImpl.java
- asset: src\org\softlang\visitor\VoidVisitor.java
- asset: build.xml
- asset: src\org\softlang\util\ChangeList.java
- asset: src\org\softlang\company\Component.java
- asset: src\org\softlang\company\Company.java
- asset: src\org\softlang\company\Department.java
- asset: src\org\softlang\util\SimpleList.java
- asset: src\org\softlang\util\SimpleLinkedList.java
- asset: src\org\softlang\company\Container.java
- asset: src\org\softlang\company\impl\bean\EmployeeImpl.java
- asset: src\org\softlang\company\impl\pojo\ContainerImpl.java
- asset: src\org\softlang\company\impl\bean\ComponentImpl.java
- asset: src\org\softlang\util\ObservableSimpleList.java
- asset: src\org\softlang\company\impl\bean\CompanyImpl.java
- asset: src\org\softlang\company\factory\Factory.java
- asset: src\org\softlang\company\Employee.java
- asset: src\org\softlang\company\impl\bean\ContainerImpl.java
- asset: src\org\softlang\util\AddToList.java
- asset: src\org\softlang\company\impl\bean\DepartmentImpl.java
- asset: src\org\softlang\company\impl\pojo\CompanyImpl.java
- asset: src\org\softlang\company\impl\pojo\DepartmentImpl.java
- asset: src\org\softlang\company\factory\BeanFactory.java
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/lib
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main
-Creating directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main/Main.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Employee.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Subunit.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Company.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/CompanyImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/EmployeeImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/DepartmentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/ContainerImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/ComponentImpl.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/CompanyImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/ContainerImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/ComponentImpl.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Container.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Component.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Department.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/PojoFactory.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/Factory.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/BeanFactory.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/SimpleLinkedList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/ChangeList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/AddToList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/SimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/ObservableSimpleList.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/RemoveFromList.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features/Logging.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor/VoidVisitor.java
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor/ReturningVisitor.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests/Basics.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/bin
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/build.xml
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/lib
-@Features Preprocess Velocity :
-
-feature:javaexorcismspl
-
-feature:logging
-
-feature:treestructure
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main/Main.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Employee.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Subunit.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Company.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/CompanyImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/ContainerImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo/ComponentImpl.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Container.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Component.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/Department.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/PojoFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/Factory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory/BeanFactory.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/SimpleLinkedList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/ChangeList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/AddToList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/SimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/ObservableSimpleList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util/RemoveFromList.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features/Logging.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor/VoidVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor/ReturningVisitor.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests/Basics.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/build.xml
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/main'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/bean'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/impl/pojo'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/company/factory'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/util'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/features'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/visitor'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3/src/org/softlang/tests'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product3
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product3'
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 18, column 13] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 15] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 19, column 49] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 16] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 23, column 52] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 24] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 29, column 41] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 36, column 13] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 37, column 13] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 41, column 20] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 42, column 20] : ${lib} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 43, column 20] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 50, column 31] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 51, column 23] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 65, column 22] : ${bin} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 66, column 22] : ${dist} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 67, column 22] : ${testReport} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 68, column 22] : ${src} cannot be resolved.
-     [java] Apr 4, 2013 9:27:43 AM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: Null reference [template 'build.xml', line 69, column 22] : ${lib} cannot be resolved.
-
-clean:
-     [echo]  This task is responsible to clean all tests. 
-
-compile_target_ind:
-     [echo]  TARGET Compile IND 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-Safe Refactor!
-
-
-ANT BUILD DIRECTORY: /build.xml
-
- You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
-
-  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
-
-init:
-
-clean:
-
-analyze_target:
-     [echo] 
-     [echo] 			            Analyzing target methods
-     [echo] 			        
-     [java] Classes that throw exception and will be not included in the tests: 
-     [java] Removing methods containing unsupported classses parameter
-
-generate_tests:
-     [echo] 
-     [echo] 	            Generating tests
-     [echo] 	        
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] org.softlang.visitor.ReturningVisitor<R>
-     [java] cons : org.softlang.util.SimpleLinkedList.<init>()
-     [java] cons : org.softlang.company.impl.pojo.EmployeeImpl.<init>()
-     [java] cons : org.softlang.company.impl.bean.EmployeeImpl.<init>()
-     [java] cons : org.softlang.util.RemoveFromList.<init>(java.lang.Object)
-     [java] cons : org.softlang.company.impl.bean.CompanyImpl.<init>()
-     [java] cons : org.softlang.tests.Basics.<init>()
-     [java] cons : org.softlang.util.ObservableSimpleList.<init>(org.softlang.util.SimpleList)
-     [java] cons : org.softlang.company.factory.BeanFactory.<init>()
-     [java] cons : org.softlang.company.impl.bean.DepartmentImpl.<init>()
-     [java] cons : org.softlang.company.impl.pojo.DepartmentImpl.<init>()
-     [java] cons : org.softlang.main.Main.<init>()
-     [java] cons : org.softlang.util.AddToList.<init>(java.lang.Object)
-     [java] cons : org.softlang.company.factory.PojoFactory.<init>()
-     [java] cons : org.softlang.company.impl.pojo.CompanyImpl.<init>()
-     [java] method : org.softlang.util.SimpleLinkedList.add(java.lang.Object) : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.util.SimpleLinkedList.iterator() : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.util.SimpleLinkedList.remove(java.lang.Object) : org.softlang.util.SimpleLinkedList
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getAddress() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setSalary(double) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getSalary() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getManager() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.EmployeeImpl.getCep() : org.softlang.company.impl.pojo.EmployeeImpl
-     [java] method : org.softlang.company.impl.pojo.ComponentImpl.getName() : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.pojo.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.pojo.ComponentImpl;org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.EmployeeImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getAddress() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getName() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setName(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setAddress(java.lang.String) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setSalary(double) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.setManager(boolean) : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getSalary() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getManager() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.EmployeeImpl.getCep() : org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.getParent() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.notifyObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.notifyObservers(java.lang.Object) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.addObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.deleteObservers() : org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl
-     [java] method : java.util.Observable.hasChanged() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : java.util.Observable.countObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.util.ObservableSimpleList;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.EmployeeImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.addObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObserver(java.util.Observer) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.deleteObservers() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ContainerImpl.subunits() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.getName() : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.company.impl.bean.ComponentImpl.setName(java.lang.String) : org.softlang.company.impl.bean.CompanyImpl;org.softlang.company.impl.bean.DepartmentImpl;org.softlang.company.impl.bean.ComponentImpl;org.softlang.company.impl.bean.ContainerImpl
-     [java] method : org.softlang.tests.Basics.test() : org.softlang.tests.Basics
-     [java] method : org.softlang.util.ObservableSimpleList.add(java.lang.Object) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.iterator() : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.remove(java.lang.Object) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.addObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.deleteObserver(java.util.Observer) : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.util.ObservableSimpleList.deleteObservers() : org.softlang.util.ObservableSimpleList
-     [java] method : org.softlang.company.factory.BeanFactory.mkCompany() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.factory.BeanFactory.mkEmployee() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.factory.BeanFactory.mkDepartment() : org.softlang.company.factory.BeanFactory
-     [java] method : org.softlang.company.impl.bean.DepartmentImpl.getManager() : org.softlang.company.impl.bean.DepartmentImpl
-     [java] method : org.softlang.company.impl.pojo.DepartmentImpl.getManager() : org.softlang.company.impl.pojo.DepartmentImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.remove(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.company.impl.pojo.ContainerImpl.subunits() : org.softlang.company.impl.pojo.DepartmentImpl;org.softlang.company.impl.pojo.ContainerImpl;org.softlang.company.impl.pojo.CompanyImpl
-     [java] method : org.softlang.main.Main.main([Ljava.lang.String;) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.createSampleCompany(org.softlang.company.factory.Factory) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setSalary(org.softlang.company.impl.bean.EmployeeImpl, double) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getSalary(org.softlang.company.impl.bean.EmployeeImpl) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getSampleCompany() : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setSampleCompany(org.softlang.company.Company) : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.getEmp() : org.softlang.main.Main
-     [java] method : org.softlang.main.Main.setEmp(org.softlang.company.impl.bean.EmployeeImpl) : org.softlang.main.Main
-     [java] method : org.softlang.company.factory.PojoFactory.mkCompany() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.factory.PojoFactory.mkEmployee() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.factory.PojoFactory.mkDepartment() : org.softlang.company.factory.PojoFactory
-     [java] method : org.softlang.company.impl.pojo.CompanyImpl.add(org.softlang.company.Subunit) : org.softlang.company.impl.pojo.CompanyImpl
-     [java] 
-     [java] policy = sun.security.provider.PolicyFile@7a3570b0
-     [java] PUBLIC MEMBERS=78
-     [java] Explorer = randoop.ForwardGenerator@70ba9340
-     [java] Começo!!
-     [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Thu Apr 04 09:27:46 BRT 2013)FIM!!!
-     [java] 
-     [java] Progress update: test inputs generated=156, failing inputs=0      (Thu Apr 04 09:27:47 BRT 2013)
-     [java] Normal method executions:2344
-     [java] Exceptional method executions:2
-     [java] 
-     [java] Average method execution time (normal termination):     0.231
-     [java] Average method execution time (exceptional termination):7.57
-     [java] 
-     [java] Creating Junit tests (156 tests)...Writing 156 junit tests
-     [java] 
-     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest0.java
-     [java] Created file: /tmp/safeRefactorAJ/tests/RandoopTest.java
-
-compile_tests:
-     [echo] Compiling the tests
-    [javac] Compiling 2 source files to /tmp/safeRefactorAJ/tests/bin
-    [javac] Note: /tmp/safeRefactorAJ/tests/RandoopTest0.java uses unchecked or unsafe operations.
-    [javac] Note: Recompile with -Xlint:unchecked for details.
-
-run_tests:
-     [echo] Running JUnit to test the "source"
-    [junit] Running RandoopTest0
-    [junit] Tests run: 156, Failures: 0, Errors: 0, Time elapsed: 0.412 sec
-     [echo] Running JUnit to test the "target"
-    [junit] Running RandoopTest0
-    [junit] Tests run: 156, Failures: 1, Errors: 0, Time elapsed: 0.332 sec
-    [junit] Test RandoopTest0 FAILED
-     [echo] Running JUnit to test the "source" again
-    [junit] Running RandoopTest0
-    [junit] Tests run: 156, Failures: 0, Errors: 0, Time elapsed: 0.373 sec
- Print Report :
-Testes generated: 156
-Failures on source: 0
-Errors on source: 0
-Failures on target: 1
-Errors on target: 0
-Refactoring? false
-
-
-
-report changes: null
-RandoopTest0.test96 in source is SUCCESS while in target is FAILURE
-
-
-coverage:
-processing instrumentation path ...
-instrumentation path processed in 33 ms
-[0 class(es) instrumented, 0 resource(s) copied]
-no output created: metadata is empty
-    [junit] Running RandoopTest0
-    [junit] Tests run: 156, Failures: 0, Errors: 0, Time elapsed: 0.229 sec
-processing input files ...
-1 file(s) read and merged in 3 ms
-writing [xml] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.xml] ...
-writing [html] report to [/home/jefferson/workspace/ferramentaLPSSM/Products/Product1/report.html] ...
-
-
- -- SafeRefactor FOUND behavioral changes -- 
-Refactoring ? false
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+It belongs to modified class list ? true
+
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+It belongs to modified class list ? false
+
+Dependencia: Subunit
+
+Dependencia: Component
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+It belongs to modified class list ? false
+
+Dependencia: Subunit
+
+Dependencia: Employee
+
+Dependencia: Container
+
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.pojo not found
+
+Dependencia: DepartmentImpl
+
+Dependencia: EmployeeImpl
+
+Dependencia: Factory
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: Employee
+
+Dependencia: CompanyImpl
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+It belongs to modified class list ? false
+
+Dependencia: org.softlang.company.Company
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: org.softlang.company.Employee
+
+Dependencia: Employee
+
+Dependencia: org.softlang.company.Department
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java:4,8:
+  Semantic Error: org.softlang.company.impl.bean not found
+
+Dependencia: DepartmentImpl
+
+Dependencia: EmployeeImpl
+
+Dependencia: Factory
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: Employee
+
+Dependencia: CompanyImpl
+
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
+
+It belongs to modified class list ? false
+
+Dependencia: SimpleList
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
+
+It belongs to modified class list ? false
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
+
+It belongs to modified class list ? false
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
+
+It belongs to modified class list ? true
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.VoidVisitor
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: Employee
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java
+
+It belongs to modified class list ? false
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:3,8:
+  Semantic Error: org.softlang.company not found
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:7:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:8:
+  Semantic Error: method with signature visit(Unknown) is multiply declared in type org.softlang.visitor.ReturningVisitor
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: Employee
+
+Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests
+
+File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests/Basics.java
+
+It belongs to modified class list ? false
+
+Dependencia: Test
+
+Dependencia: org.softlang.company.factory.Factory
+
+Dependencia: org.softlang.company.Company
+
+Dependencia: Factory
+
+Dependencia: Department
+
+Dependencia: Company
+
+Dependencia: org.softlang.company.Employee
+
+Dependencia: Employee
+
+Dependencia: org.junit.Test
+
+Dependencia: org.softlang.company.Department
+
+List of Extended Impacted Classes: 5
+org.softlang.company.factory.PojoFactory.java
+org.softlang.company.factory.BeanFactory.java
+org.softlang.main.Main.java
+org.softlang.company.Container.java
+org.softlang.company.Subunit.java
+
+--------------------------
 
 	 SPL REPORT: 
 

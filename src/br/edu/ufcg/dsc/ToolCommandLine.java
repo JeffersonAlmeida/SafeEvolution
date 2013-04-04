@@ -185,6 +185,7 @@ public class ToolCommandLine {
 		}else if(in.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 			ExtendedImpactedClasses eic = new ExtendedImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
+			eic.evaluate(sourceSPL, targetSPL, in);
 		}
 		
 		/*Report Variables: Pause total time to check the SPL.*/

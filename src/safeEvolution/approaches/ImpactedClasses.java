@@ -348,8 +348,7 @@ public class ImpactedClasses {
 			}
 	
 			for (String dependecia : dependencias) {
-				if (!classe.getAbsolutePath().contains(dependecia)
-						|| (!dependecia.contains(".") && !classe.getAbsolutePath().contains("." + dependecia))) {
+				if (!classe.getAbsolutePath().contains(dependecia) || (!dependecia.contains(".") && !classe.getAbsolutePath().contains("." + dependecia))) {
 	
 					String path = this.getPathClassMapping(dependecia, mapping);
 	
@@ -372,8 +371,7 @@ public class ImpactedClasses {
 	
 								if (filesToTrash != null) {
 									filesToTrash.add(fileDestination);
-									filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS,
-											"src")));
+									filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
 								}
 	
 								this.copyDependencies(file, destinationDirectory, mapping, filesToTrash, dependenciasCache);
