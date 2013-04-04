@@ -9,6 +9,7 @@ import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
 import safeEvolution.approaches.AllProducts;
+import safeEvolution.approaches.ExtendedImpactedClasses;
 import safeEvolution.approaches.ImpactedClasses;
 import safeEvolution.approaches.ImpactedProducts;
 import safeEvolution.fileProperties.FilePropertiesObject;
@@ -183,6 +184,7 @@ public class ToolCommandLine {
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
+			ExtendedImpactedClasses eic = new ExtendedImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
 		}
 		
 		/*Report Variables: Pause total time to check the SPL.*/

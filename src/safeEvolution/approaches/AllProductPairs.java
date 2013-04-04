@@ -1,7 +1,6 @@
 package safeEvolution.approaches;
 
 import java.io.IOException;
-
 import safeEvolution.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
