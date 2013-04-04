@@ -1,12 +1,10 @@
 package br.edu.ufcg.dsc;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
-import javax.naming.ConfigurationException;
 import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
@@ -17,7 +15,6 @@ import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.productMatcher.ProductMatching;
 import safeEvolution.productsCleaner.ProductsCleaner;
 import safeEvolution.wellFormedness.WellFormedness;
-import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.builders.MobileMediaBuilder;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.builders.TargetBuilder;
@@ -41,34 +38,14 @@ public class ToolCommandLine {
 	
 	private WellFormedness wellFormedness;
 	
-	/*A string collection of changed classes.*/
-	private Collection<String> classesModificadas;
-	
 	private ProductBuilder productBuilder;
 	
-	private long testsCompileTimeout;
-	
-	private long testsExecutionTimeout;
-	private long testsGenerationTimeout;
-	
-	/* This variable will store the changed assets - mofified files/classes.*/
-	private HashSet<String> changedAssets;
-
-	private ASTComparator astComparator;
-
-	private HashMap<String, HashSet<HashSet<String>>> productsCache;
+	private AssetMappingAnalyzer amAnalyzer;
 
 	public ToolCommandLine() {
-		this.productsCache = new HashMap<String, HashSet<HashSet<String>>>();
-		this.astComparator = new ASTComparator();
 		this.wellFormedness = new WellFormedness();
 		this.productsCleaner = new ProductsCleaner();
-		
-		try {
-			this.astComparator.setUpProject();
-		} catch (ConfigurationException e) {
-			e.printStackTrace();
-		}
+		this.amAnalyzer = new AssetMappingAnalyzer();
 	}
 
 	public ToolCommandLine(Lines line) {
@@ -83,11 +60,6 @@ public class ToolCommandLine {
 	}
 
 	private void setup(ProductLine souceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
-		this.classesModificadas = null;
-		this.testsCompileTimeout = 0;
-		this.testsExecutionTimeout = 0;
-		this.testsGenerationTimeout = 0;
-		this.changedAssets = null;
 		/* Removes all of the mappings from this map. The map will be empty after this call returns. */
 		XMLReader.getInstance().reset();
 		/* Cleans the generated products folder. */
@@ -100,13 +72,13 @@ public class ToolCommandLine {
 
 		HashSet<String> output = new HashSet<String>();
 
-		if (this.changedAssets == null) {
+		if (this.amAnalyzer.getChangedAssetsList() == null) {
 			return null;
 		}
 
 		HashSet<String> changedAssetNames = new HashSet<String>();
 
-		for (String asset : this.changedAssets) {
+		for (String asset : this.amAnalyzer.getChangedAssetsList()) {
 			String correspondingAssetName = getCorrespondingAssetName(targetLine.getAssetMapping(), asset);
 			if (correspondingAssetName != null) {
 				changedAssetNames.add(correspondingAssetName);
@@ -150,18 +122,6 @@ public class ToolCommandLine {
 		return result;
 	}
 
-	public long getTestsCompileTimeout() {
-		return testsCompileTimeout;
-	}
-
-	public long getTestsExecutionTimeout() {
-		return testsExecutionTimeout;
-	}
-
-	public long getTestsGenerationTimeout() {
-		return testsGenerationTimeout;
-	}
-
 	public boolean verifyLine(FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
 
 		String fachadaSource = null;
@@ -180,8 +140,6 @@ public class ToolCommandLine {
 		ProductLine targetSPL = new ProductLine(in.getTargetLineDirectory(), ckTarget, fmTarget, amTarget, in.isAspectsInTargetSPL(), fachadaTarget, in.getCkFormatTargetSPL(), in.getAmFormatTargetSPL());
 		sourceSPL.setLibPath(in.getSourceLineLibDirectory());
 		targetSPL.setLibPath(in.getTargetLineLibDirectory());
-		sourceSPL.setSetsOfFeatures(this.productsCache.get(sourceSPL.getPath()));
-		targetSPL.setSetsOfFeatures(this.productsCache.get(targetSPL.getPath()));
 		
 	 	/* It cleans the generated products folder. */
 		this.setup(sourceSPL, targetSPL);
@@ -203,7 +161,6 @@ public class ToolCommandLine {
 		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
 		
-		AssetMappingAnalyzer amAnalyzer = new AssetMappingAnalyzer();
 		boolean isAssetMappingsEqual = amAnalyzer.isSameAssets(sourceSPL, targetSPL);
 		System.out.println("\n AM Equal: " + isAssetMappingsEqual);
 		
@@ -237,5 +194,12 @@ public class ToolCommandLine {
 		sOutcomes.getMeasures().print();
 
 		return isRefinement;
+	}
+
+	public void setAmAnalyzer(AssetMappingAnalyzer amAnalyzer) {
+		this.amAnalyzer = amAnalyzer;
+	}
+	public AssetMappingAnalyzer getAmAnalyzer() {
+		return amAnalyzer;
 	}
 }

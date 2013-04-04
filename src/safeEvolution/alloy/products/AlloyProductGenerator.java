@@ -59,4 +59,11 @@ public class AlloyProductGenerator {
 		AlloyFMEvolutionBuilder evolutionAlloy = new AlloyFMEvolutionBuilder();
 		evolutionAlloy.buildAlloyFile("evolution", Constants.ALLOY_PATH + Constants.EVOLUTION_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, "source", sourceFMXML, "target", targetFMXML);
 	}
+	public HashMap<String, HashSet<HashSet<String>>> getProductsCache() {
+		return productsCache;
+	}
+	public void setProductsCache(
+			HashMap<String, HashSet<HashSet<String>>> productsCache) {
+		this.productsCache = productsCache;
+	}
 }

@@ -9,7 +9,6 @@ package br.edu.ufcg.dsc.evaluation;
 
 import java.io.File;
 import java.io.IOException;
-
 import safeEvolution.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ToolCommandLine;
@@ -27,7 +26,6 @@ public class Analyzer {
 			}
 			return instance;
 		}
-		
 		private Analyzer(){
 			super();
 		}

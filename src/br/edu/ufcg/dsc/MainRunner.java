@@ -13,10 +13,8 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.application.WorkbenchAdvisor;
 import org.eclipse.ui.testing.ITestHarness;
 import org.eclipse.ui.testing.TestableObject;
-
 import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.fileProperties.FilePropertiesReader;
-
 import edu.mit.csail.sdg.alloy4.Err;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
@@ -75,11 +73,9 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 	public void setArguments(String[] arguments) {
 		this.arguments = arguments;
 	}
-
 	public String[] getArguments() {
 		return arguments;
 	}
-
 	public static class NullAdvisor extends WorkbenchAdvisor {
 		@Override
 		public String getInitialWindowPerspectiveId() {

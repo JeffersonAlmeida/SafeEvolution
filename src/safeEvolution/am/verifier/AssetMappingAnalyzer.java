@@ -135,4 +135,11 @@ public class AssetMappingAnalyzer {
 	public void setModifiedClassesList(Collection<String> modifiedClassesList) {
 		this.modifiedClassesList = modifiedClassesList;
 	}
+	public HashSet<String> getChangedAssetsList() {
+		return changedAssetsList;
+	}
+	public void setChangedAssetsList(HashSet<String> changedAssetsList) {
+		this.changedAssetsList = changedAssetsList;
+	}
+	
 }
