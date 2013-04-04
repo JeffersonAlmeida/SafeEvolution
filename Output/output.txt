@@ -5013,17 +5013,15 @@ Have Source and Target the same assets ?:false
 EXTENDED IMPACTED ClASSES
 
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
 Dependencia: org.softlang.company.factory.Factory
 
@@ -5035,207 +5033,429 @@ Dependencia: Factory
 
 Dependencia: EmployeeImpl
 
-Dependencia: org.softlang.company.impl.bean.EmployeeImpl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Dependencia: org.softlang.company.Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Dependencia: BeanFactory
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-Dependencia: org.softlang.company.Department
-
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
 Dependencia: Subunit
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
 
 Dependencia: Component
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: Container
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
-
-It belongs to modified class list ? true
-
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
 Dependencia: Subunit
 
-Dependencia: Component
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-It belongs to modified class list ? true
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Dependencia: Subunit
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
 
 Dependencia: Container
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+Dependencia: Subunit
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+Dependencia: Container
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+Dependencia: Subunit
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java:4,8:
   Semantic Error: org.softlang.company.impl.pojo not found
 
 Dependencia: DepartmentImpl
 
-Dependencia: EmployeeImpl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Factory
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Dependencia: CompanyImpl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
 
 Dependencia: org.softlang.company.Company
 
 Dependencia: Department
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: org.softlang.company.Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Dependencia: org.softlang.company.Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java:4,8:
   Semantic Error: org.softlang.company.impl.bean not found
 
 Dependencia: DepartmentImpl
 
-Dependencia: EmployeeImpl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Factory
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Dependencia: CompanyImpl
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
 
 Dependencia: SimpleList
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
 
-It belongs to modified class list ? false
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
   Semantic Error: no field named element
 
 Dependencia: ChangeList
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
-
-It belongs to modified class list ? true
-
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
   Semantic Error: no field named element
 
 Dependencia: ChangeList
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
-
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:3,8:
   Semantic Error: org.softlang.company not found
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java:7:
@@ -5245,13 +5465,93 @@ It belongs to modified class list ? false
 
 Dependencia: Department
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
+
+Dependencia: SimpleList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:3,8:
   Semantic Error: org.softlang.company not found
 /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java:7:
@@ -5261,15 +5561,97 @@ It belongs to modified class list ? false
 
 Dependencia: Department
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Directory: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-File: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests/Basics.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-It belongs to modified class list ? false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
+
+Dependencia: SimpleList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests/Basics.java
 
 Dependencia: Test
 
@@ -5279,36 +5661,228 @@ Dependencia: org.softlang.company.Company
 
 Dependencia: Factory
 
-Dependencia: Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src
 
-Dependencia: Company
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org
 
-Dependencia: org.softlang.company.Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang
 
-Dependencia: Employee
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main
 
-Dependencia: org.junit.Test
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/main/Main.java
 
-Dependencia: org.softlang.company.Department
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company
 
-List of Extended Impacted Classes: 5
-org.softlang.company.factory.PojoFactory.java
-org.softlang.company.factory.BeanFactory.java
-org.softlang.main.Main.java
-org.softlang.company.Container.java
-org.softlang.company.Subunit.java
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Employee.java
 
---------------------------
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Subunit.java
 
-	 SPL REPORT: 
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Company.java
 
--> Source Product Line is Well Formed:?  true
--> Target Product Line is Well Formed:?  true
--> Asset Mappings are Equals :?false
--> Are Configuration Knowledge and Feature Model a refinement:?  true
--> The evolution has a compatible observable behavior:?  false
--> My Whole Software Product Line is Well Formed:?  true
--> My Whole Software Product Line is a Refinement:?  false
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl
 
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean
 
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/CompanyImpl.java
 
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/bean/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/CompanyImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/EmployeeImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/DepartmentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ContainerImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/impl/pojo/ComponentImpl.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Container.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Component.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/Department.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/PojoFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/Factory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/company/factory/BeanFactory.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleLinkedList.java
+
+Dependencia: SimpleList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ChangeList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/AddToList.java:4,36:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/SimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/ObservableSimpleList.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java
+/home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/util/RemoveFromList.java:4,41:
+  Semantic Error: no field named element
+
+Dependencia: ChangeList
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/VoidVisitor.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/visitor/ReturningVisitor.java
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests
+
+FILE: /home/jefferson/Dropbox/101Companies/SecondCategory/ToySPL02/src/org/softlang/tests/Basics.java
+Exception in thread "WorkbenchTestable" org.eclipse.swt.SWTException: Failed to execute runnable (java.util.ConcurrentModificationException)
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:194)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4021)
+	at org.eclipse.ui.internal.testing.WorkbenchTestable.runTest(WorkbenchTestable.java:109)
+	at br.edu.ufcg.dsc.MainRunner.runTests(MainRunner.java:52)
+	at org.eclipse.ui.internal.testing.WorkbenchTestable$1.run(WorkbenchTestable.java:68)
+	at java.lang.Thread.run(Thread.java:679)
+Caused by: java.util.ConcurrentModificationException
+	at java.util.HashMap$HashIterator.nextEntry(HashMap.java:810)
+	at java.util.HashMap$KeyIterator.next(HashMap.java:845)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:84)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.clazzDependenciesBelongToModifiedClasses(ExtendedImpactedClasses.java:90)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getDependencies(ExtendedImpactedClasses.java:58)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:52)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.getAboveDependencies(ExtendedImpactedClasses.java:49)
+	at safeEvolution.approaches.ExtendedImpactedClasses.evaluate(ExtendedImpactedClasses.java:30)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:188)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)

@@ -26,8 +26,8 @@ public class ExtendedImpactedClasses {
 		this.extendedImpactedClasses = new HashSet<String>();
 	}
 
-	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject) throws IOException, AssetNotFoundException, DirectoryException{
-		this.extendedImpactedClasses = this.getAboveDependencies(new File(sourceLine.getPath()+"/src"), new HashSet<String>());
+	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine) throws IOException, AssetNotFoundException, DirectoryException{
+		this.getAboveDependencies(new File(sourceLine.getPath()+"src"));
 		this.printListofExtendedImpactedClasses();
 		return true;
 	}
@@ -41,21 +41,22 @@ public class ExtendedImpactedClasses {
 		System.out.println("\n--------------------------");
 	}
 
-	private Collection<String> getAboveDependencies(File classe, HashSet<String> dependentsListOfModifiedClasses) {
+	private void getAboveDependencies(File classe) {
+		System.out.println("\nFILE: " + classe.getAbsolutePath());
 		if (classe.isDirectory() && !classe.getAbsolutePath().contains(".svn") ) { 
-			System.out.println("\nDirectory: " + classe.getAbsolutePath());
 			File[] files = classe.listFiles();
 			for (File subFile : files) {
-				this.getAboveDependencies(subFile, dependentsListOfModifiedClasses);
+				this.getAboveDependencies(subFile);
 			}
-		} else {
-			System.out.println("\nFile: " + classe.getAbsolutePath());
-			if (classe.getAbsolutePath().endsWith("java") && !(thisclassBelongsToModifiedClasses(classe))) {
-				Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());  // Get All Dependencies of this Class
-				dependentsListOfModifiedClasses = clazzDependenciesBelongToModifiedClasses(getPackageName(classe), dependencias, dependentsListOfModifiedClasses); // A -> B  A is dependent of B.   B is a dependency of A
-			}
+		} else if (classe.getAbsolutePath().endsWith("java")) 
+			getDependencies(classe);
+	}
+
+	private void getDependencies(File classe) {
+		if(!(thisclassBelongsToModifiedClasses(classe))){
+			Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());  // Get All Dependencies of this Class
+			clazzDependenciesBelongToModifiedClasses(getPackageName(classe), dependencias); // A -> B  A is dependent of B.   B is a dependency of A	
 		}
-		return dependentsListOfModifiedClasses;
 	}
 	
 	private boolean thisclassBelongsToModifiedClasses(File classe) {
@@ -73,7 +74,7 @@ public class ExtendedImpactedClasses {
 		}
 		return packagePath.replaceAll("/", ".");
 	}
-	private HashSet<String> clazzDependenciesBelongToModifiedClasses(String classe, Collection<String> dependencias, HashSet<String> dependentsListOfModifiedClasses) {
+	private void clazzDependenciesBelongToModifiedClasses(String classe, Collection<String> dependencias) {
 		Iterator<String> i = dependencias.iterator();
 		while(i.hasNext()){
 			String s = i.next();
@@ -84,10 +85,11 @@ public class ExtendedImpactedClasses {
 				String[] words = string2.split("\\.");//words[words.length-1];
 				String w = words[words.length-2];
 				if(s.equals(w)){
-					dependentsListOfModifiedClasses.add(classe); // Add class in the dependencies of modified classes set.
+					this.modifiedClasses.add(classe);
+					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
+					getAboveDependencies(new File(this.input.getSourceLineDirectory()+"src"));
 				}
 			}
 		}
-		return dependentsListOfModifiedClasses;
 	}
 }
