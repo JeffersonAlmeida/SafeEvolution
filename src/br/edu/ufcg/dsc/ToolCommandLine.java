@@ -9,8 +9,8 @@ import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
 import safeEvolution.approaches.AllProducts;
-import safeEvolution.approaches.ExtendedImpactedClasses;
-import safeEvolution.approaches.ImpactedClasses;
+import safeEvolution.approaches.BackwardImpactedClasses;
+import safeEvolution.approaches.ForwardImpactedClasses;
 import safeEvolution.approaches.ImpactedProducts;
 import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.productMatcher.ProductMatching;
@@ -180,16 +180,17 @@ public class ToolCommandLine {
 			System.out.println("Refactoring ? " + (isRefinement = ip.evaluate(sourceSPL, targetSPL, in, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.IC)){
 			System.out.println("\nIMPACTED ClASSES\n");
-			ImpactedClasses ic = new ImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
+			ForwardImpactedClasses ic = new ForwardImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 		}else if(in.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
-			ExtendedImpactedClasses eic = new ExtendedImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
-			eic.evaluate(sourceSPL, targetSPL);
+			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 		}
 		
 		/*Report Variables: Pause total time to check the SPL.*/
 		sOutcomes.setWF(wf);
+		sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
 		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
 		sOutcomes.setRefinement(wf && isRefinement);
 		sOutcomes.setCompObservableBehavior(isRefinement);

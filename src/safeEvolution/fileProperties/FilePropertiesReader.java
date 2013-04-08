@@ -186,7 +186,7 @@ public class FilePropertiesReader {
 			} 
 			public static void main(String [] args){
 				System.out.println("File Properties");
-				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/101SPL.properties");
+				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/motivatingEX3.properties");
 			    FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
 				System.out.println(propertiesObject);
 			}

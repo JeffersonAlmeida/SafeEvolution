@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
-
 import safeEvolution.fileProperties.FilePropertiesObject;
 import soot.Main;
 import br.edu.ufcg.dsc.Constants;
