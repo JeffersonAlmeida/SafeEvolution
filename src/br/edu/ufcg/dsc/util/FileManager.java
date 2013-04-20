@@ -596,7 +596,7 @@ public class FileManager {
 				out += separator + dirs[i];
 				separator = ".";
 			}
-			if (dirs[i].equals("src")) {
+			if (dirs[i].equals("src") || dirs[i].equals("source")) {
 				counter = i;
 			}
 		}

@@ -462,7 +462,9 @@ public abstract class ImpactedClasses {
 			//As classes em que um aspecto interferem sao informadas na primeira
 			//linha do arquivo aj.
 
-			String path = mapping.get(FileManager.getInstance().getCorrectName(this.replaceBarrasPorSeparator(aspecto)));
+			String nameWithoutSlash = this.replaceBarrasPorSeparator(aspecto);
+			String aspectName = FileManager.getInstance().getCorrectName(nameWithoutSlash);
+			String path = mapping.get(aspectName);
 
 			Collection<String> classesEmQueOAspectoInterfe = FileManager.getInstance().getDependenciasAspectos(new File(path));
 
