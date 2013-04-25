@@ -140,7 +140,7 @@ public class CommandLine {
 		Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
 
 		System.out.println("Safe Refactor!");
-		isRefinement = sr.isRefactoring(String.valueOf(propertiesObject.getTimeOut()), true);
+		isRefinement = sr.isRefactoring(String.valueOf(propertiesObject.getTimeOut()), true, propertiesObject.getGenerateTestsWith());
 
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");

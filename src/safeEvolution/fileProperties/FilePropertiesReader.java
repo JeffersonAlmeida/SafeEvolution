@@ -90,6 +90,9 @@ public class FilePropertiesReader {
 				String artifactsTargetDir = this.properties.getProperty("artifactsTargetDir");
 				this.propertiesObject.setArtifactsTargetDir(artifactsTargetDir);
 				
+				String generateTestsWith = this.properties.getProperty("generateTestsWith");
+				this.propertiesObject.setGenerateTestsWith(generateTestsWith);
+				
 				this.isLoaded = true;
 				return this.propertiesObject;
 			}
@@ -186,7 +189,7 @@ public class FilePropertiesReader {
 			} 
 			public static void main(String [] args){
 				System.out.println("File Properties");
-				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/TaRGeT_tests.properties");
+				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank1.0.properties");
 			    FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
 				System.out.println(propertiesObject);
 			}

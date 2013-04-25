@@ -26,6 +26,7 @@ public class FilePropertiesObject {
 			private AMFormat amFormatTargetSPL;
 			private String artifactsSourceDir;
 			private String artifactsTargetDir;
+			private String generateTestsWith;
 			
 			public FilePropertiesObject() {
 				super();
@@ -141,7 +142,12 @@ public class FilePropertiesObject {
 			public String getArtifactsTargetDir() {
 				return artifactsTargetDir;
 			}
-			
+			public String getGenerateTestsWith() {
+				return generateTestsWith;
+			}
+			public void setGenerateTestsWith(String generateTestsWith) {
+				this.generateTestsWith = generateTestsWith;
+			}
 			/*............................................................toString*/
 		
 			/* (non-Javadoc)
@@ -156,6 +162,7 @@ public class FilePropertiesObject {
 				   	    "sourceLineLibDirectory = " + sourceLineLibDirectory + "\n" +
 						"targetLineLibDirectory = " + targetLineLibDirectory + "\n" +
 						"line = " + line + "\n" +
+						"generateTestsWith = " + generateTestsWith + "\n" +
 						"timeOut = " + timeOut + "\n" +
 						"inputLimit = " + inputLimit + "\n" +
 						"approach  = " + approach + "\n" +
