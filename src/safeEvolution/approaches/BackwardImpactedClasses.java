@@ -26,7 +26,8 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 	}
 
 	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
-		this.getBackwardDependencies(new File(sourceSPL.getPath()+"src"));
+		/*this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); Codigo para encontrar as dependencias em mais de um nivel acima*/ 
+		this.getAboveDependencies(new File(sourceSPL.getPath()+"src"));
 		this.printListofExtendedImpactedClasses();
 		super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
@@ -41,14 +42,15 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 		System.out.println("\n--------------------------");
 	}
 
-	private void getBackwardDependencies(File sourceSplDirectory){
+	// Codigo para encontrar as dependencias em mais de um nivel acima
+	/*private void getBackwardDependencies(File sourceSplDirectory){
 		int i = 0;
 		while(i < this.sourceCodeVerificationCounter){
 			this.canIncrementVerificationCounter = true;
 			this.getAboveDependencies(sourceSplDirectory);
 			i++;
 		}
-	}
+	}*/
 	
 	private void getAboveDependencies(File classe) {
 		System.out.println("\nFILE: " + classe.getAbsolutePath());
@@ -99,7 +101,7 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 				if(s.equals(w)){
 					this.modifiedClasses.add(classe);
 					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
-					if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;}
+					/*if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} Codigo para encontrar as dependencias em mais de um nivel acima*/
 					break;
 				}
 			}
