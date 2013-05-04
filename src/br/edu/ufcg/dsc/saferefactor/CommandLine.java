@@ -15,7 +15,7 @@ import safeEvolution.fileProperties.FilePropertiesObject;
 import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
-import br.edu.ufcg.saferefactor.core.Criteria;
+import br.edu.ufcg.saferefactor.core.Analyzer;
 import br.edu.ufcg.saferefactor.core.Saferefactor;
 
 public class CommandLine {
@@ -137,11 +137,25 @@ public class CommandLine {
 
 		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 
-		Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
+		org.sr.input.FilePropertiesObject input = new org.sr.input.FilePropertiesObject();
+		input.setSourceLineDirectory(sourceProductPath);
+		input.setTargetLineDirectory(targetProductPath);
+		input.setTimeOut(propertiesObject.getTimeOut());
+		input.setInputLimit(propertiesObject.getInputLimit());
+		input.setGenerateTestsWith(propertiesObject.getGenerateTestsWith());
+		input.setWhichMethods(propertiesObject.getWhichMethods());
+		Saferefactor safeRefactor = new Saferefactor(classes, input);
+		//Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
 
-		System.out.println("Safe Refactor!");
-		isRefinement = sr.isRefactoring(String.valueOf(propertiesObject.getTimeOut()), true, propertiesObject.getGenerateTestsWith());
+		Analyzer analyzer = new Analyzer();
+		analyzer.setInput(safeRefactor.getInput());
+		safeRefactor.setAnalyzer(analyzer);
+		safeRefactor.getAnalyzer().setImpactedClasses(safeRefactor.getIc());
+		
+		isRefinement = safeRefactor.isRefactoring(String.valueOf(input.getTimeOut()), true, input.getGenerateTestsWith());
 
+		
+		
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");
 		} else {

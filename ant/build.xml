@@ -1,0 +1,388 @@
+<project name="RefactoringProject" default="run_tests_source" basedir="../">
+
+
+	<property name="wtk.home" value="/home/jefferson/WTK2.5.1"/>
+
+	<property name="emma.dir" value="lib" />
+
+	<taskdef resource="antenna.properties" classpath="lib/antenna-bin-1.2.1-beta.jar"/>
+
+	<taskdef resource="org/aspectj/tools/ant/taskdefs/aspectjTaskdefs.properties">
+		<classpath>
+			<pathelement location="lib/aspectjtools.jar" />
+		</classpath>
+	</taskdef>
+
+	<path id="emma.lib" >
+		<pathelement location="${emma.dir}/emma.jar" />
+		<pathelement location="${emma.dir}/emma_ant.jar" />
+	</path>
+
+	<taskdef resource="emma_ant.properties" classpathref="emma.lib" />
+
+	<target name="preprocess">
+	    <echo> This task is responsible to PREPROCESS the files ... </echo>
+		<wtkpreprocess srcdir="${srcpreprocess}" destdir="${src}" symbols="${symbols}" verbose="true" indent="false" />
+	</target>
+
+	<target name="velocity">
+		<java jar="ant/velocity.jar" fork="true">
+			<arg value="${contantsfile}" />
+			<arg value="${fileList}" />
+		</java>
+	</target>
+
+	<path id="classpath">
+		<fileset dir="${pluginpath}/lib" includes="junit4.8.jar" />
+	</path>
+
+	<path id="classpath_source">
+		<fileset dir="${source}/" includes="lib/*.jar" />
+        <fileset dir="${pluginpath}/libTargetPOI32" includes="*.jar"/>
+		<fileset dir="${lpsSource}/" includes="lib/*.jar" />
+		<fileset dir="${pluginpath}/lib" includes="*.jar"/>
+	</path>
+
+	<path id="classpath_target">
+		<fileset dir="${target}" includes="lib/*.jar"/>
+
+
+		<fileset dir="${pluginpath}/libTargetPOI32" includes="*.jar"/>
+		<!--fileset dir="${pluginpath}/libTargetOld" includes="*.jar"/-->
+
+
+		<fileset dir="${lpsTarget}/" includes="lib/*.jar" />
+		<fileset dir="${pluginpath}/lib" includes="*.jar"/>
+	</path>
+
+	<path id="classpath">
+		<fileset dir="${pluginpath}/lib"  includes="*.jar"/>
+	</path>
+
+	<target name="clean_products_folder">
+		<echo>This is an Ant Task created to clean the generated products folder.</echo>
+		<delete includeemptydirs="true">
+			<fileset dir="${productsFolder}/" includes="**/*" />
+			<fileset dir="${pluginpath}/emma/instr/" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="clean_directory">
+		<delete includeemptydirs="true">
+			<fileset dir="${directory}/" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="clean">
+	<echo> This task is responsible to clean all tests. </echo>
+		<delete includeemptydirs="false">
+			<!--fileset dir="${source}/bin" includes="**/*"/>
+			<fileset dir="${target}/bin" includes="**/*"/-->
+			<fileset dir="${tests.folder}/" includes="**/*"/>
+			<fileset dir="${tests.folder}/bin" includes="**/*"/>
+			<fileset dir="${tests.folder}/source" includes="**/*"/>
+			<fileset dir="${tests.folder}/target" includes="**/*"/>
+		</delete>
+
+		<delete includeemptydirs="true">
+			<fileset dir="${pluginpath}/emma/outinstr" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="clean_tests">
+	    <echo> This task is responsible to clean all tests. </echo>
+		<delete includeemptydirs="false">
+			<fileset dir="${tests.folder}/" includes="**/*"/>
+			<fileset dir="${tests.folder}/bin" includes="**/*"/>
+			<fileset dir="${tests.folder}/source" includes="**/*"/>
+			<fileset dir="${tests.folder}/target" includes="**/*"/>
+		</delete>
+
+		<delete includeemptydirs="true">
+			<fileset dir="${pluginpath}/emma/outinstr" includes="**/*" />
+		</delete>
+	</target>
+
+	<target name="compile_source">
+	<echo> SOURCE Compile </echo>
+	<echo>The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.</echo>
+		<iajc source="1.5" destdir="${source}/bin" sourceroots="${source}/src">
+			<classpath refid="classpath_source"/>
+		</iajc>
+	</target>
+
+
+
+	<target name="compile_target" depends="compile_source">
+		<echo> TARGET Compile </echo>
+		<echo>The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.</echo>
+		<iajc source="1.5" destdir="${target}/bin" sourceroots="${target}/src">
+			<classpath refid="classpath_target"/>
+		</iajc>
+	</target>
+
+	<target name="compile_target_ind">
+	<echo> TARGET Compile IND </echo>
+		<echo>The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.</echo>
+		<iajc source="1.5" destdir="${target}/bin" sourceroots="${target}/src">
+			<classpath refid="classpath_target"/>
+		</iajc>
+	</target>
+
+	<!--target name="code">
+		<echo>
+	            Analysing the code
+	        </echo>
+		<java classname="refactoring.IdentifyChange" fork="false" maxmemory="256m">
+			<arg value="${source}/src"/>
+			<arg value="${target}/src"/>
+			<arg value="1"/>
+			<arg value="${classes}"/>
+			<arg value="${f}"/>
+			<arg value="${maxtests}"/>
+			<arg value="${filelog}"/>
+			<arg value="${abordagem}"/>
+			<classpath>
+				<pathelement path="lib/aspectjrt.jar" />
+				<pathelement path="${target}/bin"/>
+				<pathelement path="bin"/>
+			</classpath>
+			<classpath refid="classpath_target"/>
+		</java>
+	</target-->
+
+	<target name="code">
+		<echo>
+	            Analysing the code
+	        </echo>
+		<java classname="refactoring.IdentifyChange" >
+			<arg value="${source}/src"/>
+			<arg value="${target}/src"/>
+			<arg value="prepare"/>
+			<arg value="${classes}"/>
+			<arg value="${timeout}"/>
+			<arg value="${maxtests}"/>
+			<arg value="${filelog}"/>
+			<arg value="${abordagem}"/>
+			<classpath>
+				<pathelement path="lib/aspectjrt.jar" />
+				<pathelement path="${target}/bin"/>
+				<pathelement path="bin"/>
+
+			</classpath>
+			<classpath refid="classpath_target"/>
+		</java>
+	</target>
+
+	<!--target name="change" depends="code">
+		<echo>
+	            Analysing the code
+	        </echo>
+		<java classname="refactoring.IdentifyChange" fork="false" maxmemory="256m">
+			<arg value="${source}/src"/>
+			<arg value="${target}/src"/>
+			<arg value="2"/>
+			<arg value="${classes}"/>
+			<arg value="${timeout}"/>
+			<arg value="${maxtests}"/>
+			<arg value="${filelog}"/>
+			<arg value="${abordagem}"/>
+			<classpath>
+				<pathelement path="lib/aspectjrt.jar" />
+				<pathelement path="${source}/bin"/>
+				<pathelement path="bin"/>
+			</classpath>
+			<classpath refid="classpath_source"/>
+		</java>
+	</target-->
+
+	<target name="change" depends="code">
+		<echo>
+	            Analysing the code
+	        </echo>
+		<java classname="refactoring.IdentifyChange" fork="false" maxmemory="256m">
+			<arg value="${source}/src"/>
+			<arg value="${target}/src"/>
+			<arg value="finish"/>
+			<arg value="${classes}"/>
+			<arg value="${timeout}"/>
+			<arg value="${maxtests}"/>
+			<arg value="${filelog}"/>
+			<arg value="${abordagem}"/>
+			<arg value="${method}"/>
+			<classpath>
+				<pathelement path="lib/aspectjrt.jar" />
+				<pathelement path="${source}/bin"/>
+				<pathelement path="bin"/>
+			</classpath>
+			<classpath refid="classpath_source"/>
+		</java>
+	</target>
+
+	<target name="compile_tests">
+		<echo>Compiling the tests</echo>
+		<javac fork="yes" memorymaximumsize="512m" includes="*.java" debug="on" srcdir="${tests.folder}/" destdir="${tests.folder}/bin">
+			<classpath refid="classpath_source"/>
+			<classpath>
+				<pathelement path="lib/aspectjrt.jar" />
+
+				<pathelement path="${source}/bin" />
+				<pathelement path="${pluginpath}/lib/junit4.8.jar" />
+			</classpath>
+
+		</javac>
+	</target>
+
+	<!--target name="run_tests">
+		<echo>Running JUnit to test the "source"</echo>
+		<junit printsummary="yes" haltonfailure="yes" fork="true" maxmemory="512m">
+			<classpath refid="classpath_source" />
+			<classpath>
+				<path refid="emma.lib" />
+				<pathelement path="lib/aspectjrt.jar" />
+				<pathelement path="${out.instr.dir}/source" />
+				<pathelement path="${source}/bin" />
+				<pathelement path="${source}/lib" />
+				<pathelement path="lib/junit-4.5.jar" />
+				<pathelement path="${tests.folder}/bin" />
+			</classpath>
+
+			<jvmarg value="-Demma.coverage.out.file=${pluginpath}/emma/instr/coverage_source.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+
+			<formatter type="xml" />
+			<batchtest todir="${tests.folder}/source" haltonfailure="no">
+				<fileset dir="${tests.folder}/bin">
+					<include name="*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+
+		<echo>Running JUnit to test the "target"</echo>
+		<junit printsummary="yes" haltonfailure="yes" fork="false" maxmemory="512m">
+			<classpath refid="classpath_target" />
+			<classpath>
+				<path refid="emma.lib"/>
+				<pathelement path="lib/aspectjrt.jar" />
+
+				<pathelement path="${out.instr.dir}/target" />
+				<pathelement path="${target}/bin" />
+				<pathelement path="${target}/lib" />
+				<pathelement path="lib/junit-4.5.jar" />
+				<pathelement path="${tests.folder}/bin" />
+			</classpath>
+
+			<jvmarg value="-Demma.coverage.out.file=${pluginpath}/emma/instr/coverage_target.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+
+			<formatter type="xml" />
+			<batchtest todir="${tests.folder}/target" haltonfailure="no">
+				<fileset dir="${tests.folder}/bin">
+					<include name="*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target-->
+
+	<target name="run_tests_source">
+		<echo>Running JUnit to test the "source"</echo>
+		<!--junit printsummary="yes" haltonfailure="yes" fork="true" maxmemory="512m"-->
+		<junit printsummary="yes" haltonfailure="yes" fork="true" timeout="60000" maxmemory="512m">
+			<classpath refid="classpath_source" />
+			<classpath>
+				<path refid="emma.lib" />
+
+				<pathelement path="${out.instr.dir}/source" />
+				<pathelement path="${source}/bin" />
+				<pathelement path="${source}/lib" />
+				<pathelement path="${lpsSource}/lib" />
+
+				<pathelement path="${tests.folder}/bin" />
+				<pathelement path="${pluginpath}/lib/junit4.8.jar" />
+			</classpath>
+
+			<jvmarg value="-Demma.coverage.out.file=${pluginpath}/emma/instr/coverage_source.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+
+			<formatter type="xml" />
+			<batchtest todir="${tests.folder}/source" haltonfailure="no">
+				<fileset dir="${tests.folder}/bin">
+					<include name="*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="run_tests_target">
+		<echo>Running JUnit to test the "target"</echo>
+		<!--junit printsummary="yes" haltonfailure="yes" fork="true" maxmemory="512m"-->
+		<junit printsummary="yes" haltonfailure="yes" fork="true" timeout="60000" maxmemory="512m">
+			<classpath refid="classpath_target" />
+			<classpath>
+				<path refid="emma.lib"/>
+
+
+				<!-- Eh necessario manter o bin original abaixo do criado pelo Emma, por que o do
+				Emma nao contem unidades nao instrumentadas como interfaces, por exemplo. -->
+				<pathelement path="${out.instr.dir}/target" />
+				<pathelement path="${target}/bin" />
+				<pathelement path="${target}/lib" />
+				<pathelement path="${lpsTarget}/lib" />
+
+				<pathelement path="${tests.folder}/bin" />
+				<pathelement path="${pluginpath}/lib/junit4.8.jar" />
+			</classpath>
+
+			<jvmarg value="-Demma.coverage.out.file=${pluginpath}/emma/instr/coverage_target.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+
+			<formatter type="xml" />
+			<batchtest todir="${tests.folder}/target" haltonfailure="no">
+				<fileset dir="${tests.folder}/bin">
+					<include name="*Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<target name="instrument" depends="emma">
+		<emma enabled="${emma.enabled}">
+			<instr instrpath="${source}/bin" destdir="${out.instr.dir}/source" metadatafile="emma/instr/metadata_source.emma" merge="true" />
+		</emma>
+		<emma enabled="${emma.enabled}">
+			<instr instrpath="${target}/bin" destdir="${out.instr.dir}/target" metadatafile="emma/instr/metadata_target.emma" merge="true" />
+		</emma>
+	</target>
+
+	<target name="emma" description="turns on EMMA instrumentation/reporting">
+		<property name="emma.enabled" value="true" />
+
+		<!-- EMMA instr class output directory: -->
+		<property name="out.instr.dir" value="emma/outinstr" />
+		<mkdir dir="${out.instr.dir}" />
+		<mkdir dir="${out.instr.dir}/source" />
+		<mkdir dir="${out.instr.dir}/target" />
+	</target>
+
+	<target name="reporthtml">
+		<emma>
+			<report sourcepath="${source}/src">
+				<fileset dir="${pluginpath}/emma/instr">
+					<include name="*source.emma" />
+				</fileset>
+				<xml outfile="${pluginpath}/Resultados/Cobertura/${coverage_name}+source.xml" depth="method"/>
+				<html outfile="${pluginpath}/Resultados/Cobertura/${coverage_name}+source.html" depth="method"/>
+			</report>
+		</emma>
+		<emma>
+			<report sourcepath="${target}/src">
+				<fileset dir="${pluginpath}/emma/instr">
+					<include name="*target.emma" />
+				</fileset>
+				<xml outfile="${pluginpath}/Resultados/Cobertura/${coverage_name}+target.xml" depth="method" />
+				<html outfile="${pluginpath}/Resultados/Cobertura/${coverage_name}+target.html" depth="method" />
+			</report>
+		</emma>
+	</target>
+
+</project>

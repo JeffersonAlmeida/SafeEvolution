@@ -1,0 +1,7 @@
+START SEQUENCE
+var3 = prim : double:2.5 :
+var2 = prim : String:"texto" :
+var1 = cons : pack.AnotherObject.<init>(java.lang.String,double) : var2 var3
+var0 = cons : pack.ComplexObject.<init>(pack.AnotherObject) : var1
+END SEQUENCE
+

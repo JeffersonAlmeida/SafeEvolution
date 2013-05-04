@@ -1,0 +1,89 @@
+<project name="emma_money_demo" default="code" basedir=".">
+	<description>  
+         emma moneytest build file  
+     </description>
+
+	<property name="src" location="${basedir}/src"/>
+	<property name="build" location="${basedir}/build"/>
+	<property name="reports" location="${basedir}/reports"/>
+	<property name="coverage" location="${reports}/coverage" />
+	<property name="instr" location="${basedir}/instr" />
+
+	<path id="build.classpath">
+		<pathelement path="${build}"/>
+	</path>
+
+	<path id="run.classpath">
+		<path  refid="build.classpath"/>
+		<pathelement path="${ant.home}/lib/junit.jar"/>
+	</path>
+
+	<target name="with.emma">
+		<mkdir dir="${coverage}" />
+		<property name="emma.enabled" value="true"/>
+		<taskdef resource="emma_ant.properties" />
+		<property name="out.instr.dir" value="${instr}" />
+		<path id="run.classpath">
+			<pathelement location="${out.instr.dir}" />
+			<path  refid="build.classpath"/>
+			<pathelement path="${ant.home}/lib/junit.jar"/>
+			<pathelement path="${ant.home}/lib/emma.jar"/>
+		</path>
+	</target>
+
+	<target name="report.html" >
+		<taskdef resource="emma_ant.properties" />
+		<emma>
+			<report sourcepath="${src}" >
+				<fileset dir="${coverage}" >
+					<include name="*.emma" />
+				</fileset>
+				<html outfile="${coverage}/coverage.html" />
+			</report>
+		</emma>
+	</target>
+
+	<!-- Creates Destination directory and compiles files in source directory-->
+	<target name="code" >
+		<mkdir dir="${build}" />
+		<javac srcdir="${src}" destdir="${build}"  debug="true"/>
+	</target>
+
+	<!-- Instrument the code -->
+	<target name="instr" depends="code" if="emma.enabled" >
+		<emma>
+			<instr instrpathref="build.classpath"  
+             destdir="${out.instr.dir}"  
+             metadatafile="${coverage}/metadata.emma"  
+             merge="true"  
+      />
+		</emma>
+	</target>
+
+	<!-- runs the tests -->
+	<target name="test" depends="instr" description="runs the examples" >
+		<mkdir dir="${reports}" />
+		<junit printsummary="yes" fork="yes"  
+            haltonfailure="yes" >
+			<classpath>
+				<path  refid="run.classpath"/>
+			</classpath>
+			<jvmarg value="-Demma.coverage.out.file=${coverage}/coverage.emma" />
+			<jvmarg value="-Demma.coverage.out.merge=true" />
+			<formatter type="plain"/>
+			<formatter type="xml" />
+			<batchtest todir="${reports}">
+				<fileset dir="${src}" >
+					<include name="**/*Test.java" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<!-- Delete the ${build} directory-->
+	<target name="clean">
+		<delete dir="${build}"/>
+		<delete dir="${instr}"/>
+		<delete dir="${reports}"/>
+	</target>
+</project>

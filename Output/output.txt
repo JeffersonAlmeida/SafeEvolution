@@ -140,23 +140,7 @@ public class Client {
 }
 
 Parametros para o SOOT -> Classe:Client path:/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/client
-
-Provided Class: Client Dependence: org.bank.account.Account
-
-Provided Class: Client Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Client Dependence: Account
-
-Provided Class: Client Its Dependencies: Account - constant Required: Account
-
-Provided Class: Client Dependence: package org.bank.client;
-
-
-Class Name: Client, src/org/bank/client/Client.java
-
- Provided Classes:  [ Client ] 
-
- Required Classes:  [ Account ] 
+java.lang.RuntimeException: Error: class org.bank.client.Client read in from a classfile in which Client was expected.
 
 Class Content:
 package org.bank.account;
@@ -244,23 +228,109 @@ public class Account {
 }
 
 Parametros para o SOOT -> Classe:Account path:/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/account
-
-Provided Class: Account Dependence: org.bank.client.Client
-
-Provided Class: Account Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: Account Dependence: Client
-
-Provided Class: Account Its Dependencies: Client - constant Required: Client
-
-Provided Class: Account Dependence: package org.bank.account;
-
-
-Class Name: Account, src/org/bank/account/Account.java
-
- Provided Classes:  [ Account ] 
-
- Required Classes:  [ Client ] 
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at br.edu.ufcg.dsc.ck.xml.XMLReader.getRequiredClasses(XMLReader.java:230)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.getProvidedRequired(HephaestusCKReader.java:58)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.readCK(HephaestusCKReader.java:116)
+	at br.edu.ufcg.dsc.ProductLine.getCk(ProductLine.java:254)
+	at safeEvolution.wellFormedness.WellFormedness.buildAlloyCKFile(WellFormedness.java:60)
+	at safeEvolution.wellFormedness.WellFormedness.isWF(WellFormedness.java:150)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:158)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
+java.lang.RuntimeException: Error: class org.bank.account.Account read in from a classfile in which Account was expected.
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at br.edu.ufcg.dsc.ck.xml.XMLReader.getRequiredClasses(XMLReader.java:230)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.getProvidedRequired(HephaestusCKReader.java:58)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.readCK(HephaestusCKReader.java:116)
+	at br.edu.ufcg.dsc.ProductLine.getCk(ProductLine.java:254)
+	at safeEvolution.wellFormedness.WellFormedness.buildAlloyCKFile(WellFormedness.java:60)
+	at safeEvolution.wellFormedness.WellFormedness.isWF(WellFormedness.java:150)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:158)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
 
 Class Content:
 package org.bank.facade;
@@ -278,23 +348,58 @@ public class Facade {
 }
 
 Parametros para o SOOT -> Classe:Facade path:/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/facade
-
-Provided Class: Facade Dependence: org.bank.account.Account
-
-Provided Class: Facade Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Facade Dependence: Account
-
-Provided Class: Facade Its Dependencies: Account - constant Required: Account
-
-Provided Class: Facade Dependence: package org.bank.facade;
-
-
-Class Name: Facade, src/org/bank/facade/Facade.java
-
- Provided Classes:  [ Facade ] 
-
- Required Classes:  [ Account ] 
+java.lang.RuntimeException: Error: class org.bank.facade.Facade read in from a classfile in which Facade was expected.
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at br.edu.ufcg.dsc.ck.xml.XMLReader.getRequiredClasses(XMLReader.java:230)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.getProvidedRequired(HephaestusCKReader.java:58)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.readCK(HephaestusCKReader.java:116)
+	at br.edu.ufcg.dsc.ProductLine.getCk(ProductLine.java:254)
+	at safeEvolution.wellFormedness.WellFormedness.buildAlloyCKFile(WellFormedness.java:60)
+	at safeEvolution.wellFormedness.WellFormedness.isWF(WellFormedness.java:150)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:158)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
 
 Class Content:
 package org.bank.validation;
@@ -316,15 +421,58 @@ public class Validation {
 }
 
 Parametros para o SOOT -> Classe:Validation path:/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/validation
-
-Provided Class: Validation Dependence: package org.bank.validation;
-
-
-Class Name: Validation, src/org/bank/validation/Validation.java
-
- Provided Classes:  [ Validation ] 
-
- Required Classes: 
+java.lang.RuntimeException: Error: class org.bank.validation.Validation read in from a classfile in which Validation was expected.
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at br.edu.ufcg.dsc.ck.xml.XMLReader.getRequiredClasses(XMLReader.java:230)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.getProvidedRequired(HephaestusCKReader.java:58)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.readCK(HephaestusCKReader.java:116)
+	at br.edu.ufcg.dsc.ProductLine.getCk(ProductLine.java:254)
+	at safeEvolution.wellFormedness.WellFormedness.buildAlloyCKFile(WellFormedness.java:60)
+	at safeEvolution.wellFormedness.WellFormedness.isWF(WellFormedness.java:150)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:158)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
 
 Class Content:
 package org.bank.gui;
@@ -373,90 +521,66 @@ public class GUI{
 }
 
 Parametros para o SOOT -> Classe:GUI path:/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:25,28:
-  Semantic Error: Validation not found
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:36:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:38:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-Provided Class: GUI Dependence: org.bank.account.Account
-
-Provided Class: GUI Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: GUI Dependence: org.bank.facade.Facade
-
-Provided Class: GUI Its Dependencies: org.bank.facade.Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: org.bank.validation.Validation
-
-Provided Class: GUI Its Dependencies: org.bank.validation.Validation - constant Required: Validation
-
-Provided Class: GUI Dependence: org.bank.client.Client
-
-Provided Class: GUI Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: GUI Dependence: Account
-
-Provided Class: GUI Its Dependencies: Account - constant Required: Account
-
-Provided Class: GUI Dependence: Facade
-
-Provided Class: GUI Its Dependencies: Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: Validation
-
-Provided Class: GUI Its Dependencies: Validation - constant Required: Validation
-
-Provided Class: GUI Dependence: Client
-
-Provided Class: GUI Its Dependencies: Client - constant Required: Client
-
-Provided Class: GUI Dependence: package org.bank.gui;
-
-
-Class Name: GUI, src/org/bank/gui/GUI.java
-
- Provided Classes:  [ GUI ] 
-
- Required Classes:  [ Account ]  [ Facade ]  [ Validation ]  [ Client ] 
+java.lang.RuntimeException: Error: class org.bank.gui.GUI read in from a classfile in which GUI was expected.
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at br.edu.ufcg.dsc.ck.xml.XMLReader.getRequiredClasses(XMLReader.java:230)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.getProvidedRequired(HephaestusCKReader.java:58)
+	at br.edu.ufcg.dsc.ck.HephaestusCKReader.readCK(HephaestusCKReader.java:116)
+	at br.edu.ufcg.dsc.ProductLine.getCk(ProductLine.java:254)
+	at safeEvolution.wellFormedness.WellFormedness.buildAlloyCKFile(WellFormedness.java:60)
+	at safeEvolution.wellFormedness.WellFormedness.isWF(WellFormedness.java:150)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:158)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
 
 source Configuration Knowledge Items:
-Feature Expression: core
-Provided: {GUI=src/org/bank/gui/GUI.java}
-Required: [Account, Facade, Validation, Client]
-
-Feature Expression: core
-Provided: {Facade=src/org/bank/facade/Facade.java}
-Required: [Account]
-
-Feature Expression: core
-Provided: {Account=src/org/bank/account/Account.java}
-Required: [Client]
-
-Feature Expression: core
-Provided: {Validation=src/org/bank/validation/Validation.java}
-Required: []
-
-Feature Expression: core
-Provided: {Client=src/org/bank/client/Client.java}
-Required: [Account]
-
 
 Alloy File Content: open default
  pred provided[] { 
-( isTrue[core] => (isTrue[GUI]) )
-( isTrue[core] => (isTrue[Facade]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[Client]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Validation] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -470,55 +594,24 @@ Feature: bank
 
 Including CK Signatures in Correct Set
 
-Signature: GUI
-
-Signature: Account
-
-Signature: core
-
-Signature: Facade
-
-Signature: Validation
-
-Signature: Client
-
 Correct Ser Filled:
-
-Correct Item: GUI
-
-Correct Item: Account
-
-Correct Item: Facade
 
 Correct Item: bank
 
 Correct Item: core
-
-Correct Item: Validation
-
-Correct Item: Client
 
 Create Alloy CK File:
 File Name: /home/jefferson/workspace/ferramentaLPSSM/Alloy/sourceCKAlloy.als
 Content: module sourceCKAlloy
 open default
  pred provided[] { 
-( isTrue[core] => (isTrue[GUI]) )
-( isTrue[core] => (isTrue[Facade]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[Client]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Validation] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
-one sig GUI, Account, Facade, bank, core, Validation, Client in Bool{}
+one sig bank, core in Bool{}
 
 pred semanticasource[] { 
 isTrue[bank] and ( isTrue[core] <=> isTrue[bank] )
@@ -975,22 +1068,13 @@ Checking CK ...
 FileContent: module sourceCKAlloy
 open default
  pred provided[] { 
-( isTrue[core] => (isTrue[GUI]) )
-( isTrue[core] => (isTrue[Facade]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[Client]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Validation] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
-one sig GUI, Account, Facade, bank, core, Validation, Client in Bool{}
+one sig bank, core in Bool{}
 
 pred semanticasource[] { 
 isTrue[bank] and ( isTrue[core] <=> isTrue[bank] )
@@ -1002,22 +1086,13 @@ check WT for 2
 Content: module sourceCKAlloy
 open default
  pred provided[] { 
-( isTrue[core] => (isTrue[GUI]) )
-( isTrue[core] => (isTrue[Facade]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[Client]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Validation] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
-one sig GUI, Account, Facade, bank, core, Validation, Client in Bool{}
+one sig bank, core in Bool{}
 
 pred semanticasource[] { 
 isTrue[bank] and ( isTrue[core] <=> isTrue[bank] )
@@ -1120,17 +1195,7 @@ Well Formedness to the <Target> SPL.: true
 1 -> [ bank ] [ core ] 
 
 Product 0 ::  [ bank ] [ core ]
-
- [ GUI ] - src/org/bank/gui/GUI.java
-
- [ Facade ] - src/org/bank/facade/Facade.java
-
- [ Account ] - src/org/bank/account/Account.java
-
- [ Validation ] - src/org/bank/validation/Validation.java
-
- [ Client ] - src/org/bank/client/Client.java
-constante destino esta vazio: false
+constante destino esta vazio: true
 
 
 	Correspondent Product
@@ -1151,11 +1216,6 @@ constante destino esta vazio: false
 
 	SOURCE Mapping Asset DESTINY:
 
- key 0: GUI content: src/org/bank/gui/GUI.java
- key 1: Account content: src/org/bank/account/Account.java
- key 2: Facade content: src/org/bank/facade/Facade.java
- key 3: Validation content: src/org/bank/validation/Validation.java
- key 4: Client content: src/org/bank/client/Client.java
 
 	TARGET Mapping Asset DESTINY:
 
@@ -1168,11 +1228,6 @@ constante destino esta vazio: false
 
 	SOURCE Mapping Asset ORGIGEM:
 
- key 0: GUI content: /src/org/bank/gui/GUI.java
- key 1: Account content: /src/org/bank/account/Account.java
- key 2: Facade content: /src/org/bank/facade/Facade.java
- key 3: Validation content: /src/org/bank/validation/Validation.java
- key 4: Client content: /src/org/bank/client/Client.java
 
 
 	TARGET Mapping Asset ORGIGEM:
@@ -1193,13 +1248,60 @@ constante destino esta vazio: false
 
 
 
-mappingAssetDestiny: true mappingAssetOrigin: true preProcess: true
+mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
+
+The two products below do not have the same set of assets:
+
+Product2 ::  [ bank ] [ core ]
+
+Product1 ::  [ bank ] [ core ]
 
 
  ... Attempting to marry products that did not have a par.
 
+This product did not have a really correspondent target product:
 
-All products in the source have a really correspondent target product ?: true
+Product  ::  [ bank ] [ core ]
+
+
+	SOURCE Mapping Asset DESTINY:
+
+
+	TARGET Mapping Asset DESTINY:
+
+ key 0: GUI content: src/org/bank/gui/GUI.java
+ key 1: Account content: src/org/bank/account/Account.java
+ key 2: Facade content: src/org/bank/facade/Facade.java
+ key 3: Validation content: src/org/bank/validation/Validation.java
+ key 4: Client content: src/org/bank/client/Client.java
+
+
+	SOURCE Mapping Asset ORGIGEM:
+
+
+
+	TARGET Mapping Asset ORGIGEM:
+
+ key 0: GUI content: /src/org/bank/gui/GUI.java
+ key 1: Account content: /src/org/bank/account/Account.java
+ key 2: Facade content: /src/org/bank/facade/Facade.java
+ key 3: Validation content: /src/org/bank/validation/Validation.java
+ key 4: Client content: /src/org/bank/client/Client.java
+
+
+	SOURCE PREPROCESS TAGS:
+
+
+
+	 TARGET PREPROCESS TAGS:
+
+
+
+
+mappingAssetDestiny: false mappingAssetOrigin: false preProcess: true
+
+
+All products in the source have a really correspondent target product ?: false
 areAllProductsMatched: true
 
 Have Source and Target the same assets ?:false 
@@ -1207,578 +1309,72 @@ Have Source and Target the same assets ?:false
 
  AM Equal: false
 
-EXTENDED IMPACTED ClASSES
+IMPACTED ClASSES
 
 
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/account
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/account/Account.java
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:25,28:
-  Semantic Error: Validation not found
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:36:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-/home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/gui/GUI.java:38:
-  Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-Dependencia: org.bank.account.Account
-
-Dependencia: org.bank.facade.Facade
-
-Dependencia: org.bank.validation.Validation
-
-Dependencia: org.bank.client.Client
-
-Dependencia: Account
-
-Dependencia: Facade
-
-Dependencia: Validation
-
-Dependencia: Client
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/client
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/client/Client.java
-
-Dependencia: org.bank.account.Account
-
-Dependencia: Account
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/facade
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/facade/Facade.java
-
-Dependencia: org.bank.account.Account
-
-Dependencia: Account
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/validation
-
-FILE: /home/jefferson/Desktop/workspace/Bank1.0/src/org/bank/validation/Validation.java
-
-List of Extended Impacted Classes: 3
-org.bank.facade.Facade.java
-org.bank.client.Client.java
-org.bank.gui.GUI.java
+List of Modified Classes: 1
+org.bank.account.Account.java
 
 --------------------------
-
-List of Modified Classes: 3
-org.bank.facade.Facade.java
-org.bank.client.Client.java
-org.bank.gui.GUI.java
-
---------------------------
-
- Amount of Pseudo Products: 0
-
- [ GUI ] - src/org/bank/gui/GUI.java
-
- [ Facade ] - src/org/bank/facade/Facade.java
-
- [ Account ] - src/org/bank/account/Account.java
-
- [ Validation ] - src/org/bank/validation/Validation.java
-
- [ Client ] - src/org/bank/client/Client.java
-
- feat: null
-
- feat: null
-Pseudo Product: [ fake0.924741872025274 ]
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/bases/dict/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/resources/properties/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account/Account.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/gui
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/gui/GUI.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client/Client.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/facade
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/facade/Facade.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/validation
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/validation/Validation.java
-@Features Preprocess Velocity :
-
-feature:fake0.924741872025274
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account/Account.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/gui/GUI.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client/Client.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/facade/Facade.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/validation/Validation.java
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/gui
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/gui'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/facade
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/facade'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/validation
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/validation'
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/bases/dict/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/tmp
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/tmp/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/tmp/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/tmp/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/prop-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/props
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/resources/properties/.svn/text-base
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account/Account.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/gui
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/gui/GUI.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client/Client.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/facade
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/facade/Facade.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/validation
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/validation/Validation.java
-@Features Preprocess Velocity :
-
-feature:fake0.924741872025274
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account/Account.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/gui/GUI.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client/Client.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/facade/Facade.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/validation/Validation.java
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account
-     [java] Apr 25, 2013 5:09:58 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/gui
-     [java] Apr 25, 2013 5:09:59 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/gui'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client
-     [java] Apr 25, 2013 5:09:59 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/facade
-     [java] Apr 25, 2013 5:09:59 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/facade'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/validation
-     [java] Apr 25, 2013 5:09:59 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/validation'
-
-Classes que receberao testes JUNIT: org.bank.facade.Facade|org.bank.client.Client|org.bank.gui.GUI
-
-clean:
-     [echo]  This task is responsible to clean all tests. 
-
-compile_target_ind:
-     [echo]  TARGET Compile IND 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-
-compile_source:
-     [echo]  SOURCE Compile 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-ProjectInfo
-classe: org.bank.facade.Facade
-classe: org.bank.client.Client
-classe: org.bank.gui.GUI
-Safe Refactor!
-
-
-ANT BUILD DIRECTORY: /build.xml
-
- You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
-
-  [taskdef] Could not load definitions from resource tasks.properties. It could not be found.
-
-init:
-
-clean:
-
-clean_evosuite_tests:
-     [echo] Cleaning evosuite tests
-Run evosuite for clazz: org.bank.facade.Facade
-
-generate_with_evosuite:
-     [echo] Creating EVOSUITE tests
-     [echo] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [echo] org.bank.facade.Facade
-     [java] * EvoSuite 
-     [java] * Starting client
-     [java] * Connecting to master process on port 7418
-     [java] * Analyzing classpath: 
-     [java]   - /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [java] * Finished analyzing classpath
-     [java] * Generating tests for class org.bank.facade.Facade
-     [java] * Test criterion: Branch coverage
-     [java] * Setting up search algorithm for whole suite generation
-     [java] * Total number of test goals: 2
-     [java] * Starting evolution
-     [java] 
-     [java] [Progress:>                             0%] [Cov:>                                  0%][Progress:>                             0%] [Cov:===================================100%][Progress:>                             0%] [Cov:===================================100%]* Search finished after 5s and 0 generations, 3807 statements, best individual has fitness 0.0
-     [java] * Minimizing result
-     [java] * Coverage of criterion BRANCH: 100%
-     [java] * Generated 1 tests with total length 4
-     [java] * Resulting test suite's coverage: 100%
-     [java] * GA-Budget:
-     [java] 	- RMIStoppingCondition
-     [java] 	- ZeroFitness :                      0 / 0            Finished!
-     [java] 	- MaxStatements :                3,866 / 1,000,000   
-     [java] 	- ShutdownTestWriter :               0 / 0           
-     [java] 	- GlobalTime :                       7 / 600         
-     [java] * Time spent executing tests: 826ms
-     [java] * Generating assertions
-     [java] 
-     [java] [Progress:>                             0%] [Cov:===================================100%]* Resulting test suite's mutation score: 50%* Writing JUnit test cases to evosuite-tests
-     [java] * Done!
-     [java] 
-     [java] * Computation finished
-Run evosuite for clazz: org.bank.client.Client
-
-generate_with_evosuite:
-     [echo] Creating EVOSUITE tests
-     [echo] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [echo] org.bank.client.Client
-     [java] * EvoSuite 
-     [java] * Starting client
-     [java] * Connecting to master process on port 17916
-     [java] * Analyzing classpath: 
-     [java]   - /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [java] * Finished analyzing classpath
-     [java] * Generating tests for class org.bank.client.Client
-     [java] * Test criterion: Branch coverage
-     [java] * Setting up search algorithm for whole suite generation
-     [java] * Total number of test goals: 9
-     [java] * Starting evolution
-     [java] 
-     [java] [Progress:>                             0%] [Cov:>                                  0%][Progress:>                             0%] [Cov:==========================>        77%][Progress:>                             0%] [Cov:==============================>    88%][Progress:>                             0%] [Cov:===================================100%][Progress:>                             0%] [Cov:===================================100%]* Search finished after 4s and 0 generations, 6188 statements, best individual has fitness 0.0
-     [java] * Minimizing result
-     [java] * Coverage of criterion BRANCH: 100%
-     [java] * Generated 7 tests with total length 21
-     [java] * Resulting test suite's coverage: 100%
-     [java] * GA-Budget:
-     [java] 	- RMIStoppingCondition
-     [java] 	- ZeroFitness :                      0 / 0            Finished!
-     [java] 	- ShutdownTestWriter :               0 / 0           
-     [java] 	- MaxStatements :                7,888 / 1,000,000   
-     [java] 	- GlobalTime :                       7 / 600         
-     [java] * Time spent executing tests: 1645ms
-     [java] * Generating assertions
-     [java] 
-     [java] [Progress:>                             0%] [Cov:===================================100%][Progress:====>                         14%] [Cov:===================================100%][Progress:========>                     28%] [Cov:===================================100%][Progress:============>                 42%] [Cov:===================================100%][Progress:=================>            57%] [Cov:===================================100%][Progress:=====================>        71%] [Cov:===================================100%][Progress:=========================>    85%] [Cov:===================================100%]* Resulting test suite's mutation score: 72%* Writing JUnit test cases to evosuite-tests
-     [java] * Done!
-     [java] 
-     [java] * Computation finished
-Run evosuite for clazz: org.bank.gui.GUI
-
-generate_with_evosuite:
-     [echo] Creating EVOSUITE tests
-     [echo] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [echo] org.bank.gui.GUI
-     [java] * EvoSuite 
-     [java] * Starting client
-     [java] * Connecting to master process on port 17427
-     [java] * Analyzing classpath: 
-     [java]   - /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [java] * Finished analyzing classpath
-     [java] * Generating tests for class org.bank.gui.GUI
-     [java] * Test criterion: Branch coverage
-     [java] * Setting up search algorithm for whole suite generation
-     [java] * Total number of test goals: 4
-     [java] * Starting evolution
-     [java] 
-     [java] [Progress:>                             0%] [Cov:>                                  0%][Progress:>                             0%] [Cov:===================================100%][Progress:>                             0%] [Cov:===================================100%]* Search finished after 4s and 0 generations, 4338 statements, best individual has fitness 0.0
-     [java] * Minimizing result
-     [java] * Coverage of criterion BRANCH: 100%
-     [java] * Generated 2 tests with total length 7
-     [java] * Resulting test suite's coverage: 100%
-     [java] * GA-Budget:
-     [java] 	- ZeroFitness :                      0 / 0            Finished!
-     [java] 	- ShutdownTestWriter :               0 / 0           
-     [java] 	- GlobalTime :                       5 / 600         
-     [java] 	- RMIStoppingCondition
-     [java] 	- MaxStatements :                4,403 / 1,000,000   
-     [java] * Time spent executing tests: 803ms
-     [java] * Generating assertions
-     [java] 
-     [java] [Progress:>                             0%] [Cov:===================================100%][Progress:===============>              50%] [Cov:===================================100%]* Resulting test suite's mutation score: 65%* Writing JUnit test cases to evosuite-tests
-     [java] * Done!
-     [java] 
-     [java] * Computation finished
-
-compile_tests_evosuite:
-     [echo] Compiling EVOSUITE generated tests
-    [javac] Compiling 3 source files to /tmp/safeRefactorAJ/tests/bin
-
-run_tests_evosuite:
-     [echo] Running JUNIT to the EVOSUITE generated files - SOURCE
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.client.TestClient
-    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.051 sec
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.facade.TestFacade
-    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.039 sec
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.gui.TestGUI
-    [junit] Bank Withdraw View for Client: Client [name=Conta [ag=, conta=Conta [ag=1, cc=1, balance=0.0]]
-    [junit] 
-    [junit] It is not allowed to withdraw an amount greater than 1000.
-    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.04 sec
-     [echo] Running JUNIT to the EVOSUITE generated files - TARGET
-    [junit] Running org.bank.client.TestClient
-    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.035 sec
-    [junit] Running org.bank.facade.TestFacade
-    [junit] Tests run: 1, Failures: 1, Errors: 0, Time elapsed: 0.034 sec
-    [junit] Test org.bank.facade.TestFacade FAILED
-    [junit] Running org.bank.gui.TestGUI
-    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.031 sec
-     [echo] Running JUNIT to the EVOSUITE generated files - SOURCE again
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.client.TestClient
-    [junit] Tests run: 7, Failures: 0, Errors: 0, Time elapsed: 0.13 sec
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.facade.TestFacade
-    [junit] Tests run: 1, Failures: 0, Errors: 0, Time elapsed: 0.037 sec
-    [junit] SLF4J: Class path contains multiple SLF4J bindings.
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/saferefactoraj/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: Found binding in [jar:file:/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/lib/evosuite.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-    [junit] SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-    [junit] SLF4J: Actual binding is of type [ch.qos.logback.classic.util.ContextSelectorStaticBinder]
-    [junit] Running org.bank.gui.TestGUI
-    [junit] Bank Withdraw View for Client: Client [name=Conta [ag=, conta=Conta [ag=1, cc=1, balance=0.0]]
-    [junit] 
-    [junit] It is not allowed to withdraw an amount greater than 1000.
-    [junit] Tests run: 2, Failures: 0, Errors: 0, Time elapsed: 0.042 sec
- Print Report :
-Testes generated: 10
-Failures on source: 0
-Errors on source: 0
-Failures on target: 1
-Errors on target: 0
-Refactoring? false
-
-
-
-report changes: null
-org.bank.facade.TestFacade.test0 in source is SUCCESS while in target is FAILURE
-
-
-
-
-
- -- SafeRefactor FOUND behavioral changes -- 
-Asset mapping checked in: 41 segundos. Same Behavior: false
-
-	 SPL REPORT: 
-
--> Source Product Line is Well Formed:?  true
--> Target Product Line is Well Formed:?  true
--> Asset Mappings are Equals :?false
--> Are Configuration Knowledge and Feature Model a refinement:?  true
--> The evolution has a compatible observable behavior:?  false
--> My Whole Software Product Line is Well Formed:?  true
--> My Whole Software Product Line is a Refinement:?  false
-
-
-
+Exception in thread "WorkbenchTestable" org.eclipse.swt.SWTException: Failed to execute runnable (java.lang.RuntimeException: Error: class org.bank.client.Client read in from a classfile in which Client was expected.)
+	at org.eclipse.swt.SWT.error(SWT.java:3777)
+	at org.eclipse.swt.SWT.error(SWT.java:3695)
+	at org.eclipse.swt.widgets.Synchronizer.syncExec(Synchronizer.java:194)
+	at org.eclipse.ui.internal.UISynchronizer.syncExec(UISynchronizer.java:150)
+	at org.eclipse.swt.widgets.Display.syncExec(Display.java:4021)
+	at org.eclipse.ui.internal.testing.WorkbenchTestable.runTest(WorkbenchTestable.java:109)
+	at br.edu.ufcg.dsc.MainRunner.runTests(MainRunner.java:52)
+	at org.eclipse.ui.internal.testing.WorkbenchTestable$1.run(WorkbenchTestable.java:68)
+	at java.lang.Thread.run(Thread.java:679)
+Caused by: java.lang.RuntimeException: Error: class org.bank.client.Client read in from a classfile in which Client was expected.
+	at soot.coffi.Util.resolveFromClassFile(Util.java:90)
+	at soot.CoffiClassSource.resolve(CoffiClassSource.java:39)
+	at soot.SootResolver.bringToHierarchy(SootResolver.java:195)
+	at soot.SootResolver.bringToSignatures(SootResolver.java:224)
+	at soot.SootResolver.processResolveWorklist(SootResolver.java:139)
+	at soot.SootResolver.resolveClass(SootResolver.java:124)
+	at soot.Scene.loadClass(Scene.java:427)
+	at soot.Scene.loadClassAndSupport(Scene.java:412)
+	at soot.Scene.loadNecessaryClass(Scene.java:1012)
+	at soot.Scene.getDependencies(Scene.java:1027)
+	at soot.Main.getDependences(Main.java:178)
+	at soot.Main.getDependences(Main.java:163)
+	at safeEvolution.approaches.optimizations.ImpactedClasses.copyDependencies(ImpactedClasses.java:339)
+	at safeEvolution.approaches.optimizations.ImpactedClasses.copyDependencies(ImpactedClasses.java:377)
+	at safeEvolution.approaches.optimizations.ImpactedClasses.processModifiedClass(ImpactedClasses.java:204)
+	at safeEvolution.approaches.optimizations.ImpactedClasses.copyModifiedClassAndDependencies(ImpactedClasses.java:262)
+	at safeEvolution.approaches.optimizations.ImpactedClasses.checkAssetMappingBehavior(ImpactedClasses.java:105)
+	at safeEvolution.approaches.ForwardImpactedClasses.evaluate(ForwardImpactedClasses.java:22)
+	at br.edu.ufcg.dsc.ToolCommandLine.verifyLine(ToolCommandLine.java:185)
+	at br.edu.ufcg.dsc.evaluation.Analyzer.analize(Analyzer.java:44)
+	at br.edu.ufcg.dsc.MainRunner$1.run(MainRunner.java:58)
+	at org.eclipse.swt.widgets.RunnableLock.run(RunnableLock.java:35)
+	at org.eclipse.swt.widgets.Synchronizer.runAsyncMessages(Synchronizer.java:133)
+	at org.eclipse.swt.widgets.Display.runAsyncMessages(Display.java:3378)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3036)
+	at org.eclipse.ui.internal.Workbench.runEventLoop(Workbench.java:2384)
+	at org.eclipse.ui.internal.Workbench.runUI(Workbench.java:2348)
+	at org.eclipse.ui.internal.Workbench.access$4(Workbench.java:2200)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:495)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:288)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:490)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:149)
+	at br.edu.ufcg.dsc.MainRunner.run(MainRunner.java:36)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.internal.app.EclipseAppContainer.callMethodWithException(EclipseAppContainer.java:574)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:195)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:110)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:79)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:386)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:179)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:616)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:549)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:504)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1236)
+	at org.eclipse.equinox.launcher.Main.main(Main.java:1212)
