@@ -8,11 +8,8 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.naming.ConfigurationException;
-
 import org.eclipse.jdt.core.JavaModelException;
-
 import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.util.FileManager;
@@ -26,7 +23,8 @@ public class AssetMappingAnalyzer {
 	private ASTComparator astComparator;
 	
 	public AssetMappingAnalyzer() {
-		super();
+		System.out.println("AssetMappingAnalyzer");
+		/*super();*/
 		this.astComparator = new ASTComparator();
 		try {
 			this.astComparator.setUpProject();
@@ -81,9 +79,9 @@ public class AssetMappingAnalyzer {
 						this.modifiedClassesList.add(asset);
 						this.changedAssetsList.add(FileManager.getInstance().getPath("src." + asset));
 					}
-				} catch (JavaModelException e) {
-					e.printStackTrace();
 				} catch (IOException e) {
+					e.printStackTrace();
+				} catch (JavaModelException e) {
 					e.printStackTrace();
 				}
 			}

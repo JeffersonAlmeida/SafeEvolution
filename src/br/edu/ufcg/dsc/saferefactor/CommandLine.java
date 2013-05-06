@@ -138,8 +138,8 @@ public class CommandLine {
 		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 
 		org.sr.input.FilePropertiesObject input = new org.sr.input.FilePropertiesObject();
-		input.setSourceLineDirectory(sourceProductPath);
-		input.setTargetLineDirectory(targetProductPath);
+		input.setSourceLineDirectory(sourceProductPath + Constants.FILE_SEPARATOR);
+		input.setTargetLineDirectory(targetProductPath + Constants.FILE_SEPARATOR);
 		input.setTimeOut(propertiesObject.getTimeOut());
 		input.setInputLimit(propertiesObject.getInputLimit());
 		input.setGenerateTestsWith(propertiesObject.getGenerateTestsWith());

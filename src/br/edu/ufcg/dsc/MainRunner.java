@@ -33,14 +33,21 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		testableObject.setTestHarness(this);
 		Display display = PlatformUI.createDisplay();
 		try {
-			PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
-			AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
-			refinementChecker.open();
-			Shell shell = refinementChecker.getShell();
-			while (!shell.isDisposed()) {
+			System.out.println("before");
+			//PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
+			ProductGenerator.MAX_TENTATIVAS = 2000;
+			FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank1.0.properties");
+			FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
+			System.out.println(propertiesObject);
+			Analyzer.getInstance().analize(propertiesObject);
+			System.out.println("after");
+			//AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
+			//refinementChecker.open();
+			//Shell shell = refinementChecker.getShell();
+			/*while (!shell.isDisposed()) {
 				if (!display.readAndDispatch())
 					display.sleep();
-			}
+			}*/
 			return EXIT_OK;
 		} finally {
 			display.dispose();

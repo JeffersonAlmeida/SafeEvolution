@@ -48,7 +48,7 @@
 
 
 		<fileset dir="${pluginpath}/libTargetPOI32" includes="*.jar"/>
-		<!--fileset dir="${pluginpath}/libTargetOld" includes="*.jar"/-->
+
 
 
 		<fileset dir="${lpsTarget}/" includes="lib/*.jar" />
@@ -128,28 +128,6 @@
 			<classpath refid="classpath_target"/>
 		</iajc>
 	</target>
-
-	<!--target name="code">
-		<echo>
-	            Analysing the code
-	        </echo>
-		<java classname="refactoring.IdentifyChange" fork="false" maxmemory="256m">
-			<arg value="${source}/src"/>
-			<arg value="${target}/src"/>
-			<arg value="1"/>
-			<arg value="${classes}"/>
-			<arg value="${f}"/>
-			<arg value="${maxtests}"/>
-			<arg value="${filelog}"/>
-			<arg value="${abordagem}"/>
-			<classpath>
-				<pathelement path="lib/aspectjrt.jar" />
-				<pathelement path="${target}/bin"/>
-				<pathelement path="bin"/>
-			</classpath>
-			<classpath refid="classpath_target"/>
-		</java>
-	</target-->
 
 	<target name="code">
 		<echo>
