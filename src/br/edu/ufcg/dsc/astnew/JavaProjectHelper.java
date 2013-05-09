@@ -48,7 +48,7 @@ import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jdt.internal.ui.util.CoreUtility;
 
-import br.edu.ufcg.dsc.Activator;
+/*import br.edu.ufcg.dsc.core.Activator;*/
 
 /**
  * Helper methods to set up a IJavaProject.
@@ -670,7 +670,7 @@ public class JavaProjectHelper {
 	 * @throws ConfigurationException 
 	 */
 	public static IPath[] findRtJar(IPath rtStubsPath) throws CoreException, ConfigurationException {
-		File rtStubs= Activator.getDefault().getFileInPlugin(rtStubsPath);
+		File rtStubs= br.edu.ufcg.dsc.Activator.getDefault().getFileInPlugin(rtStubsPath);
 		if (rtStubs == null || !rtStubs.exists()) {
 			throw new ConfigurationException("Runtime stubs at " + rtStubsPath + " does not exist");
 		}

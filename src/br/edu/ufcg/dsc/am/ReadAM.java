@@ -11,7 +11,6 @@ import java.util.Map.Entry;
 
 import org.apache.commons.io.FileUtils;
 
-import br.edu.ufcg.dsc.Constants;
 
 /**
  * @author Jefferson Almeida - jra at cin dot ufpe dot br  <br></br>
@@ -38,8 +37,8 @@ public class ReadAM {
 				String constant = parts[0].trim();
 				String path = parts[1].replaceFirst(";", "").trim();
 				
-				if (!path.startsWith(Constants.FILE_SEPARATOR)) {
-					path = Constants.FILE_SEPARATOR + path;
+				if (!path.startsWith(br.edu.ufcg.dsc.Constants.FILE_SEPARATOR)) {
+					path = br.edu.ufcg.dsc.Constants.FILE_SEPARATOR + path;
 				}
 				
 				assetMapping.put(constant, /*fullpath + */path);
@@ -71,7 +70,7 @@ public class ReadAM {
 			sig += component + ",";
 		}
 		sig = " one sig " + sig.substring(0, sig.length() - 1) + " in Bool{}"
-				+ Constants.LINE_SEPARATOR;
+				+ br.edu.ufcg.dsc.Constants.LINE_SEPARATOR;
 		return sig;
 	}
 }

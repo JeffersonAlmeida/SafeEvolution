@@ -5,9 +5,9 @@ import java.util.HashSet;
 
 import safeEvolution.wellFormedness.WellFormedness;
 
+import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ProductLine;
-import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.fm.AlloyFMEvolutionBuilder;
 
 public class AlloyProductGenerator {

@@ -2,7 +2,6 @@ package br.edu.ufcg.dsc;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
@@ -16,7 +15,7 @@ import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
 
-	// The plug-in ID
+	// The plug-in ID 
 	public static final String PLUGIN_ID = "ferramentaLPS";
 
 	// The shared instance

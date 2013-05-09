@@ -5,10 +5,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import edu.mit.csail.sdg.alloy4.Err;
 
-import br.edu.ufcg.dsc.Constants;
-import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
+import br.edu.ufcg.dsc.Constants;
+import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.fm.FeatureModelReader;
 import br.edu.ufcg.dsc.refactoringresults.SafeCompositionResult;

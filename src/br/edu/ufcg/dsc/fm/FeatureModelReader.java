@@ -8,8 +8,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Stack;
 
-import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ck.xml.Xml;
+import br.edu.ufcg.dsc.Constants;
 
 /**
  * 

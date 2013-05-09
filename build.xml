@@ -1,30 +1,130 @@
-<project name="RefactoringProject" default="clean" basedir="../">
-	
+<project name="RefactoringProject" default="clean" basedir=".">
+
+    <property name="src" location="src"/>
+    <property name="lib" location="lib"/>
+    <property name="bin" location="bin"/>
+
     <path id="classpath_source">
-        <fileset dir="${source}/" includes="lib/*.jar"/>
+
     </path>
-	
-    <path id="classpath_target">
-        <fileset dir="${target}" includes="lib/*.jar"/>
-    </path>
-	
-    <target name="clean">
-        <delete includeemptydirs="false">
-        	<fileset dir="${source}/bin" includes="**/*"/>
-        	<fileset dir="${target}/bin" includes="**/*"/>
-        </delete>
-    </target>
-	
-    <target name="compile_source" depends="clean">
-        <javac debug="on" srcdir="${source}/src" destdir="${source}/bin">
-            <classpath refid="classpath_source"/>
-        </javac>
-    </target> 
-	
-    <target name="compile_target" depends="compile_source">
-        <javac debug="on" srcdir="${target}/src" destdir="${target}/bin">
-            <classpath refid="classpath_target"/>
-        </javac>
-    </target> 
-	
-	</project>
+
+<property name="src" value="src" />
+<property name="build" value="build" />
+<property name="dist" value="dist" />
+<property name="doc" value="doc" />
+<property name="lib" value="lib" />
+<property name="test.class.name" value="git.teste.suitTest" />
+
+<target name="ola">
+	<echo message="Ola, Ant executando!" />
+</target>
+
+
+<target name="clean">
+		<delete includeemptydirs="true">
+			<fileset dir="${build}" includes="**/*" />
+			<fileset dir="${bin}" includes="**/*" />
+		</delete>
+	</target>
+
+<target name="init" depends="clean">
+<tstamp/>
+<mkdir dir="${build}" />
+</target>
+
+
+
+<path id="classpath">
+    <fileset dir="." includes="*.jar" />
+    <fileset dir="${lib}/" includes="*.jar" />
+    <fileset dir="home/jefferson/workspace/saferefactoraj/lib/" includes="*.jar" />
+    <fileset dir="home/jefferson/Downloads/eclipse/plugins/" includes="*.jar" />
+    <pathelement path="${src}" />
+    <pathelement path="${lib}" />
+    <pathelement path="/home/jefferson/Downloads/eclipse/plugins" />
+</path>
+
+<target name="safe" depends="init">
+<javac srcdir="/home/jefferson/workspace/saferefactoraj/src/" destdir="/home/jefferson/workspace/saferefactoraj/bin/" includeAntRuntime="true" includes="**/*.java" excludes="**/*Test.java">
+    <classpath>
+        <fileset dir="/home/jefferson/workspace/saferefactoraj/lib/">
+        <include name="*.jar" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/saferefactoraj/bin/">
+            <include name="**/*.class" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/saferefactoraj/src/">
+            <include name="**/*.java" />
+        </fileset>
+    </classpath>
+</javac>
+</target>
+
+
+<target name="compile" depends="init">
+     <echo> ${src} </echo>
+     <echo> ${lib} </echo>
+
+     <javac srcdir="${src}/safeEvolution" destdir="${bin}" includeAntRuntime="true" includes="**/*.java" excludes="**/*Test.java">
+
+	<classpath>
+         <fileset dir="${src}/">
+            <include name="**/*.java" />
+        </fileset>
+
+        <fileset dir="${lib}/">
+            <include name="*.jar" />
+        </fileset>
+         <fileset dir="/home/jefferson/Downloads/eclipse/plugins/">
+            <include name="*.jar" />
+        </fileset>
+         <fileset dir="/home/jefferson/workspace/soot/classes/">
+            <include name="**/*.class" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/soot/lib/">
+            <include name="*.jar" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/saferefactoraj/lib/">
+            <include name="*.jar" />
+        </fileset>
+
+        <pathelement path="${src}" />
+         <pathelement path="${build}" />
+         <pathelement path="${bin}" />
+        <pathelement path="${lib}/xercesImpl.jar" />
+    </classpath>
+    </javac>
+
+	<javac srcdir="${src}" destdir="${bin}" includeAntRuntime="true" includes="**/*.java" excludes="**/*Test.java">
+	<classpath>
+         <fileset dir="${src}/">
+            <include name="**/*.java" />
+        </fileset>
+
+        <fileset dir="${lib}/">
+            <include name="*.jar" />
+        </fileset>
+         <fileset dir="/home/jefferson/Downloads/eclipse/plugins/">
+            <include name="*.jar" />
+        </fileset>
+         <fileset dir="/home/jefferson/workspace/soot/classes/">
+            <include name="**/*.class" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/soot/lib/">
+            <include name="*.jar" />
+        </fileset>
+        <fileset dir="/home/jefferson/workspace/saferefactoraj/lib/">
+            <include name="*.jar" />
+        </fileset>
+
+        <pathelement path="${src}" />
+         <pathelement path="${build}" />
+         <pathelement path="${bin}" />
+        <pathelement path="${lib}/xercesImpl.jar" />
+    </classpath>
+    </javac>
+</target>
+
+
+
+</project>

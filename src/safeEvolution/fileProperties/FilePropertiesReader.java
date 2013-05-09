@@ -5,10 +5,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
-import br.edu.ufcg.dsc.Approach;
-import br.edu.ufcg.dsc.Lines;
+
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.JavaModelException;
+
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ck.CKFormat;
+import br.edu.ufcg.dsc.Approach;
+import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.saferefactor.core.Criteria;
 
 public class FilePropertiesReader {
@@ -18,8 +22,9 @@ public class FilePropertiesReader {
 			private FilePropertiesObject propertiesObject;
 			private boolean isLoaded;
 			
-			public FilePropertiesReader() {
+			public FilePropertiesReader() throws JavaModelException {
 				super();
+				throw new JavaModelException(new CoreException(null));
 			}
 			
 			public FilePropertiesReader(String filePropertiesDirectory) {

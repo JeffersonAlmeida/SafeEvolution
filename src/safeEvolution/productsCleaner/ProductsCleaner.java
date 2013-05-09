@@ -1,12 +1,11 @@
 package safeEvolution.productsCleaner;
 
 import java.io.File;
-
 import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 
-import br.edu.ufcg.dsc.Constants;
+/*import br.edu.ufcg.dsc.Constants;*/
 
 public class ProductsCleaner {
 	
@@ -17,15 +16,17 @@ public class ProductsCleaner {
 	* This method cleans the generated products folder.
 	*/
 	public void cleanProductsFolder() {
-		File buildFile = new File(br.edu.ufcg.dsc.Constants.BUILD_FILE_PATH);
+		String fileDir = br.edu.ufcg.dsc.Constants.BUILD_FILE_PATH;
+		File buildFile = new File(fileDir);
 		/*It creates a new ANT project.*/
 		Project p = new Project();
 		/*This is the directory of the generated products: */
 		System.out.println("\nThe directory of the generated products: " + "<  Tool Path + Products  >\n");
 		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
-		p.setProperty("productsFolder", Constants.PRODUCTS_DIR);
+		p.setProperty("productsFolder", br.edu.ufcg.dsc.Constants.PRODUCTS_DIR);
 		/* Set an ANT Build XML File property. Any existing property of the same name is overwritten, unless it is a user property.*/
-		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
+		String pl_path =  br.edu.ufcg.dsc.Constants.PLUGIN_PATH;
+		p.setProperty("pluginpath", pl_path);
 		/* Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged.*/
 		DefaultLogger consoleLogger = new DefaultLogger();
 		consoleLogger.setErrorPrintStream(System.err);

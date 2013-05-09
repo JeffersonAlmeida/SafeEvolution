@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Properties;
 import java.util.Set;
-
 import soot.Main;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.am.ReadAM;
@@ -145,6 +144,7 @@ public class ProductLine {
 
 			if(asset.endsWith(".java")){
 				dependencias = Main.v().getDependences(classFile.getName().replaceAll(".java", ""), classFile.getParent());
+				
 
 				dependencias.addAll(FileManager.getInstance().getDependenciasAspectos(classFile));
 			}

@@ -1,0 +1,459 @@
+Buildfile: /home/jefferson/workspace/ferramentaLPSSM/build.xml
+
+clean:
+
+init:
+
+compile:
+     [echo]  /home/jefferson/workspace/ferramentaLPSSM/src 
+     [echo]  /home/jefferson/workspace/ferramentaLPSSM/lib 
+    [javac] Compiling 13 source files to /home/jefferson/workspace/ferramentaLPSSM/bin
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:8: error: package br.edu.ufcg.dsc.builders does not exist
+    [javac] import br.edu.ufcg.dsc.builders.ProductBuilder;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:10: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:11: error: package br.edu.ufcg.dsc.fm does not exist
+    [javac] import br.edu.ufcg.dsc.fm.AlloyFMEvolutionBuilder;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:8: error: package br.edu.ufcg.dsc.ck does not exist
+    [javac] import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:9: error: package br.edu.ufcg.dsc.ck.alloy does not exist
+    [javac] import br.edu.ufcg.dsc.ck.alloy.SafeCompositionVerifier;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:11: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:12: error: package br.edu.ufcg.dsc.evaluation does not exist
+    [javac] import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
+    [javac]                                  ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:13: error: package br.edu.ufcg.dsc.fm does not exist
+    [javac] import br.edu.ufcg.dsc.fm.FeatureModelReader;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:14: error: package br.edu.ufcg.dsc.refactoringresults does not exist
+    [javac] import br.edu.ufcg.dsc.refactoringresults.SafeCompositionResult;
+    [javac]                                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:15: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.FileManager;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:17: error: cannot find symbol
+    [javac] 	private ProductBuilder productBuilder;
+    [javac] 	        ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AlloyProductGenerator
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:19: error: cannot find symbol
+    [javac] 	public AlloyProductGenerator(WellFormedness wellFormedness,ProductBuilder productBuilder) {
+    [javac] 	                                                           ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AlloyProductGenerator
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:30: error: cannot find symbol
+    [javac] 	public void generateProductsFromAlloyFile(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 	                                          ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AlloyProductGenerator
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/alloy/products/AlloyProductGenerator.java:30: error: cannot find symbol
+    [javac] 	public void generateProductsFromAlloyFile(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 	                                                                  ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AlloyProductGenerator
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:32: error: cannot find symbol
+    [javac] 		public void buildFMAlloyFile(String moduleName, String sourceFmAlloyName, ProductLine productLine) {
+    [javac] 		                                                                          ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class WellFormedness
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:59: error: cannot find symbol
+    [javac] 		public void buildAlloyCKFile(String name, String fMSemantics, String indicator, ProductLine productLine) {
+    [javac] 		                                                                                ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class WellFormedness
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:114: error: cannot find symbol
+    [javac] 		private SafeCompositionResult checkSafeCompositionOfLine(String string, HashSet<String> features, String name) {
+    [javac] 		        ^
+    [javac]   symbol:   class SafeCompositionResult
+    [javac]   location: class WellFormedness
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:141: error: cannot find symbol
+    [javac] 		public boolean isWF(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 		                    ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class WellFormedness
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/wellFormedness/WellFormedness.java:141: error: cannot find symbol
+    [javac] 		public boolean isWF(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 		                                            ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class WellFormedness
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:13: error: package br.edu.ufcg.dsc.ast does not exist
+    [javac] import br.edu.ufcg.dsc.ast.ASTComparator;
+    [javac]                           ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:14: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:15: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.FileManager;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:23: error: cannot find symbol
+    [javac] 	private ASTComparator astComparator;
+    [javac] 	        ^
+    [javac]   symbol:   class ASTComparator
+    [javac]   location: class AssetMappingAnalyzer
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:37: error: cannot find symbol
+    [javac] 	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 	                            ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AssetMappingAnalyzer
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/am/verifier/AssetMappingAnalyzer.java:37: error: cannot find symbol
+    [javac] 	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
+    [javac] 	                                                    ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AssetMappingAnalyzer
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:5: error: package br.edu.ufcg.dsc.builders does not exist
+    [javac] import br.edu.ufcg.dsc.builders.ProductBuilder;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:6: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Product;
+    [javac]                       ^
+    [javac]   symbol:   class Product
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:7: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:8: error: package br.edu.ufcg.dsc.saferefactor does not exist
+    [javac] import br.edu.ufcg.dsc.saferefactor.CommandLine;
+    [javac]                                    ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:9: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.AssetNotFoundException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:10: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.DirectoryException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:14: error: cannot find symbol
+    [javac] 		private ProductBuilder productBuilder;
+    [javac] 		        ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:16: error: cannot find symbol
+    [javac] 		public AllProductPairs(ProductBuilder pBuilder) {
+    [javac] 		                       ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:21: error: cannot find symbol
+    [javac] 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 		                        ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:21: error: cannot find symbol
+    [javac] 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 		                                                ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:3: error: package br.edu.ufcg.dsc.am does not exist
+    [javac] import br.edu.ufcg.dsc.am.AMFormat;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:4: error: package br.edu.ufcg.dsc.ck does not exist
+    [javac] import br.edu.ufcg.dsc.ck.CKFormat;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:5: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Approach;
+    [javac]                       ^
+    [javac]   symbol:   class Approach
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:6: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Lines;
+    [javac]                       ^
+    [javac]   symbol:   class Lines
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:21: error: cannot find symbol
+    [javac] 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 		                                                                                                                                               ^
+    [javac]   symbol:   class AssetNotFoundException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:21: error: cannot find symbol
+    [javac] 		public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 		                                                                                                                                                                       ^
+    [javac]   symbol:   class DirectoryException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                              ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                      ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                     ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                            ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                                                                        ^
+    [javac]   symbol:   class AssetNotFoundException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:41: error: cannot find symbol
+    [javac] 		private boolean tryToFindCorrespondentProduct(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, Product productSource, Product probablyCorrespondentProduct)throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                                                                                                             ^
+    [javac]   symbol:   class DirectoryException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                 ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                         ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                               ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                                      ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                                                                                   ^
+    [javac]   symbol:   class AssetNotFoundException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProductPairs.java:54: error: cannot find symbol
+    [javac] 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 		                                                                                                                                                                                                                                                        ^
+    [javac]   symbol:   class DirectoryException
+    [javac]   location: class AllProductPairs
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:17: error: cannot find symbol
+    [javac] 			private Lines line;
+    [javac] 			        ^
+    [javac]   symbol:   class Lines
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:20: error: cannot find symbol
+    [javac] 			private Approach approach;
+    [javac] 			        ^
+    [javac]   symbol:   class Approach
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:24: error: cannot find symbol
+    [javac] 			private CKFormat ckFormatSourceSPL;
+    [javac] 			        ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:25: error: cannot find symbol
+    [javac] 			private CKFormat ckFormatTargetSPL;
+    [javac] 			        ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:26: error: cannot find symbol
+    [javac] 			private AMFormat amFormatSourceSPL;
+    [javac] 			        ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:27: error: cannot find symbol
+    [javac] 			private AMFormat amFormatTargetSPL;
+    [javac] 			        ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:61: error: cannot find symbol
+    [javac] 			public Lines getLine() {
+    [javac] 			       ^
+    [javac]   symbol:   class Lines
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:64: error: cannot find symbol
+    [javac] 			public void setLine(Lines line) {
+    [javac] 			                    ^
+    [javac]   symbol:   class Lines
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:79: error: cannot find symbol
+    [javac] 			public Approach getApproach() {
+    [javac] 			       ^
+    [javac]   symbol:   class Approach
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:82: error: cannot find symbol
+    [javac] 			public void setApproach(Approach approach) {
+    [javac] 			                        ^
+    [javac]   symbol:   class Approach
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:103: error: cannot find symbol
+    [javac] 			public CKFormat getCkFormatSourceSPL() {
+    [javac] 			       ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:106: error: cannot find symbol
+    [javac] 			public void setCkFormatSourceSPL(CKFormat ckFormatSourceSPL) {
+    [javac] 			                                 ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:109: error: cannot find symbol
+    [javac] 			public CKFormat getCkFormatTargetSPL() {
+    [javac] 			       ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:112: error: cannot find symbol
+    [javac] 			public void setCkFormatTargetSPL(CKFormat ckFormatTargetSPL) {
+    [javac] 			                                 ^
+    [javac]   symbol:   class CKFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:115: error: cannot find symbol
+    [javac] 			public AMFormat getAmFormatSourceSPL() {
+    [javac] 			       ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:118: error: cannot find symbol
+    [javac] 			public void setAmFormatSourceSPL(AMFormat amFormatSourceSPL) {
+    [javac] 			                                 ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:121: error: cannot find symbol
+    [javac] 			public AMFormat getAmFormatTargetSPL() {
+    [javac] 			       ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/fileProperties/FilePropertiesObject.java:124: error: cannot find symbol
+    [javac] 			public void setAmFormatTargetSPL(AMFormat amFormatTargetSPL) {
+    [javac] 			                                 ^
+    [javac]   symbol:   class AMFormat
+    [javac]   location: class FilePropertiesObject
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:6: error: package br.edu.ufcg.dsc.builders does not exist
+    [javac] import br.edu.ufcg.dsc.builders.ProductBuilder;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:7: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Product;
+    [javac]                       ^
+    [javac]   symbol:   class Product
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:8: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:9: error: package br.edu.ufcg.dsc.saferefactor does not exist
+    [javac] import br.edu.ufcg.dsc.saferefactor.CommandLine;
+    [javac]                                    ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:10: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.AssetNotFoundException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:11: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.DirectoryException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:14: error: cannot find symbol
+    [javac] 	private ProductBuilder productBuilder;
+    [javac] 	        ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:15: error: cannot find symbol
+    [javac] 	public AllProducts(ProductBuilder productBuilder) {
+    [javac] 	                   ^
+    [javac]   symbol:   class ProductBuilder
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:20: error: cannot find symbol
+    [javac] 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 	                        ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:20: error: cannot find symbol
+    [javac] 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 	                                                ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:20: error: cannot find symbol
+    [javac] 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 	                                                                                                                                                                              ^
+    [javac]   symbol:   class AssetNotFoundException
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:20: error: cannot find symbol
+    [javac] 	public boolean evaluate(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean wf, boolean areAllProductsMatched) throws IOException, AssetNotFoundException, DirectoryException{
+    [javac] 	                                                                                                                                                                                                      ^
+    [javac]   symbol:   class DirectoryException
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                 ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                                         ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                                                                                                                               ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                                                                                                                                                      ^
+    [javac]   symbol:   class Product
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                                                                                                                                                                                                   ^
+    [javac]   symbol:   class AssetNotFoundException
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/AllProducts.java:38: error: cannot find symbol
+    [javac] 	private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
+    [javac] 	                                                                                                                                                                                                                                                        ^
+    [javac]   symbol:   class DirectoryException
+    [javac]   location: class AllProducts
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/BackwardImpactedClasses.java:11: error: package br.edu.ufcg.dsc.builders does not exist
+    [javac] import br.edu.ufcg.dsc.builders.ProductBuilder;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/BackwardImpactedClasses.java:12: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/BackwardImpactedClasses.java:13: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.AssetNotFoundException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/BackwardImpactedClasses.java:14: error: package br.edu.ufcg.dsc.util does not exist
+    [javac] import br.edu.ufcg.dsc.util.DirectoryException;
+    [javac]                            ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:15: error: package br.edu.ufcg.dsc.builders does not exist
+    [javac] import br.edu.ufcg.dsc.builders.ProductBuilder;
+    [javac]                                ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:16: error: package br.edu.ufcg.dsc.ck does not exist
+    [javac] import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
+    [javac]                          ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:18: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Lines;
+    [javac]                       ^
+    [javac]   symbol:   class Lines
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:19: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.Product;
+    [javac]                       ^
+    [javac]   symbol:   class Product
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:20: error: cannot find symbol
+    [javac] import br.edu.ufcg.dsc.ProductLine;
+    [javac]                       ^
+    [javac]   symbol:   class ProductLine
+    [javac]   location: package br.edu.ufcg.dsc
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:21: error: package br.edu.ufcg.dsc.evaluation does not exist
+    [javac] import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
+    [javac]                                  ^
+    [javac] /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/approaches/optimizations/ImpactedClasses.java:22: error: package br.edu.ufcg.dsc.saferefactor does not exist
+    [javac] import br.edu.ufcg.dsc.saferefactor.CommandLine;
+    [javac]                                    ^
+    [javac] Note: /home/jefferson/workspace/ferramentaLPSSM/src/safeEvolution/productMatcher/ProductMatching.java uses unchecked or unsafe operations.
+    [javac] Note: Recompile with -Xlint:unchecked for details.
+    [javac] 100 errors

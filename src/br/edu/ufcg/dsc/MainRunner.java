@@ -6,7 +6,9 @@ package br.edu.ufcg.dsc;
 
 import java.io.IOException;
 
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPlatformRunnable;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -33,21 +35,15 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		testableObject.setTestHarness(this);
 		Display display = PlatformUI.createDisplay();
 		try {
-			System.out.println("before");
-			//PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
-			ProductGenerator.MAX_TENTATIVAS = 2000;
-			FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank1.0.properties");
-			FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
-			System.out.println(propertiesObject);
-			Analyzer.getInstance().analize(propertiesObject);
-			System.out.println("after");
-			//AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
-			//refinementChecker.open();
-			//Shell shell = refinementChecker.getShell();
-			/*while (!shell.isDisposed()) {
+			System.out.println("SPL Refactoring Checker");
+			PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
+			AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
+			refinementChecker.open();
+			Shell shell = refinementChecker.getShell();
+			while (!shell.isDisposed()) {
 				if (!display.readAndDispatch())
 					display.sleep();
-			}*/
+			}
 			return EXIT_OK;
 		} finally {
 			display.dispose();
@@ -56,8 +52,11 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 
 	public void runTests() {
 		testableObject.testingStarting();
+		System.out.println("... Checking Start");
+		
 		testableObject.runTest(new Runnable() {
 			public void run() {
+				
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank1.0.properties");
 				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();

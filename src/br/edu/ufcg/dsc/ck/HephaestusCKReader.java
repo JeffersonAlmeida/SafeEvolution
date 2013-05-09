@@ -9,7 +9,6 @@ import java.util.Properties;
 import java.util.Set;
 
 import java_cup.runtime.Symbol;
-import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.parser.parser;
 import br.edu.ufcg.dsc.ck.parser.scanner;
@@ -17,6 +16,7 @@ import br.edu.ufcg.dsc.ck.tasks.SelectClass;
 import br.edu.ufcg.dsc.ck.tasks.Task;
 import br.edu.ufcg.dsc.ck.xml.XMLReader;
 import br.edu.ufcg.dsc.ck.xml.Xml;
+import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 
 public class HephaestusCKReader {

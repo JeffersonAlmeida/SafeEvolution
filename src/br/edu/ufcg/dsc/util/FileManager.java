@@ -27,8 +27,8 @@ import org.apache.tools.ant.DefaultLogger;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
 
-import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
+import br.edu.ufcg.dsc.Constants;
 
 public class FileManager {
 

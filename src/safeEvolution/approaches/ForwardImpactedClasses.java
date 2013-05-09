@@ -5,8 +5,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import safeEvolution.approaches.optimizations.ImpactedClasses;
 import safeEvolution.fileProperties.FilePropertiesObject;
-import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
+import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 

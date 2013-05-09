@@ -9,9 +9,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.naming.ConfigurationException;
+
 import org.eclipse.jdt.core.JavaModelException;
-import br.edu.ufcg.dsc.ProductLine;
+/*import org.eclipse.jdt.core.JavaModelException;*/
 import br.edu.ufcg.dsc.ast.ASTComparator;
+import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.util.FileManager;
 
 public class AssetMappingAnalyzer {
@@ -23,8 +25,7 @@ public class AssetMappingAnalyzer {
 	private ASTComparator astComparator;
 	
 	public AssetMappingAnalyzer() {
-		System.out.println("AssetMappingAnalyzer");
-		/*super();*/
+		System.out.println("Asset Mapping Analyzer");
 		this.astComparator = new ASTComparator();
 		try {
 			this.astComparator.setUpProject();
@@ -33,8 +34,9 @@ public class AssetMappingAnalyzer {
 		}
 	}
 
-	/** It looks for the modified assets. */
-	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) {
+	/** It looks for the modified assets. 
+	 * @throws JavaModelException */
+	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) throws JavaModelException {
 		boolean result = true;
 		
 		/* Get all SOURCE product line classes. */
@@ -80,8 +82,6 @@ public class AssetMappingAnalyzer {
 						this.changedAssetsList.add(FileManager.getInstance().getPath("src." + asset));
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (JavaModelException e) {
 					e.printStackTrace();
 				}
 			}

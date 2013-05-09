@@ -1,7 +1,6 @@
 Output/output.txt
 Output/outputfile.ods
 Resultados/
-ant/
 bin/
 emma/
 lib/
@@ -16,7 +15,6 @@ Project/
 temp/
 script.py
 randoop/
-plugin.xml
 .project
 .settings/
 .svn/
@@ -24,7 +22,6 @@ Alloy/
 META-INF/
 A
 br.ufpe.cin.target.perspective
-build.properties
 Execution*
 limitacoesTestes.txt
 junit*.properties

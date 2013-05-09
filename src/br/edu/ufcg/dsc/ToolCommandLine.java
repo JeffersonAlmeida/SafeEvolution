@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import org.eclipse.jdt.core.JavaModelException;
+
 import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
@@ -162,8 +165,14 @@ public class ToolCommandLine {
 		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL); 
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
 		
-		boolean isAssetMappingsEqual = amAnalyzer.isSameAssets(sourceSPL, targetSPL);
-		System.out.println("\n AM Equal: " + isAssetMappingsEqual);
+		boolean isAssetMappingsEqual;
+		try {
+			isAssetMappingsEqual = amAnalyzer.isSameAssets(sourceSPL, targetSPL);
+			System.out.println("\n AM Equal: " + isAssetMappingsEqual);
+			sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
+		} catch (JavaModelException e) {
+			e.printStackTrace();
+		}
 		
 		boolean isRefinement = false;
 		if(in.getApproach().equals(Approach.APP)){
@@ -190,7 +199,7 @@ public class ToolCommandLine {
 		
 		/*Report Variables: Pause total time to check the SPL.*/
 		sOutcomes.setWF(wf);
-		sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
+		
 		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
 		sOutcomes.setRefinement(wf && isRefinement);
 		sOutcomes.setCompObservableBehavior(isRefinement);

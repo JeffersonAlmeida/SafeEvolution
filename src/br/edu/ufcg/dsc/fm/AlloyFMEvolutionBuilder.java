@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
 import java.util.HashSet;
-
 import br.edu.ufcg.dsc.Constants;
 
 public class AlloyFMEvolutionBuilder {

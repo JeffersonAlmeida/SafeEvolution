@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
-import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 
 public class ProductMatching {

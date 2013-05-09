@@ -2,6 +2,7 @@ package br.edu.ufcg.dsc.gui;
 
 import java.io.IOException;
 
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.swt.SWT;
@@ -17,12 +18,12 @@ import org.eclipse.swt.widgets.Text;
 import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.fileProperties.FilePropertiesReader;
 
-import br.edu.ufcg.dsc.Approach;
-import br.edu.ufcg.dsc.Lines;
-import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.CKFormat;
+import br.edu.ufcg.dsc.Approach;
+import br.edu.ufcg.dsc.Lines;
+import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -134,7 +135,13 @@ public class AppWindow extends ApplicationWindow {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				
-				FilePropertiesReader reader = new FilePropertiesReader();
+				FilePropertiesReader reader = null;
+				try {
+					reader = new FilePropertiesReader();
+				} catch (JavaModelException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 				FilePropertiesObject propertiesObject = reader.getPropertiesObject();
 				
 				ProductGenerator.MAX_TENTATIVAS = 5000;

@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 import safeEvolution.fileProperties.FilePropertiesObject;
+import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
-import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.saferefactor.CommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;

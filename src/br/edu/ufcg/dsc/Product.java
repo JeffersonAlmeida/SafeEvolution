@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.regex.Pattern;
 
-import com.nokia.mid.sound.Sound;
-
 /**
  * @author Jefferson Almeida - jra at cin dot ufpe dot br
  * This Class represents a single product of the SPL.
@@ -286,7 +284,7 @@ public class Product {
 	
 	private String getComparablePath(String path) {
 		String result = "";
-		path = path.replaceAll(Pattern.quote(Constants.FILE_SEPARATOR), "/");
+		path = path.replace(Pattern.quote(Constants.FILE_SEPARATOR), "/");
 		String[] parts = path.split("src");
 		for(int i = 1; i < parts.length; i++){
 			result = result + "src" + parts[i];

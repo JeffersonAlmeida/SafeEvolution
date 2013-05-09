@@ -19,8 +19,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import soot.Main;
-import br.edu.ufcg.dsc.Constants;
-import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.ck.ConfigurationItem;
 import br.edu.ufcg.dsc.ck.ConfigurationKnowledge;
 import br.edu.ufcg.dsc.ck.featureexpression.FeatureExpression;
@@ -29,6 +27,8 @@ import br.edu.ufcg.dsc.ck.parser.parser;
 import br.edu.ufcg.dsc.ck.parser.scanner;
 import br.edu.ufcg.dsc.ck.tasks.SelectClass;
 import br.edu.ufcg.dsc.ck.tasks.Task;
+import br.edu.ufcg.dsc.Constants;
+import br.edu.ufcg.dsc.ProductLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.FileManager;
 

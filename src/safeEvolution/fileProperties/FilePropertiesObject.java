@@ -1,10 +1,11 @@
 package safeEvolution.fileProperties;
 
-import br.edu.ufcg.dsc.Approach;
-import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.dsc.am.AMFormat;
 import br.edu.ufcg.dsc.ck.CKFormat;
+import br.edu.ufcg.dsc.Approach;
+import br.edu.ufcg.dsc.Lines;
 import br.edu.ufcg.saferefactor.core.Criteria;
+
 
 public class FilePropertiesObject {
 	

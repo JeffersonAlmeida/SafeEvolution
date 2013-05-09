@@ -6,9 +6,9 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ck.featureexpression.IFeatureExpression;
 import br.edu.ufcg.dsc.ck.tasks.Task;
+import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.util.Comparador;
 
 public class ConfigurationItem {

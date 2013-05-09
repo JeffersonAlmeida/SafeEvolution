@@ -1,4 +1,5 @@
 package br.edu.ufcg.dsc.ast;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -51,7 +52,7 @@ public class ASTComparator {
 	public IJavaProject setUpProject() throws ConfigurationException {
 		try {
 			javaProject = JavaProjectHelper.createJavaProject("JavaProject" + System.currentTimeMillis(), "bin");
-//			JavaProjectHelper.addRTJar(javaProject);
+			/*JavaProjectHelper.addRTJar(javaProject);*/
 			root = JavaProjectHelper.addSourceContainer(javaProject, "src");
 			packageP = root.createPackageFragment("p", true, null);
 
@@ -355,6 +356,7 @@ public class ASTComparator {
 		if (sourceFile.exists()){
 			this.setInput(sourceFile.getName(), getContents(sourceFile));
 			this.classeName = sourceFile.getName().replaceAll(".java","");
+			//this.classeName = sourceFile.getName().replace(".java","");
 		}
 		else {
 			throw new IOException("The input file does not exist.");
