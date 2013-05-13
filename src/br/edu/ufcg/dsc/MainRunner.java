@@ -58,8 +58,9 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			public void run() {
 				
 				ProductGenerator.MAX_TENTATIVAS = 2000;
-				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank1.0.properties");
+				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/bank4.0.properties");
 				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
+				System.out.println(propertiesObject);
 				try {
 					Analyzer.getInstance().analize(propertiesObject);
 				} catch (DirectoryException e) {

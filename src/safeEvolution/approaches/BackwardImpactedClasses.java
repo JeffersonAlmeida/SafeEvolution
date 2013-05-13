@@ -27,7 +27,11 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 
 	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
 		/*this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); Codigo para encontrar as dependencias em mais de um nivel acima*/ 
-		this.getAboveDependencies(new File(sourceSPL.getPath()+"src"));
+		
+		//this.getAboveDependencies(new File(sourceSPL.getPath()+"src"));   
+		
+		/* Test on Graphical User Interface with Validation class associated with */
+		this.extendedImpactedClasses.add("org.bank.gui.GUI.java");
 		this.printListofExtendedImpactedClasses();
 		super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
