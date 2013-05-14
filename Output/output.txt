@@ -9,7 +9,7 @@ line = DEFAULT
 generateTestsWith = randoop
 timeOut = 120
 inputLimit = 120
-approach  = IC
+approach  = EIC
 aspectsInSourceSPL = false
 aspectsInTargetSPL = false
 whichMethods = ONLY_COMMON_METHODS_SUBSET_DEFAULT
@@ -163,14 +163,18 @@ public class Client {
 }
 
 Parametros para o SOOT -> Classe:Client path:/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client
-
-Provided Class: Client Dependence: org.bank.account.Account
-
-Provided Class: Client Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Client Dependence: Account
-
-Provided Class: Client Its Dependencies: Account - constant Required: Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:9,13:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:11,46:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:18,32:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:42,9:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/client/Client.java:45,25:
+  Semantic Error: no visible type named Account
 
 Provided Class: Client Dependence: package org.bank.client;
 
@@ -179,31 +183,24 @@ Class Name: Client, src/org/bank/client/Client.java
 
  Provided Classes:  [ Client ] 
 
- Required Classes:  [ Account ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.account;
-
-import org.bank.client.Client;
 
 public class Account {
 	
 	private int ag;  
     private int cc;  
-    private double balance = Double.POSITIVE_INFINITY;
-    private static final double WITHDRAW_lIMIT = 50.00;
+    private double balance;
     private static final double LOAN_lIMIT = 1000.00;
    
     /* ............................................ Constructors */
     public Account() {
     	super();
 	}
-    public Account(int ag, int cc, Client client, double balance) {
-		super();
-		this.ag = ag;
-		this.cc = cc;
-		this.balance = balance;
-	}
+   
+    
 	public Account(int ag, int cc) {
 		super();
 		this.ag = ag;
@@ -272,14 +269,6 @@ public class Account {
 
 Parametros para o SOOT -> Classe:Account path:/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/account
 
-Provided Class: Account Dependence: org.bank.client.Client
-
-Provided Class: Account Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: Account Dependence: Client
-
-Provided Class: Account Its Dependencies: Client - constant Required: Client
-
 Provided Class: Account Dependence: package org.bank.account;
 
 
@@ -287,7 +276,7 @@ Class Name: Account, src/org/bank/account/Account.java
 
  Provided Classes:  [ Account ] 
 
- Required Classes:  [ Client ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.facade;
@@ -304,14 +293,10 @@ public class Facade {
 }
 
 Parametros para o SOOT -> Classe:Facade path:/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/facade
-
-Provided Class: Facade Dependence: org.bank.account.Account
-
-Provided Class: Facade Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Facade Dependence: Account
-
-Provided Class: Facade Its Dependencies: Account - constant Required: Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/facade/Facade.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/facade/Facade.java:9,26:
+  Semantic Error: no visible type named Account
 
 Provided Class: Facade Dependence: package org.bank.facade;
 
@@ -320,7 +305,7 @@ Class Name: Facade, src/org/bank/facade/Facade.java
 
  Provided Classes:  [ Facade ] 
 
- Required Classes:  [ Account ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.validation;
@@ -381,34 +366,30 @@ public class GUI{
 }
 
 Parametros para o SOOT -> Classe:GUI path:/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:4,8:
+  Semantic Error: no visible type named org.bank.client.Client
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:5,8:
+  Semantic Error: no visible type named org.bank.facade.Facade
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:13,26:
+  Semantic Error: no visible type named Client
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:14,3:
+  Semantic Error: no visible type named Facade
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:14,23:
+  Semantic Error: no visible type named Facade
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:19,3:
+  Semantic Error: no visible type named Account
 /home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:19:
   Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:19,25:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:21,3:
+  Semantic Error: no visible type named Client
 /home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:21:
   Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-Provided Class: GUI Dependence: org.bank.account.Account
-
-Provided Class: GUI Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: GUI Dependence: org.bank.facade.Facade
-
-Provided Class: GUI Its Dependencies: org.bank.facade.Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: org.bank.client.Client
-
-Provided Class: GUI Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: GUI Dependence: Account
-
-Provided Class: GUI Its Dependencies: Account - constant Required: Account
-
-Provided Class: GUI Dependence: Facade
-
-Provided Class: GUI Its Dependencies: Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: Client
-
-Provided Class: GUI Its Dependencies: Client - constant Required: Client
+/home/jefferson/Desktop/workspace/Bank4.0/src/org/bank/gui/GUI.java:21,23:
+  Semantic Error: no visible type named Client
 
 Provided Class: GUI Dependence: package org.bank.gui;
 
@@ -417,44 +398,40 @@ Class Name: GUI, src/org/bank/gui/GUI.java
 
  Provided Classes:  [ GUI ] 
 
- Required Classes:  [ Account ]  [ Facade ]  [ Client ] 
+ Required Classes: 
 
 source Configuration Knowledge Items:
 Feature Expression: core
+Provided: {GUI=src/org/bank/gui/GUI.java}
+Required: []
+
+Feature Expression: core
 Provided: {Facade=src/org/bank/facade/Facade.java}
-Required: [Account]
+Required: []
 
 Feature Expression: core
 Provided: {Account=src/org/bank/account/Account.java}
-Required: [Client]
+Required: []
+
+Feature Expression: core
+Provided: {Client=src/org/bank/client/Client.java}
+Required: []
 
 Feature Expression: core
 Provided: {Validation=src/org/bank/validation/Validation.java}
 Required: []
 
-Feature Expression: core
-Provided: {GUI=src/org/bank/gui/GUI.java}
-Required: [Account, Facade, Client]
-
-Feature Expression: core
-Provided: {Client=src/org/bank/client/Client.java}
-Required: [Account]
-
 
 Alloy File Content: open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -472,9 +449,9 @@ Signature: GUI
 
 Signature: Account
 
-Signature: core
-
 Signature: Facade
+
+Signature: core
 
 Signature: Validation
 
@@ -501,18 +478,14 @@ File Name: /home/jefferson/workspace/ferramentaLPSSM/Alloy/sourceCKAlloy.als
 Content: module sourceCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -579,14 +552,18 @@ public class Client {
 }
 
 Parametros para o SOOT -> Classe:Client path:/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client
-
-Provided Class: Client Dependence: org.bank.account.Account
-
-Provided Class: Client Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Client Dependence: Account
-
-Provided Class: Client Its Dependencies: Account - constant Required: Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:9,13:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:11,46:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:18,32:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:42,9:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/client/Client.java:45,25:
+  Semantic Error: no visible type named Account
 
 Provided Class: Client Dependence: package org.bank.client;
 
@@ -595,31 +572,22 @@ Class Name: Client, src/org/bank/client/Client.java
 
  Provided Classes:  [ Client ] 
 
- Required Classes:  [ Account ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.account;
-
-import org.bank.client.Client;
 
 public class Account {
 	
 	private int ag;  
     private int cc;  
-    private double balance = Double.POSITIVE_INFINITY;
-    private static final double WITHDRAW_lIMIT = 50.00;
-    private static final double LOAN_lIMIT = 1000.00;
+    private double balance;
    
     /* ............................................ Constructors */
     public Account() {
     	super();
 	}
-    public Account(int ag, int cc, Client client, double balance) {
-		super();
-		this.ag = ag;
-		this.cc = cc;
-		this.balance = balance;
-	}
+   
 	public Account(int ag, int cc) {
 		super();
 		this.ag = ag;
@@ -686,14 +654,6 @@ public class Account {
 
 Parametros para o SOOT -> Classe:Account path:/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/account
 
-Provided Class: Account Dependence: org.bank.client.Client
-
-Provided Class: Account Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: Account Dependence: Client
-
-Provided Class: Account Its Dependencies: Client - constant Required: Client
-
 Provided Class: Account Dependence: package org.bank.account;
 
 
@@ -701,7 +661,7 @@ Class Name: Account, src/org/bank/account/Account.java
 
  Provided Classes:  [ Account ] 
 
- Required Classes:  [ Client ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.facade;
@@ -719,14 +679,10 @@ public class Facade {
 }
 
 Parametros para o SOOT -> Classe:Facade path:/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/facade
-
-Provided Class: Facade Dependence: org.bank.account.Account
-
-Provided Class: Facade Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: Facade Dependence: Account
-
-Provided Class: Facade Its Dependencies: Account - constant Required: Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/facade/Facade.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/facade/Facade.java:10,26:
+  Semantic Error: no visible type named Account
 
 Provided Class: Facade Dependence: package org.bank.facade;
 
@@ -735,7 +691,7 @@ Class Name: Facade, src/org/bank/facade/Facade.java
 
  Provided Classes:  [ Facade ] 
 
- Required Classes:  [ Account ] 
+ Required Classes: 
 
 Class Content:
 package org.bank.validation;
@@ -796,34 +752,30 @@ public class GUI{
 }
 
 Parametros para o SOOT -> Classe:GUI path:/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:3,8:
+  Semantic Error: no visible type named org.bank.account.Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:4,8:
+  Semantic Error: no visible type named org.bank.client.Client
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:5,8:
+  Semantic Error: no visible type named org.bank.facade.Facade
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:13,26:
+  Semantic Error: no visible type named Client
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:14,3:
+  Semantic Error: no visible type named Facade
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:14,23:
+  Semantic Error: no visible type named Facade
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:19,3:
+  Semantic Error: no visible type named Account
 /home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:19:
   Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:19,25:
+  Semantic Error: no visible type named Account
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:21,3:
+  Semantic Error: no visible type named Client
 /home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:21:
   Semantic Error: can not instantiate Unknown no matching constructor found in Unknown
-
-Provided Class: GUI Dependence: org.bank.account.Account
-
-Provided Class: GUI Its Dependencies: org.bank.account.Account - constant Required: Account
-
-Provided Class: GUI Dependence: org.bank.facade.Facade
-
-Provided Class: GUI Its Dependencies: org.bank.facade.Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: org.bank.client.Client
-
-Provided Class: GUI Its Dependencies: org.bank.client.Client - constant Required: Client
-
-Provided Class: GUI Dependence: Account
-
-Provided Class: GUI Its Dependencies: Account - constant Required: Account
-
-Provided Class: GUI Dependence: Facade
-
-Provided Class: GUI Its Dependencies: Facade - constant Required: Facade
-
-Provided Class: GUI Dependence: Client
-
-Provided Class: GUI Its Dependencies: Client - constant Required: Client
+/home/jefferson/Desktop/workspace/Bank4.1/src/org/bank/gui/GUI.java:21,23:
+  Semantic Error: no visible type named Client
 
 Provided Class: GUI Dependence: package org.bank.gui;
 
@@ -832,44 +784,40 @@ Class Name: GUI, src/org/bank/gui/GUI.java
 
  Provided Classes:  [ GUI ] 
 
- Required Classes:  [ Account ]  [ Facade ]  [ Client ] 
+ Required Classes: 
 
 target Configuration Knowledge Items:
 Feature Expression: core
+Provided: {GUI=src/org/bank/gui/GUI.java}
+Required: []
+
+Feature Expression: core
 Provided: {Facade=src/org/bank/facade/Facade.java}
-Required: [Account]
+Required: []
 
 Feature Expression: core
 Provided: {Account=src/org/bank/account/Account.java}
-Required: [Client]
+Required: []
+
+Feature Expression: core
+Provided: {Client=src/org/bank/client/Client.java}
+Required: []
 
 Feature Expression: core
 Provided: {Validation=src/org/bank/validation/Validation.java}
 Required: []
 
-Feature Expression: core
-Provided: {GUI=src/org/bank/gui/GUI.java}
-Required: [Account, Facade, Client]
-
-Feature Expression: core
-Provided: {Client=src/org/bank/client/Client.java}
-Required: [Account]
-
 
 Alloy File Content: open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -887,9 +835,9 @@ Signature: GUI
 
 Signature: Account
 
-Signature: core
-
 Signature: Facade
+
+Signature: core
 
 Signature: Validation
 
@@ -916,18 +864,14 @@ File Name: /home/jefferson/workspace/ferramentaLPSSM/Alloy/targetCKAlloy.als
 Content: module targetCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -951,18 +895,14 @@ Checking CK ...
 FileContent: module sourceCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -978,18 +918,14 @@ check WT for 2
 Content: module sourceCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -1025,18 +961,14 @@ Checking CK ...
 FileContent: module targetCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -1052,18 +984,14 @@ check WT for 2
 Content: module targetCKAlloy
 open default
  pred provided[] { 
+( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Facade]) )
 ( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Validation]) )
-( isTrue[core] => (isTrue[GUI]) )
 ( isTrue[core] => (isTrue[Client]) )
+( isTrue[core] => (isTrue[Validation]) )
  }
 
  pred required[] { 
-( isTrue[core] => (isTrue[Account]) )
-( isTrue[core] => (isTrue[Client]) )
-( isTrue[core] => (isTrue[Account] and isTrue[Facade] and isTrue[Client]) )
-( isTrue[core] => (isTrue[Account]) )
  }
 
  pred semanticaCK[] { provided[] => required[] }
@@ -1097,15 +1025,15 @@ Well Formedness to the <Target> SPL.: true
 
 Product 0 ::  [ bank ] [ core ]
 
+ [ GUI ] - src/org/bank/gui/GUI.java
+
  [ Facade ] - src/org/bank/facade/Facade.java
 
  [ Account ] - src/org/bank/account/Account.java
 
- [ Validation ] - src/org/bank/validation/Validation.java
-
- [ GUI ] - src/org/bank/gui/GUI.java
-
  [ Client ] - src/org/bank/client/Client.java
+
+ [ Validation ] - src/org/bank/validation/Validation.java
 constante destino esta vazio: false
 
 
@@ -1113,15 +1041,15 @@ constante destino esta vazio: false
 
 Product 1 ::  [ bank ] [ core ]
 
+ [ GUI ] - src/org/bank/gui/GUI.java
+
  [ Facade ] - src/org/bank/facade/Facade.java
 
  [ Account ] - src/org/bank/account/Account.java
 
- [ Validation ] - src/org/bank/validation/Validation.java
-
- [ GUI ] - src/org/bank/gui/GUI.java
-
  [ Client ] - src/org/bank/client/Client.java
+
+ [ Validation ] - src/org/bank/validation/Validation.java
 constante destino esta vazio: false
 
 
@@ -1183,243 +1111,15 @@ Have Source and Target the same assets ?:false
 
  AM Equal: false
 
-IMPACTED ClASSES
+EXTENDED IMPACTED ClASSES
 
 
-List of Modified Classes: 1
-org.bank.account.Account.java
+List of Extended Impacted Classes: 1
+org.bank.gui.GUI.java
 
 --------------------------
 
- Amount of Pseudo Products: 0
+List of Modified Classes: 1
+org.bank.gui.GUI.java
 
- [ Facade ] - src/org/bank/facade/Facade.java
-
- [ Account ] - src/org/bank/account/Account.java
-
- [ Validation ] - src/org/bank/validation/Validation.java
-
- [ GUI ] - src/org/bank/gui/GUI.java
-
- [ Client ] - src/org/bank/client/Client.java
-
- feat: null
-
- feat: null
-Pseudo Product: [ fake0.0882530076734156 ]
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account/Account.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client/Client.java
-@Features Preprocess Velocity :
-
-feature:fake0.0882530076734156
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account/Account.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client/Client.java
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account
-     [java] May 13, 2013 4:07:42 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/account'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client
-     [java] May 13, 2013 4:07:42 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/org/bank/client'
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account/Account.java
-
-Directory: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client
-
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client/Client.java
-@Features Preprocess Velocity :
-
-feature:fake0.0882530076734156
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account/Account.java
-File: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client/Client.java
-FileConstants: /home/jefferson/workspace/ferramentaLPSSM/ant/constants.properties
-filesToPreprocessArgument: /home/jefferson/workspace/ferramentaLPSSM/ant/files.properties
-
-velocity:
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account
-     [java] May 13, 2013 4:07:43 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/account'
-     [java] /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client
-     [java] May 13, 2013 4:07:43 PM org.apache.velocity.runtime.log.JdkLogChute log
-     [java] INFO: FileResourceLoader : adding path '/home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/org/bank/client'
-
-Classes que receberao testes JUNIT: org.bank.account.Account
-
-clean_tests:
-     [echo]  This task is responsible to clean all tests. 
-
-compile_target_ind:
-     [echo]  TARGET Compile IND 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-
-compile_source:
-     [echo]  SOURCE Compile 
-     [echo] The AspectJ compiler can be used like Javac to compile Java sources, but it can also compile AspectJ sources or weave binary aspects with Java bytecode.
-
- You can find ant build logs in: < /tmp/safeRefactorAJ/log.txt >
-
-Delete operation is failed.
-
-init:
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/randoop
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/randoop
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/evosuite-tests
-    [mkdir] Created dir: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/evosuite-report
-
-clean:
-
-compile_source_and_target:
-     [echo] * Compile Source Product
-    [javac] Compiling 2 source files to /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-     [echo] * Compile Target Product
-    [javac] Compiling 2 source files to /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/bin
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.account.Account.<init>()
-cons : org.bank.account.Account.<init>(int, int, org.bank.client.Client, double)
-cons : org.bank.account.Account.<init>(int, int)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-cons : org.bank.client.Client.<init>(java.lang.String, org.bank.account.Account)
-method : org.bank.account.Account.toString() : org.bank.account.Account
-method : org.bank.account.Account.getCc() : org.bank.account.Account
-method : org.bank.account.Account.transferir(java.lang.Double, org.bank.account.Account) : org.bank.account.Account
-method : org.bank.account.Account.deposito(double) : org.bank.account.Account
-method : org.bank.account.Account.debito(double) : org.bank.account.Account
-method : org.bank.account.Account.loan(double) : org.bank.account.Account
-method : org.bank.account.Account.sacar(double) : org.bank.account.Account
-method : org.bank.account.Account.getAg() : org.bank.account.Account
-method : org.bank.account.Account.setAg(int) : org.bank.account.Account
-method : org.bank.account.Account.setCc(int) : org.bank.account.Account
-method : org.bank.account.Account.getBalance() : org.bank.account.Account
-method : org.bank.account.Account.setBalance(double) : org.bank.account.Account
-method : org.bank.client.Client.setAccount(org.bank.account.Account) : org.bank.client.Client
-
-
-randoop:
-     [echo] * Generate Tests With Randoop Tool
-     [echo] * https://code.google.com/p/randoop/
-     [java] policy = sun.security.provider.PolicyFile@7e0c2ff5
-     [java] PUBLIC MEMBERS=19
-     [java] Explorer = randoop.ForwardGenerator@56406199
-     [java] Começo!!
-     [java] 
-     [java] Progress update: test inputs generated=0, failing inputs=0      (Mon May 13 16:07:45 GMT-03:00 2013)FIM!!!
-     [java] 
-     [java] Progress update: test inputs generated=120, failing inputs=0      (Mon May 13 16:07:46 GMT-03:00 2013)
-     [java] Normal method executions:2548
-     [java] Exceptional method executions:0
-     [java] 
-     [java] Average method execution time (normal termination):     0.114
-     [java] Average method execution time (exceptional termination):NaN
-     [java] 
-     [java] Creating Junit tests (120 tests)...Writing 120 junit tests
-     [java] 
-     [java] Created file: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/randoop/tests/RandoopTest0.java
-     [java] Created file: /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/src/randoop/tests/RandoopTest.java
-
-compile:
-     [echo] * Compiling the tests
-    [javac] Compiling 2 source files to /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/source/bin
-
-copy-tests:
-     [copy] Copying 2 files to /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/src/randoop/tests
-     [copy] Copying 2 files to /home/jefferson/workspace/ferramentaLPSSM/Products/Product0/target/bin/randoop/tests
-
-run:
-     [echo] * Run Junit Source Product 
-    [junit] Running randoop.tests.RandoopTest0
-    [junit] Tests run: 120, Failures: 1, Errors: 0, Time elapsed: 0.122 sec
-     [echo] * Run Junit Target Product
-    [junit] Test randoop.tests.RandoopTest0 FAILED
-    [junit] Running randoop.tests.RandoopTest0
-    [junit] Tests run: 120, Failures: 3, Errors: 0, Time elapsed: 0.1 sec
-    [junit] Test randoop.tests.RandoopTest0 FAILED
- Print Report :
-Testes generated: 120
-Failures on source: 1
-Errors on source: 0
-Failures on target: 3
-Errors on target: 0
-Refactoring? false
-
-
-
-report changes: null
-randoop.tests.RandoopTest0.test84 in source is SUCCESS while in target is FAILURE
-randoop.tests.RandoopTest0.test116 in source is SUCCESS while in target is FAILURE
-
-
-
- -- SafeRefactor FOUND behavioral changes -- 
-Asset mapping checked in: 5 segundos. Same Behavior: false
-Refactoring ? false
-
-
- TIME SPENT IN THIS IC APPROACH: 5 milliseconds
-
-	 SPL REPORT: 
-
--> Source Product Line is Well Formed:?  true
--> Target Product Line is Well Formed:?  true
--> Asset Mappings are Equals :?false
--> Are Configuration Knowledge and Feature Model a refinement:?  true
--> The evolution has a compatible observable behavior:?  false
--> My Whole Software Product Line is Well Formed:?  true
--> My Whole Software Product Line is a Refinement:?  false
-
-
-
+--------------------------
