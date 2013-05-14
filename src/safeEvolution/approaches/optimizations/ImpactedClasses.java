@@ -331,7 +331,7 @@ public abstract class ImpactedClasses {
 		}
 
 		Collection<String> dependencias = dependenciasCache.get(pathDependencia.replaceAll(Pattern.quote(Constants.FILE_SEPARATOR), "/"));
-		
+
 		if (dependencias == null) {
 			if (classe.getAbsolutePath().endsWith(".java")) {
 				
@@ -438,16 +438,12 @@ public abstract class ImpactedClasses {
 	
 	private String getPathClassMapping(String dependecia, HashMap<String, String> mapping) {
 		String result = null;
-		 String realPackageName = "";
-		if(dependecia.contains("package")){
-			 String packageName = dependecia.split("package")[1]; // extract package name.
-			 realPackageName = packageName.split(";")[0].trim(); // remove ";" from the package name
-		}
+
 		// A dependencia nem sempre eh um nome de classe com pacote. As chaves do
 		// mapping sempre sao.
 		// Eh necessario checar se dependencia faz parte de alguma key.
 		for (String key : mapping.keySet()) {
-			if ((key.contains(realPackageName) || dependecia.contains(".") && key.endsWith(dependecia + ".java")) || key.endsWith("." + dependecia + ".java")
+			if ((dependecia.contains(".") && key.endsWith(dependecia + ".java")) || key.endsWith("." + dependecia + ".java")
 					|| (dependecia.contains(".") && key.endsWith(dependecia + ".aj")) || key.endsWith("." + dependecia + ".aj")) {
 				result = mapping.get(key);
 
