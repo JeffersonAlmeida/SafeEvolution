@@ -31,7 +31,7 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 		//this.getAboveDependencies(new File(sourceSPL.getPath()+"src"));   
 		
 		/* Test on Graphical User Interface with Validation class associated with */
-		this.extendedImpactedClasses.add("org.bank.gui.GUI.java");
+		this.extendedImpactedClasses.add("lancs.mobilemedia.core.ui.controller.BaseController.java");
 		this.printListofExtendedImpactedClasses();
 		super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);

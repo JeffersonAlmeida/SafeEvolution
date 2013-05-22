@@ -9,7 +9,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.naming.ConfigurationException;
-
 import org.eclipse.jdt.core.JavaModelException;
 /*import org.eclipse.jdt.core.JavaModelException;*/
 import br.edu.ufcg.dsc.ast.ASTComparator;
