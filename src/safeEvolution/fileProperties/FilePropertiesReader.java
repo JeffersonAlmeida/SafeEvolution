@@ -98,6 +98,9 @@ public class FilePropertiesReader {
 				String generateTestsWith = this.properties.getProperty("generateTestsWith");
 				this.propertiesObject.setGenerateTestsWith(generateTestsWith);
 				
+				String extendedImpactedClasses = this.properties.getProperty("extended-impacted-classes");
+				this.propertiesObject.setExtendedImpactedClasses(extendedImpactedClasses);
+				
 				this.isLoaded = true;
 				return this.propertiesObject;
 			}

@@ -28,6 +28,7 @@ public class FilePropertiesObject {
 			private String artifactsSourceDir;
 			private String artifactsTargetDir;
 			private String generateTestsWith;
+			private String extendedImpactedClasses;
 			
 			public FilePropertiesObject() {
 				super();
@@ -149,8 +150,15 @@ public class FilePropertiesObject {
 			public void setGenerateTestsWith(String generateTestsWith) {
 				this.generateTestsWith = generateTestsWith;
 			}
+			public void setExtendedImpactedClasses(String extendedImpactedClasses) {
+				this.extendedImpactedClasses = extendedImpactedClasses;
+			}
+			public String getExtendedImpactedClasses() {
+				return extendedImpactedClasses;
+			}
+			
 			/*............................................................toString*/
-		
+			
 			/* (non-Javadoc)
 			 * @see java.lang.Object#toString()
 			 */
@@ -175,7 +183,8 @@ public class FilePropertiesObject {
 						"amFormatSourceSPL = " + amFormatSourceSPL + "\n" +
 						"amFormatTargetSPL = " + amFormatTargetSPL + "\n" +
 						"artifactsSourceDir = " + artifactsSourceDir + "\n" +
-						"artifactsTargetDir = " + artifactsTargetDir + "\n";
+						"artifactsTargetDir = " + artifactsTargetDir + "\n" +
+						"extendedImpactedClasses = " + extendedImpactedClasses + "\n";
 			}
 
 			
