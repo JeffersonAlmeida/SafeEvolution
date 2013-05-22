@@ -18,28 +18,49 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 	private Collection<String> extendedImpactedClasses;
 	private int sourceCodeVerificationCounter;
 	private boolean canIncrementVerificationCounter;
+	private Collection<String> auxiliaryImpactedClasses;
+	
 	public BackwardImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> modifiedClassesList) {
 		super(productBuilder, in, modifiedClassesList);
 		this.extendedImpactedClasses = new HashSet<String>();
+		this.auxiliaryImpactedClasses = new HashSet<String>();
 		this.sourceCodeVerificationCounter = 1;
 		this.canIncrementVerificationCounter = true;
 	}
 
 	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
-		/*this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); Codigo para encontrar as dependencias em mais de um nivel acima*/ 
-		
-		//this.getAboveDependencies(new File(sourceSPL.getPath()+"src"));   
-		
-		/* Test on Graphical User Interface with Validation class associated with */
-		this.extendedImpactedClasses.add("lancs.mobilemedia.core.ui.controller.BaseController.java");
-		this.printListofExtendedImpactedClasses();
-		super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
+		this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); //Codigo para encontrar as dependencias em mais de um nivel acima
+		if(!input.getExtendedImpactedClasses().isEmpty()){ /* Test on Graphical User Interface with Validation class associated with */
+			String [] classes = getExtendedImpactedClassesFromInputFile();
+			if(belongsToextendedImpactedClasses(classes)){
+				super.setModifiedClasses(this.auxiliaryImpactedClasses);
+			}
+		    this.printListofExtendedImpactedClasses(this.auxiliaryImpactedClasses.iterator());	
+		}else{			
+			super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
+			this.printListofExtendedImpactedClasses(this.extendedImpactedClasses.iterator());
+		}
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 	}
 	
-	private void printListofExtendedImpactedClasses() {
-		Iterator<String> i = this.extendedImpactedClasses.iterator();
-		System.out.println("\nList of Extended Impacted Classes: " + this.extendedImpactedClasses.size());
+	private boolean belongsToextendedImpactedClasses(String [] classes) {
+		for(String c: classes){
+			if(!this.extendedImpactedClasses.contains(c))
+				return false;
+			else
+				this.auxiliaryImpactedClasses.add(c);
+		}
+		return true;
+	}
+
+	private String [] getExtendedImpactedClassesFromInputFile() {
+		String eic = input.getExtendedImpactedClasses();
+		String [] classes = eic.split(";");
+		return classes;
+	}
+
+	private void printListofExtendedImpactedClasses(Iterator<String> i) {
+		System.out.println("\nList of Extended Impacted Classes: ");
 		while(i.hasNext()){
 			System.out.println(i.next());
 		}
@@ -47,14 +68,14 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 	}
 
 	// Codigo para encontrar as dependencias em mais de um nivel acima
-	/*private void getBackwardDependencies(File sourceSplDirectory){
+	private void getBackwardDependencies(File sourceSplDirectory){
 		int i = 0;
 		while(i < this.sourceCodeVerificationCounter){
 			this.canIncrementVerificationCounter = true;
 			this.getAboveDependencies(sourceSplDirectory);
 			i++;
 		}
-	}*/
+	}
 	
 	private void getAboveDependencies(File classe) {
 		System.out.println("\nFILE: " + classe.getAbsolutePath());
@@ -105,7 +126,7 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 				if(s.equals(w)){
 					this.modifiedClasses.add(classe);
 					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
-					/*if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} Codigo para encontrar as dependencias em mais de um nivel acima*/
+					if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} // Codigo para encontrar as dependencias em mais de um nivel acima
 					break;
 				}
 			}
