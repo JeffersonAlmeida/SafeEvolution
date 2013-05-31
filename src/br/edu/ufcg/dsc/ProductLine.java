@@ -185,8 +185,10 @@ public class ProductLine {
 			}
 		}else if (f.isFile()){
 			if (f.getName().endsWith(".java") || f.getName().endsWith(".aj")) {
+				System.out.println("FILE => " + f.getAbsolutePath());
 				String path = f.getPath();
-				this.mappingClassesSistemaDeArquivos.put(FileManager.getInstance().getCorrectName(path), path);
+				String correctName = FileManager.getInstance().getCorrectName(path);
+				this.mappingClassesSistemaDeArquivos.put(correctName, path);
 			}
 		}
 	}

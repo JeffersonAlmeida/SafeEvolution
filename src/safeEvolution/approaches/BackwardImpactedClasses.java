@@ -29,12 +29,16 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 	}
 
 	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
-		this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); //Codigo para encontrar as dependencias em mais de um nivel acima
+		//this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); //Codigo para encontrar as dependencias em mais de um nivel acima
 		if(!input.getExtendedImpactedClasses().isEmpty()){ /* Test on Graphical User Interface with Validation class associated with */
 			String [] classes = getExtendedImpactedClassesFromInputFile();
-			if(belongsToextendedImpactedClasses(classes)){
+			/*if(belongsToextendedImpactedClasses(classes)){
 				super.setModifiedClasses(this.auxiliaryImpactedClasses);
-			}
+			}*/
+			for(String c: classes)
+				this.auxiliaryImpactedClasses.add(c);
+			
+			super.setModifiedClasses(this.auxiliaryImpactedClasses);
 		    this.printListofExtendedImpactedClasses(this.auxiliaryImpactedClasses.iterator());	
 		}else{			
 			super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
