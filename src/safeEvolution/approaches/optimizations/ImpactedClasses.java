@@ -75,8 +75,11 @@ public abstract class ImpactedClasses {
 	
 	private boolean CheckProductBehavior(ProductLine sourceSPL, ProductLine targetSPL, boolean sameBehavior, HashSet<String> prod) throws AssetNotFoundException, DirectoryException, IOException {
 		printPseudoProduct(prod); 
-		processModifiedAspect(sourceSPL, this.aspectsSourceFeatureMapping.get(prod), this.sourceProductFile); // Copy modified aspects and its dependencies to the source SPL product folder.
-		processModifiedAspect(targetSPL, this.aspectsTargetFeatureMapping.get(prod), this.targetProductFile); // Copy modified aspects and its dependencies to the target SPL product folder.
+		if(this.input.isAspectsInSourceSPL())
+			processModifiedAspect(sourceSPL, this.aspectsSourceFeatureMapping.get(prod), this.sourceProductFile); // Copy modified aspects and its dependencies to the source SPL product folder.	
+		if(this.input.isAspectsInTargetSPL())
+			processModifiedAspect(targetSPL, this.aspectsTargetFeatureMapping.get(prod), this.targetProductFile); // Copy modified aspects and its dependencies to the target SPL product folder.
+		
 		preProcessAssets(sourceSPL, targetSPL, this.input, prod);
 		System.out.println("\nClasses que receberao testes JUNIT: " + classes);
 		sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
