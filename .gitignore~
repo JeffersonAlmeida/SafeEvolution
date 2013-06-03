@@ -3,7 +3,6 @@ Output/outputfile.ods
 Resultados/
 bin/
 emma/
-lib/
 libTarget/
 libTargetOld/
 libTargetPOI32/
@@ -19,7 +18,6 @@ randoop/
 .settings/
 .svn/
 Alloy/
-META-INF/
 A
 br.ufpe.cin.target.perspective
 Execution*
