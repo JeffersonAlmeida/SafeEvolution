@@ -35,6 +35,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		testableObject.setTestHarness(this);
 		Display display = PlatformUI.createDisplay();
 		try {
+			// delete generated JavaProjects in Eclipse Run Configuration Directory
+			Process p = Runtime.getRuntime().exec("rm -rf /home/jefferson/runtime-ferramentaLPS.Main/");
 			System.out.println("SPL Refactoring Checker");
 			PlatformUI.createAndRunWorkbench(display, new NullAdvisor());
 			AppWindow refinementChecker = new AppWindow("Software Product Line Refinement Checker");
@@ -58,7 +60,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			public void run() {
 				
 				ProductGenerator.MAX_TENTATIVAS = 2000;
-				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/ToySPL-EIC2.0.properties");
+				FilePropertiesReader propertiesReader = new FilePropertiesReader("/home/jefferson/workspace/ferramentaLPSSM/inputFiles/branch1.0.properties");
 				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
 				System.out.println(propertiesObject);
 				try {
