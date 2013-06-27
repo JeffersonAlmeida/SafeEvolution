@@ -268,7 +268,7 @@ public class SpreadSheetGenerator {
     }
 
     void saveOutputDocument() {
-        try {
+        try {	
             outputDocument.save(outputFileName);
         } catch (Exception e) {
             System.err.println("Unable to save document.");

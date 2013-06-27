@@ -339,11 +339,13 @@ public abstract class ImpactedClasses {
 			if (classe.getAbsolutePath().endsWith(".java")) {
 				
 				String clazz =  classe.getName().replaceAll(".java", ""); String path =classe.getParent() ;
+				System.out.println("\n@Clazz: " + clazz + " - " + " path: " + path);
 				dependencias = Main.v().getDependences(clazz, path);
 
 				//Classes podem ser dependentes de aspectos
 				//Ocorre quando excecoes lancadas em classes sao tratadas apenas em Aspectos.
-				dependencias.addAll(FileManager.getInstance().getDependenciasAspectos(classe));
+				Collection<String> aspectos = FileManager.getInstance().getDependenciasAspectos(classe); 
+				dependencias.addAll(aspectos);
 			} else {
 				//Dependencias de aspectos serao identificadas pelo import deles.
 				dependencias = FileManager.getInstance().getDependenciasDeAspectosPeloImport(classe);

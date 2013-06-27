@@ -131,14 +131,14 @@ public class ToolCommandLine {
 		String fachadaSource = null;
 		String fachadaTarget = null; 
 		
-		String ckSource = in.getArtifactsSourceDir() + "ck.xml";
-		String ckTarget = in.getArtifactsTargetDir() + "ck.xml";
+		String ckSource = in.getArtifactsSourceDir() + "ConfigurationKnowledge.xml";
+		String ckTarget = in.getArtifactsTargetDir() + "ConfigurationKnowledge.xml";
 		
-		String fmSource = in.getArtifactsSourceDir() + "fm.xml";
-		String fmTarget = in.getArtifactsTargetDir() + "fm.xml";
+		String fmSource = in.getArtifactsSourceDir() + "FeatureModel.xml";
+		String fmTarget = in.getArtifactsTargetDir() + "FeatureModel.xml";
 		
-		String amSource = in.getArtifactsSourceDir() + "am.txt";
-		String amTarget = in.getArtifactsTargetDir() + "am.txt";
+		String amSource = in.getArtifactsSourceDir() + "ComponentModel.txt";
+		String amTarget = in.getArtifactsTargetDir() + "ComponentModel.txt";
 		
 		ProductLine sourceSPL = new ProductLine(in.getSourceLineDirectory(), ckSource, fmSource, amSource, in.isAspectsInSourceSPL(), fachadaSource, in.getCkFormatSourceSPL(),in.getAmFormatSourceSPL());
 		ProductLine targetSPL = new ProductLine(in.getTargetLineDirectory(), ckTarget, fmTarget, amTarget, in.isAspectsInTargetSPL(), fachadaTarget, in.getCkFormatTargetSPL(), in.getAmFormatTargetSPL());

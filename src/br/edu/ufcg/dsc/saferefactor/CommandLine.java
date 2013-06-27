@@ -128,12 +128,12 @@ public class CommandLine {
 
 		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().startContinue();
 
-		if (!targetIsCompiled) {
+		/*if (!targetIsCompiled) {
 			p.executeTarget("compile_target_ind");
 		}
 		if (!sourceIsCompiled) {
 			p.executeTarget("compile_source");
-		}
+		}*/
 
 		SPLOutcomes.getInstance().getMeasures().getTempoCompilacaoProdutos().pause();
 
