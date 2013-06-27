@@ -281,8 +281,8 @@ public class SpreadSheetGenerator {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-    	String in = "/home/jefferson/workspace/ferramentaLPSSM/resultFiles/";
-    	String out = "/home/jefferson/workspace/ferramentaLPSSM/Output/outputfile.ods";
+    	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/resultFiles";
+    	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/outputfile.ods";
         new SpreadSheetGenerator(in,out);
         System.out.println("finished!");
     }

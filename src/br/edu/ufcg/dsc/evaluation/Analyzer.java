@@ -8,8 +8,14 @@ package br.edu.ufcg.dsc.evaluation;
  */
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
+
 import safeEvolution.fileProperties.FilePropertiesObject;
+import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -43,8 +49,36 @@ public class Analyzer {
 			/* Is SPL refactoring a	 REFINEMENT ?*/
 			resultado.setRefinement(toolCommandLine.verifyLine(propertiesObject));
 			createOutcomesPropertyFile(propertiesObject, resultado);
+			createExecutionReport(propertiesObject, resultado);
+			
 		}
 
+		private void createExecutionReport(FilePropertiesObject input, SPLOutcomes resultado) throws IOException {
+			String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "executionReport" + Constants.FILE_SEPARATOR +input.getEvolutionDescription();
+			
+			File executionReport = new File(resultFileName + ".properties");
+			
+			if(!executionReport.exists()){
+				executionReport.createNewFile();
+			}
+			
+			Properties properties = new Properties();
+			FileInputStream fileInputStream = new FileInputStream(executionReport);
+			properties.load(fileInputStream);
+			fileInputStream.close();
+			
+			String approachTool = input.getApproach()+ "-" + input.getGenerateTestsWith(); 
+			properties.setProperty(approachTool, resultado.isRefinement()+"");
+			properties.setProperty("branchName", input.getEvolutionDescription());
+			properties.setProperty("approachTime", String.valueOf(resultado.getMeasures().getTempoTotal().getTotal()));
+			
+			
+			FileOutputStream fileOutputStream = new FileOutputStream(executionReport);
+			properties.store(fileOutputStream,"Execution Report");
+			fileOutputStream.close();
+			
+		}
+		
 		private void createOutcomesPropertyFile(FilePropertiesObject propertiesObject, SPLOutcomes resultado) {
 			String resultFileName =  Constants.PLUGIN_PATH + Constants.FILE_SEPARATOR + "resultFiles" + Constants.FILE_SEPARATOR +propertiesObject.getEvolutionDescription();
 			System.out.println("\n\t SPL REPORT: \n");
@@ -57,3 +91,4 @@ public class Analyzer {
 			}
 		}
 }
+

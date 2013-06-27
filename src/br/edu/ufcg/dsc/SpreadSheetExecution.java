@@ -108,11 +108,16 @@ public class SpreadSheetExecution {
 	    table = getTable();
         row = new OdfTableRow(contentDom);
         row.setTableStyleNameAttribute(rowStyleName);
-        row.appendCell(createCell(headingStyleName, "Evolution Pair"));
-        row.appendCell(createCell(headingStyleName, "Approach"));
-        row.appendCell(createCell(headingStyleName, "Approach Time"));
-        row.appendCell(createCell(headingStyleName, "COB"));
-        row.appendCell(createCell(headingStyleName, "Refinement"));
+        row.appendCell(createCell(headingStyleName, "Branch Name"));
+        
+        row.appendCell(createCell(headingStyleName, "IC<randoop>"));
+        row.appendCell(createCell(headingStyleName, "EIC<randoop>"));
+        
+        row.appendCell(createCell(headingStyleName, "IC<evosuite>"));
+        row.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
+        
+        row.appendCell(createCell(headingStyleName, "Time"));
+        
         table.appendRow(row);
         table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
 	}
@@ -159,7 +164,7 @@ public class SpreadSheetExecution {
         style = contentAutoStyles.newStyle(OdfStyleFamily.TableColumn);
         columnStyleName = style.getStyleNameAttribute();
         style.setProperty(OdfStyleParagraphProperties.TextAlign, "center");
-        style.setProperty(OdfStyleTableColumnProperties.ColumnWidth, "9.1cm");
+        style.setProperty(OdfStyleTableColumnProperties.ColumnWidth, "5.1cm");
         
         // Row style
         style = contentAutoStyles.newStyle(OdfStyleFamily.TableRow);
@@ -193,55 +198,38 @@ public class SpreadSheetExecution {
 
     void processInputDocument() {
       
-        String[] info;              // holds the split-up data
-       
         table = getTable();
         setColumnStyle();
         
         try {
     			
-    			String evolutionPair = properties.getProperty("EvolutionName");
-
-    			this.approaches = new HashMap<String, String >();
-    			approaches.put("APP", properties.getProperty("APP"));
-    			approaches.put("AP", properties.getProperty("AP"));
-    			approaches.put("IP", properties.getProperty("IP"));
-    			approaches.put("IC", properties.getProperty("IC"));
-    			approaches.put("EIC", properties.getProperty("EIC"));
-    			
-    			Iterator<String> i = approaches.keySet().iterator();
-    			while (i.hasNext()){
-    				
-    				String key = i.next();
-    				String approach = approaches.get(key);
-    			
-	    			/* #Abordagem = tempoTotal, tempoCompilacaoProdutos, tempoCompilacaoTestes, tempoExecucaoTestes, qtdTestes, quantidadeProdutosCompilados,
-	    			 *  isRefinement, tempoExecucaoAbordagem, SourceWF, TargetWF, AM' refine AM, CK/FM refine CK'/FM', COB, Refinement*/
-	    			info  = approach.split(",");
-	    			
-	                row = new OdfTableRow(contentDom);
-	                row.setTableStyleNameAttribute(rowStyleName);
-	             
-	                /* Evolution Pair */
-	                row.appendCell(createCell(lineStyleName, evolutionPair));
+			String branchName = properties.getProperty("branchName");
+			
+			String icRandoop = verifyString(properties.getProperty("IC-randoop"));
+			String eicRandoop = verifyString(properties.getProperty("EIC-randoop"));
+			String icEvosuite = verifyString(properties.getProperty("IC-evosuite"));
+			String eicEvosuite = verifyString(properties.getProperty("EIC-evosuite"));
+			
+			String approachTime = properties.getProperty("approachTime");
+			
+			
+            row = new OdfTableRow(contentDom);
+            row.setTableStyleNameAttribute(rowStyleName);
+         
+            row.appendCell(createCell(lineStyleName, branchName));
+            
+            row.appendCell(createCell(lineStyleName, icRandoop));
+            
+            row.appendCell(createCell(lineStyleName, eicRandoop));
+            
+            row.appendCell(createCell(lineStyleName, icEvosuite));
+            
+            row.appendCell(createCell(lineStyleName, eicEvosuite));
+            
+            row.appendCell(createCell(lineStyleName, approachTime));
+            
+            table.appendRow(row);
 	                
-	                /* Approach */
-	                row.appendCell(createCell(lineStyleName, key));
-	                
-	                /* Aprroach Time */
-	                String approachTime = info[6];
-	                row.appendCell(createCell(lineStyleName, approachTime));
-	                
-	                /* Compatible Observable Behavior */
-	                String cob = info[11];
-	                row.appendCell(createCell(lineStyleName, cob));
-	                
-	                /* Refinement */
-	                String refinement = info[12];
-	                row.appendCell(createCell(lineStyleName, refinement));
-	                table.appendRow(row);
-	                
-    		}
     		table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
         	this.officeSpreadsheet.appendChild(table);
             
@@ -249,6 +237,13 @@ public class SpreadSheetExecution {
             System.err.println("Cannot process " + inputFileName);
         }
     }
+
+	private String verifyString(String str) {
+		if(str.equals("true")){
+			return "Refinement";
+		}return "Non-Refinement";
+		
+	}
 
 	private void setColumnStyle() {
 		for(int i=0; i< 5; i++){
@@ -281,8 +276,9 @@ public class SpreadSheetExecution {
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-    	String in = "/home/jefferson/workspace/ferramentaLPSSM/resultFiles/";
-    	String out = "/home/jefferson/workspace/ferramentaLPSSM/Output/outputfile.ods";
+    	System.out.println("Execution Report!");
+    	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/"; 
+    	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/executionReport.ods";
         new SpreadSheetExecution(in,out);
         System.out.println("finished!");
     }

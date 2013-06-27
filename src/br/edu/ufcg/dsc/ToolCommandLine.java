@@ -162,8 +162,8 @@ public class ToolCommandLine {
 		
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
 		
-		boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL);
-		areAllProductsMatched = true;
+		//boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL);
+		boolean areAllProductsMatched  = true;
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
 		
 		boolean isAssetMappingsEqual;
