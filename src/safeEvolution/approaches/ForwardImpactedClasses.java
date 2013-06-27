@@ -19,11 +19,15 @@ public class ForwardImpactedClasses extends ImpactedClasses {
 		public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
 			boolean isRefinement = false;
 			if(wf && areAllProductsMatched){
-				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);	
+				if(super.getModifiedClasses().isEmpty()){
+					System.out.println("\nThere is not impacted classes to verify.");
+					return true;
+				}else{
+					return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
+				}
 			}else{  // Create an Exception!!
 				System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
 			}
 			return isRefinement;
-			
 		}
 }

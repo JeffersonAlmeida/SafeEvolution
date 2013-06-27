@@ -46,7 +46,7 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 		}
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 	}
-	
+
 	private boolean belongsToextendedImpactedClasses(String [] classes) {
 		for(String c: classes){
 			if(!this.extendedImpactedClasses.contains(c))
@@ -134,6 +134,15 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 					break;
 				}
 			}
+		}
+	}
+
+	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL,HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched, Collection<String> modifiedClassesList) throws AssetNotFoundException, IOException, DirectoryException {
+		if(modifiedClassesList.isEmpty()){ // if modified class list is empty then spl is a refinement.
+			System.out.println("\nThere is not impacted classes to verify.");
+			return true;
+		}else{
+			return evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 		}
 	}
 }
