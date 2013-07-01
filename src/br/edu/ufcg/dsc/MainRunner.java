@@ -76,27 +76,25 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				// Create an evolution pair with Python Script 
 				int numberOfEvolutionPairs = 1;
-				int branchNumber = 51; 
+				int branchNumber = 25; // 3 25 32
 				//createEvolutionPair(numberOfEvolutionPairs,branchNumber);
 				
 				// Create Property File for the Evolution Pair created above
 				//createInputFile(numberOfEvolutionPairs,branchNumber);
 				
-				// IC - EIC
-				// Randoop - Evosuite
-				
 				ArrayList<String> approaches = new ArrayList<String>();
 				ArrayList<String> tool = new ArrayList<String>();
 				approaches.add("IC");approaches.add("EIC");
 				tool.add("randoop");tool.add("evosuite");
-				for(int i = 0; i < approaches.size(); i++){
+				/*for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );
 						manipulateFileProperty(branchNumber, approaches.get(i), tool.get(j));
 						run(branchNumber);
 					}
-				}
-				//run(branchNumber);
+				}*/
+				
+				run(branchNumber);
 			}
 
 			
