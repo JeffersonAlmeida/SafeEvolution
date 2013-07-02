@@ -4,10 +4,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
@@ -36,7 +35,7 @@ import org.w3c.dom.Node;
 public class SpreadSheetExecution {
 
     String inputFileName;
-    String outputFileName;
+	String outputFileName;
     OdfSpreadsheetDocument outputDocument;
     OdfFileDom contentDom;	// the document object model for content.xml
     OdfFileDom stylesDom;	// the document object model for styles.xml
@@ -70,62 +69,54 @@ public class SpreadSheetExecution {
 		super();
 		this.inputFileName = in;
 		this.outputFileName = out;
-		this.run();
 	}
     
     private void loadConsumeData(String filepath) throws IOException {
 		InputStream is = new FileInputStream(filepath);
-		properties.load(is);
+		this.properties.load(is);
 		is.close();
 	}
 
-
 	public void run() throws IOException {
-       /* File f = new File(outputFileName);
-        if(f.exists()){
-        	f.delete();
-        }*/
         setupOutputDocument();
-        if (outputDocument != null) {
-            cleanOutDocument();
+        if (this.outputDocument != null) {
             addAutomaticStyles();
-            readPropertiesFiles();
+            readPropertyFile();
             saveOutputDocument();
         }
     }
 
-    private void readPropertiesFiles() throws IOException {
-    	 File f = new File(inputFileName);
-    	 File[] files = f.listFiles();
+    private void readPropertyFile() throws IOException {
+    	 File file = new File(inputFileName);
     	 createHeader();
-    	 for(File file: files){
-    		 loadConsumeData(file.getAbsolutePath());
-    		 processInputDocument();
-    	 }
+   		 loadConsumeData(file.getAbsolutePath());
+   		 processInputDocument();
 	}
 
 	private void createHeader() {
 	    table = getTable();
         row = new OdfTableRow(contentDom);
         row.setTableStyleNameAttribute(rowStyleName);
-        row.appendCell(createCell(headingStyleName, "Branch Name"));
-        
+        row.appendCell(createCell(headingStyleName, "Pair Id"));
         row.appendCell(createCell(headingStyleName, "IC<randoop>"));
         row.appendCell(createCell(headingStyleName, "EIC<randoop>"));
-        
         row.appendCell(createCell(headingStyleName, "IC<evosuite>"));
         row.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
-        
-        row.appendCell(createCell(headingStyleName, "Time"));
-        
+        row.appendCell(createCell(headingStyleName, "Expected ?"));
         table.appendRow(row);
         table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
 	}
 
 	void setupOutputDocument() {
         try {
-            outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
-            contentDom = outputDocument.getContentDom();
+        	File file = new File(this.outputFileName);
+        	if(file.exists()){
+        		outputDocument =  (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(this.outputFileName);
+        	}else{
+        		outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
+        		
+        	}
+        	contentDom = outputDocument.getContentDom();
             stylesDom = outputDocument.getStylesDom();
             contentAutoStyles = contentDom.getOrCreateAutomaticStyles();
             stylesOfficeStyles = outputDocument.getOrCreateDocumentStyles();
@@ -146,7 +137,20 @@ public class SpreadSheetExecution {
         childNode = officeSpreadsheet.getFirstChild();
         while (childNode != null) {
             officeSpreadsheet.removeChild(childNode);
+            System.out.println("child node: " + childNode.toString());
+            System.out.println("\nText Content: " + childNode.getTextContent());
             childNode = officeSpreadsheet.getFirstChild();
+        }
+    }
+    
+    void walkThrough() {
+        Node childNode;
+        childNode = officeSpreadsheet.getFirstChild();
+        while (childNode != null) {
+            //officeSpreadsheet.removeChild(childNode);
+            System.out.println("child node: " + childNode.toString());
+            System.out.println("\nText Content: " + childNode.getTextContent());
+            childNode = officeSpreadsheet.getNextSibling();
         }
     }
 
@@ -191,59 +195,48 @@ public class SpreadSheetExecution {
     
     public synchronized OdfTable getTable(){
 		if(table==null){
-			table = new OdfTable(contentDom);
+			//table = new OdfTable(contentDom);
+			table = (OdfTable) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
 		}
 		return table;
     }
 
     void processInputDocument() {
-      
         table = getTable();
         setColumnStyle();
-        
         try {
-    			
-			String branchName = properties.getProperty("branchName");
+			String pairId = properties.getProperty("pairId");
+			String[] icRandoopAndTime = properties.getProperty("IC-randoop").split(",");
+			String[] eicRandoopAndTime = properties.getProperty("EIC-randoop").split(",");
+			String[] icEvosuiteAndTime = properties.getProperty("IC-evosuite").split(",");
+			String[] eicEvosuiteAndTime = properties.getProperty("EIC-evosuite").split(",");
 			
-			String icRandoop = verifyString(properties.getProperty("IC-randoop"));
-			String eicRandoop = verifyString(properties.getProperty("EIC-randoop"));
-			String icEvosuite = verifyString(properties.getProperty("IC-evosuite"));
-			String eicEvosuite = verifyString(properties.getProperty("EIC-evosuite"));
-			
-			String approachTime = properties.getProperty("approachTime");
-			
+			String icRandoop = icRandoopAndTime[0];
+			String icRandoopTime = icRandoopAndTime[1];
+			String eicRandoop = eicRandoopAndTime[0];
+			String eicRandoopTime = eicRandoopAndTime[1];
+			String icEvosuite = icEvosuiteAndTime[0];
+			String icEvosuiteTime = icEvosuiteAndTime[1];
+			String eicEvosuite = eicEvosuiteAndTime[0];
+			String eicEvosuiteTime = eicEvosuiteAndTime[1];	
 			
             row = new OdfTableRow(contentDom);
             row.setTableStyleNameAttribute(rowStyleName);
-         
-            row.appendCell(createCell(lineStyleName, branchName));
-            
+            row.appendCell(createCell(lineStyleName, pairId));
             row.appendCell(createCell(lineStyleName, icRandoop));
-            
             row.appendCell(createCell(lineStyleName, eicRandoop));
-            
             row.appendCell(createCell(lineStyleName, icEvosuite));
-            
             row.appendCell(createCell(lineStyleName, eicEvosuite));
-            
-            row.appendCell(createCell(lineStyleName, approachTime));
-            
             table.appendRow(row);
-	                
     		table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
-        	this.officeSpreadsheet.appendChild(table);
-            
+        	//this.officeSpreadsheet.appendChild(table);
+        	
+        	//Replace the First Sheet
+        	this.officeSpreadsheet.replaceChild(table, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0));
         } catch (Exception e) {
             System.err.println("Cannot process " + inputFileName);
         }
     }
-
-	private String verifyString(String str) {
-		if(str.equals("true")){
-			return "Refinement";
-		}return "Non-Refinement";
-		
-	}
 
 	private void setColumnStyle() {
 		for(int i=0; i< 5; i++){
@@ -270,16 +263,30 @@ public class SpreadSheetExecution {
             System.err.println(e.getMessage());
         }
     }
+    
+    public String getInputFileName() {
+		return inputFileName;
+	}
+    public void setInputFileName(String inputFileName) {
+		this.inputFileName = inputFileName;
+	}
+	public String getOutputFileName() {
+		return outputFileName;
+	}
+	public void setOutputFileName(String outputFileName) {
+		this.outputFileName = outputFileName;
+	}
 
     /**
      * @param args the command line arguments
      * @throws IOException 
      */
     public static void main(String[] args) throws IOException {
-    	System.out.println("Execution Report!");
-    	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/"; 
-    	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/executionReport.ods";
-        new SpreadSheetExecution(in,out);
+    	System.out.println("Generating SpreadSheetReport ... ");
+    	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template.properties"; 
+    	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
+    	SpreadSheetExecution sheet = new SpreadSheetExecution(in,out);
+        sheet.run();
         System.out.println("finished!");
     }
 }
