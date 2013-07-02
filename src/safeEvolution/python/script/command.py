@@ -32,28 +32,28 @@ def manipulate_directories(bn):
     print('manipulating directories')
     f = os.popen('ls -l')
     print (f.read())
-    
+
     f = os.popen('mkdir src/')
     print (f.read())
-    
+
     f = os.popen('ls -l')
     print (f.read())
-    
+
     f = os.popen('rm -rf TaRGeT\ PV/')
     print (f.read())
-    
+
     f = os.popen('ls -l')
     print (f.read())
-    
+
     f = os.popen('mv * src/')
     print (f.read())
-    
+
     os.chdir(d + "/src/")
     f = os.popen('ls -l')
-    print (f.read()) 
+    print (f.read())
 
 def find_revisions(c,f, used):
-    revision = random.randint(2161,3877) 
+    revision = random.randint(2161,3877)
     if not alrealdy_used(revision,used):
         if log(revision) == "":
             find_revisions(c,f,used)
@@ -75,21 +75,31 @@ def find_revisions(c,f, used):
             used.write('%s' %revision + '\n')
     else:
         find_revisions(c,f,used)
-        
+
+def get_branch_number(numberOfEvolutionPairs):
+    lastBranch = open('lastBranch','r')
+    x = lastBranch.readline()
+    print('before: %s' %x)
+    lastBranch.close()
+    lastBranch = open('lastBranch','w')
+    y = int(x)+numberOfEvolutionPairs
+    lastBranch.write(str(y))
+    print('after: %s' %y)
+    lastBranch.close()
+    return y
 
 def create_branches():
     array = sys.argv
-    numberOfEvolutionPairs = array[1]
-    branchNumber = array[2]
-    i = int(branchNumber)
-    size = i + int(numberOfEvolutionPairs)
+    pairsNumber = array[1]
+    i = get_branch_number(int(pairsNumber))
+    size = i + int(pairsNumber)
     f = open('logFile','a')
     used = open('used','a')
     while (i<size):
         find_revisions(i,f,used)
         i = i+1
     f.close()
-    used.close()  
-     
-create_branches()     
+    used.close()
+
+create_branches()
 

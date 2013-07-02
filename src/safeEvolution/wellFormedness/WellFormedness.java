@@ -18,9 +18,19 @@ public class WellFormedness {
 	
 		private String featureModelSourceSemantics;
 		private String featureModelTargetSemantics;
+		private boolean alreadyVerified;
+		private boolean wf;
 		
-		public WellFormedness(){
+		private static WellFormedness instance;
+		
+		private WellFormedness(){
 			super();
+		}
+		
+		public static synchronized WellFormedness getInstance(){
+			if (instance == null){
+				instance = new WellFormedness();
+			}return instance;
 		}
 		
 		/**
@@ -140,6 +150,9 @@ public class WellFormedness {
 		 */
 		public boolean isWF(ProductLine sourceLine, ProductLine targetLine) {
 			
+			if(this.alreadyVerified)
+				return this.wf;
+			
 			System.out.println("\nBuild the SOURCE Feature Model Alloy file:");
 			this.buildFMAlloyFile("source", Constants.ALLOY_PATH + Constants.SOURCE_FM_ALLOY_NAME + Constants.ALLOY_EXTENSION, sourceLine);
 			
@@ -161,8 +174,10 @@ public class WellFormedness {
 			SafeCompositionResult targetComposition = checkSafeCompositionOfLine(Constants.TARGET_CK_ALLOY_NAME, targetLine.getFeatures(), "target");
 			SPLOutcomes.getInstance().setTargetIsWellFormed(!targetComposition.getAnalysisResult());
 			System.out.println("Well Formedness to the <Target> SPL.: " + !targetComposition.getAnalysisResult());
-	
-			return !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();
+			
+			this.wf = !sourceComposition.getAnalysisResult() && !targetComposition.getAnalysisResult();
+			this.alreadyVerified = true;
+			return this.wf;
 			/* End of th Well Formedness Test */ 
 		}
 	

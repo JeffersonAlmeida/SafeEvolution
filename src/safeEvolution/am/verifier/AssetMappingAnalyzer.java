@@ -22,6 +22,8 @@ public class AssetMappingAnalyzer {
 	/** This variable will store the changed assets - mofified files, classes, etc .*/
 	private HashSet<String> changedAssetsList;
 	private ASTComparator astComparator;
+	private boolean alreadyVerified;
+	private boolean isSameAssets;
 	
 	public AssetMappingAnalyzer() {
 		System.out.println("Asset Mapping Analyzer");
@@ -36,7 +38,10 @@ public class AssetMappingAnalyzer {
 	/** It looks for the modified assets. 
 	 * @throws JavaModelException */
 	public boolean isSameAssets(ProductLine sourceLine, ProductLine targetLine) throws JavaModelException {
-		boolean result = true;
+		if(this.alreadyVerified)
+			return this.isSameAssets;
+		
+		this.isSameAssets = true;
 		
 		/* Get all SOURCE product line classes. */
 		Set<String> sourceKeySet = sourceLine.getMappingClassesSistemaDeArquivos().keySet();
@@ -75,7 +80,7 @@ public class AssetMappingAnalyzer {
 						equals = true;
 					}
 					if (!equals) {
-						result = false;
+						this.isSameAssets = false;
 						/*Put the asset in the modified classes.*/
 						this.modifiedClassesList.add(asset);
 						this.changedAssetsList.add(FileManager.getInstance().getPath("src." + asset));
@@ -86,10 +91,11 @@ public class AssetMappingAnalyzer {
 			}
 		}
 		if (!targetKeySet.containsAll((sourceKeySet))) {
-			result = false;
+			this.isSameAssets = false;
 		}
-		System.out.println("\nHave Source and Target the same assets ?:" + result +" \n");
-		return result;
+		System.out.println("\nHave Source and Target the same assets ?:" + this.isSameAssets +" \n");
+		this.alreadyVerified = true;
+		return this.isSameAssets;
 	}
 	
 	/**

@@ -81,10 +81,10 @@ public class SpreadSheetExecution {
 
 
 	public void run() throws IOException {
-        File f = new File(outputFileName);
+       /* File f = new File(outputFileName);
         if(f.exists()){
         	f.delete();
-        }
+        }*/
         setupOutputDocument();
         if (outputDocument != null) {
             cleanOutDocument();

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<evolutionPairs xmlns="ck.v20090401">
+	<pair>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch49.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch49.1/</target>
+	</pair>
+	<pair>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch50.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch50.1/</target>
+	</pair>
+	<pair>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch51.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch51.1/</target>
+	</pair>
+</evolutionPairs>

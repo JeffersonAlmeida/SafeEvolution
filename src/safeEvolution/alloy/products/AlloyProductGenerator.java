@@ -19,7 +19,7 @@ public class AlloyProductGenerator {
 	public AlloyProductGenerator(WellFormedness wellFormedness,ProductBuilder productBuilder) {
 		super();
 		this.productsCache = new HashMap<String, HashSet<HashSet<String>>>();
-		this.wellFormedness = wellFormedness;
+		this.wellFormedness = WellFormedness.getInstance();
 		this.productBuilder = productBuilder;
 	}
 

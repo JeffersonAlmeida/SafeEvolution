@@ -8,10 +8,12 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -28,6 +30,7 @@ import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.fileProperties.FilePropertiesReader;
 import edu.mit.csail.sdg.alloy4.Err;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
+import br.edu.ufcg.dsc.ck.xml.Xml;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
 import br.edu.ufcg.dsc.gui.AppWindow;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
@@ -72,59 +75,97 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		
 		testableObject.runTest(new Runnable() {
 			public void run() {
-				
 				ProductGenerator.MAX_TENTATIVAS = 2000;
-				// Create an evolution pair with Python Script 
-				int numberOfEvolutionPairs = 1;
-				int branchNumber = 25; // 3 25 32
-				//createEvolutionPair(numberOfEvolutionPairs,branchNumber);
 				
-				// Create Property File for the Evolution Pair created above
-				//createInputFile(numberOfEvolutionPairs,branchNumber);
+				/* arguments */
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch52.0/";
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch52.1/";
+				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
+				int pairsAmount = 1;
 				
+				/* Create a TaRGeT evolution pair with Python Script and Run */
+				//createPairs(pairsAmount); 
+				
+				/* Create an evolution pair with directory Source and Target and Run */
+				onePairInput(source, target);
+				
+				/* Create several evolution pairs with this file and Run */
+				//severalPairsInput(stringFile);
+				
+				
+			}
+
+			private void severalPairsInput(String stringFile) {
+				Xml xml = new Xml(stringFile, "evolutionPairs");
+				for (Xml pair : xml.children("pair")) {
+					String source = pair.child("source").content().toLowerCase();
+					String target = pair.child("target").content().toLowerCase();
+					System.out.println("source: " + source);
+					System.out.println("target: " + target );
+					onePairInput(source, target);
+				}
+			}
+
+			private void onePairInput(String source, String target) {
+				Properties propertyFile = new Properties();
+				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branchTemplate.properties";
+				String array[] = source.split("/");
+				String evolutionDescription = array[array.length-1];
+				try {
+					InputStream is = new FileInputStream(stringFile);
+					propertyFile.load(is);
+					propertyFile.setProperty("sourceLineDirectory", source); 
+					propertyFile.setProperty("targetLineDirectory", target); 
+					propertyFile.setProperty("artifactsSourceDir", source+ "src/TaRGeT Hephaestus/");
+					propertyFile.setProperty("artifactsTargetDir", target+ "src/TaRGeT Hephaestus/");
+					propertyFile.setProperty("evolutionDescription", evolutionDescription);
+					is.close();
+					OutputStream os = new FileOutputStream(stringFile);
+					propertyFile.store(os, "changing variables");
+				} catch (FileNotFoundException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				run(stringFile);
+			}
+
+			private void run(String stringFile) {
+				FilePropertiesReader propertiesReader = new FilePropertiesReader(stringFile);
+				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
+				System.out.println(propertiesObject);
 				ArrayList<String> approaches = new ArrayList<String>();
 				ArrayList<String> tool = new ArrayList<String>();
 				approaches.add("IC");approaches.add("EIC");
 				tool.add("randoop");tool.add("evosuite");
-				/*for(int i = 0; i < approaches.size(); i++){
+				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );
-						manipulateFileProperty(branchNumber, approaches.get(i), tool.get(j));
-						run(branchNumber);
+						manipulateFileProperty(stringFile, approaches.get(i), tool.get(j));
+						try {
+							Analyzer.getInstance().analize(propertiesObject);
+						} catch (DirectoryException e) {
+							e.printStackTrace();
+						} catch (Err e) {
+							e.printStackTrace();
+						} catch (IOException e) {
+							e.printStackTrace();
+						} catch (AssetNotFoundException e) {
+							e.printStackTrace();
+						}
 					}
-				}*/
-				
-				run(branchNumber);
-			}
-
-			
-			private void run(int branchNumber) {
-				FilePropertiesReader propertiesReader = new FilePropertiesReader("/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branch" + branchNumber +".properties");
-				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
-				System.out.println(propertiesObject);
-				try {
-					Analyzer.getInstance().analize(propertiesObject);
-				} catch (DirectoryException e) {
-					e.printStackTrace(); 
-				} catch (Err e) {
-					e.printStackTrace();
-				} catch (IOException e) {
-					e.printStackTrace();
-				} catch (AssetNotFoundException e) {
-					e.printStackTrace();
 				}
 			}
 
-			private void manipulateFileProperty(int branchNumber, String approach, String tool) {
+			private void manipulateFileProperty(String stringFile, String approach, String tool) {
 				Properties propertyFile = new Properties();
-				String evosuitePropertiesFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branch" + branchNumber +".properties";
 				try {
-					InputStream is = new FileInputStream(evosuitePropertiesFile);
+					InputStream is = new FileInputStream(stringFile);
 					propertyFile.load(is);
 					propertyFile.setProperty("generateTestsWith", tool); 
 					propertyFile.setProperty("approach", approach); 
 					is.close();
-					OutputStream os = new FileOutputStream(evosuitePropertiesFile);
+					OutputStream os = new FileOutputStream(stringFile);
 					propertyFile.store(os, "changing variables");
 				} catch (FileNotFoundException e) {
 					e.printStackTrace();
@@ -166,15 +207,34 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				}
 			}
 
-			private void createEvolutionPair(int numberOfEvolutionPairs, int branchNumber) {
+			private void createPairs(int pairsAmount){
 				System.out.println("\nCall Python in java");
+				String s = null; String line = "";
+				String strFile = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/lastBranch"; 
+				try {
+					BufferedReader br = new BufferedReader(new FileReader(strFile));
+					line = br.readLine();
+					System.out.println("line: " + line);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+		        callPython(pairsAmount);
+		        String branches = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/";
+		        int init = Integer.parseInt(line)+1;
+		        for(int i = init; i < (init+pairsAmount) ; i++){
+		        	String source = branches + "branch" + i + ".0/";
+		        	String target = branches + "branch" + i + ".1/";
+		        	onePairInput(source, target);
+		        }
+		    }
+
+			private void callPython(int pairsAmount) {
 				String s = null;
-		        try {
-		        	String [] cmdArray = new String[4]; 
+				try {
+		        	String [] cmdArray = new String[3]; 
 					cmdArray[0] = "python";
 					cmdArray[1] = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/src/safeEvolution/python/script/command.py";
-					cmdArray[2] = Integer.toString(numberOfEvolutionPairs);
-					cmdArray[3] = Integer.toString(branchNumber);
+					cmdArray[2] = Integer.toString(pairsAmount);
 					Runtime rt = Runtime.getRuntime(); 
 					Process p = rt.exec(cmdArray);
 		            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -194,7 +254,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		            System.out.println("exception happened: ");
 		            e.printStackTrace();
 		        }
-		    }
+			}
 			
 		});
 		testableObject.testingFinished();

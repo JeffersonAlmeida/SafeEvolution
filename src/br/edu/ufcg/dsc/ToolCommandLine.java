@@ -34,8 +34,6 @@ import edu.mit.csail.sdg.alloy4.Err;
 
 public class ToolCommandLine {
 
-	private ProductMatching productMatching;
-	
 	private ProductsCleaner productsCleaner;
 	
 	private AlloyProductGenerator alloyProductGenerator;
@@ -45,9 +43,12 @@ public class ToolCommandLine {
 	private ProductBuilder productBuilder;
 	
 	private AssetMappingAnalyzer amAnalyzer;
+	
+	private boolean alreadyVerified;
+	
+	private HashSet<String> changedFeatureNames;
 
 	public ToolCommandLine() {
-		this.wellFormedness = new WellFormedness();
 		this.productsCleaner = new ProductsCleaner();
 		this.amAnalyzer = new AssetMappingAnalyzer();
 	}
@@ -59,7 +60,7 @@ public class ToolCommandLine {
 		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
 			this.productBuilder = TargetBuilder.getInstance();
 		}
-		this.productMatching = new ProductMatching(this.productBuilder);
+		//this.productMatching = new ProductMatching(this.productBuilder);
 		this.alloyProductGenerator = new AlloyProductGenerator(wellFormedness,this.productBuilder);
 	}
 
@@ -74,8 +75,10 @@ public class ToolCommandLine {
 
 	private HashSet<String> getChangedFeatureNames(ProductLine targetLine) {
 
-		HashSet<String> output = new HashSet<String>();
-
+		if(this.alreadyVerified)
+			return this.changedFeatureNames;
+		
+		this.changedFeatureNames = new HashSet<String>();
 		if (this.amAnalyzer.getChangedAssetsList() == null) {
 			return null;
 		}
@@ -101,13 +104,13 @@ public class ToolCommandLine {
 				Set<String> provided = task.getProvided().keySet();
 				for (String string : changedAssetNames) {
 					if (provided.contains(string)) {
-						output.add(featExp.getCode());
+						this.changedFeatureNames.add(featExp.getCode());
 					}
 				}
 			}
 		}
-
-		return output;
+		this.alreadyVerified = true;
+		return this.changedFeatureNames;
 	}
 
 	private String getCorrespondingAssetName(HashMap<String, String> assetMapping, String asset) {
@@ -157,13 +160,11 @@ public class ToolCommandLine {
 		sOutcomes.getMeasures().setApproach(in.getApproach());
 		sOutcomes.getMeasures().getTempoTotal().startContinue();
 
-		WellFormedness wellFormedness =  new WellFormedness();
-		boolean wf = wellFormedness.isWF(sourceSPL, targetSPL);
+		boolean wf = WellFormedness.getInstance().isWF(sourceSPL, targetSPL); 
 		
 		HashSet<String> changedFeatures = getChangedFeatureNames(targetSPL);
 		
-		//boolean areAllProductsMatched = this.productMatching.areAllProductsMatched(sourceSPL, targetSPL);
-		boolean areAllProductsMatched  = true;
+		boolean areAllProductsMatched = ProductMatching.getInstance(productBuilder).areAllProductsMatched(sourceSPL, targetSPL);
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
 		
 		boolean isAssetMappingsEqual;
@@ -217,6 +218,8 @@ public class ToolCommandLine {
 
 		return isRefinement;
 	}
+	
+	
 
 	public void setAmAnalyzer(AssetMappingAnalyzer amAnalyzer) {
 		this.amAnalyzer = amAnalyzer;

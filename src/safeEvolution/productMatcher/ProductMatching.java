@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+
+import safeEvolution.wellFormedness.WellFormedness;
 import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.Product;
 import br.edu.ufcg.dsc.ProductLine;
@@ -13,10 +15,21 @@ import br.edu.ufcg.dsc.util.AssetNotFoundException;
 public class ProductMatching {
 	
 	private ProductBuilder productBuilder;
+	private boolean alreadyVerified;
+	private boolean areAllProductsMatched;
 	
-	public ProductMatching(ProductBuilder productBuilder) {
+	
+	private static ProductMatching instance;
+	
+	private ProductMatching(ProductBuilder productBuilder){
 		super();
 		this.productBuilder = productBuilder;
+	}
+	
+	public static synchronized ProductMatching getInstance(ProductBuilder productBuilder){
+		if (instance == null){
+			instance = new ProductMatching(productBuilder);
+		}return instance;
 	}
 
 	/**
@@ -28,9 +41,10 @@ public class ProductMatching {
 	 * @throws AssetNotFoundException
 	 */
 	public boolean areAllProductsMatched(ProductLine sourceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
-	
-		boolean isRefinement = true;
+		if(this.alreadyVerified)
+			return this.areAllProductsMatched;
 
+		this.areAllProductsMatched = true;
 		/*IT will store the set of SOURCE PRODUCT LINE features*/
 		HashSet<HashSet<String>> setsOfFeaturesSource = sourceLine.getSetsOfFeatures();
 		System.out.println("\n# SOURCE Products List<"+ setsOfFeaturesSource.size() +"> #");
@@ -112,13 +126,14 @@ public class ProductMatching {
 					 /* It will store the corresponding <TARGET> product. Corresponding products has the same features. Not necessarily the same assets and the same behavior. */
 					productSource.setLikelyCorrespondingProduct(provavelCorrespondenteNoTarget);
 				} else {
-					isRefinement = false;
+					areAllProductsMatched = false;
 				}
 			}
 		}
 
-		System.out.println("\n\nAll products in the source have a really correspondent target product ?: " + isRefinement);
-		return isRefinement;
+		System.out.println("\n\nAll products in the source have a really correspondent target product ?: " + areAllProductsMatched);
+		this.alreadyVerified = true;
+		return areAllProductsMatched;
 	} /*Method end*/
 	
 	/**
