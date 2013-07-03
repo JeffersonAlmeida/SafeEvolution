@@ -9,13 +9,10 @@ package br.edu.ufcg.dsc.evaluation;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 import safeEvolution.fileProperties.FilePropertiesObject;
-import br.edu.ufcg.dsc.Approach;
 import br.edu.ufcg.dsc.Constants;
 import br.edu.ufcg.dsc.ToolCommandLine;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;

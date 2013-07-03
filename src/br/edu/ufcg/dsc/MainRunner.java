@@ -32,6 +32,7 @@ import edu.mit.csail.sdg.alloy4.Err;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.xml.Xml;
 import br.edu.ufcg.dsc.evaluation.Analyzer;
+import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.gui.AppWindow;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
@@ -107,50 +108,52 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			}
 
 			private void onePairInput(String source, String target) {
-				Properties propertyFile = new Properties();
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branchTemplate.properties";
 				String array[] = source.split("/");
 				String evolutionDescription = array[array.length-1];
+				FilePropertiesReader propertiesReader = new FilePropertiesReader(stringFile);
+				FilePropertiesObject input = propertiesReader.getPropertiesObject();
+				input.setSourceLineDirectory(source);
+				input.setTargetLineDirectory(target);
+				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
+				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
+				input.setEvolutionDescription(evolutionDescription);
+				System.out.println(input);
+				ToolCommandLine toolCommandLine = new ToolCommandLine(input.getLine());
 				try {
-					InputStream is = new FileInputStream(stringFile);
-					propertyFile.load(is);
-					propertyFile.setProperty("sourceLineDirectory", source); 
-					propertyFile.setProperty("targetLineDirectory", target); 
-					propertyFile.setProperty("artifactsSourceDir", source+ "src/TaRGeT Hephaestus/");
-					propertyFile.setProperty("artifactsTargetDir", target+ "src/TaRGeT Hephaestus/");
-					propertyFile.setProperty("evolutionDescription", evolutionDescription);
-					is.close();
-					OutputStream os = new FileOutputStream(stringFile);
-					propertyFile.store(os, "changing variables");
-				} catch (FileNotFoundException e) {
+					toolCommandLine.commonInfoBetweenApproaches(input);
+				} catch (Err e) {
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
+				} catch (AssetNotFoundException e) {
+					e.printStackTrace();
+				} catch (DirectoryException e) {
+					e.printStackTrace();
 				}
-				run(stringFile);
+				runApproach(input,toolCommandLine);
 			}
 
-			private void run(String stringFile) {
-				FilePropertiesReader propertiesReader = new FilePropertiesReader(stringFile);
-				FilePropertiesObject propertiesObject = propertiesReader.getPropertiesObject();
-				System.out.println(propertiesObject);
-				ArrayList<String> approaches = new ArrayList<String>();
+			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine) {
+				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
-				approaches.add("IC");approaches.add("EIC");
+				approaches.add(Approach.IC);approaches.add(Approach.EIC);
 				tool.add("randoop");tool.add("evosuite");
 				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );
-						manipulateFileProperty(stringFile, approaches.get(i), tool.get(j));
+						input.setApproach(approaches.get(i));
+						input.setGenerateTestsWith(tool.get(j));
 						try {
-							Analyzer.getInstance().analize(propertiesObject);
-						} catch (DirectoryException e) {
-							e.printStackTrace();
-						} catch (Err e) {
+							toolCommandLine.runApproach(input);
+							System.out.println("\n\t SPL REPORT: \n");
+							SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+							System.out.println(sOutcomes.toString());
+						} catch (AssetNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
 							e.printStackTrace();
-						} catch (AssetNotFoundException e) {
+						} catch (DirectoryException e) {
 							e.printStackTrace();
 						}
 					}

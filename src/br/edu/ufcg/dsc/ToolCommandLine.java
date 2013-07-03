@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.regex.Pattern;
-
 import org.eclipse.jdt.core.JavaModelException;
-
 import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
@@ -47,6 +45,18 @@ public class ToolCommandLine {
 	private boolean alreadyVerified;
 	
 	private HashSet<String> changedFeatureNames;
+	
+	private ProductLine sourceSPL;
+	
+	private ProductLine targetSPL;
+	
+	private boolean wf;
+	
+	private HashSet<String> changedFeatures;
+	
+	private boolean areAllProductsMatched;
+	
+	private boolean isAssetMappingsEqual;
 
 	public ToolCommandLine() {
 		this.productsCleaner = new ProductsCleaner();
@@ -60,7 +70,6 @@ public class ToolCommandLine {
 		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
 			this.productBuilder = TargetBuilder.getInstance();
 		}
-		//this.productMatching = new ProductMatching(this.productBuilder);
 		this.alloyProductGenerator = new AlloyProductGenerator(wellFormedness,this.productBuilder);
 	}
 
@@ -127,6 +136,94 @@ public class ToolCommandLine {
 		}
 
 		return result;
+	}
+	
+	public void commonInfoBetweenApproaches (FilePropertiesObject input)throws Err, IOException, AssetNotFoundException, DirectoryException{
+		String fachadaSource = null;
+		String fachadaTarget = null; 
+		
+		String ckSource = input.getArtifactsSourceDir() + "ConfigurationKnowledge.xml";
+		String ckTarget = input.getArtifactsTargetDir() + "ConfigurationKnowledge.xml";
+		
+		String fmSource = input.getArtifactsSourceDir() + "FeatureModel.xml";
+		String fmTarget = input.getArtifactsTargetDir() + "FeatureModel.xml";
+		
+		String amSource = input.getArtifactsSourceDir() + "ComponentModel.txt";
+		String amTarget = input.getArtifactsTargetDir() + "ComponentModel.txt";
+		
+		this.sourceSPL = new ProductLine(input.getSourceLineDirectory(), ckSource, fmSource, amSource, input.isAspectsInSourceSPL(), fachadaSource, input.getCkFormatSourceSPL(),input.getAmFormatSourceSPL());
+		this.targetSPL = new ProductLine(input.getTargetLineDirectory(), ckTarget, fmTarget, amTarget, input.isAspectsInTargetSPL(), fachadaTarget, input.getCkFormatTargetSPL(), input.getAmFormatTargetSPL());
+		this.sourceSPL.setLibPath(input.getSourceLineLibDirectory());
+		this.targetSPL.setLibPath(input.getTargetLineLibDirectory());
+		
+	 	/* It cleans the generated products folder. */
+		this.setup(sourceSPL, targetSPL);
+
+		/* It Calls alloy to build source and target products and put it in cache. */
+		this.alloyProductGenerator.generateProductsFromAlloyFile(this.sourceSPL, this.targetSPL);
+
+		/* Reset results variables .*/
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		sOutcomes.getMeasures().reset();
+		sOutcomes.getMeasures().setApproach(input.getApproach());
+		sOutcomes.getMeasures().getTempoTotal().startContinue();
+
+		this.wf = WellFormedness.getInstance().isWF(this.sourceSPL, this.targetSPL); 
+		
+		this.changedFeatures = getChangedFeatureNames(this.targetSPL);
+		
+		this.areAllProductsMatched = ProductMatching.getInstance(productBuilder).areAllProductsMatched(this.sourceSPL, this.targetSPL);
+		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
+		
+		try {
+			this.isAssetMappingsEqual = amAnalyzer.isSameAssets(this.sourceSPL, this.targetSPL);
+			System.out.println("\n AM Equal: " + isAssetMappingsEqual);
+			sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
+		} catch (JavaModelException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{
+		boolean isRefinement = false;
+		if(input.getApproach().equals(Approach.APP)){
+			System.out.println("\nALL PRODUCT PAIRS\n");
+			AllProductPairs app = new AllProductPairs(this.productBuilder);
+			System.out.println("Refactoring ? " + (isRefinement = app.evaluate(sourceSPL, targetSPL, input, wf)));
+		}else if(input.getApproach().equals(Approach.AP)){
+			System.out.println("\nALL PRODUCTS\n");
+			AllProducts ap = new AllProducts(this.productBuilder);
+			System.out.println("Refactoring ? " + (isRefinement = ap.evaluate(sourceSPL, targetSPL, input, wf, areAllProductsMatched)));
+		}else if(input.getApproach().equals(Approach.IP)){
+			System.out.println("\nIMPACTED PRODUCTS\n");
+			ImpactedProducts ip = new ImpactedProducts(this.productBuilder, amAnalyzer.getModifiedClassesList());
+			System.out.println("Refactoring ? " + (isRefinement = ip.evaluate(sourceSPL, targetSPL, input, wf, areAllProductsMatched)));
+		}else if(input.getApproach().equals(Approach.IC)){
+			System.out.println("\nIMPACTED ClASSES\n");
+			long startTime = System.currentTimeMillis();
+			ForwardImpactedClasses ic = new ForwardImpactedClasses(productBuilder, input, amAnalyzer.getModifiedClassesList());
+			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
+			long stopTime = System.currentTimeMillis();
+		    long elapsedTime = stopTime - startTime;
+		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + elapsedTime/1000 + " milliseconds");
+		}else if(input.getApproach().equals(Approach.EIC)){
+			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
+			long startTime = System.currentTimeMillis();
+			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getModifiedClassesList());
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
+			long stopTime = System.currentTimeMillis();
+		    long elapsedTime = stopTime - startTime;
+		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " milliseconds");
+		}
+		
+		/*Report Variables: Pause total time to check the SPL.*/
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		sOutcomes.getMeasures().setApproach(input.getApproach());
+		sOutcomes.setWF(wf);
+		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
+		sOutcomes.setRefinement(wf && isRefinement);
+		sOutcomes.setCompObservableBehavior(isRefinement);
+		
 	}
 
 	public boolean verifyLine(FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
