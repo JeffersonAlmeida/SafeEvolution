@@ -110,7 +110,9 @@ public class SpreadSheetExecution {
         secondRow.appendCell(createCell(headingStyleName, "IC<evosuite>"));
         secondRow.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
         table.appendRow(firstRow);
-        secondTable.appendRow(new OdfTableRow(contentDom));
+        
+       
+		
         secondTable.appendRow(secondRow);
 	}
 
@@ -124,6 +126,8 @@ public class SpreadSheetExecution {
         	}else{
     			outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
     			configureVariables();
+    			this.officeSpreadsheet.removeChild(officeSpreadsheet.getFirstChild());
+    			this.officeSpreadsheet.appendChild(new OdfTable(contentDom)); // In this case, fist sheet does not exist yet.
     			this.officeSpreadsheet.appendChild(new OdfTable(contentDom)); // In this case, second sheet does not exist yet.
                 addAutomaticStyles();
                 createHeader();
@@ -233,29 +237,37 @@ public class SpreadSheetExecution {
             secondRow.appendCell(createCell(lineStyleName, icEvosuiteTime));
             secondRow.appendCell(createCell(lineStyleName, eicEvosuiteTime));
             
-            //if(!spreadSheetContainsThisPair(pairId, firstRow))
-            table.appendRow(firstRow);
+            if(!spreadSheetContainsThisPair(pairId, firstRow, secondRow)){
+            	table.appendRow(firstRow);	
+            	secondTable.appendRow(secondRow);
+            }
         	
             //Replace the First Sheet
         	this.officeSpreadsheet.replaceChild(table, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0));
 
         	//Replace the Second Sheet
-        	secondTable.appendRow(secondRow);
         	this.officeSpreadsheet.replaceChild(secondTable, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1));
         } catch (Exception e) {
             System.err.println("Cannot process " + inputFileName);
         }
     }
 
-	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow row) {
-        NodeList nl = (NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
-        int size = nl.getLength(); 
+	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow firstRow, OdfTableRow secondRow) {
+        NodeList firstSheetNodeList =  table.getChildNodes();//(NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
+        NodeList secondSheetNodeList =  secondTable.getChildNodes();//(NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1);
+        int size = firstSheetNodeList.getLength();
+        int size2 = secondSheetNodeList.getLength(); 
         for(int i=0; i< size; i++){
-        	Node node = nl.item(i);
-        	System.out.println(" nodeName: " + node.getNodeName() + " i = " + i);
-        	if(node.getNodeName().equals("table:table-row")){
-        		if(node.toString().contains(pairId)){
-        			this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0).replaceChild(row, node);
+        	Node firstNode = firstSheetNodeList.item(i);
+        	Node secondNode = secondSheetNodeList.item(i);
+        	System.out.println(" first nodeName: " + firstNode.getNodeName() + " i = " + i);
+        	System.out.println(" second nodeName: " + secondNode.getNodeName() + " i = " + i);
+        	if(firstNode.getNodeName().equals("table:table-row")){
+        		if(firstNode.toString().contains(pairId)){
+        			System.out.println("FirstNode: " + firstNode.toString());
+        			System.out.println("secondNode: " + secondNode.toString());
+        			table.replaceChild(firstRow, firstNode);
+        			secondTable.replaceChild(secondRow, secondNode);
         			return true;
             	}
         	}
