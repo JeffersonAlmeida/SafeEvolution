@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.Properties;
-
 import org.odftoolkit.odfdom.OdfFileDom;
 import org.odftoolkit.odfdom.doc.OdfSpreadsheetDocument;
 import org.odftoolkit.odfdom.doc.office.OdfOfficeAutomaticStyles;
@@ -26,6 +25,7 @@ import org.odftoolkit.odfdom.dom.attribute.office.OfficeValueTypeAttribute;
 import org.odftoolkit.odfdom.dom.element.OdfStyleBase;
 import org.odftoolkit.odfdom.dom.style.OdfStyleFamily;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 
 /**
@@ -55,6 +55,7 @@ public class SpreadSheetExecution {
     // the office:spreadsheet element in the content.xml file
     
     OdfTable table;
+    OdfTable secondTable;
     OdfTableRow row;
     OdfTableColumn column;
     OdfTableCell cell;
@@ -80,17 +81,15 @@ public class SpreadSheetExecution {
 	public void run() throws IOException {
         setupOutputDocument();
         if (this.outputDocument != null) {
-            addAutomaticStyles();
             readPropertyFile();
+            processInputDocument();
             saveOutputDocument();
         }
     }
 
     private void readPropertyFile() throws IOException {
     	 File file = new File(inputFileName);
-    	 createHeader();
    		 loadConsumeData(file.getAbsolutePath());
-   		 processInputDocument();
 	}
 
 	private void createHeader() {
@@ -104,23 +103,22 @@ public class SpreadSheetExecution {
         row.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
         row.appendCell(createCell(headingStyleName, "Expected ?"));
         table.appendRow(row);
-        table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
+        //table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
 	}
 
 	void setupOutputDocument() {
         try {
         	File file = new File(this.outputFileName);
         	if(file.exists()){
-        		outputDocument =  (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(this.outputFileName);
+    			outputDocument =  (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(this.outputFileName);
+        		configureVariables();
+        		addAutomaticStyles();
         	}else{
-        		outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
-        		
-        	}
-        	contentDom = outputDocument.getContentDom();
-            stylesDom = outputDocument.getStylesDom();
-            contentAutoStyles = contentDom.getOrCreateAutomaticStyles();
-            stylesOfficeStyles = outputDocument.getOrCreateDocumentStyles();
-            this.officeSpreadsheet = outputDocument.getContentRoot();
+    			outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
+    			configureVariables();
+                addAutomaticStyles();
+                createHeader();
+    		}
         } catch (Exception e) {
             System.err.println("Unable to create output file.");
             System.err.println(e.getMessage());
@@ -128,6 +126,14 @@ public class SpreadSheetExecution {
         }
     }
 
+	private void configureVariables() throws Exception{
+		contentDom = outputDocument.getContentDom();
+        stylesDom = outputDocument.getStylesDom();
+        contentAutoStyles = contentDom.getOrCreateAutomaticStyles();
+        stylesOfficeStyles = outputDocument.getOrCreateDocumentStyles();
+        this.officeSpreadsheet = outputDocument.getContentRoot();
+	}
+	
     /**
      * The default document has some content in it already (in the case
      * of a text document, a <text:p>.  Clean out all the old stuff.
@@ -195,14 +201,22 @@ public class SpreadSheetExecution {
     
     public synchronized OdfTable getTable(){
 		if(table==null){
-			//table = new OdfTable(contentDom);
 			table = (OdfTable) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
 		}
 		return table;
     }
+    
+    public synchronized OdfTable getSecondTable(){
+		if(secondTable==null){
+			secondTable = new OdfTable(contentDom);
+			secondTable= (OdfTable) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1);
+		}
+		return secondTable;
+    }
 
     void processInputDocument() {
         table = getTable();
+        secondTable = getSecondTable();
         setColumnStyle();
         try {
 			String pairId = properties.getProperty("pairId");
@@ -227,16 +241,39 @@ public class SpreadSheetExecution {
             row.appendCell(createCell(lineStyleName, eicRandoop));
             row.appendCell(createCell(lineStyleName, icEvosuite));
             row.appendCell(createCell(lineStyleName, eicEvosuite));
-            table.appendRow(row);
-    		table.appendRow(new OdfTableRow(contentDom)); // insert a blank row
-        	//this.officeSpreadsheet.appendChild(table);
-        	
+            
+            OdfTableRow secondRow = new OdfTableRow(contentDom);
+            secondRow.setTableStyleNameAttribute(rowStyleName);
+            secondRow.appendCell(createCell(lineStyleName, pairId));
+            secondRow.appendCell(createCell(lineStyleName, icRandoopTime));
+            secondRow.appendCell(createCell(lineStyleName, eicRandoopTime));
+            secondRow.appendCell(createCell(lineStyleName, icEvosuiteTime));
+            secondRow.appendCell(createCell(lineStyleName, eicEvosuiteTime));
+            
+            if(!spreadSheetContainsThisPair(pairId, row))
+            	table.appendRow(row);
         	//Replace the First Sheet
         	this.officeSpreadsheet.replaceChild(table, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0));
+        	
         } catch (Exception e) {
             System.err.println("Cannot process " + inputFileName);
         }
     }
+
+	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow row) {
+        NodeList nl = (NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
+        int size = nl.getLength(); 
+        for(int i=0; i< size; i++){
+        	Node node = nl.item(i);
+        	System.out.println(" nodeName: " + node.getNodeName() + " i = " + i);
+        	if(node.getNodeName().equals("table:table-row")){
+        		if(node.toString().contains(pairId)){
+        			this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0).replaceChild(row, node);
+        			return true;
+            	}
+        	}
+        }return false;
+	}
 
 	private void setColumnStyle() {
 		for(int i=0; i< 5; i++){
