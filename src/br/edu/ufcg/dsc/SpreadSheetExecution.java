@@ -78,12 +78,12 @@ public class SpreadSheetExecution {
 	}
 
 	public void run() throws IOException {
-        setupOutputDocument();
-        if (this.outputDocument != null) {
-            readPropertyFile();
-            processInputDocument();
-            saveOutputDocument();
+        if(outputDocument==null){
+        	setupOutputDocument();	
         }
+        readPropertyFile();
+        processInputDocument();
+        saveOutputDocument();
     }
 
     private void readPropertyFile() throws IOException {
@@ -110,10 +110,8 @@ public class SpreadSheetExecution {
         secondRow.appendCell(createCell(headingStyleName, "IC<evosuite>"));
         secondRow.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
         table.appendRow(firstRow);
-        
-       
-		
         secondTable.appendRow(secondRow);
+        setColumnStyle();
 	}
 
 	void setupOutputDocument() {
@@ -122,7 +120,7 @@ public class SpreadSheetExecution {
         	if(file.exists()){
     			outputDocument =  (OdfSpreadsheetDocument) OdfSpreadsheetDocument.loadDocument(this.outputFileName);
         		configureVariables();
-        		addAutomaticStyles();
+        		//addAutomaticStyles();
         	}else{
     			outputDocument = OdfSpreadsheetDocument.newSpreadsheetDocument();
     			configureVariables();
@@ -154,9 +152,7 @@ public class SpreadSheetExecution {
     }
 
     void addAutomaticStyles() {
-
         OdfStyle style;
-
          // Column style (all columns same width)
         style = contentAutoStyles.newStyle(OdfStyleFamily.TableColumn);
         columnStyleName = style.getStyleNameAttribute();
@@ -203,14 +199,12 @@ public class SpreadSheetExecution {
     void processInputDocument() {
         table = getTable();
         secondTable = getSecondTable();
-        setColumnStyle();
         try {
 			String pairId = properties.getProperty("pairId");
 			String[] icRandoopAndTime = properties.getProperty("IC-randoop").split(",");
 			String[] eicRandoopAndTime = properties.getProperty("EIC-randoop").split(",");
 			String[] icEvosuiteAndTime = properties.getProperty("IC-evosuite").split(",");
 			String[] eicEvosuiteAndTime = properties.getProperty("EIC-evosuite").split(",");
-			
 			String icRandoop = icRandoopAndTime[0];
 			String icRandoopTime = icRandoopAndTime[1];
 			String eicRandoop = eicRandoopAndTime[0];
@@ -219,16 +213,13 @@ public class SpreadSheetExecution {
 			String icEvosuiteTime = icEvosuiteAndTime[1];
 			String eicEvosuite = eicEvosuiteAndTime[0];
 			String eicEvosuiteTime = eicEvosuiteAndTime[1];	
-			
-			 OdfTableRow firstRow = new OdfTableRow(contentDom);
-			
+			OdfTableRow firstRow = new OdfTableRow(contentDom);
 			firstRow.setTableStyleNameAttribute(rowStyleName);
 			firstRow.appendCell(createCell(lineStyleName, pairId));
 			firstRow.appendCell(createCell(lineStyleName, icRandoop));
 			firstRow.appendCell(createCell(lineStyleName, eicRandoop));
 			firstRow.appendCell(createCell(lineStyleName, icEvosuite));
 			firstRow.appendCell(createCell(lineStyleName, eicEvosuite));
-            
             OdfTableRow secondRow = new OdfTableRow(contentDom);
             secondRow.setTableStyleNameAttribute(rowStyleName);
             secondRow.appendCell(createCell(lineStyleName, pairId));
@@ -236,12 +227,10 @@ public class SpreadSheetExecution {
             secondRow.appendCell(createCell(lineStyleName, eicRandoopTime));
             secondRow.appendCell(createCell(lineStyleName, icEvosuiteTime));
             secondRow.appendCell(createCell(lineStyleName, eicEvosuiteTime));
-            
             if(!spreadSheetContainsThisPair(pairId, firstRow, secondRow)){
             	table.appendRow(firstRow);	
             	secondTable.appendRow(secondRow);
             }
-        	
             //Replace the First Sheet
         	this.officeSpreadsheet.replaceChild(table, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0));
 
@@ -253,19 +242,18 @@ public class SpreadSheetExecution {
     }
 
 	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow firstRow, OdfTableRow secondRow) {
-        NodeList firstSheetNodeList =  table.getChildNodes();//(NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0);
-        NodeList secondSheetNodeList =  secondTable.getChildNodes();//(NodeList) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1);
+        NodeList firstSheetNodeList =  table.getChildNodes();
+        NodeList secondSheetNodeList =  secondTable.getChildNodes();
         int size = firstSheetNodeList.getLength();
-        int size2 = secondSheetNodeList.getLength(); 
-        for(int i=0; i< size; i++){
+        int rowStartAt = 5;
+        for(int i=rowStartAt; i<size; i++){
         	Node firstNode = firstSheetNodeList.item(i);
         	Node secondNode = secondSheetNodeList.item(i);
-        	System.out.println(" first nodeName: " + firstNode.getNodeName() + " i = " + i);
-        	System.out.println(" second nodeName: " + secondNode.getNodeName() + " i = " + i);
         	if(firstNode.getNodeName().equals("table:table-row")){
         		if(firstNode.toString().contains(pairId)){
-        			System.out.println("FirstNode: " + firstNode.toString());
-        			System.out.println("secondNode: " + secondNode.toString());
+        			System.out.println("\nReplace existing row in the spreadsheet:\n");
+        			System.out.println("First sheet row: " + firstNode.toString());
+        			System.out.println("second sheet row: " + secondNode.toString());
         			table.replaceChild(firstRow, firstNode);
         			secondTable.replaceChild(secondRow, secondNode);
         			return true;
@@ -322,9 +310,18 @@ public class SpreadSheetExecution {
     public static void main(String[] args) throws IOException {
     	System.out.println("Generating SpreadSheetReport ... ");
     	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template.properties"; 
+    	String in2 = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template2.properties"; 
+    	String in3 = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template3.properties";
+    	
     	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
     	SpreadSheetExecution sheet = new SpreadSheetExecution(in,out);
         sheet.run();
-        System.out.println("finished!");
+        System.out.println("\nfinished!"); 
+        sheet.setInputFileName(in2);
+        sheet.run();
+        System.out.println("\nfinished!");
+        sheet.setInputFileName(in3);
+        sheet.run();
+        System.out.println("\nfinished!");
     }
 }
