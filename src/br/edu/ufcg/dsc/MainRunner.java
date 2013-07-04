@@ -79,8 +79,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch52.0/";
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch52.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch54.0/";
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch54.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
 				int pairsAmount = 1;
 				
