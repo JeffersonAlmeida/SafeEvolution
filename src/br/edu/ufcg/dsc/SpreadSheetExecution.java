@@ -71,17 +71,30 @@ public class SpreadSheetExecution {
 		this.outputFileName = out;
 	}
     
+    public SpreadSheetExecution(){
+    	super();
+    	this.outputFileName = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
+    }
+    
     private void loadConsumeData(String filepath) throws IOException {
 		InputStream is = new FileInputStream(filepath);
 		this.properties.load(is);
 		is.close();
 	}
 
+    public void storePropertiesInSpreadSheet(Properties p){
+    	this.setProperties(p);
+    	try {
+			this.run();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
+    
 	public void run() throws IOException {
         if(outputDocument==null){
         	setupOutputDocument();	
         }
-        readPropertyFile();
         processInputDocument();
         saveOutputDocument();
     }
@@ -237,7 +250,7 @@ public class SpreadSheetExecution {
         	//Replace the Second Sheet
         	this.officeSpreadsheet.replaceChild(secondTable, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1));
         } catch (Exception e) {
-            System.err.println("Cannot process " + inputFileName);
+            System.err.println("Cannot process");
         }
     }
 
@@ -302,8 +315,14 @@ public class SpreadSheetExecution {
 	public void setOutputFileName(String outputFileName) {
 		this.outputFileName = outputFileName;
 	}
+    public Properties getProperties() {
+		return properties;
+	}
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
 
-    /**
+	/**
      * @param args the command line arguments
      * @throws IOException 
      */

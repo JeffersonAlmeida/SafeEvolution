@@ -34,7 +34,10 @@ Bundle-ClassPath: ferramentaLPS.jar,
  lib/mmapi.jar,
  lib/mobileLib.jar,
  lib/att.jar,
- lib/randoop.jar
+ lib/randoop.jar,
+ lib/odfdom.jar,
+ lib/plume.jar,
+ lib/xercesImpl.jar
 Export-Package: CVS,
  LICENSES,
  about_files,

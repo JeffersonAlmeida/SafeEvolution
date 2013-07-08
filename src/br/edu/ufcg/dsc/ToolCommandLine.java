@@ -1,8 +1,12 @@
 package br.edu.ufcg.dsc;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
 import org.eclipse.jdt.core.JavaModelException;
@@ -57,6 +61,10 @@ public class ToolCommandLine {
 	private boolean areAllProductsMatched;
 	
 	private boolean isAssetMappingsEqual;
+	
+	private Properties properties;
+	
+	private SpreadSheetExecution sheetExecution;
 
 	public ToolCommandLine() {
 		this.productsCleaner = new ProductsCleaner();
@@ -65,6 +73,7 @@ public class ToolCommandLine {
 
 	public ToolCommandLine(Lines line) {
 		this();
+		this.properties = new Properties();
 		if (line.equals(Lines.MOBILE_MEDIA)) {
 			this.productBuilder = new MobileMediaBuilder();
 		} else if (line.equals(Lines.TARGET)  || line.equals(Lines.DEFAULT)) {
@@ -172,11 +181,20 @@ public class ToolCommandLine {
 		
 		this.changedFeatures = getChangedFeatureNames(this.targetSPL);
 		
-		this.areAllProductsMatched = ProductMatching.getInstance(productBuilder).areAllProductsMatched(this.sourceSPL, this.targetSPL);
+		long initTime = System.currentTimeMillis();
+		//this.areAllProductsMatched = ProductMatching.getInstance(productBuilder).areAllProductsMatched(this.sourceSPL, this.targetSPL);
+		this.areAllProductsMatched =  true;
 		System.out.println("areAllProductsMatched: " + areAllProductsMatched);
+		long stTime = System.currentTimeMillis();
+		long finishTime = stTime - initTime;
+		System.out.println("\nTotal Time Spent to verify Products Matching: " + finishTime/60000 + " minutes");
 		
 		try {
+			long startTime = System.currentTimeMillis();
 			this.isAssetMappingsEqual = amAnalyzer.isSameAssets(this.sourceSPL, this.targetSPL);
+			long stopTime = System.currentTimeMillis();
+			long elapsedTime = stopTime - startTime;
+			System.out.println("\nTotal Time Spent to verify Modified Assets: " + elapsedTime/1000 + "seconds");
 			System.out.println("\n AM Equal: " + isAssetMappingsEqual);
 			sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
 		} catch (JavaModelException e) {
@@ -186,6 +204,7 @@ public class ToolCommandLine {
 	
 	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{
 		boolean isRefinement = false;
+		long elapsedTime = 0;
 		if(input.getApproach().equals(Approach.APP)){
 			System.out.println("\nALL PRODUCT PAIRS\n");
 			AllProductPairs app = new AllProductPairs(this.productBuilder);
@@ -204,7 +223,7 @@ public class ToolCommandLine {
 			ForwardImpactedClasses ic = new ForwardImpactedClasses(productBuilder, input, amAnalyzer.getModifiedClassesList());
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 			long stopTime = System.currentTimeMillis();
-		    long elapsedTime = stopTime - startTime;
+		    elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + elapsedTime/1000 + " milliseconds");
 		}else if(input.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
@@ -212,9 +231,11 @@ public class ToolCommandLine {
 			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getModifiedClassesList());
 			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
 			long stopTime = System.currentTimeMillis();
-		    long elapsedTime = stopTime - startTime;
+		    elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " milliseconds");
 		}
+		
+		long approachTime = elapsedTime/1000; // seconds.
 		
 		/*Report Variables: Pause total time to check the SPL.*/
 		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
@@ -223,7 +244,22 @@ public class ToolCommandLine {
 		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
 		sOutcomes.setRefinement(wf && isRefinement);
 		sOutcomes.setCompObservableBehavior(isRefinement);
+		sOutcomes.setApproachTime(approachTime);
 		
+		
+	}
+	
+	public void persitResultsInPropertyFile(FilePropertiesObject input) throws IOException {
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		System.out.println("\nResult: " + sOutcomes.toString());
+		String approachTool = input.getApproach()+ "-" + input.getGenerateTestsWith(); 
+		properties.setProperty(approachTool, sOutcomes.isRefinement()+","+ sOutcomes.getApproachTime());
+		properties.setProperty("pairId", input.getEvolutionDescription());
+	}
+	
+	public void writeResultsInSpreadSheet(){
+		 this.sheetExecution = new SpreadSheetExecution();
+		 this.sheetExecution.storePropertiesInSpreadSheet(this.properties);
 	}
 
 	public boolean verifyLine(FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
@@ -324,4 +360,12 @@ public class ToolCommandLine {
 	public AssetMappingAnalyzer getAmAnalyzer() {
 		return amAnalyzer;
 	}
+	public Properties getProperties(FilePropertiesObject input) {
+		return properties;
+	}
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+	
+	
 }

@@ -37,6 +37,8 @@ public class SPLOutcomes {
 	
 	private String observation;
 	
+	private long approachTime;
+	
 	/**
 	 * Initiate the properties of the class.
 	 * Default Values.
@@ -238,6 +240,12 @@ public class SPLOutcomes {
 	}
 	public void setObservation(String observation) {
 		this.observation = observation;
+	}
+	public void setApproachTime(long approachTime) {
+		this.approachTime = approachTime;
+	}
+	public long getApproachTime() {
+		return approachTime;
 	}
 	
 }

@@ -76,6 +76,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		
 		testableObject.runTest(new Runnable() {
 			public void run() {
+				long startTime = System.currentTimeMillis();
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
@@ -92,7 +93,9 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				
 				/* Create several evolution pairs with this file and Run */
 				//severalPairsInput(stringFile);
-				
+				long stopTime = System.currentTimeMillis();
+				long elapsedTime = stopTime - startTime;
+				System.out.println("\nTotal Time Spent: " + elapsedTime/60000 + " minutes");
 				
 			}
 
@@ -101,8 +104,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				for (Xml pair : xml.children("pair")) {
 					String source = pair.child("source").content().toLowerCase();
 					String target = pair.child("target").content().toLowerCase();
-					System.out.println("source: " + source);
-					System.out.println("target: " + target );
+					System.out.println("Source: " + source);
+					System.out.println("Target: " + target );
 					onePairInput(source, target);
 				}
 			}
@@ -147,8 +150,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 						try {
 							toolCommandLine.runApproach(input);
 							System.out.println("\n\t SPL REPORT: \n");
-							SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
-							System.out.println(sOutcomes.toString());
+							// write approach plus tool in property file 
+							toolCommandLine.persitResultsInPropertyFile(input);
 						} catch (AssetNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
@@ -158,6 +161,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 						}
 					}
 				}
+				// write pair results in spreadsheet
+				toolCommandLine.writeResultsInSpreadSheet();
 			}
 
 			private void manipulateFileProperty(String stringFile, String approach, String tool) {
