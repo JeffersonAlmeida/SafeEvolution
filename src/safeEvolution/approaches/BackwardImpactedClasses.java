@@ -44,6 +44,11 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 			super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
 			this.printListofExtendedImpactedClasses(this.extendedImpactedClasses.iterator());
 		}
+		
+		if(this.extendedImpactedClasses.isEmpty()){
+			System.out.println("\nThere is no Extended Impacted Classes to verify.");
+			return true;
+		}
 		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 	}
 

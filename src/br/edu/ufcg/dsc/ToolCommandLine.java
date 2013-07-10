@@ -253,7 +253,8 @@ public class ToolCommandLine {
 		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
 		System.out.println("\nResult: " + sOutcomes.toString());
 		String approachTool = input.getApproach()+ "-" + input.getGenerateTestsWith(); 
-		properties.setProperty(approachTool, sOutcomes.isRefinement()+","+ sOutcomes.getApproachTime());
+		String refinementOrNot = sOutcomes.isRefinement() ? "Refinement" : "Non-Refinement";
+		properties.setProperty(approachTool, refinementOrNot +","+ sOutcomes.getApproachTime());
 		properties.setProperty("pairId", input.getEvolutionDescription());
 	}
 	
