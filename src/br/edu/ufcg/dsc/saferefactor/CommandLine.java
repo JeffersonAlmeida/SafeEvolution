@@ -3,6 +3,7 @@ package br.edu.ufcg.dsc.saferefactor;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.apache.tools.ant.DefaultLogger;
@@ -46,7 +47,7 @@ public class CommandLine {
 	 * @throws IOException
 	 */
 	// int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, boolean sour
-	public static boolean isRefactoring(int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, String classes, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
+	public static boolean isRefactoring(int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, Collection<String> impactedClasses, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
 
 		boolean isRefinement = true;
 
@@ -89,10 +90,6 @@ public class CommandLine {
 		p.setProperty("target", targetProductPath);
 		p.setProperty("lpsSource", propertiesObject.getSourceLineDirectory());
 		p.setProperty("lpsTarget", propertiesObject.getTargetLineDirectory());
-
-		if (classes != null) {
-			p.setProperty("classes", classes);
-		}
 
 		p.setProperty("tests.folder", Constants.TEST);
 		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
@@ -144,7 +141,7 @@ public class CommandLine {
 		input.setInputLimit(propertiesObject.getInputLimit());
 		input.setGenerateTestsWith(propertiesObject.getGenerateTestsWith());
 		input.setWhichMethods(propertiesObject.getWhichMethods());
-		Saferefactor safeRefactor = new Saferefactor(classes, input);
+		Saferefactor safeRefactor = new Saferefactor(impactedClasses, input);
 		//Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
 
 		Analyzer analyzer = new Analyzer();
@@ -179,7 +176,7 @@ public class CommandLine {
 	 * @throws IOException
 	 */
 	//Product sourceProduct, Product targetProduct, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, ResultadoLPS resultado
-	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, String classes, FilePropertiesObject propertiesObject) throws IOException {
+	public static boolean isRefactoring(Product sourceProduct, Product targetProduct, Collection<String> modifiedClasses, FilePropertiesObject propertiesObject) throws IOException {
 
 		boolean result = false;
 
@@ -190,7 +187,7 @@ public class CommandLine {
 		int targetProductId = targetProduct.getId();
 
 		// idSource, idTarget, source, target, classes, timeout, maxTests, approach, criteria, sourceLPSPath, targetLPSPath, sourceProduct.isCompiled(), targetProduct.isCompiled()
-		result = isRefactoring(sourceProductId, targetProductId, sourceProductPath, targetProductPath, classes, propertiesObject, sourceProduct.isCompiled(), targetProduct.isCompiled());
+		result = isRefactoring(sourceProductId, targetProductId, sourceProductPath, targetProductPath, modifiedClasses, propertiesObject, sourceProduct.isCompiled(), targetProduct.isCompiled());
 
 		sourceProduct.setCompiled(true);
 		targetProduct.setCompiled(true);

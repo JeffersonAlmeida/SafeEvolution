@@ -82,7 +82,7 @@ public abstract class ImpactedClasses {
 		
 		preProcessAssets(sourceSPL, targetSPL, this.input, prod);
 		System.out.println("\nClasses que receberao testes JUNIT: " + classes);
-		sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
+		sameBehavior = sameBehavior && CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), this.modifiedClasses, this.input , false, false);
 		deleteFileToTrash(); // delete files, clean dependencies and aspectsList
 		return sameBehavior;
 	}
@@ -126,7 +126,7 @@ public abstract class ImpactedClasses {
 			} else { // No preProcess, No aspects
 				this.sourceProductFile.renameTo(new File(this.sourceProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
 				this.targetProductFile.renameTo(new File(this.targetProductFile.getParent() + Constants.FILE_SEPARATOR + "src"));
-				sameBehavior = CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, this.input , false, false);
+				sameBehavior = CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), this.modifiedClasses, this.input , false, false);
 			}
 		}
 		System.out.println("Asset mapping checked in: " + String.valueOf(((System.currentTimeMillis()) - startedTime) / 1000) + " segundos. " + "Same Behavior: " + sameBehavior);
@@ -255,7 +255,7 @@ public abstract class ImpactedClasses {
 	private boolean CheckProductBehavior(FilePropertiesObject in, boolean sameBehavior, HashSet<String> prod) throws IOException {
 		this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.sourceProductFile.getParent());
 		this.productBuilder.preprocess(this.productBuilder.getSymbols(prod), this.targetProductFile.getParent());
-		sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), classes, in , false, false);
+		sameBehavior = sameBehavior	&& CommandLine.isRefactoring(0, 0, this.sourceProductFile.getParent(), this.targetProductFile.getParent(), this.modifiedClasses, in , false, false);
 		return sameBehavior;
 	}
 

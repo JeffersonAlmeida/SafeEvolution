@@ -43,7 +43,7 @@ public class AllProductPairs {
 			for (Product productTarget : targetLine.getProducts()) {
 				this.productBuilder.generateProduct(productTarget, targetLine.getPath());
 				if(productTarget!=probablyCorrespondentProduct){
-					if (isRefactoring = CommandLine.isRefactoring(productSource, productTarget, sourceLine.getControladoresFachadas(), propertiesObject)) {
+					if (isRefactoring = CommandLine.isRefactoring(productSource, productTarget, null, propertiesObject)) {
 						break;
 					}
 				}
@@ -54,7 +54,7 @@ public class AllProductPairs {
 		private boolean haveSameBehavior(ProductLine sourceLine, ProductLine targetLine, FilePropertiesObject propertiesObject, boolean isRefactoring, Product productSource, Product probablyCorrespondentProduct) throws AssetNotFoundException, IOException, DirectoryException {
 			if (probablyCorrespondentProduct != null) {
 				this.productBuilder.generateProduct(probablyCorrespondentProduct, targetLine.getPath());
-				isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, probablyCorrespondentProduct, sourceLine.getControladoresFachadas(), propertiesObject);
+				isRefactoring = isRefactoring && CommandLine.isRefactoring(productSource, probablyCorrespondentProduct,null, propertiesObject);
 			}
 			return isRefactoring;
 		}

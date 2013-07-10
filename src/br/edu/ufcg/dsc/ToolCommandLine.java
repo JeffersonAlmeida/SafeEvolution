@@ -200,6 +200,8 @@ public class ToolCommandLine {
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		}
+		
+		this.amAnalyzer.findExtendedImpactedClasses(new File(input.getSourceLineDirectory()+"src"));
 	}
 	
 	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{
@@ -228,8 +230,8 @@ public class ToolCommandLine {
 		}else if(input.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 			long startTime = System.currentTimeMillis();
-			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getModifiedClassesList());
-			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
+			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 			long stopTime = System.currentTimeMillis();
 		    elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " seconds");
@@ -334,8 +336,8 @@ public class ToolCommandLine {
 		}else if(in.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 			long startTime = System.currentTimeMillis();
-			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, in, amAnalyzer.getModifiedClassesList());
-			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
+			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, in, amAnalyzer.getExtendedImpactedClasses());
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
 			long stopTime = System.currentTimeMillis();
 		    long elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " milliseconds");

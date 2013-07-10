@@ -1,71 +1,36 @@
 package safeEvolution.approaches;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
-import soot.Main;
 import safeEvolution.approaches.optimizations.ImpactedClasses;
 import safeEvolution.fileProperties.FilePropertiesObject;
-import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.ProductLine;
+import br.edu.ufcg.dsc.builders.ProductBuilder;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
 
 public class BackwardImpactedClasses  extends ImpactedClasses{
 	
-	private Collection<String> extendedImpactedClasses;
-	private int sourceCodeVerificationCounter;
-	private boolean canIncrementVerificationCounter;
-	private Collection<String> auxiliaryImpactedClasses;
-	
-	public BackwardImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> modifiedClassesList) {
-		super(productBuilder, in, modifiedClassesList);
-		this.extendedImpactedClasses = new HashSet<String>();
-		this.auxiliaryImpactedClasses = new HashSet<String>();
-		this.sourceCodeVerificationCounter = 1;
-		this.canIncrementVerificationCounter = true;
+	public BackwardImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> extendedImpactedClasses) {
+		super(productBuilder, in, extendedImpactedClasses);
+		this.printListofExtendedImpactedClasses(extendedImpactedClasses.iterator());
 	}
 
 	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
-		this.getBackwardDependencies(new File(sourceSPL.getPath()+"src")); //Codigo para encontrar as dependencias em mais de um nivel acima
-		if(!input.getExtendedImpactedClasses().isEmpty()){ /* Test on Graphical User Interface with Validation class associated with */
-			String [] classes = getExtendedImpactedClassesFromInputFile();
-			/*if(belongsToextendedImpactedClasses(classes)){
-				super.setModifiedClasses(this.auxiliaryImpactedClasses);
-			}*/
-			for(String c: classes)
-				this.auxiliaryImpactedClasses.add(c);
-			
-			super.setModifiedClasses(this.auxiliaryImpactedClasses);
-		    this.printListofExtendedImpactedClasses(this.auxiliaryImpactedClasses.iterator());	
-		}else{			
-			super.setModifiedClasses(this.extendedImpactedClasses); // Impacted Classes is Extended Impacted Classes now
-			this.printListofExtendedImpactedClasses(this.extendedImpactedClasses.iterator());
+		boolean isRefinement = false;
+		if(wf && areAllProductsMatched){
+			if(super.getModifiedClasses().isEmpty()){
+				System.out.println("\nThere is not Extended Impacted classes to verify.");
+				return true;
+			}else{
+				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
+			}
+		}else{  // Create an Exception!!
+			System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
 		}
-		
-		if(this.extendedImpactedClasses.isEmpty()){
-			System.out.println("\nThere is no Extended Impacted Classes to verify.");
-			return true;
-		}
-		return super.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
-	}
-
-	private boolean belongsToextendedImpactedClasses(String [] classes) {
-		for(String c: classes){
-			if(!this.extendedImpactedClasses.contains(c))
-				return false;
-			else
-				this.auxiliaryImpactedClasses.add(c);
-		}
-		return true;
-	}
-
-	private String [] getExtendedImpactedClassesFromInputFile() {
-		String eic = input.getExtendedImpactedClasses();
-		String [] classes = eic.split(";");
-		return classes;
+		return isRefinement;
 	}
 
 	private void printListofExtendedImpactedClasses(Iterator<String> i) {
@@ -74,80 +39,5 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 			System.out.println(i.next());
 		}
 		System.out.println("\n--------------------------");
-	}
-
-	// Codigo para encontrar as dependencias em mais de um nivel acima
-	private void getBackwardDependencies(File sourceSplDirectory){
-		int i = 0;
-		while(i < this.sourceCodeVerificationCounter){
-			this.canIncrementVerificationCounter = true;
-			this.getAboveDependencies(sourceSplDirectory);
-			i++;
-		}
-	}
-	
-	private void getAboveDependencies(File classe) {
-		System.out.println("\nFILE: " + classe.getAbsolutePath());
-		if (classe.isDirectory() && !classe.getAbsolutePath().contains(".svn") ) { 
-			File[] files = classe.listFiles();
-			for (File subFile : files) {
-				this.getAboveDependencies(subFile);
-			}
-		} else if (classe.getAbsolutePath().endsWith("java") && !classe.getAbsolutePath().contains("ProjectManagerController")) 
-			getDependencies(classe);
-	}
-
-	private void getDependencies(File classe) {
-		if(!(thisclassBelongsToModifiedClasses(classe))){
-			Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());  // Get All Dependencies of this Class
-			if(!(dependencias.isEmpty())){
-				clazzDependenciesBelongToModifiedClasses(getPackageName(classe), dependencias); // A -> B  A is dependent of B.   B is a dependency of A	
-			}
-		}
-	}
-	
-	private boolean thisclassBelongsToModifiedClasses(File classe) {
-		return super.modifiedClasses.contains(this.getPackageName(classe));
-	}
-
-	private String getPackageName(File classe) {
-		String words[] = classe.getAbsolutePath().split("src/");
-		String packagePath =  "";
-		if(words.length>2){
-			/* Target Case */
-			packagePath = words[words.length-2] + "src/" +words[words.length-1];
-		}else if (words.length==2){
-			packagePath =  words[1];
-		}
-		return packagePath.replaceAll("/", ".");
-	}
-	
-	private void clazzDependenciesBelongToModifiedClasses(String classe, Collection<String> dependencias) {
-		Iterator<String> i = dependencias.iterator();
-		while(i.hasNext()){
-			String s = i.next();
-			System.out.println("\nDependencia: " + s);
-			Iterator<String> iterator2 = this.modifiedClasses.iterator();
-			while(iterator2.hasNext()){
-				String string2 = iterator2.next();
-				String[] words = string2.split("\\.");//words[words.length-1];
-				String w = words[words.length-2];
-				if(s.equals(w)){
-					this.modifiedClasses.add(classe);
-					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
-					//if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} // Codigo para encontrar as dependencias em mais de um nivel acima
-					break;
-				}
-			}
-		}
-	}
-
-	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL,HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched, Collection<String> modifiedClassesList) throws AssetNotFoundException, IOException, DirectoryException {
-		if(modifiedClassesList.isEmpty()){ // if modified class list is empty then spl is a refinement.
-			System.out.println("\nThere is not impacted classes to verify.");
-			return true;
-		}else{
-			return evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
-		}
 	}
 }

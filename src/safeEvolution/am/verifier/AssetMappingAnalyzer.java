@@ -7,9 +7,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import javax.naming.ConfigurationException;
 import org.eclipse.jdt.core.JavaModelException;
+
+import soot.Main;
 /*import org.eclipse.jdt.core.JavaModelException;*/
 import br.edu.ufcg.dsc.ast.ASTComparator;
 import br.edu.ufcg.dsc.ProductLine;
@@ -24,9 +27,18 @@ public class AssetMappingAnalyzer {
 	private ASTComparator astComparator;
 	private boolean alreadyVerified;
 	private boolean isSameAssets;
+	private boolean canIncrementVerificationCounter;
+	private int sourceCodeVerificationCounter;
+	/** A string collection of changed classes.*/
+	protected Collection<String> impactedClasses;
+	private Collection<String> extendedImpactedClasses;
 	
 	public AssetMappingAnalyzer() {
 		System.out.println("Asset Mapping Analyzer");
+		this.canIncrementVerificationCounter = true;
+		this.sourceCodeVerificationCounter = 1;
+		this.extendedImpactedClasses = new HashSet<String>();
+		this.impactedClasses = new HashSet<String>();
 		this.astComparator = new ASTComparator();
 		try {
 			this.astComparator.setUpProject();
@@ -131,6 +143,81 @@ public class AssetMappingAnalyzer {
 		return result;
 	}
 	
+	public void findExtendedImpactedClasses(File sourceSplDirectory){
+		if(!this.getModifiedClassesList().isEmpty()){
+			this.impactedClasses.addAll(this.modifiedClassesList);
+			this.getBackwardDependencies(sourceSplDirectory);	
+		}
+	}
+	
+	// Codigo para encontrar as dependencias em mais de um nivel acima
+	private void getBackwardDependencies(File sourceSplDirectory){
+		int i = 0;
+		while(i < this.sourceCodeVerificationCounter){
+			this.canIncrementVerificationCounter = true;
+			this.getAboveDependencies(sourceSplDirectory);
+			i++;
+		}
+	}
+	
+	private void getDependencies(File classe) {
+		if(!(thisclassBelongsToModifiedClasses(classe))){
+			Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());  // Get All Dependencies of this Class
+			if(!(dependencias.isEmpty())){
+				clazzDependenciesBelongToModifiedClasses(getPackageName(classe), dependencias); // A -> B  A is dependent of B.   B is a dependency of A	
+			}
+		}
+	}
+	
+	private void clazzDependenciesBelongToModifiedClasses(String classe, Collection<String> dependencias) {
+		Iterator<String> i = dependencias.iterator();
+		while(i.hasNext()){
+			String s = i.next();
+			s = s + ".java";
+			System.out.println("\nDependencia: " + s);
+			Iterator<String> iterator2 = this.impactedClasses.iterator();
+			while(iterator2.hasNext()){
+				String string2 = iterator2.next();
+				/*String[] words = string2.split("\\.");//words[words.length-1];
+				String w = words[words.length-2];*/
+				if(s.equals(string2)){
+					this.impactedClasses.add(classe);
+					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
+					//if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} // Codigo para encontrar as dependencias em mais de um nivel acima
+					break;
+				}
+			}
+		}
+	}
+
+	
+	private boolean thisclassBelongsToModifiedClasses(File classe) {
+		return this.impactedClasses.contains(this.getPackageName(classe));
+	}
+	
+	private String getPackageName(File classe) {
+		String words[] = classe.getAbsolutePath().split("src/");
+		String packagePath =  "";
+		if(words.length>2){
+			/* Target Case */
+			packagePath = words[words.length-2] + "src/" +words[words.length-1];
+		}else if (words.length==2){
+			packagePath =  words[1];
+		}
+		return packagePath.replaceAll("/", ".");
+	}
+	
+	private void getAboveDependencies(File classe) {
+		System.out.println("\nFILE: " + classe.getAbsolutePath());
+		if (classe.isDirectory() && !classe.getAbsolutePath().contains(".svn")){ 
+			File[] files = classe.listFiles();
+			for (File subFile : files) {
+				this.getAboveDependencies(subFile);
+			}
+		} else if (classe.getAbsolutePath().endsWith("java") && !classe.getAbsolutePath().contains("ProjectManagerController")) 
+			getDependencies(classe);
+	}
+	
 	/*************************************************************Getters and Setters */
 	public Collection<String> getModifiedClassesList() {
 		return modifiedClassesList;
@@ -144,5 +231,17 @@ public class AssetMappingAnalyzer {
 	public void setChangedAssetsList(HashSet<String> changedAssetsList) {
 		this.changedAssetsList = changedAssetsList;
 	}
-	
+	public Collection<String> getExtendedImpactedClasses() {
+		return extendedImpactedClasses;
+	}
+	public void setExtendedImpactedClasses(
+			Collection<String> extendedImpactedClasses) {
+		this.extendedImpactedClasses = extendedImpactedClasses;
+	}
+	public Collection<String> getImpactedClasses() {
+		return impactedClasses;
+	}
+	public void setImpactedClasses(Collection<String> impactedClasses) {
+		this.impactedClasses = impactedClasses;
+	}
 }
