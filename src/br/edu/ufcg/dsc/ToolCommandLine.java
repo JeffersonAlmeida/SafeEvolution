@@ -224,7 +224,7 @@ public class ToolCommandLine {
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 			long stopTime = System.currentTimeMillis();
 		    elapsedTime = stopTime - startTime;
-		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + elapsedTime/1000 + " milliseconds");
+		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + elapsedTime/1000 + " seconds");
 		}else if(input.getApproach().equals(Approach.EIC)){
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 			long startTime = System.currentTimeMillis();
@@ -232,7 +232,7 @@ public class ToolCommandLine {
 			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
 			long stopTime = System.currentTimeMillis();
 		    elapsedTime = stopTime - startTime;
-		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " milliseconds");
+		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " seconds");
 		}
 		
 		long approachTime = elapsedTime/1000; // seconds.
