@@ -13,13 +13,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPlatformRunnable;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
@@ -28,14 +24,12 @@ import org.eclipse.ui.testing.ITestHarness;
 import org.eclipse.ui.testing.TestableObject;
 import safeEvolution.fileProperties.FilePropertiesObject;
 import safeEvolution.fileProperties.FilePropertiesReader;
-import edu.mit.csail.sdg.alloy4.Err;
 import br.edu.ufcg.dsc.builders.ProductGenerator;
 import br.edu.ufcg.dsc.ck.xml.Xml;
-import br.edu.ufcg.dsc.evaluation.Analyzer;
-import br.edu.ufcg.dsc.evaluation.SPLOutcomes;
 import br.edu.ufcg.dsc.gui.AppWindow;
 import br.edu.ufcg.dsc.util.AssetNotFoundException;
 import br.edu.ufcg.dsc.util.DirectoryException;
+import edu.mit.csail.sdg.alloy4.Err;
 
 public class MainRunner implements IPlatformRunnable, ITestHarness {
 
