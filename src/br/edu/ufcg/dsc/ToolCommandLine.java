@@ -1,15 +1,19 @@
 package br.edu.ufcg.dsc;
 
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
+
 import org.eclipse.jdt.core.JavaModelException;
+import br.edu.ufcg.saferefactor.core.*;
+
 import safeEvolution.alloy.products.AlloyProductGenerator;
 import safeEvolution.am.verifier.AssetMappingAnalyzer;
 import safeEvolution.approaches.AllProductPairs;
@@ -65,6 +69,8 @@ public class ToolCommandLine {
 	private Properties properties;
 	
 	private SpreadSheetExecution sheetExecution;
+	
+	
 
 	public ToolCommandLine() {
 		this.productsCleaner = new ProductsCleaner();
@@ -81,7 +87,7 @@ public class ToolCommandLine {
 		}
 		this.alloyProductGenerator = new AlloyProductGenerator(wellFormedness,this.productBuilder);
 	}
-
+	
 	private void setup(ProductLine souceLine, ProductLine targetLine) throws IOException, AssetNotFoundException {
 		/* Removes all of the mappings from this map. The map will be empty after this call returns. */
 		XMLReader.getInstance().reset();
@@ -202,9 +208,26 @@ public class ToolCommandLine {
 		}
 		
 		this.amAnalyzer.findExtendedImpactedClasses(new File(input.getSourceLineDirectory()+"src"));
+		
+		String timeStamp = new SimpleDateFormat("dd-MM-yyyy   HH:mm:ss").format(Calendar.getInstance().getTime());
+ 		BufferedWriter logFile = LogFile.getInstance().getLog();
+ 		logFile.append("------------------------------------------------------------------------------" + "\n");
+ 		logFile.newLine();
+ 		logFile.append(timeStamp + "\n");
+		logFile.newLine();
+		logFile.append("Pair ID: " + input.getEvolutionDescription() + "\n");
+		logFile.append("\nImpacted Classes:\n\n" + amAnalyzer.getModifiedClassesList());
+		logFile.newLine();
+		logFile.append("\nExtended Impacted Classes:\n\n" + amAnalyzer.getExtendedImpactedClasses());
+		logFile.newLine();
+		logFile.flush();
 	}
 	
 	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{
+		BufferedWriter logFile = LogFile.getInstance().getLog();
+ 		logFile.newLine();
+ 		logFile.append("Approach: " + input.getApproach() + "<" + input.getGenerateTestsWith() + ">\n");
+		logFile.flush();
 		boolean isRefinement = false;
 		long elapsedTime = 0;
 		if(input.getApproach().equals(Approach.APP)){
@@ -236,7 +259,7 @@ public class ToolCommandLine {
 		    elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " seconds");
 		}
-		
+
 		long approachTime = elapsedTime/1000; // seconds.
 		
 		/*Report Variables: Pause total time to check the SPL.*/

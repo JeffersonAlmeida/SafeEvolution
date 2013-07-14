@@ -77,13 +77,13 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				String source = "/home/jefferson/Desktop/workspace/Bank1.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
 				String target = "/home/jefferson/Desktop/workspace/Bank1.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
-				int pairsAmount = 1;
+				int pairsAmount = 5;
 				
 				/* Create a TaRGeT evolution pair with Python Script and Run */
-				//createPairs(pairsAmount); 
+				createPairs(pairsAmount); 
 				
 				/* Create an evolution pair with directory Source and Target and Run */
-				onePairInput(source, target);
+				//onePairInput(source, target);
 				
 				/* Create several evolution pairs with this file and Run */
 				//severalPairsInput(stringFile);
