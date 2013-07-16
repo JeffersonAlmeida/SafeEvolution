@@ -39,6 +39,11 @@ public class SPLOutcomes {
 	
 	private long approachTime;
 	
+	private long diffTime;
+
+	private long findEicTime;
+	
+	
 	/**
 	 * Initiate the properties of the class.
 	 * Default Values.
@@ -246,6 +251,18 @@ public class SPLOutcomes {
 	}
 	public long getApproachTime() {
 		return approachTime;
+	}
+	public long getDiffTime() {
+		return diffTime;
+	}
+	public void setDiffTime(long diffTime) {
+		this.diffTime = diffTime;
+	}
+	public long getFindEicTime() {
+		return findEicTime;
+	}
+	public void setFindEicTime(long findEicTime) {
+		this.findEicTime = findEicTime;
 	}
 	
 }

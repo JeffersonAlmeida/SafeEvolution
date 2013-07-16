@@ -6,7 +6,6 @@ Created on Jun 5, 2013
 
 import os
 import random
-import sys
 os.chdir("/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT")
 c = 1
 def log(revision):
@@ -17,6 +16,7 @@ def log(revision):
 
 def alrealdy_used(revision, used):
     used.close;
+    os.chdir("/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT")
     f =  open('used','r')
     for line in f.readlines():
         r  = str(revision) + '\n';
@@ -29,63 +29,39 @@ def alrealdy_used(revision, used):
 def manipulate_directories(bn):
     d = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/%s" %bn
     os.chdir(d)
-    print('manipulating directories')
-    f = os.popen('ls -l')
-    print (f.read())
-
-    f = os.popen('mkdir src/')
-    print (f.read())
-
-    f = os.popen('ls -l')
-    print (f.read())
-
-    f = os.popen('rm -rf TaRGeT\ PV/')
-    print (f.read())
-
-    f = os.popen('ls -l')
-    print (f.read())
-
-    f = os.popen('mv * src/')
-    print (f.read())
-
-    os.chdir(d + "/src/")
-    f = os.popen('ls -l')
-    print (f.read())
-
-def find_revisions(c,f, used):
-    revision = random.randint(2161,3877)
-    if not alrealdy_used(revision,used):
-        if log(revision) == "":
-            find_revisions(c,f,used)
-        elif log(revision+1) == "":
-            find_revisions(c,f,used)
-        else:
-            cmd = os.popen('svn copy -r %s' %revision  + ' trunk/ branches/branch%s' %c + '.0')
-            output = cmd.read()
-            print(output)
-            manipulate_directories('branches/branch%s' %c + '.0')
-            os.chdir("/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT")
-            svn2 = os.popen('svn copy -r %s' %(revision+1)  + ' trunk/ branches/branch%s' %c + '.1')
-            out2 = svn2.read()
-            print(out2)
-            manipulate_directories('branches/branch%s' %c + '.1')
-            f.write('svn copy -r %s' %revision  + ' trunk/ branches/branch%s' %c + '.0' + '\n')
-            f.write('svn copy -r %s' %(revision+1)  + ' trunk/ branches/branch%s' %c + '.1' + '\n')
-            f.write('\n')
-            used.write('%s' %revision + '\n')
-    else:
-        find_revisions(c,f,used)
-
+    os.popen('mkdir src/')
+    os.popen('rm -rf TaRGeT\ PV/')
+    os.popen('mv * src/')
+    
+def fw(c,f, used):
+    while True:
+        revision = random.randint(2161,3877)
+        if not alrealdy_used(revision,used):
+            if log(revision) != "":
+                if log(revision+1) != "":
+                    svn1 = os.popen('svn copy -r %s' %revision  + ' trunk/ branches/branch%s' %c + '.0/')
+                    print(svn1.read())
+                    revision = revision + 1
+                    svn2 = os.popen('svn copy -r %s' %revision  + ' trunk/ branches/branch%s' %c + '.1/')
+                    print(svn2.read())
+                    manipulate_directories('branches/branch%s' %c + '.0/')
+                    manipulate_directories('branches/branch%s' %c + '.1/')
+                    f.write('svn copy -r %s' %revision  + ' trunk/ branches/branch%s' %c + '.0' + '\n')
+                    f.write('svn copy -r %s' %(revision+1)  + ' trunk/ branches/branch%s' %c + '.1' + '\n')
+                    f.write('\n')
+                    used.write('%s' %revision + '\n')
+                    break
+        
 def get_branch_number(numberOfEvolutionPairs):
     lastBranch = open('lastBranch','r')
     x = lastBranch.readline()
     print('before: %s' %x)
     lastBranch.close()
     lastBranch = open('lastBranch','w')
-    y = int(x)+numberOfEvolutionPairs
+    y = int(x)+numberOfEvolutionPairs    
     lastBranch.write(str(y))
     print('after: %s' %y)
-    lastBranch.close()
+    lastBranch.close()       
     return y
 
 def create_branches():
@@ -96,10 +72,10 @@ def create_branches():
     f = open('logFile','a')
     used = open('used','a')
     while (i<size):
-        find_revisions(i,f,used)
+        fw(i, f, used)
         i = i+1
     f.close()
-    used.close()
-
-create_branches()
+    used.close()  
+     
+create_branches()     
 

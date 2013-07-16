@@ -200,14 +200,21 @@ public class ToolCommandLine {
 			this.isAssetMappingsEqual = amAnalyzer.isSameAssets(this.sourceSPL, this.targetSPL);
 			long stopTime = System.currentTimeMillis();
 			long elapsedTime = stopTime - startTime;
-			System.out.println("\nTotal Time Spent to verify Modified Assets: " + elapsedTime/1000 + "seconds");
+			long diffTime =  elapsedTime/1000;
+			System.out.println("\nTotal Time Spent to verify Modified Assets: " + diffTime + "seconds");
 			System.out.println("\n AM Equal: " + isAssetMappingsEqual);
 			sOutcomes.setAssetMappingsEqual(isAssetMappingsEqual);
+			sOutcomes.setDiffTime(diffTime);
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		}
 		
+		long startTime = System.currentTimeMillis();
 		this.amAnalyzer.findExtendedImpactedClasses(new File(input.getSourceLineDirectory()+"src"));
+		long stopTime = System.currentTimeMillis();
+		long elapsedTime = stopTime - startTime;
+		long findEicTime = elapsedTime/1000; // seconds
+		sOutcomes.setFindEicTime(findEicTime);
 		
 		String timeStamp = new SimpleDateFormat("dd-MM-yyyy   HH:mm:ss").format(Calendar.getInstance().getTime());
  		BufferedWriter logFile = LogFile.getInstance().getLog();
@@ -228,6 +235,8 @@ public class ToolCommandLine {
  		logFile.newLine();
  		logFile.append("Approach: " + input.getApproach() + "<" + input.getGenerateTestsWith() + ">\n");
 		logFile.flush();
+		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
+		long approachTime;
 		boolean isRefinement = false;
 		long elapsedTime = 0;
 		if(input.getApproach().equals(Approach.APP)){
@@ -249,29 +258,26 @@ public class ToolCommandLine {
 			System.out.println("Refactoring ? " + (isRefinement = ic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched)));
 			long stopTime = System.currentTimeMillis();
 		    elapsedTime = stopTime - startTime;
-		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + elapsedTime/1000 + " seconds");
-		}else if(input.getApproach().equals(Approach.EIC)){
-			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
-			long startTime = System.currentTimeMillis();
-			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
-			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
-			long stopTime = System.currentTimeMillis();
-		    elapsedTime = stopTime - startTime;
-		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " seconds");
+		    approachTime = (elapsedTime/1000) + sOutcomes.getDiffTime(); // seconds.
+		    sOutcomes.setApproachTime(approachTime);
+		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + approachTime + " seconds");
+			}else if(input.getApproach().equals(Approach.EIC)){
+				System.out.println("\nEXTENDED IMPACTED ClASSES\n");
+				long startTime = System.currentTimeMillis();
+				BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
+				isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
+				long stopTime = System.currentTimeMillis();
+			    elapsedTime = stopTime - startTime;
+		    approachTime = (elapsedTime/1000) + sOutcomes.getDiffTime() + sOutcomes.getFindEicTime(); // seconds.
+		    sOutcomes.setApproachTime(approachTime);
+		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + approachTime + " seconds");
 		}
-
-		long approachTime = elapsedTime/1000; // seconds.
-		
 		/*Report Variables: Pause total time to check the SPL.*/
-		SPLOutcomes sOutcomes = SPLOutcomes.getInstance();
 		sOutcomes.getMeasures().setApproach(input.getApproach());
 		sOutcomes.setWF(wf);
 		sOutcomes.setFmAndCKRefinement(areAllProductsMatched);
 		sOutcomes.setRefinement(wf && isRefinement);
 		sOutcomes.setCompObservableBehavior(isRefinement);
-		sOutcomes.setApproachTime(approachTime);
-		
-		
 	}
 	
 	public void persitResultsInPropertyFile(FilePropertiesObject input) throws IOException {
