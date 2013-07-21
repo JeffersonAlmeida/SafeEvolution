@@ -151,7 +151,12 @@ public class CommandLine {
 		
 		isRefinement = safeRefactor.isRefactoring(String.valueOf(input.getTimeOut()), true, input.getGenerateTestsWith());
 
-		
+		  if(input.getGenerateTestsWith().equals("evosuite")){ // copy evosuite report to /tmp^M
+              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/evosuite-report"), new File("/tmp/"+ propertiesObject.getApproach() + "/evosuite-report"));
+      }else if(input.getGenerateTestsWith().equals("randoop")){ // copy randoop file to /tmp^M
+              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File("/tmp/"+  propertiesObject.getApproach() + "/methods-to-test-list"));
+              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/randoop"), new File("/tmp/"+  propertiesObject.getApproach() + "/randoop"));
+      }
 		
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");

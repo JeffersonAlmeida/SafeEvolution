@@ -174,19 +174,21 @@ public class AssetMappingAnalyzer {
 		while(i.hasNext()){
 			String s = i.next();
 			s = s + ".java";
-			System.out.println("\nDependencia: " + s);
-			Iterator<String> iterator2 = this.impactedClasses.iterator();
-			while(iterator2.hasNext()){
-				String string2 = iterator2.next();
-				/*String[] words = string2.split("\\.");//words[words.length-1];
-				String w = words[words.length-2];*/
-				if(s.equals(string2)){
-					this.impactedClasses.add(classe);
-					this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.
-					//if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false;} // Codigo para encontrar as dependencias em mais de um nivel acima
-					break;
-				}
-			}
+			if(s.contains("br.ufpe")){
+					System.out.println("\nDependencia: " + s);
+					Iterator<String> iterator2 = this.impactedClasses.iterator();
+					while(iterator2.hasNext()){
+						String string2 = iterator2.next();
+						/*String[] words = string2.split("\\.");//words[words.length-1];^M
+						String w = words[words.length-2];*/
+		                if(string2.contains(s)){
+		                       //this.impactedClasses.add(classe);^M
+		                       this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.^M
+		                       //if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false
+		                       break;
+		                }
+	                }
+            }
 		}
 	}
 
