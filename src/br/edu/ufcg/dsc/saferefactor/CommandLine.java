@@ -47,7 +47,7 @@ public class CommandLine {
 	 * @throws IOException
 	 */
 	// int idSource, int idTarget, String source, String target, String classes, int timeout, int maxTests, Approach approach, Criteria criteria, String sourceLpsPath, String targetLpsPath, boolean sour
-	public static boolean isRefactoring(int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, Collection<String> impactedClasses, FilePropertiesObject propertiesObject, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
+	public static boolean isRefactoring(int sourceProductId, int targetProductId, String sourceProductPath, String targetProductPath, Collection<String> impactedClasses, FilePropertiesObject in, boolean sourceIsCompiled, boolean targetIsCompiled) throws IOException {
 
 		boolean isRefinement = true;
 
@@ -69,17 +69,17 @@ public class CommandLine {
 		/* Set a user property, which cannot be overwritten by set/unset property calls. */
 		p.setUserProperty(br.edu.ufcg.dsc.Constants.PLUGIN_PATH + "/ant/build.properties", buildFile.getAbsolutePath());
 
-		if (propertiesObject.getTimeOut() != 0) {
+		if (in.getTimeOut() != 0) {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("timeout", String.valueOf(propertiesObject.getTimeOut()));
+			p.setProperty("timeout", String.valueOf(in.getTimeOut()));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 			p.setProperty("timeout", "60");
 		}
 
-		if (propertiesObject.getInputLimit() != 0) {
+		if (in.getInputLimit() != 0) {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
-			p.setProperty("maxtests", String.valueOf(propertiesObject.getInputLimit()));
+			p.setProperty("maxtests", String.valueOf(in.getInputLimit()));
 		} else {
 			/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 			p.setProperty("maxtests", "60");
@@ -88,17 +88,17 @@ public class CommandLine {
 		/*  Set a property. Any existing property of the same name is overwritten, unless it is a user property. */
 		p.setProperty("source", sourceProductPath);
 		p.setProperty("target", targetProductPath);
-		p.setProperty("lpsSource", propertiesObject.getSourceLineDirectory());
-		p.setProperty("lpsTarget", propertiesObject.getTargetLineDirectory());
+		p.setProperty("lpsSource", in.getSourceLineDirectory());
+		p.setProperty("lpsTarget", in.getTargetLineDirectory());
 
 		p.setProperty("tests.folder", Constants.TEST);
 		p.setProperty("pluginpath", br.edu.ufcg.dsc.Constants.PLUGIN_PATH);
-		p.setProperty("abordagem", propertiesObject.getApproach().toString());
-		p.setProperty("criteria", propertiesObject.getWhichMethods().toString());
+		p.setProperty("abordagem", in.getApproach().toString());
+		p.setProperty("criteria", in.getWhichMethods().toString());
 
 		String pathCobertura = null;
 
-		p.setProperty("coverage_name", pathCobertura + "+" + propertiesObject.getApproach());
+		p.setProperty("coverage_name", pathCobertura + "+" + in.getApproach());
 
 		/* Writes build events to a PrintStream. Currently, it only writes which targets are being executed, and any messages that get logged. */
 		DefaultLogger consoleLogger = new DefaultLogger();
@@ -115,7 +115,7 @@ public class CommandLine {
 		/*  Initialise the project. */	
 		helper.parse(p, buildFile);
 
-		if (propertiesObject.getApproach() == Approach.IC) {
+		if (in.getApproach() == Approach.IC) {
 			/*Execute the specified target and any targets it depends on.*/
 			p.executeTarget("clean_tests");
 		} else {
@@ -137,10 +137,10 @@ public class CommandLine {
 		org.sr.input.FilePropertiesObject input = new org.sr.input.FilePropertiesObject();
 		input.setSourceLineDirectory(sourceProductPath + Constants.FILE_SEPARATOR);
 		input.setTargetLineDirectory(targetProductPath + Constants.FILE_SEPARATOR);
-		input.setTimeOut(propertiesObject.getTimeOut());
-		input.setInputLimit(propertiesObject.getInputLimit());
-		input.setGenerateTestsWith(propertiesObject.getGenerateTestsWith());
-		input.setWhichMethods(propertiesObject.getWhichMethods());
+		input.setTimeOut(in.getTimeOut());
+		input.setInputLimit(in.getInputLimit());
+		input.setGenerateTestsWith(in.getGenerateTestsWith());
+		input.setWhichMethods(in.getWhichMethods());
 		Saferefactor safeRefactor = new Saferefactor(impactedClasses, input);
 		//Saferefactor sr = new Saferefactor(sourceProductPath, targetProductPath, "bin", "src", "lib", classes, propertiesObject.getInputLimit(), propertiesObject.getWhichMethods());
 
@@ -151,12 +151,7 @@ public class CommandLine {
 		
 		isRefinement = safeRefactor.isRefactoring(String.valueOf(input.getTimeOut()), true, input.getGenerateTestsWith());
 
-		  if(input.getGenerateTestsWith().equals("evosuite")){ // copy evosuite report to /tmp^M
-              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/evosuite-report"), new File("/tmp/"+ propertiesObject.getApproach() + "/evosuite-report"));
-      }else if(input.getGenerateTestsWith().equals("randoop")){ // copy randoop file to /tmp^M
-              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File("/tmp/"+  propertiesObject.getApproach() + "/methods-to-test-list"));
-              br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/randoop"), new File("/tmp/"+  propertiesObject.getApproach() + "/randoop"));
-      }
+	    saveReport(in, input);
 		
 		if (isRefinement) {
 			System.out.println("SafeRefactor found NO behavioral changes");
@@ -165,6 +160,19 @@ public class CommandLine {
 		}
 
 		return isRefinement;
+	}
+
+	private static void saveReport(FilePropertiesObject in,
+			org.sr.input.FilePropertiesObject input) {
+		if(input.getGenerateTestsWith().equals("evosuite")){ // copy evosuite report to
+			   String evosuiteReport = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT + in.getEvolutionDescription() + "/" + in.getApproach() + "/evosuite-report"; 
+			   br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/evosuite-report"), new File(evosuiteReport));
+		  }else if(input.getGenerateTestsWith().equals("randoop")){ // copy randoop file to
+			  String methods2Test = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT + in.getEvolutionDescription() + "/" + in.getApproach() + "/methods-to-test-list";
+			  String randoopTest = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT +  in.getApproach() + "/randoop";
+		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File(methods2Test));
+		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/randoop"), new File(randoopTest));
+		  }
 	}
 
 	/**

@@ -26,6 +26,8 @@ public class Constants {
 	
 	/**Home Path para o Alloy*/
 	public static final String ALLOY_PATH = PLUGIN_PATH + FILE_SEPARATOR + "Alloy" + FILE_SEPARATOR;
+	
+	public static final String  EXECUTION_REPORT =  "/media/jefferson/Expansion Drive/ExecutionReport/";
     
 	/**String que armazena a extens�o do ALLOY.*/
 	public static final String ALLOY_EXTENSION = ".als";
