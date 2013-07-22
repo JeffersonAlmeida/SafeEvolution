@@ -1,4 +1,4 @@
-Manifest-Version: 1.0
+Manifest-Version: 1.0.0.qualifier
 Bundle-ManifestVersion: 2
 Bundle-Name: ferramentaLPS
 Bundle-SymbolicName: ferramentaLPS;singleton:=true
