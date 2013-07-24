@@ -169,7 +169,7 @@ public class CommandLine {
 			   br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/evosuite-report"), new File(evosuiteReport));
 		  }else if(input.getGenerateTestsWith().equals("randoop")){ // copy randoop file to
 			  String methods2Test = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT + in.getEvolutionDescription() + "/" + in.getApproach() + "/methods-to-test-list";
-			  String randoopTest = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT +  in.getApproach() + "/randoop";
+			  String randoopTest = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT +  in.getEvolutionDescription() + "/" + in.getApproach() + "/randoop";
 		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File(methods2Test));
 		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/randoop"), new File(randoopTest));
 		  }
