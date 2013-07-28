@@ -170,8 +170,10 @@ public class CommandLine {
 		  }else if(input.getGenerateTestsWith().equals("randoop")){ // copy randoop file to
 			  String methods2Test = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT + in.getEvolutionDescription() + "/" + in.getApproach() + "/methods-to-test-list";
 			  String randoopTest = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT +  in.getEvolutionDescription() + "/" + in.getApproach() + "/randoop";
-		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File(methods2Test));
+			  String randoopReport = br.edu.ufcg.dsc.Constants.EXECUTION_REPORT +  in.getEvolutionDescription() + "/" + in.getApproach() + "/emma";
+			  br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "/methods-to-test-list"), new File(methods2Test));
 		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "src" + "/randoop"), new File(randoopTest));
+		      br.edu.ufcg.saferefactor.core.util.FileUtil.copyFromTo(new File(input.getSourceLineDirectory() + "emma"), new File(randoopReport));
 		  }
 	}
 
