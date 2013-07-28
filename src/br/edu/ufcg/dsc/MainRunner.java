@@ -135,7 +135,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
 				approaches.add(Approach.IC);approaches.add(Approach.EIC);
-				tool.add("randoop");tool.add("evosuite");
+				tool.add("evosuite");tool.add("randoop");
 				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );

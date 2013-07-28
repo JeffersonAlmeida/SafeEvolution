@@ -18,19 +18,27 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 		this.printListofExtendedImpactedClasses(extendedImpactedClasses.iterator());
 	}
 
-	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched) throws AssetNotFoundException, IOException, DirectoryException{
+	public boolean evaluate(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, boolean wf, boolean areAllProductsMatched,  Collection<String> ic) throws AssetNotFoundException, IOException, DirectoryException{
 		boolean isRefinement = false;
 		if(wf && areAllProductsMatched){
-			if(super.getModifiedClasses().isEmpty()){
-				System.out.println("\nThere is not Extended Impacted classes to verify.");
-				return true;
-			}else{
-				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
-			}
+			return run(sourceSPL, targetSPL, changedFeatures, ic);
 		}else{  // Create an Exception!!
 			System.out.println("\nERROR: It is not possible to apply this tool, because Well-Formedness: " + wf + " product Matching: " + areAllProductsMatched);
 		}
 		return isRefinement;
+	}
+
+	private boolean run(ProductLine sourceSPL, ProductLine targetSPL, HashSet<String> changedFeatures, Collection<String> ic) throws AssetNotFoundException, DirectoryException, IOException {
+		if(!super.getModifiedClasses().isEmpty())
+			return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
+		else{
+			if (!ic.isEmpty()){
+				super.setModifiedClasses(ic);
+				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
+			}else
+				System.out.println("\nThere is neither IC nor EIC to analyze.");
+		}
+		return false;
 	}
 
 	private void printListofExtendedImpactedClasses(Iterator<String> i) {
@@ -40,4 +48,5 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 		}
 		System.out.println("\n--------------------------");
 	}
+	
 }

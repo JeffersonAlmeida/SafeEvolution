@@ -265,12 +265,12 @@ public class ToolCommandLine {
 				System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 				long startTime = System.currentTimeMillis();
 				BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
-				isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
+				isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList() );
 				long stopTime = System.currentTimeMillis();
 			    elapsedTime = stopTime - startTime;
 		    approachTime = (elapsedTime/1000) + sOutcomes.getDiffTime() + sOutcomes.getFindEicTime(); // seconds.
 		    sOutcomes.setApproachTime(approachTime);
-		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + approachTime + " seconds");
+		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + approachTime + " seconds");
 		}
 		/*Report Variables: Pause total time to check the SPL.*/
 		sOutcomes.getMeasures().setApproach(input.getApproach());
@@ -366,7 +366,7 @@ public class ToolCommandLine {
 			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
 			long startTime = System.currentTimeMillis();
 			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, in, amAnalyzer.getExtendedImpactedClasses());
-			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched);
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList());
 			long stopTime = System.currentTimeMillis();
 		    long elapsedTime = stopTime - startTime;
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + elapsedTime/1000 + " milliseconds");
