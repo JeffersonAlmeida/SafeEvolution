@@ -32,9 +32,11 @@ public class AssetMappingAnalyzer {
 	/** A string collection of changed classes.*/
 	protected Collection<String> impactedClasses;
 	private Collection<String> extendedImpactedClasses;
+	private String excludes;
 	
 	public AssetMappingAnalyzer() {
 		System.out.println("Asset Mapping Analyzer");
+		this.excludes = "Action";
 		this.canIncrementVerificationCounter = true;
 		this.sourceCodeVerificationCounter = 1;
 		this.extendedImpactedClasses = new HashSet<String>();
@@ -182,13 +184,19 @@ public class AssetMappingAnalyzer {
 						/*String[] words = string2.split("\\.");//words[words.length-1];^M
 						String w = words[words.length-2];*/
 		                if(string2.contains(s)){
-		                       //this.impactedClasses.add(classe);^M
-		                       this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.^M
-		                       //if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false
+		                	   addToEIC(classe);
 		                       break;
 		                }
 	                }
             }
+		}
+	}
+
+	private void addToEIC(String classe) {
+		//this.impactedClasses.add(classe);
+		if(!classe.contains(this.excludes)){
+			   this.extendedImpactedClasses.add(classe); // Add class in the dependencies of modified classes set.^M
+			   //if (canIncrementVerificationCounter){ this.sourceCodeVerificationCounter++; this.canIncrementVerificationCounter = false
 		}
 	}
 
