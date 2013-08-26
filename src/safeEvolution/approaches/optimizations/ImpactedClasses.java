@@ -327,6 +327,7 @@ public abstract class ImpactedClasses {
 	
 	private void copyDependencies(File classe, File destinationDirectory, HashMap<String, String> mapping, ArrayList<File> filesToTrash, HashMap<String, Collection<String>> dependenciasCache) throws AssetNotFoundException, DirectoryException {
 
+		
 		String pathDependencia = FileManager.getInstance().getPathAPartirDoSrc( classe.getAbsolutePath().replaceFirst("srcpreprocess", "src"));
 
 		if (!pathDependencia.startsWith("/")) {
@@ -378,8 +379,7 @@ public abstract class ImpactedClasses {
 								filesToTrash.add(fileDestination);
 								filesToTrash.add(new File(fileDestination.getAbsolutePath().replaceFirst(ProductBuilder.SRCPREPROCESS, "src")));
 							}
-
-							this.copyDependencies(file, destinationDirectory, mapping, filesToTrash, dependenciasCache);
+							this.copyDependencies(file, destinationDirectory, mapping, filesToTrash, dependenciasCache);	
 						}
 					}
 				}

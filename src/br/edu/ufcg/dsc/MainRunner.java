@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch105.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch105.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch282.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch282.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
 				int pairsAmount = 1;
 				
@@ -96,8 +96,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			private void severalPairsInput(String stringFile) {
 				Xml xml = new Xml(stringFile, "evolutionPairs");
 				for (Xml pair : xml.children("pair")) {
-					String source = pair.child("source").content().toLowerCase();
-					String target = pair.child("target").content().toLowerCase();
+					String source = pair.child("source").content();
+					String target = pair.child("target").content();
 					System.out.println("Source: " + source);
 					System.out.println("Target: " + target );
 					onePairInput(source, target);

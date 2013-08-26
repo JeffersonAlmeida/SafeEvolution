@@ -4,7 +4,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Properties;
@@ -198,6 +200,12 @@ public class ToolCommandLine {
 		try {
 			long startTime = System.currentTimeMillis();
 			this.isAssetMappingsEqual = amAnalyzer.isSameAssets(this.sourceSPL, this.targetSPL);
+			
+			Collection<String> c = new HashSet<String>();
+			c.add("TaRGeT Common.src.java.com.motorola.btc.research.target.common.ucdoc.xml.UseCaseDocumentXMLParser.java");
+			this.amAnalyzer.setModifiedClassesList(c);
+			
+			
 			long stopTime = System.currentTimeMillis();
 			long elapsedTime = stopTime - startTime;
 			long diffTime =  elapsedTime/1000;
@@ -211,6 +219,9 @@ public class ToolCommandLine {
 		
 		long startTime = System.currentTimeMillis();
 		this.amAnalyzer.findExtendedImpactedClasses(new File(input.getSourceLineDirectory()+"src"));
+		
+		
+		
 		long stopTime = System.currentTimeMillis();
 		long elapsedTime = stopTime - startTime;
 		long findEicTime = elapsedTime/1000; // seconds
