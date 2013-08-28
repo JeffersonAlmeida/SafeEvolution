@@ -244,8 +244,7 @@ public class AssetMappingAnalyzer {
 	public Collection<String> getExtendedImpactedClasses() {
 		return extendedImpactedClasses;
 	}
-	public void setExtendedImpactedClasses(
-			Collection<String> extendedImpactedClasses) {
+	public void setExtendedImpactedClasses(Collection<String> extendedImpactedClasses) {
 		this.extendedImpactedClasses = extendedImpactedClasses;
 	}
 	public Collection<String> getImpactedClasses() {
