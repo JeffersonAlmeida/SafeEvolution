@@ -2,28 +2,18 @@
 <evolutionPairs xmlns="ck.v20090401">
 
 	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch282.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch282.1/</target>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch290.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch290.1/</target>
 	</pair>
 
 	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch279.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch279.1/</target>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch291.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch291.1/</target>
 	</pair>
 
 	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch281.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch281.1/</target>
-	</pair>
-
-	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch284.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch284.1/</target>
-	</pair>
-
-	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch288.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch288.1/</target>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch292.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch292.1/</target>
 	</pair>
 
 </evolutionPairs>

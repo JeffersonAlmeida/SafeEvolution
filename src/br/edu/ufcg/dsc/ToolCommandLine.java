@@ -238,51 +238,115 @@ public class ToolCommandLine {
 	private void verifyBranchNumber(FilePropertiesObject input) {
 		Collection<String> eic = new HashSet<String>();
 		Collection<String> ic = new HashSet<String>();
-		if (input.getEvolutionDescription().equals("branch282.0")){
+		if (input.getEvolutionDescription().equals("branch17.0")){
 			eic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.preferences.PreferencesDialog.java");
 			eic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.editors.OnTheFlyUtil.java");
+			ic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.editors.OnTheFlyEditorInput.java");
+			ic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.editors.OnTheFlyUtil.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch284.0")){
-			eic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.editor.TestComparisonPage.java");
-			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch279.0")){
+		}else if(input.getEvolutionDescription().equals("branch18.0")){
 			ic.add("TaRGeT Common.src.java.com.motorola.btc.research.target.common.lts.LTS.java");
 			eic.add("TaRGeT Common.src.java.com.motorola.btc.research.target.common.lts.UserViewLTSGenerator.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch281.0")){
+		}else if(input.getEvolutionDescription().equals("branch19.0")){
 			ic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.tcsimilarity.logic.StepSimilarity.java");
 			eic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.tcsimilarity.metrics.Metrics.java");
 			eic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.tcsimilarity.metrics.Metrics2.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch288.0")){
+		}else if(input.getEvolutionDescription().equals("branch20.0")){
 			ic.add("TaRGeT XLS Input Plug-in.src.com.motorola.btc.research.target.xlsinput.extractor.PhoneDocumentExtractor.java");
 			eic.add("TaRGeT XLS Input Plug-in.src.com.motorola.btc.research.target.xlsinput.controller.XLSDocumentExtensionImplementation.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch290.0")){
+		}else if(input.getEvolutionDescription().equals("branch22.0")){
 			ic.add("TaRGeT Common.src.java.com.motorola.btc.research.target.common.ucdoc.Feature.java");
 			eic.add("TaRGeT Project Manager.src.java.com.motorola.btc.research.target.pm.controller.ProjectManagerController.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch291.0")){
+		}else if(input.getEvolutionDescription().equals("branch23.0")){
 			ic.add("TaRGeT XLS Input Plug-in.src.com.motorola.btc.research.target.xlsinput.extractor.PhoneDocumentExtractor.java");
 			eic.add("TaRGeT XLS Input Plug-in.src.com.motorola.btc.research.target.xlsinput.controller.XLSDocumentExtensionImplementation.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch292.0")){
+		}else if(input.getEvolutionDescription().equals("branch24.0")){
 			ic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLProperties.java");
 			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLPluginController.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
-		}else if(input.getEvolutionDescription().equals("branch293.0")){
+		}else if(input.getEvolutionDescription().equals("branch21.0")){
 			ic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLProperties.java");
+			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLPluginController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch26.0")){
+			ic.add("TaRGeT Project Manager.src.java.com.motorola.btc.research.target.pm.controller.ProjectManagerController.java");
+			eic.add("TaRGeT Project Manager.src.java.com.motorola.btc.research.target.pm.controller.ProjectManagerController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch25.0")){
+			ic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLPluginController.java");
+			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.views.CNLView.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch27.0")){
+			ic.add("CNL Framework.src.java.com.motorola.btc.research.cnlframework.util.UtilNLP.java");
+			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.dialogs.AddLexicalTermDialog.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch28.0")){
+			ic.add("CNL Framework.src.java.com.motorola.btc.research.cnlframework.vocabulary.terms.VerbTerm.java");
+			eic.add("CNL Framework.src.java.com.motorola.btc.research.cnlframework.util.UtilNLP.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch100.0")){
+			ic.add("TaRGeT Common.src.java.com.motorola.btc.research.target.common.ucdoc.Feature.java");
+			eic.add("");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch102.0")){
+			ic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.tcsimilarity.metrics.Metrics2.java");
+			eic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.controller.ConsistencyManagementController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch103.0")){
+			ic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.extractor.TextualTestCaseFactory.java");
+			eic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.controller.TestCaseGeneratorController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch104.0")){
+			ic.add("CNL Framework.src.java.com.motorola.btc.research.cnlframework.util.UtilNLP.java");
+			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.dialogs.AddLexicalTermDialog.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch105.0")){
+			ic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.extractor.TextualTestCaseFactory.java");
+			eic.add("TaRGeT TC Generation GUI.src.java.com.motorola.btc.research.target.tcg.controller.TestCaseGeneratorController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch106.0")){
+			ic.add("TaRGeT Project Manager.src.java.com.motorola.btc.research.target.pm.extensions.input.InputDocumentExtensionFactory.java");
+			eic.add("TaRGeT Project Manager.src.java.com.motorola.btc.research.target.pm.controller.ProjectManagerController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch107.0")){
+			ic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.tcsimilarity.metrics.Metrics.java");
+			eic.add("TaRGeT Consistency Manager.src.java.com.motorola.btc.research.target.cm.controller.ConsistencyManagementController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branch108.0")){
+			ic.add("TaRGeT STD Output Plug-in.src.com.motorola.btc.research.target.stdoutput.excel.ExcelFileFormatter.java");
+			eic.add("");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("branchy1.0")){
+			ic.add("CNL Framework.src.java.com.motorola.btc.research.cnlframework.preprocessor.TextPreprocessor.java");
 			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLPluginController.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
 		}
-
 	}
 	
 	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{

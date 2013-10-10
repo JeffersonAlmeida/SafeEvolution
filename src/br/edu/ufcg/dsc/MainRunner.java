@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch290.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch290.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branchy1.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branchy1.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
 				int pairsAmount = 1;
 				
@@ -90,7 +90,6 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				long stopTime = System.currentTimeMillis();
 				long elapsedTime = stopTime - startTime;
 				System.out.println("\nTotal Time Spent: " + elapsedTime/60000 + " minutes");
-				
 			}
 
 			private void severalPairsInput(String stringFile) {
@@ -112,6 +111,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				FilePropertiesObject input = propertiesReader.getPropertiesObject();
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
+				input.setInputLimit(1000); // Input Limit
+				input.setTimeOut(1000);   // TimeOut Limit
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);
@@ -134,8 +135,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine) {
 				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
-				approaches.add(Approach.IC);approaches.add(Approach.EIC);
-				tool.add("randoop");tool.add("evosuite");
+				approaches.add(Approach.EIC);approaches.add(Approach.EIC);
+				tool.add("evosuite");tool.add("randoop");
 				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );
@@ -144,8 +145,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 						try {
 							toolCommandLine.runApproach(input);
 							System.out.println("\n\t SPL REPORT: \n");
-							// write approach plus tool in property file 
-							toolCommandLine.persitResultsInPropertyFile(input);
+							 //write approach plus tool in property file
+							  toolCommandLine.persitResultsInPropertyFile(input);
 						} catch (AssetNotFoundException e) {
 							e.printStackTrace();
 						} catch (IOException e) {
