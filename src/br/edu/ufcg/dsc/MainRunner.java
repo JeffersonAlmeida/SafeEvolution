@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branchy1.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branchy1.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch107.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch107.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
 				int pairsAmount = 1;
 				
@@ -135,8 +135,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine) {
 				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
-				approaches.add(Approach.EIC);approaches.add(Approach.EIC);
-				tool.add("evosuite");tool.add("randoop");
+				approaches.add(Approach.IC);approaches.add(Approach.EIC);
+				tool.add("randoop");tool.add("evosuite");
 				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );
