@@ -2,13 +2,13 @@
 <evolutionPairs xmlns="ck.v20090401">
 
 	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch0.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch0.1/</target>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch0.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch0.1/</target>
 	</pair>
 
     <pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch1.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch1.1/</target>
+		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch1.0/</source>
+		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch1.1/</target>
 	</pair>
 
 </evolutionPairs>
