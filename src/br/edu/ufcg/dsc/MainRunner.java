@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch107.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch107.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch35.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch35.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
 				int pairsAmount = 1;
 				
@@ -83,10 +83,10 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				//createPairs(pairsAmount); 
 				
 				/* Create an evolution pair with directory Source and Target and Run */
-				onePairInput(source, target);
+				//onePairInput(source, target);
 				
 				/* Create several evolution pairs with this file and Run */
-				//severalPairsInput(stringFile);
+				severalPairsInput(stringFile);
 				long stopTime = System.currentTimeMillis();
 				long elapsedTime = stopTime - startTime;
 				System.out.println("\nTotal Time Spent: " + elapsedTime/60000 + " minutes");
