@@ -46,7 +46,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			String [] cmdArray = new String[3]; 
 			cmdArray[0] = "rm";
 			cmdArray[1] = "-rf";
-			cmdArray[2] = "/media/jefferson/Expansion Drive/runtime-ferramentaLPS.MainRunner/"; 
+			cmdArray[2] = "/storage1/jra/runtime-ferramentaLPS.MainRunner/"; 
 			Runtime rt = Runtime.getRuntime(); 
 			Process proc = rt.exec(cmdArray);
 			System.out.println("SPL Refactoring Checker");
@@ -74,19 +74,19 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch35.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch35.1/";
-				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/severalFiles.xml";
+				String source = "/storage1/jra/targetWorkspace/TaRGeT/branches/branch23.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/storage1/jra/targetWorkspace/TaRGeT/branches/branch23.1/";
+				String stringFile = "/storage1/jra/workspace/ferramentaLPSSM/inputFiles/allPairs.xml";
 				int pairsAmount = 1;
 				
 				/* Create a TaRGeT evolution pair with Python Script and Run */
 				//createPairs(pairsAmount); 
 				
 				/* Create an evolution pair with directory Source and Target and Run */
-				//onePairInput(source, target);
+				onePairInput(source, target);
 				
 				/* Create several evolution pairs with this file and Run */
-				severalPairsInput(stringFile);
+				//severalPairsInput(stringFile);
 				long stopTime = System.currentTimeMillis();
 				long elapsedTime = stopTime - startTime;
 				System.out.println("\nTotal Time Spent: " + elapsedTime/60000 + " minutes");
@@ -104,15 +104,15 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			}
 
 			private void onePairInput(String source, String target) {
-				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branchTemplate.properties";
+				String stringFile = "/storage1/jra/workspace/ferramentaLPSSM/inputFiles/branchTemplate.properties";
 				String array[] = source.split("/");
 				String evolutionDescription = array[array.length-1];
 				FilePropertiesReader propertiesReader = new FilePropertiesReader(stringFile);
 				FilePropertiesObject input = propertiesReader.getPropertiesObject();
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
-				input.setInputLimit(1000); // Input Limit
-				input.setTimeOut(1000);   // TimeOut Limit
+				input.setInputLimit(5000); // Input Limit
+				input.setTimeOut(5000);   // TimeOut Limit
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);

@@ -73,7 +73,7 @@ public class SpreadSheetExecution {
     
     public SpreadSheetExecution(){
     	super();
-    	this.outputFileName = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
+    	this.outputFileName = "/storage1/jra/workspace/ferramentaLPSSM/Output/report.ods";
     }
     
     private void loadConsumeData(String filepath) throws IOException {

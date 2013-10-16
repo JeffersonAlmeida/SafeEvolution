@@ -162,6 +162,11 @@ public class AssetMappingAnalyzer {
 		}
 	}
 	
+	// Codigo para encontrar as dependencias em um nivel acima
+	private void getBackwardDependenciesTwo(File sourceSplDirectory){
+		this.getAboveDependencies(sourceSplDirectory);
+	}
+	
 	private void getDependencies(File classe) {
 		if(!(thisclassBelongsToModifiedClasses(classe))){
 			Collection<String> dependencias = Main.v().getDependences(classe.getName().replaceAll(".java", ""), classe.getParent());  // Get All Dependencies of this Class

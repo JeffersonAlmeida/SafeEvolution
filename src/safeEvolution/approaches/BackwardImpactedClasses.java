@@ -37,8 +37,8 @@ public class BackwardImpactedClasses  extends ImpactedClasses{
 				return checkAssetMappingBehavior(sourceSPL, targetSPL, changedFeatures);
 			}else
 				System.out.println("\nThere is neither IC nor EIC to analyze.");
+			return true;
 		}
-		return false;
 	}
 
 	private void printListofExtendedImpactedClasses(Iterator<String> i) {

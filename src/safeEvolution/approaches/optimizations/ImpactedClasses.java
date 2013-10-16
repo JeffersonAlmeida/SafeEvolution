@@ -56,7 +56,7 @@ public abstract class ImpactedClasses {
 	
 	private ArrayList<File> filesToTrash;
 	
-	public ImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> modifiedClasses) {
+	public ImpactedClasses(ProductBuilder productBuilder, FilePropertiesObject in, Collection<String> impactedClasses) {
 		super();
 		this.productBuilder = productBuilder;
 		this.input = in;
@@ -68,7 +68,16 @@ public abstract class ImpactedClasses {
 		this.aspectsTargetFeatureMapping = new HashMap<HashSet<String>, HashSet<String>>();
 		this.filesToTrash = new ArrayList<File>();
 		this.constantsPreProcessor = new HashSet<String>();
-		this.modifiedClasses = modifiedClasses;
+		
+		if(impactedClasses.size() > 3){
+			ArrayList<String> ics = (ArrayList<String>) impactedClasses;
+			this.modifiedClasses.add(ics.get(0));
+			this.modifiedClasses.add(ics.get(1));
+			this.modifiedClasses.add(ics.get(2));
+		}else{
+			this.modifiedClasses = impactedClasses;	
+		}
+
 		this.classes = new String();
 		this.classeToGenerateTestes = new String();
 	}

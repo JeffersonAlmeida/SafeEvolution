@@ -1,14 +1,24 @@
 <?xml version="1.0"?>
 <evolutionPairs xmlns="ck.v20090401">
 
-	<pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch0.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch0.1/</target>
+   	<pair>
+		<source>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch7.0/</source>
+		<target>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch7.1/</target>
 	</pair>
 
-    <pair>
-		<source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch1.0/</source>
-		<target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/newBranches/branch1.1/</target>
+	<pair>
+		<source>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch8.0/</source>
+		<target>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch8.1/</target>
+	</pair>
+
+	<pair>
+		<source>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch9.0/</source>
+		<target>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch9.1/</target>
+	</pair>
+
+	<pair>
+		<source>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch10.0/</source>
+		<target>/storage1/jra/targetWorkspace/TaRGeT/newBranches/branch10.1/</target>
 	</pair>
 
 </evolutionPairs>
