@@ -20,14 +20,14 @@ public class Constants {
 
 	/**Caminho para o workspace do projeto do plugin. (Home Path da Ferramenta).
 	<br></br>Pegar caminho de forma autom�tica: Activator.getDefault().getPluginFolder();*/  
-	public static final String PLUGIN_PATH = "/storage1/jra/workspace/ferramentaLPSSM"; 
+	public static final String PLUGIN_PATH = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM"; 
 	
-	public static final String BUILD_FILE_PATH = "/storage1/jra/workspace/ferramentaLPSSM//ant/build.xml";
+	public static final String BUILD_FILE_PATH = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/ant/build.xml";
 	
 	/**Home Path para o Alloy*/
 	public static final String ALLOY_PATH = PLUGIN_PATH + FILE_SEPARATOR + "Alloy" + FILE_SEPARATOR;
 	
-	public static final String  EXECUTION_REPORT =  "/storage1/jra/ExecutionReport/";
+	public static final String  EXECUTION_REPORT =  "/media/jefferson/Expansion Drive/ExecutionReport/";
     
 	/**String que armazena a extens�o do ALLOY.*/
 	public static final String ALLOY_EXTENSION = ".als";
