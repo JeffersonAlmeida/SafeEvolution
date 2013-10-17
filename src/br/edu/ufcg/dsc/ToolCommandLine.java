@@ -13,6 +13,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.swing.text.html.HTMLDocument.HTMLReader;
+
 import org.eclipse.jdt.core.JavaModelException;
 import br.edu.ufcg.saferefactor.core.*;
 
@@ -24,6 +26,7 @@ import safeEvolution.approaches.BackwardImpactedClasses;
 import safeEvolution.approaches.ForwardImpactedClasses;
 import safeEvolution.approaches.ImpactedProducts;
 import safeEvolution.fileProperties.FilePropertiesObject;
+import safeEvolution.inputFiles.xml.HtmlReader;
 import safeEvolution.productMatcher.ProductMatching;
 import safeEvolution.productsCleaner.ProductsCleaner;
 import safeEvolution.wellFormedness.WellFormedness;
@@ -436,7 +439,11 @@ public class ToolCommandLine {
 		System.out.println("\nResult: " + sOutcomes.toString());
 		String approachTool = input.getApproach()+ "-" + input.getGenerateTestsWith(); 
 		String refinementOrNot = sOutcomes.isRefinement() ? "Refinement" : "Non-Refinement";
-		properties.setProperty(approachTool, refinementOrNot +","+ sOutcomes.getApproachTime());
+
+		String htmlFile = Constants.PRODUCTS_DIR + "/Product0/source/src/evosuite-report/report-generation.html";
+		double averageCoverage =  HtmlReader.getAverageOfCoverage(htmlFile);
+		
+		properties.setProperty(approachTool, refinementOrNot +","+ sOutcomes.getApproachTime()+ "," + averageCoverage);
 		properties.setProperty("pairId", input.getEvolutionDescription());
 	}
 	
