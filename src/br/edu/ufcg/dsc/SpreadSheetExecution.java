@@ -56,6 +56,9 @@ public class SpreadSheetExecution {
     
     OdfTable table;
     OdfTable secondTable;
+    
+    OdfTable thirdTable;
+    
     OdfTableColumn column;
     OdfTableCell cell;
     
@@ -107,8 +110,13 @@ public class SpreadSheetExecution {
 	private void createHeader() {
 	    table = getTable();
 	    secondTable = getSecondTable();
+	    thirdTable = getThirdTable();
+	    
+	    OdfTableRow thirdRow = new OdfTableRow(contentDom);
 	    OdfTableRow secondRow = new OdfTableRow(contentDom);
 	    OdfTableRow firstRow = new OdfTableRow(contentDom);
+	    
+	    
         firstRow.setTableStyleNameAttribute(rowStyleName);
         firstRow.appendCell(createCell(headingStyleName, "Pair Id"));
         firstRow.appendCell(createCell(headingStyleName, "IC<randoop>"));
@@ -116,14 +124,29 @@ public class SpreadSheetExecution {
         firstRow.appendCell(createCell(headingStyleName, "IC<evosuite>"));
         firstRow.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
         firstRow.appendCell(createCell(headingStyleName, "Expected ?"));
+       
+        
         secondRow.setTableStyleNameAttribute(rowStyleName);
         secondRow.appendCell(createCell(headingStyleName, "Pair Id"));
         secondRow.appendCell(createCell(headingStyleName, "IC<randoop>"));
         secondRow.appendCell(createCell(headingStyleName, "EIC<randoop>"));
         secondRow.appendCell(createCell(headingStyleName, "IC<evosuite>"));
         secondRow.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
+        
+        thirdRow.setTableStyleNameAttribute(rowStyleName);
+        thirdRow.appendCell(createCell(headingStyleName, "Pair Id"));
+        thirdRow.appendCell(createCell(headingStyleName, "IC<randoop>"));
+        thirdRow.appendCell(createCell(headingStyleName, "EIC<randoop>"));
+        thirdRow.appendCell(createCell(headingStyleName, "IC<evosuite>"));
+        thirdRow.appendCell(createCell(headingStyleName, "EIC<evosuite>"));
+        
+        
         table.appendRow(firstRow);
         secondTable.appendRow(secondRow);
+        thirdTable.appendRow(thirdRow);
+        
+        
+        
         setColumnStyle();
 	}
 
@@ -140,6 +163,7 @@ public class SpreadSheetExecution {
     			this.officeSpreadsheet.removeChild(officeSpreadsheet.getFirstChild());
     			this.officeSpreadsheet.appendChild(new OdfTable(contentDom)); // In this case, fist sheet does not exist yet.
     			this.officeSpreadsheet.appendChild(new OdfTable(contentDom)); // In this case, second sheet does not exist yet.
+    			this.officeSpreadsheet.appendChild(new OdfTable(contentDom)); // In this case, third sheet does not exist yet.
                 addAutomaticStyles();
                 createHeader();
     		}
@@ -208,24 +232,44 @@ public class SpreadSheetExecution {
 		}
 		return secondTable;
     }
+   
+    public synchronized OdfTable getThirdTable(){
+		if(thirdTable==null){
+			thirdTable = (OdfTable) this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(2);
+		}
+		return thirdTable;
+    }
 
     void processInputDocument() {
         table = getTable();
         secondTable = getSecondTable();
+        thirdTable = getThirdTable();
+        
         try {
 			String pairId = properties.getProperty("pairId");
 			String[] icRandoopAndTime = properties.getProperty("IC-randoop").split(",");
 			String[] eicRandoopAndTime = properties.getProperty("EIC-randoop").split(",");
 			String[] icEvosuiteAndTime = properties.getProperty("IC-evosuite").split(",");
 			String[] eicEvosuiteAndTime = properties.getProperty("EIC-evosuite").split(",");
+			
+			
 			String icRandoop = icRandoopAndTime[0];
 			String icRandoopTime = icRandoopAndTime[1];
+			String icRandoopCoverage = icRandoopAndTime[2];
+			
 			String eicRandoop = eicRandoopAndTime[0];
 			String eicRandoopTime = eicRandoopAndTime[1];
+			String eicRandoopCoverage = eicRandoopAndTime[2];
+			
 			String icEvosuite = icEvosuiteAndTime[0];
 			String icEvosuiteTime = icEvosuiteAndTime[1];
+			String icEvosuiteCoverage = icEvosuiteAndTime[2];
+			
 			String eicEvosuite = eicEvosuiteAndTime[0];
 			String eicEvosuiteTime = eicEvosuiteAndTime[1];	
+			String eicEvosuiteCoverage = eicEvosuiteAndTime[2];
+			
+			
 			OdfTableRow firstRow = new OdfTableRow(contentDom);
 			firstRow.setTableStyleNameAttribute(rowStyleName);
 			firstRow.appendCell(createCell(lineStyleName, pairId));
@@ -233,42 +277,66 @@ public class SpreadSheetExecution {
 			firstRow.appendCell(createCell(lineStyleName, eicRandoop));
 			firstRow.appendCell(createCell(lineStyleName, icEvosuite));
 			firstRow.appendCell(createCell(lineStyleName, eicEvosuite));
-            OdfTableRow secondRow = new OdfTableRow(contentDom);
+            
+			
+			OdfTableRow secondRow = new OdfTableRow(contentDom);
             secondRow.setTableStyleNameAttribute(rowStyleName);
             secondRow.appendCell(createCell(lineStyleName, pairId));
             secondRow.appendCell(createCell(lineStyleName, icRandoopTime));
             secondRow.appendCell(createCell(lineStyleName, eicRandoopTime));
             secondRow.appendCell(createCell(lineStyleName, icEvosuiteTime));
             secondRow.appendCell(createCell(lineStyleName, eicEvosuiteTime));
-            if(!spreadSheetContainsThisPair(pairId, firstRow, secondRow)){
+            
+            OdfTableRow thirdRow = new OdfTableRow(contentDom);
+            thirdRow.setTableStyleNameAttribute(rowStyleName);
+            thirdRow.appendCell(createCell(lineStyleName, pairId));
+            thirdRow.appendCell(createCell(lineStyleName, icRandoopCoverage));
+            thirdRow.appendCell(createCell(lineStyleName, eicRandoopCoverage));
+            thirdRow.appendCell(createCell(lineStyleName, icEvosuiteCoverage));
+            thirdRow.appendCell(createCell(lineStyleName, eicEvosuiteCoverage));
+          
+            
+            if(!spreadSheetContainsThisPair(pairId, firstRow, secondRow, thirdRow)){
             	table.appendRow(firstRow);	
             	secondTable.appendRow(secondRow);
+            	thirdTable.appendRow(thirdRow);
             }
             //Replace the First Sheet
         	this.officeSpreadsheet.replaceChild(table, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(0));
 
         	//Replace the Second Sheet
         	this.officeSpreadsheet.replaceChild(secondTable, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(1));
+        	
+        	//Replace the Third Sheet
+        	this.officeSpreadsheet.replaceChild(thirdTable, this.outputDocument.getOfficeBody().getChildNodes().item(0).getChildNodes().item(2));
+        	
         } catch (Exception e) {
             System.err.println("Cannot process");
         }
     }
 
-	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow firstRow, OdfTableRow secondRow) {
+	private boolean spreadSheetContainsThisPair(String pairId, OdfTableRow firstRow, OdfTableRow secondRow, OdfTableRow thirdRow) {
         NodeList firstSheetNodeList =  table.getChildNodes();
         NodeList secondSheetNodeList =  secondTable.getChildNodes();
+        NodeList thirdSheetNodeList =  thirdTable.getChildNodes();
+        
         int size = firstSheetNodeList.getLength();
         int rowStartAt = 5;
         for(int i=rowStartAt; i<size; i++){
         	Node firstNode = firstSheetNodeList.item(i);
         	Node secondNode = secondSheetNodeList.item(i);
+        	Node thirdNode = thirdSheetNodeList.item(i);
+        	
+        	
         	if(firstNode.getNodeName().equals("table:table-row")){
         		if(firstNode.toString().contains(pairId)){
         			System.out.println("\nReplace existing row in the spreadsheet:\n");
         			System.out.println("First sheet row: " + firstNode.toString());
         			System.out.println("second sheet row: " + secondNode.toString());
+        			System.out.println("third sheet row: " + thirdNode.toString());
         			table.replaceChild(firstRow, firstNode);
         			secondTable.replaceChild(secondRow, secondNode);
+        			thirdTable.replaceChild(thirdRow, thirdNode);
         			return true;
             	}
         	}
@@ -277,10 +345,15 @@ public class SpreadSheetExecution {
 
 	private void setColumnStyle() {
 		for(int i=0; i< 5; i++){
-        	column = table.addStyledTableColumn(columnStyleName);
+        	
+			column = table.addStyledTableColumn(columnStyleName);
             column.setDefaultCellStyle(contentAutoStyles.getStyle(stringStyleCell,OdfStyleFamily.TableCell));
+            
             column = secondTable.addStyledTableColumn(columnStyleName);
             column.setDefaultCellStyle(contentAutoStyles.getStyle(stringStyleCell,OdfStyleFamily.TableCell));	
+            
+            column = thirdTable.addStyledTableColumn(columnStyleName);
+            column.setDefaultCellStyle(contentAutoStyles.getStyle(stringStyleCell,OdfStyleFamily.TableCell));
         }
 	}
 
@@ -328,19 +401,13 @@ public class SpreadSheetExecution {
      */
     public static void main(String[] args) throws IOException {
     	System.out.println("Generating SpreadSheetReport ... ");
-    	String in = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template.properties"; 
-    	String in2 = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template2.properties"; 
-    	String in3 = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template3.properties";
-    	
-    	String out = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
-    	SpreadSheetExecution sheet = new SpreadSheetExecution(in,out);
-        sheet.run();
-        System.out.println("\nfinished!"); 
-        sheet.setInputFileName(in2);
-        sheet.run();
-        System.out.println("\nfinished!");
-        sheet.setInputFileName(in3);
-        sheet.run();
-        System.out.println("\nfinished!");
+    	String input = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/executionReport/template2.properties"; 
+        Properties p = new Properties();
+        InputStream is = new FileInputStream(input);
+		p.load(is);
+        SpreadSheetExecution s = new SpreadSheetExecution();
+		s.storePropertiesInSpreadSheet(p);
+		is.close();
+		System.out.println("\nfinished!");
     }
 }

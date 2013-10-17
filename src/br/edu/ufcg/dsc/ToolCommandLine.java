@@ -415,13 +415,13 @@ public class ToolCommandLine {
 		    approachTime = (elapsedTime/1000) + sOutcomes.getDiffTime(); // seconds.
 		    sOutcomes.setApproachTime(approachTime);
 		    System.out.println("\n\n TIME SPENT IN THIS IC APPROACH: " + approachTime + " seconds");
-			}else if(input.getApproach().equals(Approach.EIC)){
-				System.out.println("\nEXTENDED IMPACTED ClASSES\n");
-				long startTime = System.currentTimeMillis();
-				BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
-				isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList() );
-				long stopTime = System.currentTimeMillis();
-			    elapsedTime = stopTime - startTime;
+		}else if(input.getApproach().equals(Approach.EIC)){
+			System.out.println("\nEXTENDED IMPACTED ClASSES\n");
+			long startTime = System.currentTimeMillis();
+			BackwardImpactedClasses eic = new BackwardImpactedClasses(productBuilder, input, amAnalyzer.getExtendedImpactedClasses());
+			isRefinement = eic.evaluate(sourceSPL, targetSPL, changedFeatures, wf, areAllProductsMatched, amAnalyzer.getModifiedClassesList() );
+			long stopTime = System.currentTimeMillis();
+		    elapsedTime = stopTime - startTime;
 		    approachTime = (elapsedTime/1000) + sOutcomes.getDiffTime() + sOutcomes.getFindEicTime(); // seconds.
 		    sOutcomes.setApproachTime(approachTime);
 		    System.out.println("\n\n TIME SPENT IN THIS EIC APPROACH: " + approachTime + " seconds");
@@ -440,8 +440,11 @@ public class ToolCommandLine {
 		String approachTool = input.getApproach()+ "-" + input.getGenerateTestsWith(); 
 		String refinementOrNot = sOutcomes.isRefinement() ? "Refinement" : "Non-Refinement";
 
-		String htmlFile = Constants.PRODUCTS_DIR + "/Product0/source/src/evosuite-report/report-generation.html";
-		double averageCoverage =  HtmlReader.getAverageOfCoverage(htmlFile);
+		String averageCoverage = "-";
+		if(input.getGenerateTestsWith().equals("evosuite")){
+			String htmlFile = Constants.PRODUCTS_DIR + "/Product0/source/src/evosuite-report/report-generation.html";
+			averageCoverage =  HtmlReader.getAverageOfCoverage(htmlFile);	
+		}
 		
 		properties.setProperty(approachTool, refinementOrNot +","+ sOutcomes.getApproachTime()+ "," + averageCoverage);
 		properties.setProperty("pairId", input.getEvolutionDescription());

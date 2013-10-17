@@ -9,7 +9,7 @@ import org.jsoup.select.Elements;
 
 public class HtmlReader {
 	
-	public static double getAverageOfCoverage(String html){
+	public static String getAverageOfCoverage(String html){
 	      File input = new File(html);
 	      Document doc;
 	      double soma = 0.0, average = 0;
@@ -38,7 +38,7 @@ public class HtmlReader {
 			e.printStackTrace();
 		}
 		
-		return average;
+		return average+"";
 	}
 
 	public static void main(String[] args) {
