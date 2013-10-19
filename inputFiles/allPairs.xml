@@ -1,62 +1,7 @@
 <?xml version="1.0"?>
 <evolutionPairs xmlns="ck.v20090401">
 
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch16.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch16.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch17.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch17.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch18.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch18.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch19.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch19.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch20.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch20.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch21.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch21.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch22.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch22.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch23.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch23.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch24.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch24.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch25.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch25.1/</target>
-        </pair>
-
-        <pair>
-            <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch26.0/</source>
-            <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch26.1/</target>
-        </pair>
-
-        <pair>
+       <pair>
             <source>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch27.0/</source>
             <target>/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch27.1/</target>
         </pair>
