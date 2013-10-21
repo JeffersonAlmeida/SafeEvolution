@@ -451,8 +451,8 @@ public class ToolCommandLine {
 	}
 	
 	public void writeResultsInSpreadSheet(){
-		 this.sheetExecution = new SpreadSheetExecution();
-		 this.sheetExecution.storePropertiesInSpreadSheet(this.properties);
+		this.sheetExecution = new SpreadSheetExecution();
+		this.sheetExecution.storePropertiesInSpreadSheet(this.properties);
 	}
 
 	public boolean verifyLine(FilePropertiesObject in) throws Err, IOException, AssetNotFoundException, DirectoryException {
