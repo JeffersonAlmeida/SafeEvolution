@@ -69,7 +69,7 @@ public abstract class ImpactedClasses {
 		this.filesToTrash = new ArrayList<File>();
 		this.constantsPreProcessor = new HashSet<String>();
 		
-		if(impactedClasses.size() > 3){
+		if(impactedClasses.size() > 5){
 			ArrayList<String> ics = (ArrayList<String>) impactedClasses;
 			this.modifiedClasses.add(ics.get(0));
 			this.modifiedClasses.add(ics.get(1));
