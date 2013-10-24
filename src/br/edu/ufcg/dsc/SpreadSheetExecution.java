@@ -74,9 +74,9 @@ public class SpreadSheetExecution {
 		this.outputFileName = out;
 	}
     
-    public SpreadSheetExecution(){
+    public SpreadSheetExecution(int spreadSheetNumber){
     	super();
-    	this.outputFileName = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/report.ods";
+    	this.outputFileName = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/Output/" + "report" + spreadSheetNumber+ ".ods";
     }
     
     private void loadConsumeData(String filepath) throws IOException {
@@ -405,7 +405,7 @@ public class SpreadSheetExecution {
         Properties p = new Properties();
         InputStream is = new FileInputStream(input);
 		p.load(is);
-        SpreadSheetExecution s = new SpreadSheetExecution();
+        SpreadSheetExecution s = new SpreadSheetExecution(25);
 		s.storePropertiesInSpreadSheet(p);
 		is.close();
 		System.out.println("\nfinished!");

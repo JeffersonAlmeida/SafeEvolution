@@ -472,8 +472,8 @@ public class ToolCommandLine {
 		properties.setProperty("pairId", input.getEvolutionDescription());
 	}
 	
-	public void writeResultsInSpreadSheet(){
-		this.sheetExecution = new SpreadSheetExecution();
+	public void writeResultsInSpreadSheet(int spreadSheetNumber){
+		this.sheetExecution = new SpreadSheetExecution(spreadSheetNumber);
 		this.sheetExecution.storePropertiesInSpreadSheet(this.properties);
 	}
 

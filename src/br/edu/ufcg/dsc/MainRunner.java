@@ -83,10 +83,10 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				//createPairs(pairsAmount); 
 				
 				/* Create an evolution pair with directory Source and Target and Run */
-				onePairInput(source, target);
+				//onePairInput(source, target);
 				
 				/* Create several evolution pairs with this file and Run */
-				//severalPairsInput(stringFile);
+				severalPairsInput(stringFile);
 				long stopTime = System.currentTimeMillis();
 				long elapsedTime = stopTime - startTime;
 				System.out.println("\nTotal Time Spent: " + elapsedTime/60000 + " minutes");
@@ -94,16 +94,19 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 
 			private void severalPairsInput(String stringFile) {
 				Xml xml = new Xml(stringFile, "evolutionPairs");
-				for (Xml pair : xml.children("pair")) {
-					String source = pair.child("source").content();
-					String target = pair.child("target").content();
-					System.out.println("Source: " + source);
-					System.out.println("Target: " + target );
-					onePairInput(source, target);
+				int runManyTimes  = 5; // Rodar 5 vezes
+				for(int number=0; number< runManyTimes; number++){
+					for (Xml pair : xml.children("pair")) {
+						String source = pair.child("source").content();
+						String target = pair.child("target").content();
+						System.out.println("Source: " + source);
+						System.out.println("Target: " + target );
+						onePairInput(source, target, number);
+					}
 				}
 			}
 
-			private void onePairInput(String source, String target) {
+			private void onePairInput(String source, String target, int spreadSheetNumber) {
 				String array[] = source.split("/");
 				String evolutionDescription = array[array.length-1];
 				String stringFile = "";
@@ -118,7 +121,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
 				//input.setInputLimit(5000); // Input Limit
-				input.setTimeOut(4);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
+				input.setTimeOut(3);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);
@@ -135,10 +138,10 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				} catch (DirectoryException e) {
 					e.printStackTrace();
 				}
-				runApproach(input,toolCommandLine);
+				runApproach(input,toolCommandLine, spreadSheetNumber);
 			}
 
-			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine) {
+			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine, int spreadSheetNumber) {
 				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
 				approaches.add(Approach.IC);approaches.add(Approach.EIC);
@@ -163,7 +166,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 					}
 				}
 				// write pair results in spreadsheet
-				toolCommandLine.writeResultsInSpreadSheet();
+				toolCommandLine.writeResultsInSpreadSheet(spreadSheetNumber);
 			}
 
 			private void manipulateFileProperty(String stringFile, String approach, String tool) {
@@ -216,7 +219,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				}
 			}
 
-			private void createPairs(int pairsAmount){
+			/*private void createPairs(int pairsAmount){
 				System.out.println("\nCall Python in java");
 				String s = null; String line = "";
 				String strFile = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/lastBranch"; 
@@ -236,7 +239,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 		        	onePairInput(source, target);
 		        }
 		    }
-
+*/
 			private void callPython(int pairsAmount) {
 				String s = null;
 				try {
