@@ -121,7 +121,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
 				//input.setInputLimit(5000); // Input Limit
-				input.setTimeOut(3);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
+				input.setTimeOut(300);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);
