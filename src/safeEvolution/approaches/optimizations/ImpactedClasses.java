@@ -68,12 +68,15 @@ public abstract class ImpactedClasses {
 		this.aspectsTargetFeatureMapping = new HashMap<HashSet<String>, HashSet<String>>();
 		this.filesToTrash = new ArrayList<File>();
 		this.constantsPreProcessor = new HashSet<String>();
-		
-		if(impactedClasses.size() > 5){
-			ArrayList<String> ics = (ArrayList<String>) impactedClasses;
-			this.modifiedClasses.add(ics.get(0));
-			this.modifiedClasses.add(ics.get(1));
-			this.modifiedClasses.add(ics.get(2));
+		this.modifiedClasses = new HashSet<String>(); 
+		if(impactedClasses.size() > 3){
+			HashSet<String> ics = (HashSet<String>) impactedClasses;
+			Iterator<String> it = ics.iterator();
+			int i = 0;
+			while(i < 3 && it.hasNext()){
+				this.modifiedClasses.add(it.next());
+				i++;
+			}
 		}else{
 			this.modifiedClasses = impactedClasses;	
 		}

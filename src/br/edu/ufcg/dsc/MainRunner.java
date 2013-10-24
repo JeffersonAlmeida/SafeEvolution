@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia4.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia4.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia1.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia1.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/allPairs.xml";
 				int pairsAmount = 1;
 				
@@ -112,7 +112,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
 				//input.setInputLimit(5000); // Input Limit
-				input.setTimeOut(60);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
+				input.setTimeOut(4);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);
