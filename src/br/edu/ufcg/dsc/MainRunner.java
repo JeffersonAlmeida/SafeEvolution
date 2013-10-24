@@ -74,8 +74,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				ProductGenerator.MAX_TENTATIVAS = 2000;
 				
 				/* arguments */
-				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch22.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
-				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch22.1/";
+				String source = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia1.0/";  // /media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/branch3.0/
+				String target = "/media/jefferson/Expansion Drive/targetWorkspace/TaRGeT/branches/MobileMedia1.1/";
 				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/allPairs.xml";
 				int pairsAmount = 1;
 				
@@ -104,7 +104,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			}
 
 			private void onePairInput(String source, String target) {
-				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/branchTemplate.properties";
+				String stringFile = "/media/jefferson/Expansion Drive/workspace/ferramentaLPSSM/inputFiles/MobileMediaTemplate.properties";
 				String array[] = source.split("/");
 				String evolutionDescription = array[array.length-1];
 				FilePropertiesReader propertiesReader = new FilePropertiesReader(stringFile);
@@ -112,7 +112,7 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 				input.setSourceLineDirectory(source);
 				input.setTargetLineDirectory(target);
 				//input.setInputLimit(5000); // Input Limit
-				input.setTimeOut(300);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
+				input.setTimeOut(4);   // TimeOut Limit  => Maximum number of SECONDS to spend generating tests [default 100]    300 seg = 5 minutos
 				input.setArtifactsSourceDir(source+ "src/TaRGeT Hephaestus/");
 				input.setArtifactsTargetDir(target+ "src/TaRGeT Hephaestus/");
 				input.setEvolutionDescription(evolutionDescription);
@@ -135,8 +135,8 @@ public class MainRunner implements IPlatformRunnable, ITestHarness {
 			private void runApproach(FilePropertiesObject input, ToolCommandLine toolCommandLine) {
 				ArrayList<Approach> approaches = new ArrayList<Approach>();
 				ArrayList<String> tool = new ArrayList<String>();
-				approaches.add(Approach.IC);approaches.add(Approach.EIC);
-				tool.add("randoop");tool.add("randoop");
+				approaches.add(Approach.EIC);approaches.add(Approach.EIC);
+				tool.add("evosuite");tool.add("randoop");
 				for(int i = 0; i < approaches.size(); i++){
 					for(int j = 0; j< tool.size(); j++){
 						System.out.println("\n Run tool for approach: " +  approaches.get(i) + " and tool: " + tool.get(j) );

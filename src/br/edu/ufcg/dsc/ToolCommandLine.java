@@ -190,8 +190,6 @@ public class ToolCommandLine {
 
 		this.wf = WellFormedness.getInstance().isWF(this.sourceSPL, this.targetSPL); 
 		
-		this.changedFeatures = getChangedFeatureNames(this.targetSPL);
-		
 		long initTime = System.currentTimeMillis();
 		//this.areAllProductsMatched = ProductMatching.getInstance(productBuilder).areAllProductsMatched(this.sourceSPL, this.targetSPL);
 		this.areAllProductsMatched =  true;
@@ -213,6 +211,8 @@ public class ToolCommandLine {
 		} catch (JavaModelException e) {
 			e.printStackTrace();
 		}
+		
+		this.changedFeatures = getChangedFeatureNames(this.targetSPL);
 		
 		long startTime = System.currentTimeMillis();
 		this.amAnalyzer.findExtendedImpactedClasses(new File(input.getSourceLineDirectory()+"src"));
@@ -381,7 +381,29 @@ public class ToolCommandLine {
 			eic.add("TaRGeT CNL Plugin.src.java.com.motorola.btc.research.target.cnl.controller.CNLPluginController.java");
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("MobileMedia1.0")){
+			ic.add("lancs.mobilemedia.core.ui.datamodel.ImageData.java");
+			eic.add("lancs.mobilemedia.core.util.ImageUtil.java");
+			eic.add("lancs.mobilemedia.core.ui.datamodel.ImageAccessor.java");
+			eic.add("lancs.mobilemedia.core.ui.datamodel.AlbumData.java");
+			eic.add("lancs.mobilemedia.core.ui.controller.BaseController.java"); // RETIRAR BaseController
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("MobileMedia2.0")){
+			ic.add("lancs.mobilemedia.core.util.ImageUtil.java");
+			ic.add("lancs.mobilemedia.core.ui.datamodel.ImageData.java");
+			eic.add("lancs.mobilemedia.core.ui.datamodel.ImageAccessor.java");
+			eic.add("lancs.mobilemedia.core.ui.datamodel.AlbumData.java");
+			eic.add("lancs.mobilemedia.core.ui.controller.PhotoController.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
+		}else if(input.getEvolutionDescription().equals("MobileMedia3.0")){
+			ic.add("lancs.mobilemedia.core.ui.datamodel.ImageData.java");
+			eic.add("lancs.mobilemedia.core.util.ImageUtil.java");
+			this.amAnalyzer.setModifiedClassesList(ic);
+			this.amAnalyzer.setExtendedImpactedClasses(eic);
 		}
+		
 	}
 	
 	public void runApproach(FilePropertiesObject input) throws AssetNotFoundException, IOException, DirectoryException{
