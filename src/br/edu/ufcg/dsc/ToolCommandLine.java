@@ -384,9 +384,8 @@ public class ToolCommandLine {
 		}else if(input.getEvolutionDescription().equals("MobileMedia1.0")){
 			ic.add("lancs.mobilemedia.core.ui.datamodel.ImageData.java");
 			eic.add("lancs.mobilemedia.core.util.ImageUtil.java");
-			eic.add("lancs.mobilemedia.core.ui.datamodel.ImageAccessor.java");
-			eic.add("lancs.mobilemedia.core.ui.datamodel.AlbumData.java");
-			eic.add("lancs.mobilemedia.core.ui.controller.BaseController.java"); // RETIRAR BaseController
+			/*eic.add("lancs.mobilemedia.core.ui.datamodel.ImageAccessor.java");
+			eic.add("lancs.mobilemedia.core.ui.datamodel.AlbumData.java");*/
 			this.amAnalyzer.setModifiedClassesList(ic);
 			this.amAnalyzer.setExtendedImpactedClasses(eic);
 		}else if(input.getEvolutionDescription().equals("MobileMedia2.0")){
